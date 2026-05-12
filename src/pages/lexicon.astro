@@ -1,9 +1,14 @@
 ---
 /**
- * /lexicon — VFT Lexicon v0.1 (Layer A of the encoding stack).
+ * /lexicon — Value-First Lexicon v0.1 (Layer A of the encoding stack).
  *
  * Renders staged markdown vft-lexicon-canon-v0_1.md. Sanity metadata from
  * the `lexicon-v0-1` doc when available.
+ *
+ * Note: "Value-First" spelled out per conventions.md — never "VFT" in
+ * customer-facing prose. Staged markdown filename and Sanity doc ID retain
+ * the `vft-` slug (internal identifier); Sanity doc `title` field is Canon's
+ * domain to update.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
@@ -23,7 +28,7 @@ const effectiveDate = meta?.effectiveDate;
 ---
 
 <BaseLayout
-  title="VFT Lexicon"
+  title="Value-First Lexicon"
   description="The structured vocabulary of VCP — Layer A of the encoding stack. Each entry encodes a load-bearing term with its industrial counterpart, operational definition, and contrastive training pairs."
   path="/lexicon"
   ogImage="og-lexicon.jpg"
@@ -32,7 +37,7 @@ const effectiveDate = meta?.effectiveDate;
   <PageContainer>
     <PageHeader
       eyebrow="Encoding Stack · Layer A — Lexical"
-      title="VFT Lexicon"
+      title="Value-First Lexicon"
       lede="The structured vocabulary of the Value-First methodology, encoded so AI systems can recognize, declare, and execute against it."
       version={version}
       status={status}

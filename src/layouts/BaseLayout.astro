@@ -340,7 +340,7 @@ const auxDefinedTerms =
           {NAV.map((item) => (
             <a
               href={item.href}
-              class="inline-flex items-center min-h-[44px] px-2 text-stone-700 hover:text-stone-900 no-underline"
+              class="inline-flex items-center min-h-11 px-2 text-stone-700 hover:text-stone-900 no-underline"
             >
               {item.label}
             </a>
@@ -348,10 +348,10 @@ const auxDefinedTerms =
         </nav>
         <div class="md:hidden">
           <details class="relative">
-            <summary class="list-none cursor-pointer text-stone-700 text-sm inline-flex items-center min-h-[44px] px-2">Menu</summary>
+            <summary class="list-none cursor-pointer text-stone-700 text-sm inline-flex items-center min-h-11 px-2">Menu</summary>
             <div class="absolute right-0 mt-2 w-56 bg-white border border-stone-200 rounded-md shadow-lg p-3 flex flex-col gap-1 z-50">
               {NAV.map((item) => (
-                <a href={item.href} class="text-sm text-stone-700 no-underline min-h-[44px] flex items-center px-3 hover:bg-stone-50 rounded">
+                <a href={item.href} class="text-sm text-stone-700 no-underline min-h-11 flex items-center px-3 hover:bg-stone-50 rounded">
                   {item.label}
                 </a>
               ))}
