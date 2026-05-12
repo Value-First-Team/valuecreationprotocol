@@ -1,0 +1,49 @@
+---
+/**
+ * /value-graph — Value Graph v0.1 (Layer C of the encoding stack).
+ *
+ * Renders staged markdown value-graph-canon-v0_1.md. Sanity metadata from
+ * the `value-graph-v0-1` doc when available.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+import { getCanonDoc } from '../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.valueGraph);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('value-graph-v0-1');
+
+const version = meta?.version ?? 'v0.1';
+const status = meta?.status ?? 'Active';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="Value Graph"
+  description="The specification for encoding mutual value creation as a platform-agnostic relational structure. Layer C of the VCP encoding stack."
+  path="/value-graph"
+  ogImage="og-value-graph.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Encoding Stack · Layer C — Relational"
+      title="Value Graph"
+      lede="The specification for encoding mutual value creation as a platform-agnostic relational structure. Three-Org Model and Value Path expressed as graph traversal."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <nav class="mb-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
+      <a href="/lexicon" class="text-stone-700 underline">← Lexicon (Layer A)</a>
+      <a href="/vcp-lang" class="text-stone-700 underline">← VCP-Lang (Layer B)</a>
+      <a href="/encoding-stack" class="text-stone-700 underline">Encoding stack overview</a>
+    </nav>
+
+    <Prose html={html} />
+  </PageContainer>
+</BaseLayout>

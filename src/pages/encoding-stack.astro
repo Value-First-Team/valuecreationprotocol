@@ -1,0 +1,113 @@
+---
+/**
+ * /encoding-stack — overview page introducing Lexicon → VCP-Lang → Value Graph.
+ *
+ * The three-layer substrate that makes VCP machine-parseable. Links into
+ * each canon page. Uses encoding-stack.svg as the central diagram.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Diagram from '../components/Diagram.astro';
+---
+
+<BaseLayout
+  title="Encoding Stack"
+  description="The three-layer substrate that makes VCP machine-parseable: Lexicon (lexical), VCP-Lang (structural), Value Graph (relational)."
+  path="/encoding-stack"
+  ogImage="og-encoding-stack.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Substrate"
+      title="The Encoding Stack"
+      lede="VCP requires substrate to be machine-parseable. The substrate is a three-layer encoding stack — lexical, structural, relational."
+      version="v0.1"
+      status="Active development"
+    />
+
+    <Diagram
+      name="encoding-stack"
+      alt="Three layers: Lexicon (lexical) → VCP-Lang (structural) → Value Graph (relational)"
+      caption="Each layer makes a different aspect of VCP machine-executable."
+    />
+
+    <article class="prose mx-auto">
+      <h2>Why an encoding stack</h2>
+      <p>
+        Foundation models default to industrial-age vocabulary because that
+        vocabulary dominates training data. Prompt engineering can shift
+        outputs at the surface, but the underlying defaults reassert under
+        load — under context pressure, ambiguity, or when the model has to
+        reason about novel situations.
+      </p>
+      <p>
+        The encoding stack gives VCP a substrate that does not depend on
+        prompt-level overrides. Each layer makes a different aspect of VCP
+        machine-executable.
+      </p>
+
+      <h2>The three layers</h2>
+
+      <h3>Layer A — Lexicon (lexical)</h3>
+      <p>
+        The structured vocabulary of VCP. Each entry encodes a load-bearing
+        term with its industrial counterpart, operational definition,
+        distinguishing signals, and contrastive training pairs. The Lexicon
+        is the formal evolution of the Value-First Language Translation Guide.
+      </p>
+      <p>
+        <a href="/lexicon"><strong>Read the Lexicon v0.1 →</strong></a>
+      </p>
+
+      <h3>Layer B — VCP-Lang (structural)</h3>
+      <p>
+        The grammar for declaring Values, Context, and Trust in parseable
+        syntax. VCP-Lang declarations are structured statements AI systems
+        can read, validate, and execute against. VCP-Lang descends from the
+        March 2026 HCP-Lang work.
+      </p>
+      <p>
+        <a href="/vcp-lang"><strong>Read the VCP-Lang spec v0.1 →</strong></a>
+      </p>
+
+      <h3>Layer C — Value Graph (relational)</h3>
+      <p>
+        The specification for encoding mutual value creation as a
+        platform-agnostic relational structure. The Value Graph formalizes
+        relationships the Value-First methodology already describes —
+        particularly the Three-Org Model and the Value Path — into a graph
+        specification AI systems can traverse.
+      </p>
+      <p>
+        <a href="/value-graph"><strong>Read the Value Graph spec v0.1 →</strong></a>
+      </p>
+
+      <h2>How the layers work together</h2>
+      <p>
+        A VCP-aligned system declares its values, context, and trust
+        commitments using <em>VCP-Lang</em>, references terms whose meaning
+        is fixed by the <em>Lexicon</em>, and operates over relationships
+        modeled in the <em>Value Graph</em>. An AI system reading those
+        declarations can verify alignment, surface drift, and generate
+        outputs that respect the protocol without re-deriving the
+        methodology from natural-language description.
+      </p>
+
+      <h2>Status</h2>
+      <p>
+        All three layers are at v0.1 — defined, scoped, and entering
+        implementation. The Lexicon has the longest history (descended from
+        a multi-year language guide). VCP-Lang is the newest layer. The
+        Value Graph is being formalized from existing relational frameworks.
+      </p>
+      <p>
+        The encoding stack is not VCP. It is the substrate that makes VCP
+        executable. VCP can be referenced without invoking the encoding
+        stack; the encoding stack should not be referenced without invoking
+        VCP, because the stack exists to serve the protocol.
+      </p>
+    </article>
+  </PageContainer>
+</BaseLayout>
