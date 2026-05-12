@@ -1,0 +1,753 @@
+---
+/**
+ * CanonArchetype — shared shell for every methodology canon page on vcp.com.
+ *
+ * Hand-crafted to the Phase 1 editorial substrate (BaseLayout + tokens.css).
+ * Reads as a published spec: confident, well-organized, generously spaced,
+ * easy to cite from a phone in a meeting.
+ *
+ * Anatomy (top → bottom):
+ *
+ *   1. Hero block
+ *      - Topical eyebrow (e.g. "THE VALUE PATH", "TWELVE COMPLEXITY TRAPS")
+ *      - Display heading (Newsreader, opsz 60, weight 500, letter-spacing -0.012em)
+ *      - Single lead paragraph (Newsreader, lead size, ink-2)
+ *      - Optional spec-meta strip (definition list: Status / Verified / Cite / Length)
+ *
+ *   2. <slot> — page body. Mix of:
+ *      - Prose sections (use the .canon-prose class on inner blocks)
+ *      - Per-record renders for Sanity-sourced pages (anchored, hairline H2s)
+ *      - Embedded Diagram component where applicable
+ *      - Pull quotes / callouts
+ *
+ *   3. CrossCitation — peer link to valuefirstteam.com (auto-suppresses if peerSlug is null)
+ *
+ *   4. Implementer attribution band — dark surface, one sentence
+ *
+ * Voice: direct, warm, confident, practical. Generous whitespace. Single
+ * editorial gesture per page — the lead-paragraph drop-cap.
+ *
+ * Conventions:
+ *   - No "Chapter NN of 12" eyebrows. Use the concept's own name as the eyebrow.
+ *   - Spec meta omits rows for unknown values; never pad with placeholders.
+ *   - Page body sections should use H2/H3 from .canon-prose (handled by stylesheet).
+ */
+import { SITE } from '../lib/site';
+import { getCrossCitation } from '../lib/site';
+
+export interface SpecMetaItem {
+  /** Label (e.g. "Status", "Verified", "Cite", "Length"). */
+  label: string;
+  /** Value (e.g. "v1.0 · stable", "12 May 2026", "valuecreationprotocol.com/value-path"). */
+  value: string;
+}
+
+export interface Props {
+  /**
+   * Eyebrow text. Use the concept's name in mono caps,
+   * e.g. "THE VALUE PATH", "TWELVE COMPLEXITY TRAPS".
+   * Avoid "Chapter NN of 12" framing.
+   */
+  eyebrow: string;
+  /** Display heading — the concept's name. */
+  title: string;
+  /** Lead paragraph below the title. One paragraph, declarative. */
+  lead: string;
+  /**
+   * Path on vcp.com (e.g. "/value-path"). Used for the cross-citation lookup.
+   * Cross-citation auto-suppresses when the peer slug is null.
+   */
+  path: string;
+  /**
+   * Optional spec meta strip rows. Omit rows entirely rather than padding.
+   * Order is preserved as given.
+   */
+  specMeta?: SpecMetaItem[];
+}
+
+const { eyebrow, title, lead, path, specMeta = [] } = Astro.props;
+const cite = getCrossCitation(path);
+const peerUrl = cite?.peerSlug ? `${SITE.implementer.url}${cite.peerSlug}` : null;
+---
+
+<article class="canon">
+  <header class="canon-hero">
+    <div class="canon-hero-inner">
+      <p class="canon-eyebrow">
+        <span>{eyebrow}</span>
+        <span class="canon-eyebrow-rule" aria-hidden="true"></span>
+      </p>
+      <h1 class="canon-display" set:html={title} />
+      <p class="canon-lead">{lead}</p>
+      {specMeta.length > 0 && (
+        <dl class="canon-spec">
+          {specMeta.map((row) => (
+            <div class="canon-spec-row">
+              <dt class="canon-spec-label">{row.label}</dt>
+              <dd class="canon-spec-value">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+  </header>
+
+  <div class="canon-body">
+    <div class="canon-body-inner">
+      <slot />
+    </div>
+  </div>
+
+  {peerUrl && cite?.peerLabel && (
+    <aside class="canon-peer">
+      <div class="canon-peer-inner">
+        <p class="canon-peer-eyebrow">See also</p>
+        <p class="canon-peer-body">
+          <a
+            href={peerUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="canon-peer-link">{cite.peerLabel}</a>
+          <span class="canon-peer-trail"> — the implementing firm's view.</span>
+        </p>
+      </div>
+    </aside>
+  )}
+
+  <section class="canon-impl">
+    <div class="canon-impl-inner">
+      <p class="canon-impl-eyebrow">Protocol home</p>
+      <p class="canon-impl-body">
+        VCP is originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="canon-impl-link">Value-First Team</a>.
+        Anyone may read, cite, and operate the protocol independently of firm engagement.
+      </p>
+    </div>
+  </section>
+</article>
+
+<style is:global>
+  /* ============================================================
+     Canon Archetype — methodology canon page shell.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     ============================================================ */
+
+  .canon { display: block; }
+
+  /* ============= Hero ============= */
+  .canon-hero {
+    border-bottom: 1px solid var(--vcp-border);
+    background: var(--vcp-surface);
+  }
+  .canon-hero-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3.5rem;
+  }
+  @media (min-width: 768px) {
+    .canon-hero-inner { padding: 5.5rem 1.5rem 4rem; }
+  }
+
+  .canon-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0 0 1.75rem;
+  }
+  .canon-eyebrow-rule {
+    height: 1px;
+    width: 88px;
+    background: var(--vcp-ink);
+    display: inline-block;
+  }
+
+  .canon-display {
+    font-family: var(--vcp-font-display);
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    max-width: 18ch;
+    font-variation-settings: "opsz" 60;
+  }
+
+  .canon-lead {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--vcp-ink-2);
+    margin: 1.75rem 0 0;
+    max-width: 56ch;
+    font-variation-settings: "opsz" 22;
+  }
+
+  /* Spec meta — definition list, mono labels, ink values. */
+  .canon-spec {
+    margin: 2.75rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--vcp-border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+  }
+  @media (min-width: 640px) {
+    .canon-spec {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .canon-spec {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .canon-spec-row {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .canon-spec-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0;
+  }
+  .canon-spec-value {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.8125rem;
+    color: var(--vcp-ink);
+    margin: 0;
+    word-break: break-word;
+  }
+
+  /* ============= Body ============= */
+  .canon-body {
+    background: var(--vcp-surface);
+  }
+  .canon-body-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 5rem;
+  }
+  @media (min-width: 768px) {
+    .canon-body-inner { padding: 5rem 1.5rem 6rem; }
+  }
+
+  /* ============= Canon prose (long-form bodies) =============
+     Apply .canon-prose to any wrapper that contains long-form
+     editorial markdown content. Single drop-cap on first paragraph. */
+  .canon-prose {
+    max-width: var(--vcp-max-prose);
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--vcp-ink);
+    font-variation-settings: "opsz" 19;
+  }
+  .canon-prose > * + * { margin-top: 1.2em; }
+  .canon-prose > p { margin: 0 0 1.2em; }
+
+  .canon-prose > p:first-of-type::first-letter {
+    font-family: var(--vcp-font-display);
+    float: left;
+    font-size: 5em;
+    line-height: 0.86;
+    margin: 0.05em 0.1em 0 -0.04em;
+    font-weight: 500;
+    color: var(--vcp-teal-deep);
+    font-variation-settings: "opsz" 72;
+  }
+
+  .canon-prose h2 {
+    font-family: var(--vcp-font-display);
+    font-size: 1.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin-top: 2.6em;
+    margin-bottom: 0.6em;
+    font-variation-settings: "opsz" 30;
+    position: relative;
+    padding-top: 1.5rem;
+  }
+  /* Hairline wayfinding above each section H2 — short, teal-deep, not a banner. */
+  .canon-prose h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+  .canon-prose h3 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--vcp-ink);
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+    letter-spacing: -0.005em;
+  }
+  .canon-prose h4 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--vcp-ink);
+    margin-top: 1.6em;
+    margin-bottom: 0.4em;
+  }
+  .canon-prose p, .canon-prose li {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  .canon-prose ul, .canon-prose ol {
+    padding-left: 1.4em;
+  }
+  .canon-prose li + li { margin-top: 0.45em; }
+  .canon-prose strong { color: var(--vcp-ink); font-weight: 600; }
+  .canon-prose em { font-style: italic; color: var(--vcp-ink); }
+  .canon-prose a {
+    color: var(--vcp-teal-deep);
+    text-decoration-color: rgba(13, 148, 136, 0.32);
+    text-underline-offset: 3px;
+  }
+  .canon-prose a:hover { color: var(--vcp-link-hover); }
+  .canon-prose code {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.94em;
+    background: var(--vcp-surface-2);
+    padding: 0.1em 0.35em;
+    border-radius: var(--vcp-r-xs);
+  }
+  .canon-prose pre {
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    padding: 1rem;
+    border-radius: var(--vcp-r-md);
+    overflow-x: auto;
+    line-height: 1.5;
+    font-family: var(--vcp-font-mono);
+  }
+  .canon-prose blockquote {
+    margin: 1.8em 0;
+    padding: 0.4em 0 0.4em 1.4em;
+    border-left: 2px solid var(--vcp-ink);
+    color: var(--vcp-ink-2);
+    font-style: italic;
+    font-size: 1.125rem;
+  }
+  .canon-prose blockquote p { margin: 0; }
+  .canon-prose hr {
+    border: 0;
+    border-top: 1px solid var(--vcp-border);
+    margin: 2.4em 0;
+  }
+  .canon-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin: 1.4em 0;
+    font-family: var(--vcp-font-body);
+  }
+  .canon-prose th, .canon-prose td {
+    text-align: left;
+    padding: 0.65em 0.9em;
+    border-bottom: 1px solid var(--vcp-border);
+    vertical-align: top;
+  }
+  .canon-prose th {
+    background: var(--vcp-surface-2);
+    font-weight: 600;
+    color: var(--vcp-ink);
+  }
+
+  /* ============= Per-record canonical section =============
+     Used by Sanity-driven canon pages (value-path, twelve-traps,
+     beliefs, unified-views, realities). Each record gets its own
+     anchored section. */
+  .canon-records {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .canon-record {
+    scroll-margin-top: 5rem;
+    border-top: 1px solid var(--vcp-border);
+    padding-top: 2.25rem;
+  }
+  .canon-record:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .canon-record-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    margin: 0 0 0.65rem;
+    font-weight: 500;
+  }
+  .canon-record-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0 0 0.5rem;
+    font-variation-settings: "opsz" 28;
+  }
+  @media (min-width: 768px) {
+    .canon-record-title { font-size: 1.875rem; font-variation-settings: "opsz" 32; }
+  }
+  .canon-record-mantra {
+    font-family: var(--vcp-font-display);
+    font-style: italic;
+    font-size: 1.125rem;
+    color: var(--vcp-ink);
+    margin: 0.5rem 0 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .canon-record-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--vcp-ink-2);
+    margin: 0.75rem 0 0;
+    max-width: 64ch;
+    font-variation-settings: "opsz" 19;
+  }
+  .canon-record-body p { margin: 0 0 0.85em; }
+  .canon-record-body p:last-child { margin-bottom: 0; }
+  .canon-record-meta {
+    margin-top: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .canon-record-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .canon-record-meta-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.35rem;
+  }
+  .canon-record-meta-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+  }
+  .canon-record-meta-list li {
+    padding: 0.15em 0;
+  }
+  .canon-record-meta-list li::before {
+    content: "·";
+    margin-right: 0.5em;
+    color: var(--vcp-ink-4);
+  }
+  .canon-record-tags {
+    margin: 1.25rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .canon-record-tag {
+    display: inline-block;
+    padding: 0.25rem 0.625rem;
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-pill);
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-ink-2);
+    text-decoration: none;
+  }
+  .canon-record-tag:hover {
+    border-color: var(--vcp-ink);
+    color: var(--vcp-ink);
+  }
+  .canon-record-tag-label {
+    color: var(--vcp-ink-4);
+    margin-right: 0.4em;
+  }
+
+  /* Section delimiter — short hairline before a labeled group of records. */
+  .canon-section-label {
+    margin: 0 0 2rem;
+    padding-top: 1.25rem;
+    position: relative;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+  }
+  .canon-section-label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+  .canon-section-sub {
+    font-family: var(--vcp-font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--vcp-ink);
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 24;
+  }
+  .canon-section-note {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    color: var(--vcp-ink-3);
+    margin: 0 0 2.5rem;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 17;
+  }
+
+  /* Pivot / divider stripe (e.g. between Path TO and Path OF). */
+  .canon-pivot {
+    margin: 3rem 0;
+    padding: 1.5rem 1.75rem;
+    border-top: 1px solid var(--vcp-teal-deep);
+    border-bottom: 1px solid var(--vcp-teal-deep);
+    background: var(--vcp-teal-soft);
+    text-align: center;
+  }
+  .canon-pivot-mark {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 600;
+    margin: 0;
+  }
+  .canon-pivot-note {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    color: var(--vcp-teal-ink);
+    margin: 0.5rem 0 0;
+    font-variation-settings: "opsz" 17;
+  }
+
+  /* Quick index for per-record canon pages. */
+  .canon-index {
+    margin: 0 0 3.5rem;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+  }
+  .canon-index-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 1rem;
+  }
+  .canon-index-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 1.25rem;
+  }
+  @media (min-width: 640px) {
+    .canon-index-list { grid-template-columns: 1fr 1fr; }
+  }
+  .canon-index-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.35rem 0;
+    text-decoration: none;
+    color: var(--vcp-ink-2);
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    transition: color var(--vcp-t-fast);
+  }
+  .canon-index-list a:hover {
+    color: var(--vcp-ink);
+  }
+  .canon-index-num {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    color: var(--vcp-ink-4);
+    min-width: 1.5rem;
+  }
+
+  /* Callout — quiet hairline panel for cross-references or operational notes. */
+  .canon-callout {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.75rem;
+    border-left: 2px solid var(--vcp-ink);
+    background: var(--vcp-surface-2);
+  }
+  .canon-callout-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.5rem;
+  }
+  .canon-callout-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 19;
+  }
+  .canon-callout-body a {
+    color: var(--vcp-teal-deep);
+    text-decoration-color: rgba(13, 148, 136, 0.32);
+    text-underline-offset: 3px;
+  }
+
+  /* Embedded diagram wrapper — generous breathing room, hairline frame. */
+  .canon-figure {
+    margin: 2.5rem auto;
+    max-width: 880px;
+  }
+  .canon-figure-frame {
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    padding: 1.5rem;
+  }
+  .canon-figure-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .canon-figure-caption {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-ink-3);
+    margin: 0.85rem 0 0;
+    text-align: center;
+  }
+
+  /* ============= Peer cross-citation ============= */
+  .canon-peer {
+    border-top: 1px solid var(--vcp-border);
+    background: var(--vcp-surface-2);
+  }
+  .canon-peer-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .canon-peer-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.5rem;
+  }
+  .canon-peer-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--vcp-ink);
+    margin: 0;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 19;
+  }
+  .canon-peer-link {
+    color: var(--vcp-teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal-deep);
+  }
+  .canon-peer-link:hover {
+    color: var(--vcp-link-hover);
+    border-bottom-color: var(--vcp-link-hover);
+  }
+  .canon-peer-trail { color: var(--vcp-ink-3); }
+
+  /* ============= Implementer band ============= */
+  .canon-impl {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+  }
+  .canon-impl-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+  }
+  .canon-impl-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal);
+    margin: 0 0 1rem;
+  }
+  .canon-impl-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--vcp-surface);
+    max-width: 60ch;
+    margin: 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .canon-impl-link {
+    color: var(--vcp-teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal);
+  }
+  .canon-impl-link:hover {
+    color: var(--vcp-d-teal);
+    border-bottom-color: var(--vcp-d-teal);
+  }
+</style>
