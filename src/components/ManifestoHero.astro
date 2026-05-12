@@ -1,74 +1,16 @@
 ---
 /**
- * ManifestoHero — Manifesto.jsx archetype hero block.
- *
- * Renders:
- *  - Eyebrow with hairline rule: "A manifesto · {date} · valuecreationprotocol.com"
- *  - Giant pull-quote (Newsreader italic, clamp 3.5rem → 6.5rem)
- *  - Byline band with BY / FILED UNDER / CITE columns
- *
- * Use on /manifestos/* and /positioning. The body content follows in a
- * Prose component with the manifesto variant.
+ * ManifestoHero — STUB during Phase 1 rebuild. Final form lands in Phase 4.
  */
 export interface Props {
-  /** Eyebrow date string e.g. "February 2026" */
-  date?: string;
-  /** Position number in the manifesto series, e.g. "01 of 03" */
-  position?: string;
-  /** The pull-quote — supports HTML for <strong> emphasis. */
-  pullQuote: string;
-  /** Author label — defaults to "Value-First Team" */
-  author?: string;
-  /** Filed-under tags */
-  filedUnder?: string;
-  /** Cite URL fragment (no protocol) e.g. "valuecreationprotocol.com/manifestos/beyond-leads" */
-  citeUrl: string;
-  /** Read-time estimate e.g. "9 MIN" — surfaces in minimal-nav crumb. */
-  readTime?: string;
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
 }
-
-const {
-  date = '2026',
-  position,
-  pullQuote,
-  author = 'Value-First Team',
-  filedUnder = 'Manifestos',
-  citeUrl,
-  readTime,
-} = Astro.props;
+const { eyebrow, title, subtitle } = Astro.props;
 ---
-
-{/* Minimal manifesto nav (replaces standard chrome — see BaseLayout minimalNav prop) */}
-<nav class="px-6 md:px-20 py-6 flex items-center justify-between border-b border-vcp-border" aria-label="Primary">
-  <a href="/" class="flex items-center gap-3 no-underline">
-    <img src="/assets/marks/vcp-mark-tight.png" alt="Value Creation Protocol" class="h-10 md:h-12 w-auto" width="120" height="48" />
-  </a>
-  {position && (
-    <span class="font-mono text-[11px] tracking-[0.14em] uppercase text-vcp-ink-3 hidden sm:inline">
-      Manifesto · {position}
-    </span>
-  )}
-  <div class="font-mono text-[11px] tracking-[0.06em] text-vcp-ink-3 flex gap-3">
-    {readTime && (<><span>READ · {readTime}</span><span aria-hidden="true">·</span></>)}
-    <span>{date.toUpperCase()}</span>
-  </div>
-</nav>
-
-<section class="px-6 md:px-20 pt-24 md:pt-32 pb-20 md:pb-24 max-w-[1440px] mx-auto">
-  <p class="font-mono text-[12px] tracking-[0.16em] uppercase text-vcp-ink-3 m-0 mb-16 md:mb-20 inline-flex items-center gap-3.5">
-    <span>A manifesto · {date} · valuecreationprotocol.com</span>
-    <span class="h-px bg-vcp-ink inline-block w-[120px] md:w-[200px]" aria-hidden="true"></span>
-  </p>
-
-  <p
-    class="font-display text-[clamp(3rem,8vw,6.5rem)] font-normal italic leading-[1.0] tracking-[-0.03em] text-vcp-ink max-w-[17ch] m-0"
-    style="font-variation-settings: 'opsz' 72"
-    set:html={pullQuote}
-  />
-
-  <div class="mt-16 md:mt-20 pt-7 border-t border-vcp-ink flex flex-wrap gap-x-12 gap-y-3 justify-between max-w-3xl font-mono text-[12px] tracking-[0.08em] uppercase text-vcp-ink-3">
-    <span>BY <b class="text-vcp-ink font-medium">{author}</b></span>
-    <span>FILED UNDER <b class="text-vcp-ink font-medium">{filedUnder}</b></span>
-    <span>CITE <b class="text-vcp-ink font-medium normal-case tracking-normal">{citeUrl}</b></span>
-  </div>
-</section>
+<header style="padding: 4rem 1.5rem; border-bottom: 1px solid #e6e3d9;">
+  {eyebrow && <p style="font-family: monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: #0b7a70;">{eyebrow}</p>}
+  <h1 style="font-family: 'Newsreader', Georgia, serif; font-size: 3rem; font-weight: 500; line-height: 1.1; color: #1a1815;">{title}</h1>
+  {subtitle && <p style="font-family: 'Newsreader', Georgia, serif; font-size: 1.25rem; color: #3f3c36;">{subtitle}</p>}
+</header>

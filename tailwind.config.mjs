@@ -3,9 +3,9 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      // Theme tokens reference the CSS variables declared in src/styles/tokens.css.
-      // This preserves Claude Design's canonical token system while keeping
-      // Tailwind utilities working end-to-end.
+      // Color tokens map to CSS variables declared in src/styles/tokens.css.
+      // Use these utilities (e.g. bg-vcp-paper, text-vcp-ink) NOT arbitrary
+      // values. Tailwind JIT generates these classes reliably.
       colors: {
         // Surfaces
         'vcp-paper': 'var(--vcp-paper)',
@@ -41,6 +41,7 @@ export default {
         'hcp-blue-ink': 'var(--hcp-blue-ink)',
       },
       fontFamily: {
+        // Body / display / mono — matches tokens.css declarations.
         display: ['Newsreader', 'Source Serif 4', 'Georgia', '"Times New Roman"', 'serif'],
         sans: ['Geist', '"Inter Tight"', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
         mono: ['"Geist Mono"', '"JetBrains Mono"', 'ui-monospace', '"SF Mono"', 'Menlo', 'monospace'],
@@ -52,29 +53,9 @@ export default {
         'vcp-doc': '1280px',
       },
       borderRadius: {
-        'vcp-xs': '2px',
         'vcp-sm': '4px',
         'vcp-md': '6px',
         'vcp-lg': '10px',
-        'vcp-xl': '16px',
-      },
-      letterSpacing: {
-        'vcp-display': '-0.02em',
-        'vcp-h': '-0.012em',
-        'vcp-eyebrow': '0.14em',
-      },
-      lineHeight: {
-        'vcp-tight': '1.05',
-        'vcp-snug': '1.18',
-        'vcp-body': '1.65',
-        'vcp-loose': '1.75',
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            maxWidth: '68ch',
-          },
-        },
       },
     },
   },

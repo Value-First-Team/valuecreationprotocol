@@ -1,30 +1,7 @@
 ---
 /**
- * ProtocolStackDiagram — three peer protocols rendered as horizontal layer rows.
- *
- * No hierarchy implied. Each row carries id band (color-coded per protocol),
- * name + description, and meta (owner, status). Mirrors the Chrome.jsx
- * ProtocolStackDiagram pattern.
+ * ProtocolStackDiagram — STUB during Phase 1 rebuild.
+ * Final form lands in Phase 1 homepage commit (rendered inline).
  */
-import { PROTOCOL_STACK } from '../data/homepage';
 ---
-
-<div class="grid gap-3">
-  {PROTOCOL_STACK.map((r) => (
-    <div class="grid grid-cols-[88px_1fr_220px] items-stretch gap-0 rounded-vcp-lg border border-vcp-border bg-vcp-paper overflow-hidden">
-      <div class={`flex items-center justify-center font-mono font-semibold text-xl tracking-[0.06em] ${r.bandClass} ${r.idClass}`}>
-        {r.id}
-      </div>
-      <div class="px-6 py-5 border-l border-vcp-border">
-        <h3 class="font-display text-[20px] font-medium leading-snug text-vcp-ink m-0" style="font-variation-settings: 'opsz' 20">
-          {r.name}
-        </h3>
-        <p class="text-[15px] text-vcp-ink-2 mt-1.5 mb-0 leading-relaxed">{r.desc}</p>
-      </div>
-      <div class="px-5 py-5 border-l border-vcp-border bg-vcp-surface/40 font-mono text-[11px] tracking-[0.06em] text-vcp-ink-3 uppercase flex flex-col gap-1.5 justify-center">
-        <div>owner <span class="text-vcp-ink font-medium normal-case tracking-normal">{r.owner}</span></div>
-        <div>status <span class="text-vcp-ink font-medium normal-case tracking-normal">{r.status}</span></div>
-      </div>
-    </div>
-  ))}
-</div>
+<div></div>

@@ -1,268 +1,31 @@
 ---
 /**
- * BaseLayout — site-wide HTML shell.
- *
- * Responsibilities:
- * - HTML head: title, description, canonical, OG/Twitter, favicon, JSON-LD
- * - Global typography + design tokens (tokens.css + Google Fonts)
- * - Header (nav with VCP compass-mark lockup) + Footer (implementer attribution)
- * - Slot for page body
- *
- * Reads as a calm protocol home, warm-paper editorial. VF teal is the
- * identity color; MCP orange and HCP blue are reserved for peer protocols.
+ * BaseLayout — STUB during Phase 1 rebuild.
+ * Hand-crafted version lands in the next commit.
  */
-import { SITE, NAV } from '../lib/site';
-import '../styles/tokens.css';
-
 export interface Props {
-  /** Page title (concatenated with "— Value Creation Protocol") */
   title: string;
-  /** Meta description */
   description?: string;
-  /** Path relative to site root, e.g. "/value-path". Used for canonical + OG URL. */
   path: string;
-  /** Filename in /public/og/ — defaults to og-default.jpg. */
   ogImage?: string;
-  /** Optional schema.org @type override. Defaults to "WebPage". */
   schemaType?: 'WebPage' | 'DefinedTerm' | 'TechArticle' | 'Article' | 'CollectionPage' | 'DefinedTermSet';
-  /** Optional schema.org termCode (short identifier for DefinedTerm). */
   schemaTermCode?: string;
-  /**
-   * For DefinedTerm pages, additional DefinedTerm entries to embed in the JSON-LD.
-   * Example: /beliefs emits one DefinedTerm per Core Belief; /realities emits
-   * one per Value Reality. Each entry is rendered as a sibling DefinedTerm.
-   */
   schemaDefinedTerms?: Array<{ name: string; description?: string; termCode?: string }>;
-  /** For TechArticle/Article: ISO date. Defaults to undefined (omits the property). */
   datePublished?: string;
-  /** For TechArticle/Article: ISO date. Defaults to undefined. */
   dateModified?: string;
-  /**
-   * If true, suppress the standard header chrome (manifesto archetype uses
-   * a minimal nav rendered inline by the page).
-   */
   minimalNav?: boolean;
 }
-
-const {
-  title,
-  description = SITE.description,
-  path,
-  ogImage = 'og-default.jpg',
-  schemaType = 'WebPage',
-  schemaTermCode,
-  schemaDefinedTerms,
-  datePublished,
-  dateModified,
-  minimalNav = false,
-} = Astro.props;
-
-const fullTitle = path === '/' ? `${SITE.name} — Open Protocol Home` : `${title} — ${SITE.name}`;
-// Canonical URL — derived from SITE.url + path. NEVER cross-domain (TR-8 hard rule).
-const canonicalUrl = `${SITE.url}${path}`;
-const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE.url}/og/${ogImage}`;
-
-// JSON-LD schema. Each branch adds the type-specific properties.
-const jsonLd: Record<string, unknown> = {
-  '@context': 'https://schema.org',
-  '@type': schemaType,
-  name: title,
-  description,
-  url: canonicalUrl,
-  inLanguage: 'en',
-  isPartOf: {
-    '@type': 'WebSite',
-    name: SITE.name,
-    url: SITE.url,
-    inLanguage: 'en',
-  },
-};
-
-if (schemaType === 'DefinedTerm') {
-  if (schemaTermCode) {
-    jsonLd.termCode = schemaTermCode;
-  }
-  jsonLd.inDefinedTermSet = {
-    '@type': 'DefinedTermSet',
-    name: 'Value Creation Protocol Glossary',
-    url: `${SITE.url}/glossary`,
-  };
-}
-
-if (schemaType === 'TechArticle' || schemaType === 'Article') {
-  jsonLd.headline = title;
-  jsonLd.author = {
-    '@type': 'Organization',
-    name: SITE.implementer.name,
-    url: SITE.implementer.url,
-  };
-  jsonLd.publisher = {
-    '@type': 'Organization',
-    name: SITE.implementer.name,
-    url: SITE.implementer.url,
-  };
-  if (datePublished) jsonLd.datePublished = datePublished;
-  if (dateModified) jsonLd.dateModified = dateModified;
-}
-
-if (schemaType === 'CollectionPage') {
-  // No additional fields by default.
-}
-
-if (schemaType === 'DefinedTermSet') {
-  // Same shape as a DefinedTerm container; pages emit hasDefinedTerm inline.
-}
-
-const auxDefinedTerms =
-  schemaDefinedTerms && schemaDefinedTerms.length > 0
-    ? {
-        '@context': 'https://schema.org',
-        '@graph': schemaDefinedTerms.map((t) => ({
-          '@type': 'DefinedTerm',
-          name: t.name,
-          description: t.description,
-          termCode: t.termCode,
-          inDefinedTermSet: {
-            '@type': 'DefinedTermSet',
-            name: 'Value Creation Protocol Glossary',
-            url: `${SITE.url}/glossary`,
-          },
-        })),
-      }
-    : null;
+const { title } = Astro.props;
 ---
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content={Astro.generator} />
-
-    <title>{fullTitle}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/favicon-180.png" />
-    <link rel="shortcut icon" href="/favicon/favicon.ico" />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content={SITE.name} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:image:alt" content={`${title} — Value Creation Protocol`} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImageUrl} />
-
-    <!-- Fonts: Newsreader (display + prose, opsz 6–72), Geist (UI body), Geist Mono (technical) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600;6..72,700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-    {auxDefinedTerms && (
-      <script type="application/ld+json" set:html={JSON.stringify(auxDefinedTerms)} />
-    )}
+    <title>{title} — Value Creation Protocol</title>
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to content</a>
-
-    {!minimalNav && (
-      <header class="border-b border-vcp-border bg-vcp-surface/95 backdrop-blur sticky top-0 z-40">
-        <div class="max-w-vcp-content mx-auto px-6 py-3 flex items-center justify-between gap-6">
-          <a href="/" class="flex items-center gap-3 no-underline group">
-            <img
-              src="/assets/marks/vcp-mark-tight.png"
-              alt="Value Creation Protocol"
-              class="h-10 md:h-12 w-auto block"
-              width="120"
-              height="48"
-            />
-            <span class="sr-only">Value Creation Protocol</span>
-          </a>
-          <nav class="hidden md:flex items-center gap-1 text-[14px] font-medium" aria-label="Primary">
-            {NAV.map((item) => (
-              <a
-                href={item.href}
-                class="inline-flex items-center min-h-11 px-3 text-vcp-ink-2 hover:text-vcp-ink no-underline transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          <div class="hidden md:flex items-center gap-3 ml-2">
-            <span class="vcp-status-pill">v0.1 · DRAFT</span>
-          </div>
-          <div class="md:hidden">
-            <details class="relative">
-              <summary class="list-none cursor-pointer text-vcp-ink-2 text-sm inline-flex items-center min-h-11 px-2">Menu</summary>
-              <div class="absolute right-0 mt-2 w-56 bg-vcp-paper border border-vcp-border rounded-vcp-md shadow-md p-3 flex flex-col gap-1 z-50">
-                {NAV.map((item) => (
-                  <a href={item.href} class="text-sm text-vcp-ink-2 no-underline min-h-11 flex items-center px-3 hover:bg-vcp-surface-2 rounded">
-                    {item.label}
-                  </a>
-                ))}
-                <div class="border-t border-vcp-border mt-2 pt-2 px-3">
-                  <span class="vcp-status-pill">v0.1 · DRAFT</span>
-                </div>
-              </div>
-            </details>
-          </div>
-        </div>
-      </header>
-    )}
-
-    <main id="main">
+    <main>
       <slot />
     </main>
-
-    <!-- Implementer attribution + footer (Chrome.jsx VcpFoot pattern) -->
-    <footer class="mt-24 border-t border-vcp-border bg-vcp-surface">
-      <div class="max-w-vcp-content mx-auto px-6 pt-14 pb-10">
-        <!-- Attribution band -->
-        <div class="max-w-2xl mb-14">
-          <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
-            PROTOCOL HOME
-          </p>
-          <p class="font-display text-[17px] leading-[1.55] text-vcp-ink m-0">
-            Operated and refined by{' '}
-            <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">Value-First Team</a>
-            {' '}— the originating and canonical implementing firm. The Value Creation Protocol is
-            published openly; anyone may read, cite, and operate on it independently of firm engagement.
-          </p>
-        </div>
-
-        <!-- Bottom row: link list + meta -->
-        <div class="pt-7 border-t border-vcp-border flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div class="flex flex-wrap gap-6 font-mono text-[11px] tracking-[0.06em] text-vcp-ink-3">
-            <a href="/methodology" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Methodology</a>
-            <a href="/protocol-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Protocol stack</a>
-            <a href="/manifestos" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Manifestos</a>
-            <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Encoding stack</a>
-            <a href="/glossary" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Glossary</a>
-            <a href="/engagement" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Engagement</a>
-            <a href="/sitemap" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Sitemap</a>
-          </div>
-          <p class="font-mono text-[11px] tracking-[0.04em] text-vcp-ink-4 m-0">
-            VCP v0.1 · 2026
-          </p>
-        </div>
-      </div>
-    </footer>
   </body>
 </html>
