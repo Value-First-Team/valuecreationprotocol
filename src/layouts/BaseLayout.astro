@@ -13,14 +13,6 @@
  */
 import { SITE, NAV } from '../lib/site';
 
-export type SchemaType =
-  | 'WebPage'
-  | 'DefinedTerm'
-  | 'TechArticle'
-  | 'Article'
-  | 'CollectionPage'
-  | 'DefinedTermSet';
-
 export interface Props {
   /** Page title (concatenated with "— Value Creation Protocol") */
   title: string;
@@ -31,7 +23,7 @@ export interface Props {
   /** Filename in /public/og/ — defaults to og-default.jpg. */
   ogImage?: string;
   /** Optional schema.org @type override. Defaults to "WebPage". */
-  schemaType?: SchemaType;
+  schemaType?: 'WebPage' | 'DefinedTerm' | 'TechArticle' | 'Article' | 'CollectionPage' | 'DefinedTermSet';
   /** Optional schema.org termCode (short identifier for DefinedTerm). */
   schemaTermCode?: string;
   /**
