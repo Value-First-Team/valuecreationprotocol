@@ -2,15 +2,47 @@
 /**
  * Homepage — protocol overview at /
  *
- * Cold reader can identify VCP scope in 60 seconds. Above-the-fold the
- * protocol-stack diagram (MCP → HCP → VCP) is visible. Brief prose lifts
- * key framings from the canonical reference. Entry points to encoding stack,
- * methodology canon, manifestos, glossary.
+ * Architecture follows Claude Design's Homepage.jsx archetype:
+ *   - Hero with "At a glance" sidecar (Status / Verified / Canon pages / Peers / License)
+ *   - § 01 The Stack — three peer protocols, no hierarchy implied
+ *   - § 02 Enter here — three entry-point cards (encoding stack, methodology, manifestos)
+ *   - Five load-bearing claims (retained from prior content; re-skinned)
+ *   - Implementers band (retained; warm-paper variant)
  *
  * Tone: peer-level, calm, technical. Not a sales surface.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES, PROTOCOL_PEERS } from '../lib/site';
+import { SITE } from '../lib/site';
+import { AT_A_GLANCE, ENTRY_CARDS } from '../data/homepage';
+import ProtocolStackDiagram from '../components/ProtocolStackDiagram.astro';
+
+const FIVE_CLAIMS = [
+  {
+    n: '01',
+    title: 'Mutual Value Creation',
+    body: 'Value is created across stakeholders, not extracted from them. Customers, employees, operators, and the organization itself are all participants.',
+  },
+  {
+    n: '02',
+    title: 'Context as Substrate',
+    body: 'Context is not an input to operations — it is the substrate on which operations run. Fragmented context produces fragmented operations.',
+  },
+  {
+    n: '03',
+    title: 'Configuration Over Customization',
+    body: 'Configure native platform capability rather than customize bespoke architecture. Custom architecture creates consultant dependency; configuration leverages platform investment.',
+  },
+  {
+    n: '04',
+    title: 'Relationships Over Transactions',
+    body: 'Relationships are the unit of value creation; transactions are events within relationships. Optimize for relationship trajectory.',
+  },
+  {
+    n: '05',
+    title: 'Just-In-Time Over Just-In-Case',
+    body: 'Operations deliver capability when needed, not accumulate it against hypothetical need. Just-In-Case operations produce platform sprawl and integration debt.',
+  },
+];
 ---
 
 <BaseLayout
@@ -21,303 +53,234 @@ import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES, PROTOCOL_PEERS } from '../lib
   schemaType="DefinedTerm"
   schemaTermCode="VCP"
 >
-  <!-- HERO -->
-  <section class="border-b border-stone-200">
-    <div class="max-w-6xl mx-auto px-6 pt-16 pb-12 md:pt-24 md:pb-16">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-6">
-          <p class="text-[11px] uppercase tracking-[0.2em] font-semibold text-vcp-teal m-0 mb-5">
-            Open Protocol · v0.1
+  <!-- ============= HERO ============= -->
+  <section class="border-b border-vcp-border">
+    <div class="max-w-vcp-content mx-auto px-6 pt-16 pb-14 md:pt-24 md:pb-20">
+      <div class="grid lg:grid-cols-[1.3fr_1fr] gap-10 lg:gap-20 items-start">
+        <div>
+          <p class="vcp-eyebrow m-0 mb-8">
+            <span>An open protocol · v0.1</span>
           </p>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight m-0 text-stone-900">
-            Value Creation Protocol
+          <h1
+            class="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-medium leading-[1.02] tracking-vcp-display text-vcp-ink m-0 max-w-[12ch]"
+            style="font-variation-settings: 'opsz' 72"
+          >
+            Value, drawn open and <em class="text-vcp-teal-deep italic font-normal">operable.</em>
           </h1>
-          <p class="text-xl md:text-2xl text-stone-700 mt-6 mb-0 leading-relaxed max-w-2xl">
-            An open framework for designing systems where value flows naturally
-            between people, organizations, and AI.
+          <p
+            class="font-display text-[22px] leading-[1.5] text-vcp-ink-2 max-w-[56ch] mt-7 mb-0"
+            style="font-variation-settings: 'opsz' 22"
+          >
+            The Value Creation Protocol is a peer-level open protocol for value creation in AI-native
+            organizations — authored, refined, and operated by Value-First Team. Read, cite, and run
+            it on your own work.
           </p>
-          <p class="text-base md:text-lg text-stone-600 mt-5 mb-0 max-w-2xl leading-relaxed">
-            VCP is the methodology layer of the AI-native protocol stack. It sits atop
-            <a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer" class="text-stone-800 underline">MCP</a>
-            (capability) and
-            <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer" class="text-stone-800 underline">HCP</a>
-            (human context), and gives organizations the operating discipline to translate
-            both into realized value.
-          </p>
-          <div class="mt-9 flex flex-wrap items-center gap-3">
-            <a
-              href="/encoding-stack"
-              class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md bg-stone-900 text-white text-sm font-medium no-underline hover:bg-stone-800"
-            >
-              Read the encoding stack
-              <span aria-hidden="true">→</span>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a href="/encoding-stack" class="vcp-btn vcp-btn-primary">
+              Read the spec <span aria-hidden="true">→</span>
             </a>
-            <a
-              href="/methodology"
-              class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-stone-300 text-stone-800 text-sm font-medium no-underline hover:bg-stone-50"
-            >
-              Methodology canon
-            </a>
-            <a
-              href="/positioning"
-              class="inline-flex items-center gap-1.5 px-1 py-2.5 text-stone-600 text-sm font-medium no-underline hover:text-stone-900"
-            >
-              Why VCP →
+            <a href="/protocol-stack" class="vcp-btn vcp-btn-ghost">
+              See the protocol stack <span aria-hidden="true" class="text-vcp-teal-deep">→</span>
             </a>
           </div>
         </div>
 
-        <div class="lg:col-span-6">
-          <div class="rounded-lg border border-stone-200 bg-stone-50 p-4 md:p-6">
-            <img
-              src="/diagrams/protocol-stack.svg"
-              alt="The AI-native protocol stack: MCP (capability), HCP (human context), VCP (methodology)"
-              class="w-full h-auto block"
-            />
-            <p class="text-xs text-stone-500 mt-3 mb-0 text-center italic">
-              The protocol stack reads bottom-up: capability → context → methodology.
-            </p>
-          </div>
-        </div>
+        <!-- At a glance sidecar -->
+        <aside class="rounded-vcp-lg border border-vcp-border bg-vcp-paper p-8">
+          <h4 class="font-sans text-[13px] font-medium tracking-[0.06em] uppercase text-vcp-ink-3 m-0 mb-5">
+            At a glance
+          </h4>
+          <dl class="grid gap-4 m-0">
+            {AT_A_GLANCE.map((row) => (
+              <div>
+                <dt class="font-mono text-[11px] tracking-[0.06em] uppercase text-vcp-ink-4 mb-1">{row.label}</dt>
+                <dd class="m-0 font-display text-[16px] leading-snug text-vcp-ink" style="font-variation-settings: 'opsz' 16">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- WHAT VCP IS / IS NOT -->
-  <section>
-    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16">
+  <!-- ============= § 01 · THE STACK ============= -->
+  <section class="border-b border-vcp-border">
+    <div class="max-w-vcp-content mx-auto px-6 py-20 md:py-24">
+      <div class="grid md:grid-cols-[280px_1fr] gap-10 md:gap-16 items-baseline mb-12">
         <div>
-          <h2 class="text-2xl md:text-3xl font-semibold m-0 text-stone-900 tracking-tight">
-            What VCP is
-          </h2>
-          <p class="text-base md:text-[17px] text-stone-700 mt-5 leading-relaxed">
-            VCP gives organizations a protocol-level identity for the methodology
-            that turns AI capability and human context into mutual value. The
-            existing Value-First methodology — Value Path, Three-Org Model,
-            Four Unified Views, Twelve Complexity Traps, Five Core Beliefs,
-            Value Loop, Value Realities, Value-Led Growth — stays in force.
-            VCP names the methodology so AI systems can recognize, declare,
-            and execute against it.
-          </p>
-          <p class="text-base md:text-[17px] text-stone-700 mt-4 leading-relaxed">
-            Foundation models default to industrial-age vocabulary at a depth
-            that prompt engineering cannot reliably override. VCP gives
-            the methodology a place to stand alongside the protocols AI-native
-            systems already understand.
+          <p class="font-mono text-[12px] tracking-[0.14em] uppercase text-vcp-teal-deep m-0">
+            § 01 · The Stack
           </p>
         </div>
         <div>
-          <h2 class="text-2xl md:text-3xl font-semibold m-0 text-stone-900 tracking-tight">
-            What VCP is not
+          <h2
+            class="font-display text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.05] tracking-vcp-h text-vcp-ink m-0"
+            style="font-variation-settings: 'opsz' 48"
+          >
+            Three peer protocols.<br />No hierarchy implied.
           </h2>
-          <ul class="mt-5 space-y-3 list-none p-0 text-base md:text-[17px] text-stone-700 leading-relaxed">
-            <li class="flex gap-3">
-              <span class="text-vcp-orange font-mono text-sm mt-1.5">—</span>
-              <span><strong class="text-stone-900">Not a competitor to MCP.</strong> VCP sits atop MCP and depends on it.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-vcp-orange font-mono text-sm mt-1.5">—</span>
-              <span><strong class="text-stone-900">Not a competitor to HCP.</strong> VCP complements HCP; HCP encodes human context, VCP encodes the methodology that uses it.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-vcp-orange font-mono text-sm mt-1.5">—</span>
-              <span><strong class="text-stone-900">Not a replacement methodology.</strong> Every existing Value-First framework remains in force.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-vcp-orange font-mono text-sm mt-1.5">—</span>
-              <span><strong class="text-stone-900">Not a marketing repositioning.</strong> Technical and methodological identity; appears where it is load-bearing.</span>
-            </li>
-            <li class="flex gap-3">
-              <span class="text-vcp-orange font-mono text-sm mt-1.5">—</span>
-              <span><strong class="text-stone-900">Not finished.</strong> The protocol exists; the encoding stack that makes it executable is in active development.</span>
-            </li>
-          </ul>
+          <p
+            class="font-display text-[18px] leading-[1.55] text-vcp-ink-2 max-w-[56ch] mt-5 mb-0"
+            style="font-variation-settings: 'opsz' 18"
+          >
+            MCP is the machine-context layer. HCP is the human-context layer. VCP is the
+            value-creation layer — what creates value, for whom, and why. They are peers because
+            each addresses a layer the others don't reach.
+          </p>
         </div>
       </div>
+      <ProtocolStackDiagram />
     </div>
   </section>
 
-  <!-- THE FIVE CLAIMS -->
-  <section class="bg-stone-50 border-y border-stone-200">
-    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
-      <div class="max-w-3xl">
-        <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-          Five Load-Bearing Claims
+  <!-- ============= § 02 · ENTER HERE ============= -->
+  <section class="border-b border-vcp-border">
+    <div class="max-w-vcp-content mx-auto px-6 py-20 md:py-24">
+      <div class="grid md:grid-cols-[280px_1fr] gap-10 md:gap-16 items-baseline">
+        <div>
+          <p class="font-mono text-[12px] tracking-[0.14em] uppercase text-vcp-teal-deep m-0 mb-3">
+            § 02 · Enter Here
+          </p>
+          <h2
+            class="font-display text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.05] tracking-vcp-h text-vcp-ink m-0"
+            style="font-variation-settings: 'opsz' 48"
+          >
+            Three doors in.
+          </h2>
+        </div>
+        <p
+          class="font-display text-[18px] leading-[1.55] text-vcp-ink-2 max-w-[52ch] m-0"
+          style="font-variation-settings: 'opsz' 18"
+        >
+          The protocol resolves at three different reading depths. Pick one. The others remain
+          navigable from any page.
         </p>
-        <h2 class="text-2xl md:text-3xl font-semibold m-0 text-stone-900 tracking-tight">
+      </div>
+
+      <div class="mt-14 grid md:grid-cols-3 gap-6 md:gap-8">
+        {ENTRY_CARDS.map((card) => (
+          <a
+            href={card.href}
+            class="group flex flex-col gap-4 p-9 rounded-vcp-lg border border-vcp-border bg-vcp-paper no-underline text-inherit transition-all duration-200 hover:border-vcp-ink hover:-translate-y-0.5 min-h-[280px]"
+          >
+            <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep">{card.num} · {card.eyebrow}</span>
+            <h3
+              class="font-display text-[28px] md:text-[30px] font-medium leading-[1.15] tracking-vcp-h text-vcp-ink m-0"
+              style="font-variation-settings: 'opsz' 30"
+            >
+              {card.title}
+            </h3>
+            <p
+              class="font-display text-[16px] leading-[1.55] text-vcp-ink-2 m-0"
+              style="font-variation-settings: 'opsz' 17"
+            >
+              {card.body}
+            </p>
+            <div class="mt-auto pt-4 border-t border-vcp-border flex justify-between items-center font-mono text-[11px] tracking-[0.06em] text-vcp-ink-3 uppercase">
+              <span>{card.meta}</span>
+              <span class="text-vcp-teal-deep text-lg">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FIVE LOAD-BEARING CLAIMS ============= -->
+  <section class="bg-vcp-surface-2 border-b border-vcp-border">
+    <div class="max-w-vcp-content mx-auto px-6 py-20 md:py-24">
+      <div class="max-w-3xl">
+        <p class="font-mono text-[12px] tracking-[0.14em] uppercase text-vcp-teal-deep m-0 mb-3">
+          § 03 · Five Load-Bearing Claims
+        </p>
+        <h2
+          class="font-display text-[clamp(2rem,3.5vw,3rem)] font-medium leading-[1.05] tracking-vcp-h text-vcp-ink m-0"
+          style="font-variation-settings: 'opsz' 48"
+        >
           What VCP claims
         </h2>
-        <p class="text-base md:text-[17px] text-stone-600 mt-4 leading-relaxed">
-          VCP distinguishes itself from industrial-age operating protocols
-          through five claims. Each is a contrastive position, not a slogan.
+        <p
+          class="font-display text-[18px] leading-[1.55] text-vcp-ink-2 m-0 mt-5 max-w-[56ch]"
+          style="font-variation-settings: 'opsz' 18"
+        >
+          VCP distinguishes itself from industrial-age operating protocols through five claims.
+          Each is a contrastive position, not a slogan.
         </p>
       </div>
 
       <ol class="mt-12 grid md:grid-cols-2 gap-6 list-none p-0 m-0">
-        {[
-          {
-            n: '01',
-            title: 'Mutual Value Creation',
-            body: 'Value is created across stakeholders, not extracted from them. Customers, employees, operators, and the organization itself are all participants.',
-          },
-          {
-            n: '02',
-            title: 'Context as Substrate',
-            body: 'Context is not an input to operations — it is the substrate on which operations run. Fragmented context produces fragmented operations.',
-          },
-          {
-            n: '03',
-            title: 'Configuration Over Customization',
-            body: 'Configure native platform capability rather than customize bespoke architecture. Custom architecture creates consultant dependency; configuration leverages platform investment.',
-          },
-          {
-            n: '04',
-            title: 'Relationships Over Transactions',
-            body: 'Relationships are the unit of value creation; transactions are events within relationships. Optimize for relationship trajectory.',
-          },
-          {
-            n: '05',
-            title: 'Just-In-Time Over Just-In-Case',
-            body: 'Operations deliver capability when needed, not accumulate it against hypothetical need. Just-In-Case operations produce platform sprawl and integration debt.',
-          },
-        ].map((claim) => (
-          <li class="bg-white border border-stone-200 rounded-lg p-6">
-            <span class="font-mono text-xs text-vcp-teal block mb-2">{claim.n}</span>
-            <h3 class="text-lg font-semibold m-0 text-stone-900">{claim.title}</h3>
-            <p class="text-[15px] text-stone-600 mt-2 mb-0 leading-relaxed">{claim.body}</p>
+        {FIVE_CLAIMS.map((claim) => (
+          <li class="bg-vcp-paper border border-vcp-border rounded-vcp-lg p-7">
+            <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep block mb-2">{claim.n}</span>
+            <h3
+              class="font-display text-[22px] font-medium leading-snug text-vcp-ink m-0"
+              style="font-variation-settings: 'opsz' 22"
+            >
+              {claim.title}
+            </h3>
+            <p class="text-[15px] text-vcp-ink-2 mt-2 mb-0 leading-relaxed">{claim.body}</p>
           </li>
         ))}
       </ol>
 
-      <p class="text-sm text-stone-500 mt-10 italic max-w-3xl">
-        Full canonical reference: <a href="/positioning" class="text-stone-700 underline">Value Creation Protocol Positioning Paper</a>
-        · <a href="/encoding-stack" class="text-stone-700 underline">Encoding stack overview</a>
+      <p class="text-sm text-vcp-ink-3 mt-10 italic max-w-3xl">
+        Full canonical reference:{' '}
+        <a href="/positioning" class="text-vcp-ink-2 underline">Value Creation Protocol Positioning Paper</a>{' '}
+        · <a href="/encoding-stack" class="text-vcp-ink-2 underline">Encoding stack overview</a>
       </p>
     </div>
   </section>
 
-  <!-- ENTRY POINTS -->
-  <section>
-    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
-      <div class="grid md:grid-cols-3 gap-10">
-
+  <!-- ============= IMPLEMENTERS / ENGAGEMENT ============= -->
+  <section class="bg-vcp-ink text-vcp-surface">
+    <div class="max-w-vcp-content mx-auto px-6 py-20 md:py-24">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
         <div>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-            Encoding Stack
-          </p>
-          <h3 class="text-xl font-semibold m-0 text-stone-900">
-            How VCP becomes executable
-          </h3>
-          <p class="text-[15px] text-stone-600 mt-3 leading-relaxed">
-            Three layers make VCP machine-parseable: a structured Lexicon,
-            a declarative grammar (VCP-Lang), and a relational Value Graph.
-          </p>
-          <ul class="mt-4 space-y-1.5 list-none p-0 text-[15px]">
-            <li><a href="/lexicon" class="text-stone-700 underline">Lexicon v0.1</a></li>
-            <li><a href="/vcp-lang" class="text-stone-700 underline">VCP-Lang v0.1</a></li>
-            <li><a href="/value-graph" class="text-stone-700 underline">Value Graph v0.1</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-            Methodology Canon
-          </p>
-          <h3 class="text-xl font-semibold m-0 text-stone-900">
-            The frameworks VCP encodes
-          </h3>
-          <p class="text-[15px] text-stone-600 mt-3 leading-relaxed">
-            VCP names and packages a methodology that has been refined for years
-            in practice. Twelve canon pages cover the operating frameworks.
-          </p>
-          <ul class="mt-4 space-y-1.5 list-none p-0 text-[15px]">
-            <li><a href="/beliefs" class="text-stone-700 underline">Five Core Beliefs</a></li>
-            <li><a href="/twelve-traps" class="text-stone-700 underline">Twelve Complexity Traps</a></li>
-            <li><a href="/value-path" class="text-stone-700 underline">Value Path</a></li>
-            <li><a href="/three-orgs" class="text-stone-700 underline">Three-Org Model</a></li>
-            <li><a href="/unified-views" class="text-stone-700 underline">Four Unified Views</a></li>
-            <li><a href="/methodology" class="text-stone-600 underline">All methodology pages →</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-            Manifestos & Positioning
-          </p>
-          <h3 class="text-xl font-semibold m-0 text-stone-900">
-            Why this protocol exists
-          </h3>
-          <p class="text-[15px] text-stone-600 mt-3 leading-relaxed">
-            Long-form treatments of the conditions that produced VCP, and
-            where it sits in the broader landscape.
-          </p>
-          <ul class="mt-4 space-y-1.5 list-none p-0 text-[15px]">
-            <li><a href="/manifestos/beyond-leads" class="text-stone-700 underline">Beyond "Leads"</a></li>
-            <li><a href="/manifestos/value-led-growth" class="text-stone-700 underline">Value-Led Growth</a></li>
-            <li><a href="/positioning" class="text-stone-700 underline">Positioning Paper</a></li>
-            <li><a href="/cvp-vs-vcp" class="text-stone-700 underline">CVP vs VCP</a></li>
-            <li><a href="/glossary" class="text-stone-700 underline">Full glossary</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IMPLEMENTERS / ENGAGEMENT -->
-  <section class="bg-stone-900 text-stone-100">
-    <div class="max-w-6xl mx-auto px-6 py-16 md:py-20">
-      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
-        <div>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
+          <p class="font-mono text-[12px] tracking-[0.14em] uppercase text-vcp-teal m-0 mb-3">
             Implementers
           </p>
-          <h2 class="text-2xl md:text-3xl font-semibold m-0 text-white tracking-tight">
-            The protocol is open. The implementation is opinionated.
+          <h2
+            class="font-display text-[clamp(2rem,3.5vw,2.75rem)] font-medium leading-[1.1] tracking-vcp-h m-0"
+            style="font-variation-settings: 'opsz' 44"
+          >
+            The protocol is open.<br />The implementation is opinionated.
           </h2>
-          <p class="text-base md:text-[17px] text-stone-300 mt-5 mb-0 leading-relaxed">
-            VCP was originated and is canonically implemented by
-            <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-white underline">
+          <p class="font-display text-[17px] leading-[1.65] mt-6 mb-0 opacity-90" style="font-variation-settings: 'opsz' 19">
+            VCP was originated and is canonically implemented by{' '}
+            <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-vcp-teal border-b border-vcp-teal no-underline">
               Value-First Team
-            </a>.
-            Anyone can read it, implement it, and contribute. The team that
-            wrote it operates as the canonical implementing firm — not because
-            VCP requires it, but because protocols benefit from a reference implementation.
+            </a>. Anyone can read it, implement it, and contribute. The team that wrote it operates
+            as the canonical implementing firm — not because VCP requires it, but because
+            protocols benefit from a reference implementation.
           </p>
         </div>
         <div>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-400 m-0 mb-3">
+          <p class="font-mono text-[12px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
             Engage
           </p>
-          <p class="text-base text-stone-300 m-0 leading-relaxed">
-            Four ways to engage with the protocol:
-          </p>
-          <ul class="mt-5 space-y-3 list-none p-0">
-            <li class="text-[15px] text-stone-300">
-              <strong class="text-white">Read</strong> — start with the
-              <a href="/positioning" class="text-vcp-teal underline">positioning paper</a>
+          <ul class="space-y-4 list-none p-0 m-0">
+            <li class="text-[16px] leading-relaxed">
+              <strong class="text-white">Read</strong> — start with the{' '}
+              <a href="/positioning" class="text-vcp-teal underline">positioning paper</a>{' '}
               or the <a href="/encoding-stack" class="text-vcp-teal underline">encoding stack</a>.
             </li>
-            <li class="text-[15px] text-stone-300">
+            <li class="text-[16px] leading-relaxed">
               <strong class="text-white">Implement</strong> — apply VCP in your own organization
               using the methodology canon as reference.
             </li>
-            <li class="text-[15px] text-stone-300">
-              <strong class="text-white">Contribute</strong> — propose lexicon entries,
-              VCP-Lang refinements, or Value Graph extensions.
+            <li class="text-[16px] leading-relaxed">
+              <strong class="text-white">Contribute</strong> — propose lexicon entries, VCP-Lang
+              refinements, or Value Graph extensions.
             </li>
-            <li class="text-[15px] text-stone-300">
-              <strong class="text-white">Reach the canonical implementer</strong> —
-              for engaged implementation help, the team is at
+            <li class="text-[16px] leading-relaxed">
+              <strong class="text-white">Reach the canonical implementer</strong> — for engaged
+              implementation help, the team is at{' '}
               <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-vcp-teal underline">valuefirstteam.com</a>.
             </li>
           </ul>
-          <p class="mt-7 mb-0">
-            <a
-              href="/engagement"
-              class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md border border-stone-700 text-white text-sm font-medium no-underline hover:bg-stone-800"
-            >
-              Engagement pathway →
+          <p class="mt-8 mb-0">
+            <a href="/engagement" class="vcp-btn" style="background: transparent; color: var(--vcp-surface); border: 1px solid rgba(246, 243, 236, 0.3);">
+              Engagement pathway <span aria-hidden="true">→</span>
             </a>
           </p>
         </div>

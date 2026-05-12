@@ -196,20 +196,19 @@ export const CROSS_CITATIONS: Record<string, CrossCitationEntry> = {
     peerLabel: 'TEACH section on About at valuefirstteam.com',
   },
 
-  // Peer-pending — page exists on vcp.com but peer slug not yet live on
-  // valuefirstteam.com. Cross-citation suppressed until peer ships; Implementers
-  // band still renders. Surface these in FR-15 follow-ups.
+  // Peers shipped on valuefirstteam.com (cross-citation lifted 2026-05-12,
+  // per Showcase Batch 2 brief — Chris confirmed these are now live).
   '/beliefs': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/beliefs returns 404 as of 2026-05-12 — peer page not yet shipped.',
+    peerSlug: '/beliefs',
+    peerLabel: 'Five Core Beliefs at valuefirstteam.com',
   },
   '/three-orgs': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/three-orgs returns 404 as of 2026-05-12 — peer page not yet shipped.',
+    peerSlug: '/three-orgs',
+    peerLabel: 'Three-Org Model at valuefirstteam.com',
   },
   '/value-led-growth': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/value-led-growth returns 404 as of 2026-05-12 — peer page not yet shipped.',
+    peerSlug: '/value-led-growth',
+    peerLabel: 'Value-Led Growth at valuefirstteam.com',
   },
 
   // vcp.com-only canon — no peer expected.
