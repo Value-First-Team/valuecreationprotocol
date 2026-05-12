@@ -9,6 +9,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Diagram from '../components/Diagram.astro';
+import { PROTOCOL_PEERS } from '../lib/site';
 ---
 
 <BaseLayout
@@ -48,7 +49,8 @@ import Diagram from '../components/Diagram.astro';
 
       <h2>HCP — Human Context Protocol</h2>
       <p>
-        Human Context Protocol gives AI systems <strong>human context</strong>.
+        <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer">Human Context Protocol</a>
+        gives AI systems <strong>human context</strong>.
         It standardizes how AI systems represent and respect the interests,
         agency, preferences, and lived reality of the humans whose work they
         affect. HCP-Lang (March 2026) is the declarative grammar layer that
@@ -110,7 +112,8 @@ import Diagram from '../components/Diagram.astro';
       <ul>
         <li><a href="/positioning">VCP Positioning Paper</a> — full positioning document</li>
         <li><a href="/encoding-stack">Encoding Stack</a> — Lexicon, VCP-Lang, Value Graph</li>
-        <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a> — the canonical MCP home</li>
+        <li><a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer">modelcontextprotocol.io</a> — the canonical MCP home</li>
+        <li><a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer">humancontextprotocol.com</a> — the canonical HCP home</li>
       </ul>
     </article>
   </PageContainer>

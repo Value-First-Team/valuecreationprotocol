@@ -10,7 +10,7 @@
  * Tone: peer-level, calm, technical. Not a sales surface.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES } from '../lib/site';
+import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES, PROTOCOL_PEERS } from '../lib/site';
 ---
 
 <BaseLayout
@@ -38,9 +38,11 @@ import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES } from '../lib/site';
           </p>
           <p class="text-base md:text-lg text-stone-600 mt-5 mb-0 max-w-2xl leading-relaxed">
             VCP is the methodology layer of the AI-native protocol stack. It sits atop
-            <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener" class="text-stone-800 underline">MCP</a>
-            (capability) and HCP (human context), and gives organizations the operating
-            discipline to translate both into realized value.
+            <a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer" class="text-stone-800 underline">MCP</a>
+            (capability) and
+            <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer" class="text-stone-800 underline">HCP</a>
+            (human context), and gives organizations the operating discipline to translate
+            both into realized value.
           </p>
           <div class="mt-9 flex flex-wrap items-center gap-3">
             <a
