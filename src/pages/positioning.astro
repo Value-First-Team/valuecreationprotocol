@@ -1,0 +1,47 @@
+---
+/**
+ * /positioning — VCP Positioning Paper.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import Diagram from '../components/Diagram.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+import { getCanonDoc } from '../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.positioning);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('vcp-positioning-paper');
+
+const version = meta?.version ?? 'v1.0';
+const status = meta?.status ?? 'Published';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="Positioning Paper"
+  description="Where the Value Creation Protocol sits in the AI-native protocol stack — alongside MCP and HCP — and why it exists."
+  path="/positioning"
+  ogImage="og-positioning.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Reference"
+      title={meta?.title ?? 'Value Creation Protocol — Positioning Paper'}
+      lede="Where VCP sits in the AI-native protocol stack, what it claims, and how it relates to existing methodology canon."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <Diagram
+      name="protocol-stack"
+      alt="Protocol stack: MCP (capability), HCP (human context), VCP (methodology)"
+      caption="Capability, context, methodology — read bottom-up."
+    />
+
+    <Prose html={html} />
+  </PageContainer>
+</BaseLayout>

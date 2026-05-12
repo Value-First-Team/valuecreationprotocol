@@ -1,0 +1,47 @@
+---
+/**
+ * /ai-native-shift — methodology page (cohort-agnostic).
+ *
+ * Renders the pattern of organizational transformation. Distinct from any
+ * firm-program description. No pricing, no enrollment. Reads from staged
+ * VCP-Newsletter-Part3.md which carries the methodology framings.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+---
+
+<BaseLayout
+  title="The AI-Native Shift"
+  description="The pattern of organizational transformation toward AI-native operations — methodology only. No program, no enrollment."
+  path="/ai-native-shift"
+  ogImage="og-ai-native-shift.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Methodology"
+      title="The AI-Native Shift"
+      lede="The pattern of organizational transformation toward AI-native operations. A methodology, not a program. Read it, adapt it, run it on your own substrate."
+      status="Canon"
+    />
+
+    <aside class="mb-10 p-5 rounded-lg border border-stone-200 bg-stone-50 text-sm text-stone-700">
+      <p class="m-0">
+        <strong class="text-stone-900">This page describes the pattern.</strong>
+        Specific cohort delivery, pricing, and enrollment live with implementing
+        firms. The protocol is open; the implementation is opinionated.
+      </p>
+    </aside>
+
+    <Prose html={stripFirstH1(renderStagedMarkdown(STAGED_FILES.aiNativeShift).html)} />
+
+    <CrossCitation
+      peerPath="/catalyst"
+      peerLabel="AI-Native Shift program at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>

@@ -1,0 +1,40 @@
+---
+/**
+ * /manifestos — manifesto hub.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageContainer from '../../components/PageContainer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { MANIFESTO_PAGES } from '../../lib/site';
+---
+
+<BaseLayout
+  title="Manifestos"
+  description="Long-form treatments of the conditions that produced VCP — Beyond Leads, Value-Led Growth, and the positioning paper."
+  path="/manifestos"
+  ogImage="og-manifestos-beyond-leads.jpg"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Long-form"
+      title="Manifestos"
+      lede="Why this protocol exists. Three long-form treatments of the conditions and reasoning that produced VCP."
+    />
+
+    <div class="space-y-8">
+      {MANIFESTO_PAGES.map((m) => (
+        <a
+          href={m.href}
+          class="block p-6 md:p-7 rounded-lg border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-colors no-underline"
+        >
+          <h2 class="text-xl md:text-2xl font-semibold m-0 text-stone-900">
+            {m.label}
+          </h2>
+          <p class="text-stone-600 mt-2 mb-0 leading-relaxed">
+            {m.summary}
+          </p>
+        </a>
+      ))}
+    </div>
+  </PageContainer>
+</BaseLayout>

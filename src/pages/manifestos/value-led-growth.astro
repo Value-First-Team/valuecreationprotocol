@@ -1,0 +1,49 @@
+---
+/**
+ * /manifestos/value-led-growth — Value-Led Growth Manifesto.
+ *
+ * Distinct from /value-led-growth (the framework canon page).
+ * This is the long-form manifesto treatment.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageContainer from '../../components/PageContainer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../../lib/markdown';
+import { getCanonDoc } from '../../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.valueLedGrowth);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('value-led-growth-manifesto');
+
+const version = meta?.version ?? 'v1';
+const status = meta?.status ?? 'Published';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="Value-Led Growth — Manifesto"
+  description="A manifesto for organizational transformation in the AI era. Growth as a consequence of value created, not a function pursued."
+  path="/manifestos/value-led-growth"
+  ogImage="og-manifestos-value-led-growth.jpg"
+  schemaType="Article"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Manifesto"
+      title={meta?.title ?? 'Value-Led Growth'}
+      lede="A manifesto for organizational transformation. Growth is what happens when value created exceeds value extracted."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <Prose html={html} />
+
+    <nav class="mt-16 pt-8 border-t border-stone-200 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
+      <a href="/value-led-growth" class="text-stone-700 underline">Value-Led Growth framework canon →</a>
+      <a href="/manifestos/beyond-leads" class="text-stone-700 underline">Beyond "Leads" manifesto →</a>
+      <a href="/positioning" class="text-stone-700 underline">Positioning paper →</a>
+    </nav>
+  </PageContainer>
+</BaseLayout>

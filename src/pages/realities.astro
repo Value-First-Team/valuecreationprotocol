@@ -1,0 +1,129 @@
+---
+/**
+ * /realities — Value Realities page.
+ *
+ * Renders all valueReality records from Sanity with their commitments.
+ * Each reality cross-references its corresponding trap.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getValueRealities } from '../lib/sanity/canon';
+
+const realities = await getValueRealities();
+const total = realities.length;
+---
+
+<BaseLayout
+  title="Value Realities"
+  description="The realities of value creation that an AI-native organization must operate against — and the commitments each implies. Paired with the Complexity Traps they counter."
+  path="/realities"
+  ogImage="og-realities.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer wide>
+    <PageHeader
+      eyebrow="Methodology Canon"
+      title="Value Realities"
+      lede="The operational realities of value creation in AI-native systems. Each reality is paired with the Complexity Trap it counters and the commitments it implies."
+      status="Canon"
+    />
+
+    {total === 0 ? (
+      <div class="p-8 rounded-lg border border-amber-200 bg-amber-50">
+        <p class="m-0 text-stone-700">
+          <strong>Source records loading.</strong> Value Reality records render
+          from the canon dataset. If you see this message in production,
+          the Sanity read token may not be configured for this surface yet.
+        </p>
+      </div>
+    ) : (
+      <>
+        <p class="text-stone-600 text-sm mb-10">
+          {total} realities · ordered by canonical sequence.
+        </p>
+
+        <ol class="space-y-10 list-none p-0">
+          {realities.map((r) => {
+            const name = r.title ?? r.name ?? 'Reality';
+            const accent = r.accentColor ?? '#0d9488';
+            return (
+              <li class="bg-white border border-stone-200 rounded-lg overflow-hidden">
+                <div class="px-6 md:px-8 py-6 border-b border-stone-100 flex items-start gap-5">
+                  <div class="flex-shrink-0">
+                    <span
+                      class="inline-flex items-center justify-center w-12 h-12 rounded-full text-white font-mono text-lg font-semibold"
+                      style={`background:${accent}`}
+                    >
+                      {r.number ?? '·'}
+                    </span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <h2 class="text-xl md:text-2xl font-semibold m-0 text-stone-900 leading-tight">
+                      {name}
+                    </h2>
+                    {r.summary && (
+                      <p class="text-stone-600 mt-2 mb-0 leading-relaxed text-[15px]">
+                        {r.summary}
+                      </p>
+                    )}
+                    {r.relatedTrap && (
+                      <p class="mt-3 mb-0 text-sm">
+                        <span class="inline-block px-2 py-0.5 rounded text-xs font-medium bg-vcp-orange/10 text-vcp-orange border border-vcp-orange/30 mr-2">
+                          Counters Trap
+                        </span>
+                        <a
+                          href={`/twelve-traps#${r.relatedTrap.slug?.current ?? ''}`}
+                          class="text-stone-700 underline"
+                        >
+                          {r.relatedTrap.name}
+                        </a>
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                {r.commitments && r.commitments.length > 0 && (
+                  <div class="px-6 md:px-8 py-5 bg-stone-50/50">
+                    <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-4">
+                      Commitments
+                    </p>
+                    <ol class="space-y-4 list-none p-0">
+                      {r.commitments.map((c) => (
+                        <li class="flex gap-4">
+                          <span class="font-mono text-sm text-stone-400 flex-shrink-0 pt-0.5">
+                            {String(c.number).padStart(2, '0')}
+                          </span>
+                          <div class="min-w-0">
+                            <p class="m-0 text-stone-800 font-medium text-[15px]">
+                              {c.title}
+                            </p>
+                            {c.actions && c.actions.length > 0 && (
+                              <ul class="mt-2 space-y-1 list-none p-0 text-sm text-stone-600">
+                                {c.actions.map((action) => (
+                                  <li class="flex gap-2">
+                                    <span class="text-stone-400" aria-hidden="true">→</span>
+                                    <span>{action}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </>
+    )}
+
+    <p class="text-sm text-stone-500 mt-16 italic">
+      Realities and Traps are complementary. The Traps name what derails value creation;
+      the Realities name what supports it. See <a href="/twelve-traps" class="text-stone-700 underline">Twelve Complexity Traps</a>.
+    </p>
+  </PageContainer>
+</BaseLayout>

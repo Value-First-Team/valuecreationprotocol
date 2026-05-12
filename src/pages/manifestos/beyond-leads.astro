@@ -1,0 +1,49 @@
+---
+/**
+ * /manifestos/beyond-leads — Beyond "Leads" Manifesto v2.
+ *
+ * Renders staged markdown beyond_leads_manifesto_v2.md.
+ * Long-form treatment, calm typography.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageContainer from '../../components/PageContainer.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Prose from '../../components/Prose.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../../lib/markdown';
+import { getCanonDoc } from '../../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.beyondLeads);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('beyond-leads-manifesto-v2');
+
+const version = meta?.version ?? 'v2';
+const status = meta?.status ?? 'Published';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="Beyond Leads — Manifesto"
+  description="A manifesto for humanized, collaborative growth. The industrial-age lead vocabulary is no longer load-bearing in an AI-native era."
+  path="/manifestos/beyond-leads"
+  ogImage="og-manifestos-beyond-leads.jpg"
+  schemaType="Article"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Manifesto"
+      title={meta?.title ?? 'Beyond "Leads"'}
+      lede="A manifesto for humanized, collaborative growth in the AI-native era."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <Prose html={html} />
+
+    <nav class="mt-16 pt-8 border-t border-stone-200 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
+      <a href="/manifestos/value-led-growth" class="text-stone-700 underline">Value-Led Growth manifesto →</a>
+      <a href="/positioning" class="text-stone-700 underline">Positioning paper →</a>
+      <a href="/realities" class="text-stone-700 underline">Value Realities →</a>
+    </nav>
+  </PageContainer>
+</BaseLayout>
