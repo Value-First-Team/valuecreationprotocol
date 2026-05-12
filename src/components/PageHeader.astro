@@ -1,10 +1,16 @@
 ---
 /**
  * PageHeader — title block at the top of every canon/concept page.
- * Calm. Direct. No marketing decoration.
+ *
+ * Implements the Canon.jsx archetype hero:
+ *   - Eyebrow (mono uppercase, teal) with hairline rule
+ *   - Newsreader display heading (variable opsz)
+ *   - Newsreader lead paragraph
+ *   - Optional meta-row (READ time, VERIFIED date, CITED IN, CITE URL)
+ *   - Optional version + status + effective-date pills
  */
 export interface Props {
-  /** Eyebrow text (small, uppercase, above title) — e.g. "Encoding Stack" or "Methodology Canon" */
+  /** Eyebrow text (small, uppercase, above title) — e.g. "Methodology Canon · Chapter 03 of 12" */
   eyebrow?: string;
   /** Page title */
   title: string;
@@ -12,46 +18,64 @@ export interface Props {
   lede?: string;
   /** Optional version tag (shown as monospace pill) */
   version?: string;
-  /** Optional status label (e.g. "Approved", "Draft") */
+  /** Optional status label (e.g. "Approved", "Draft", "Active") */
   status?: string;
   /** Effective date or "as of" date */
   effectiveDate?: string;
+  /** Optional read-time string e.g. "12 min" */
+  readTime?: string;
+  /** Optional last-verified date e.g. "12 May 2026" */
+  verified?: string;
+  /** Optional cite URL fragment — e.g. "valuecreationprotocol.com/value-path" */
+  citeUrl?: string;
 }
 
-const { eyebrow, title, lede, version, status, effectiveDate } = Astro.props;
+const { eyebrow, title, lede, version, status, effectiveDate, readTime, verified, citeUrl } = Astro.props;
+const hasMetaRow = readTime || verified || citeUrl;
 ---
 
-<header class="border-b border-stone-200 pb-8 mb-12">
+<header class="border-b border-vcp-border pb-10 mb-14">
   {eyebrow && (
-    <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-      {eyebrow}
+    <p class="font-mono text-[12px] tracking-[0.16em] uppercase text-vcp-teal-deep m-0 mb-7 font-medium inline-flex items-center gap-3.5">
+      <span>{eyebrow}</span>
+      <span class="h-px bg-vcp-ink inline-block w-[88px] max-w-[88px]" aria-hidden="true"></span>
     </p>
   )}
-  <h1 class="text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight m-0 text-stone-900">
-    {title}
-  </h1>
+  <h1
+    class="font-display text-[clamp(2.5rem,6vw,4.5rem)] font-medium leading-[1.05] tracking-vcp-display text-vcp-ink m-0 max-w-[16ch]"
+    style="font-variation-settings: 'opsz' 72"
+    set:html={title}
+  />
   {lede && (
-    <p class="text-lg md:text-xl text-stone-600 mt-5 mb-0 max-w-3xl leading-relaxed">
+    <p
+      class="font-display text-[clamp(1.125rem,1.6vw,1.375rem)] leading-[1.5] text-vcp-ink-2 mt-7 mb-0 max-w-[56ch]"
+      style="font-variation-settings: 'opsz' 22"
+    >
       {lede}
     </p>
   )}
   {(version || status || effectiveDate) && (
-    <div class="mt-6 flex flex-wrap items-center gap-2 text-xs">
+    <div class="mt-7 flex flex-wrap items-center gap-2 text-xs">
       {version && (
-        <span class="font-mono px-2 py-1 rounded bg-stone-100 text-stone-700 border border-stone-200">
+        <span class="font-mono px-2 py-1 rounded-vcp-sm bg-vcp-surface-2 text-vcp-ink border border-vcp-border">
           {version}
         </span>
       )}
       {status && (
-        <span class="px-2 py-1 rounded bg-vcp-teal/10 text-vcp-teal border border-vcp-teal/30 font-medium">
+        <span class="font-mono px-2 py-1 rounded-vcp-sm bg-vcp-teal-soft text-vcp-teal-ink border border-vcp-teal/30 font-medium uppercase tracking-wider text-[10px]">
           {status}
         </span>
       )}
       {effectiveDate && (
-        <span class="text-stone-500">
-          Effective {effectiveDate}
-        </span>
+        <span class="text-vcp-ink-3 font-mono">Effective {effectiveDate}</span>
       )}
+    </div>
+  )}
+  {hasMetaRow && (
+    <div class="mt-10 pt-6 border-t border-vcp-border flex flex-wrap gap-x-8 gap-y-3 font-mono text-[12px] tracking-[0.06em] uppercase text-vcp-ink-3">
+      {readTime && <span>READ · <b class="text-vcp-ink font-medium normal-case tracking-normal">{readTime}</b></span>}
+      {verified && <span>VERIFIED · <b class="text-vcp-ink font-medium normal-case tracking-normal">{verified}</b></span>}
+      {citeUrl && <span>CITE · <b class="text-vcp-ink font-medium normal-case tracking-normal">{citeUrl}</b></span>}
     </div>
   )}
 </header>

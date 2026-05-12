@@ -8,13 +8,8 @@
  *
  * Source of truth: the CROSS_CITATIONS map in src/lib/site.ts. Pass the current
  * page path; the component looks up the peer slug + label. If the page has
- * `peerSlug: null` in the map (vcp.com-only canon, hub page, or peer-pending),
- * the component renders nothing — making it safe to drop on every page
- * unconditionally.
- *
- * Voice (per "why so serious?" 2026-05 feedback):
- *   - Light visual weight. One link, calm aside.
- *   - Trust the reader; the protocol doesn't need to keep announcing itself.
+ * `peerSlug: null` in the map, the component renders nothing — safe to drop
+ * on every page unconditionally.
  */
 import { getCrossCitation, SITE } from '../lib/site';
 
@@ -25,20 +20,20 @@ export interface Props {
 
 const { path } = Astro.props;
 const entry = getCrossCitation(path);
-
-// Render only when a live peer slug exists. peerSlug: null = silent skip.
 const peerUrl = entry?.peerSlug ? `${SITE.implementer.url}${entry.peerSlug}` : null;
 ---
 
 {peerUrl && entry?.peerLabel && (
-  <aside class="my-8 p-4 rounded-lg border border-stone-200 bg-stone-50/50 text-sm">
-    <p class="m-0 text-stone-600 leading-relaxed">
-      <span class="font-medium text-stone-700">Cross-reference:</span>{' '}
+  <aside class="my-10 p-6 rounded-vcp-lg border border-vcp-border-strong bg-vcp-surface-2">
+    <p class="font-mono text-[10px] tracking-[0.12em] uppercase text-vcp-ink-3 m-0 mb-2">
+      SEE ALSO
+    </p>
+    <p class="font-display text-[15px] leading-relaxed text-vcp-ink m-0" style="font-variation-settings: 'opsz' 17">
       <a
         href={peerUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="text-stone-700 underline"
+        class="text-vcp-teal-deep border-b border-vcp-teal-deep/40 no-underline hover:border-vcp-teal-deep"
       >
         {entry.peerLabel}
       </a>

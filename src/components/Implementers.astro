@@ -27,46 +27,39 @@ export interface Props {
 }
 
 const { variant = 'default' } = Astro.props;
-
-const lede =
-  variant === 'manifesto'
-    ? 'Written for the Value Creation Protocol — originated and canonically implemented by'
-    : 'Value-First Team is the originating and canonical implementing firm.';
 ---
 
-<aside class="mt-12 pt-6 border-t border-stone-200 text-sm text-stone-600">
-  {variant === 'manifesto' ? (
-    <p class="m-0 leading-relaxed">
-      {lede}{' '}
-      <a
-        href={SITE.implementer.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-stone-800 underline"
-      >
-        Value-First Team
-      </a>.
-    </p>
-  ) : (
-    <p class="m-0 leading-relaxed">
-      <span class="font-medium text-stone-700">Originated and canonically implemented by{' '}</span>
-      <a
-        href={SITE.implementer.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-stone-800 underline"
-      >
-        Value-First Team
-      </a>.
-      See it in practice at{' '}
-      <a
-        href={SITE.implementer.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-stone-800 underline"
-      >
-        valuefirstteam.com
-      </a>.
-    </p>
-  )}
+<aside class="mt-14 pt-7 border-t border-vcp-border">
+  <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
+    PROTOCOL HOME
+  </p>
+  <p class="font-display text-[16px] leading-[1.55] text-vcp-ink m-0 max-w-[68ch]" style="font-variation-settings: 'opsz' 19">
+    {variant === 'manifesto' ? (
+      <>
+        Written for the Value Creation Protocol — originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline"
+        >
+          Value-First Team
+        </a>.
+      </>
+    ) : (
+      <>
+        Operated and refined by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline"
+        >
+          Value-First Team
+        </a>
+        {' '}— the originating and canonical implementing firm. The protocol is published openly;
+        anyone may read, cite, and operate on it.
+      </>
+    )}
+  </p>
 </aside>

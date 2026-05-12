@@ -27,10 +27,12 @@ const html = stripFirstH1(rawHtml);
 >
   <PageContainer>
     <PageHeader
-      eyebrow="Methodology Canon"
+      eyebrow="Methodology canon · Chapter 10 of 12"
       title="Value-Led Growth"
       lede="A framework, not a slogan. Growth as a consequence of value created across mutual stakeholders. Pairs with the Value Path on the relational side."
       status="Canon"
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/value-led-growth"
     />
 
     <aside class="mb-10 p-4 rounded-lg bg-stone-50 border border-stone-200 text-sm text-stone-600">
@@ -39,7 +41,7 @@ const html = stripFirstH1(rawHtml);
       This page is the canonical framework reference.
     </aside>
 
-    <Prose html={html} />
+    <Prose html={html} canon />
 
     <CrossCitation path="/value-led-growth" />
     <Implementers />

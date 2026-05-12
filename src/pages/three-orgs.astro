@@ -28,10 +28,12 @@ const html = stripFirstH1(rawHtml);
 >
   <PageContainer wide>
     <PageHeader
-      eyebrow="Methodology Canon"
+      eyebrow="Methodology canon · Chapter 04 of 12"
       title="Three-Org Model"
       lede="Customer Org, Operations Org, Finance Org. Every business concern maps to one of the three. Functional silos dissolve into clear ownership."
       status="Canon"
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/three-orgs"
     />
 
     <Diagram
@@ -40,7 +42,7 @@ const html = stripFirstH1(rawHtml);
       caption="Every concern, every agent, every BU maps to one of the three orgs."
     />
 
-    <Prose html={html} />
+    <Prose html={html} canon />
 
     <CrossCitation path="/three-orgs" />
     <Implementers />

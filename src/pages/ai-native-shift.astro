@@ -25,10 +25,12 @@ import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdow
 >
   <PageContainer>
     <PageHeader
-      eyebrow="Methodology"
+      eyebrow="Methodology canon · Chapter 08 of 12"
       title="The AI-Native Shift"
       lede="The pattern of organizational transformation toward AI-native operations. A methodology, not a program. Read it, adapt it, run it on your own substrate."
       status="Canon"
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/ai-native-shift"
     />
 
     <aside class="mb-10 p-5 rounded-lg border border-stone-200 bg-stone-50 text-sm text-stone-700">
@@ -39,7 +41,7 @@ import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdow
       </p>
     </aside>
 
-    <Prose html={stripFirstH1(renderStagedMarkdown(STAGED_FILES.aiNativeShift).html)} />
+    <Prose html={stripFirstH1(renderStagedMarkdown(STAGED_FILES.aiNativeShift).html)} canon />
 
     <CrossCitation path="/ai-native-shift" />
     <Implementers />

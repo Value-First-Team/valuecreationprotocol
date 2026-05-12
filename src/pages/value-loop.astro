@@ -26,14 +26,16 @@ const html = stripFirstH1(rawHtml);
 >
   <PageContainer>
     <PageHeader
-      eyebrow="Methodology Canon"
+      eyebrow="Methodology canon · Chapter 06 of 12"
       title="Value Loop"
       lede="Discover → Codify → Deliver → Learn. A continuous loop, not a sequential delivery pipeline. The unit of organizational learning in AI-native operations."
       version="v1"
       status="Canon"
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/value-loop"
     />
 
-    <Prose html={html} />
+    <Prose html={html} canon />
 
     <CrossCitation path="/value-loop" />
     <Implementers />

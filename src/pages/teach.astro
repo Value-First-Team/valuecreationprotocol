@@ -33,15 +33,17 @@ const effectiveDate = meta?.effectiveDate;
 >
   <PageContainer>
     <PageHeader
-      eyebrow="Methodology Canon"
+      eyebrow="Methodology canon · Chapter 07 of 12"
       title="TEACH"
       lede="Five values for teaching, leading, and operating. Each pair holds a creative tension — neither pole alone produces value."
       version={version}
       status={status}
       effectiveDate={effectiveDate}
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/teach"
     />
 
-    <Prose html={html} />
+    <Prose html={html} canon />
 
     <CrossCitation path="/teach" />
     <Implementers />

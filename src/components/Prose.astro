@@ -2,13 +2,25 @@
 /**
  * Prose — wrapper for rendered-from-markdown HTML.
  *
- * Applies the .prose typography defined in BaseLayout.
+ * Variants:
+ *   - default        (.prose)              canon-body typography, no drop-cap
+ *   - canon          (.prose .prose-canon) adds editorial drop-cap on first paragraph
+ *   - manifesto      (.prose-manifesto)    larger, narrower, loose line-height, drop-cap
+ *
  * Use with set:html when the HTML is trusted (we control all input).
  */
 export interface Props {
   html: string;
+  /** Apply canon drop-cap on the first paragraph. */
+  canon?: boolean;
+  /** Use the manifesto archetype styles (larger display, narrower, drop-cap). */
+  manifesto?: boolean;
 }
-const { html } = Astro.props;
+const { html, canon = false, manifesto = false } = Astro.props;
+
+let cls = 'prose mx-auto';
+if (canon) cls = 'prose prose-canon mx-auto';
+if (manifesto) cls = 'prose-manifesto mx-auto';
 ---
 
-<article class="prose mx-auto" set:html={html} />
+<article class={cls} set:html={html} />

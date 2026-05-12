@@ -1,16 +1,23 @@
 ---
 /**
- * PageContainer — standard content width wrapper for canon pages.
- * Provides consistent horizontal padding + top padding.
+ * PageContainer — content width wrapper for canon / hub / spec pages.
+ *
+ * Default: 4xl (reading width). `wide` opt-in (5xl) for hubs / spec pages.
+ * `narrow` for manifesto-style content (max-vcp-narrow = 56ch).
  */
 export interface Props {
-  /** Use the wide container (1100px) instead of standard reading width (880px). */
+  /** Use the wide container (max-w-5xl) for hub / spec pages. */
   wide?: boolean;
+  /** Use the narrow manifesto container (56ch). */
+  narrow?: boolean;
 }
-const { wide = false } = Astro.props;
-const max = wide ? 'max-w-5xl' : 'max-w-4xl';
+const { wide = false, narrow = false } = Astro.props;
+
+let max = 'max-w-4xl';
+if (wide) max = 'max-w-5xl';
+if (narrow) max = 'max-w-vcp-narrow';
 ---
 
-<div class={`${max} mx-auto px-6 py-12 md:py-16`}>
+<div class={`${max} mx-auto px-6 py-14 md:py-20`}>
   <slot />
 </div>
