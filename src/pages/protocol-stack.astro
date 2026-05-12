@@ -1,0 +1,117 @@
+---
+/**
+ * /protocol-stack — Overview of the AI-native protocol stack: MCP, HCP, VCP.
+ *
+ * Complements the homepage hero with a dedicated reference page.
+ * Schema.org TechArticle.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Diagram from '../components/Diagram.astro';
+---
+
+<BaseLayout
+  title="Protocol Stack"
+  description="The AI-native protocol stack: MCP (capability), HCP (human context), VCP (methodology). Each layer is necessary; none is sufficient on its own."
+  path="/protocol-stack"
+  ogImage="og-default.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Reference"
+      title="The Protocol Stack"
+      lede="Three layers, read bottom-up: capability, context, methodology. Each layer is necessary; none is sufficient on its own."
+    />
+
+    <Diagram
+      name="protocol-stack"
+      alt="Protocol stack: MCP, HCP, VCP."
+      caption="MCP gives AI capability. HCP gives it human context. VCP gives organizations methodology."
+    />
+
+    <article class="prose mx-auto">
+      <h2>MCP — Model Context Protocol</h2>
+      <p>
+        <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a>
+        gives AI systems <strong>capability</strong>. It standardizes how language
+        models call tools, read external context, and act on the world through
+        servers exposing capability surfaces. MCP made AI systems capable of
+        operating against arbitrary software substrates without per-vendor
+        integration glue.
+      </p>
+      <p>
+        MCP is the bottom of the stack because nothing higher matters if the
+        models can't reach into the systems where work happens.
+      </p>
+
+      <h2>HCP — Human Context Protocol</h2>
+      <p>
+        Human Context Protocol gives AI systems <strong>human context</strong>.
+        It standardizes how AI systems represent and respect the interests,
+        agency, preferences, and lived reality of the humans whose work they
+        affect. HCP-Lang (March 2026) is the declarative grammar layer that
+        lets humans express context as parseable statements rather than
+        prompt-injected hints.
+      </p>
+      <p>
+        HCP sits above MCP because capability without human context produces
+        operations that are efficient but inhumane — a defect AI-native
+        systems should not perpetuate.
+      </p>
+
+      <h2>VCP — Value Creation Protocol</h2>
+      <p>
+        <a href="/positioning">Value Creation Protocol</a>
+        gives organizations <strong>methodology</strong>. It encodes the operating
+        discipline that translates AI capability and human context into realized
+        value for all stakeholders. VCP is the methodology layer — the part
+        that prevents capability and context from being applied to the wrong
+        problem, or to the right problem with the wrong frame.
+      </p>
+      <p>
+        VCP sits at the top because capability and context, without methodology,
+        produce efficient progress toward poor outcomes. The protocol exists
+        because foundation models default to industrial-age operating defaults
+        — leads, funnels, conversion, extraction — that VCP-aligned
+        organizations explicitly reject.
+      </p>
+
+      <h2>Why three layers</h2>
+      <p>
+        Each layer is necessary; none is sufficient on its own.
+      </p>
+      <ul>
+        <li><strong>MCP only:</strong> AI that can act but doesn't know who it's acting for or why.</li>
+        <li><strong>HCP only:</strong> AI that respects humans but can't reach the systems where work happens.</li>
+        <li><strong>VCP only:</strong> Methodology with no machine-readable substrate or capability surface.</li>
+        <li><strong>MCP + HCP only:</strong> Substrate for AI-native operations, but no operating discipline.</li>
+        <li><strong>MCP + VCP only:</strong> Methodology that can execute, but doesn't respect human context.</li>
+        <li><strong>HCP + VCP only:</strong> Operating discipline that respects humans but can't act on systems.</li>
+        <li><strong>All three:</strong> AI-native operations with capability, context, and discipline.</li>
+      </ul>
+
+      <h2>Independence and complementarity</h2>
+      <p>
+        The three protocols are independent. VCP does not require any particular
+        MCP implementation, nor does it mandate a specific HCP. Each layer is
+        free to evolve at its own pace, with its own governance, in its own
+        community.
+      </p>
+      <p>
+        They are also complementary. A VCP-aligned system that exposes MCP
+        servers can be operated by AI agents that respect HCP declarations.
+        The three protocols stack cleanly because they were defined at
+        different layers of the same problem.
+      </p>
+
+      <h2>Related</h2>
+      <ul>
+        <li><a href="/positioning">VCP Positioning Paper</a> — full positioning document</li>
+        <li><a href="/encoding-stack">Encoding Stack</a> — Lexicon, VCP-Lang, Value Graph</li>
+        <li><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io</a> — the canonical MCP home</li>
+      </ul>
+    </article>
+  </PageContainer>
+</BaseLayout>
