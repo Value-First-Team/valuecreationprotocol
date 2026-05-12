@@ -1,0 +1,72 @@
+---
+/**
+ * Implementers — one-line attribution that names Value-First Team as the
+ * originating + canonical implementing firm for the Value Creation Protocol.
+ *
+ * Voice (per "why so serious?" 2026-05 feedback):
+ *   - One sentence + link. Not a sales pitch, not a disclaimer.
+ *   - Light visual weight. Near page bottom, in an aside, not a banner.
+ *   - Single touch per page. Footer + this component is plenty; never both
+ *     this AND a separate impl-name in adjacent prose.
+ *
+ * Used in tandem with CrossCitation on most canon pages:
+ *   - CrossCitation = "here's the peer page at valuefirstteam.com"
+ *   - Implementers   = "Value-First Team operates the protocol in practice"
+ *
+ * If a page already has a more elaborate implementers section inline (the
+ * homepage dark band, the engagement page), skip this component on that page.
+ */
+import { SITE } from '../lib/site';
+
+export interface Props {
+  /**
+   * Optional override for the leading sentence. Defaults to a concise pattern.
+   * Keep to one sentence — the component intentionally resists growth.
+   */
+  variant?: 'default' | 'manifesto';
+}
+
+const { variant = 'default' } = Astro.props;
+
+const lede =
+  variant === 'manifesto'
+    ? 'Written for the Value Creation Protocol — originated and canonically implemented by'
+    : 'Value-First Team is the originating and canonical implementing firm.';
+---
+
+<aside class="mt-12 pt-6 border-t border-stone-200 text-sm text-stone-600">
+  {variant === 'manifesto' ? (
+    <p class="m-0 leading-relaxed">
+      {lede}{' '}
+      <a
+        href={SITE.implementer.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-stone-800 underline"
+      >
+        Value-First Team
+      </a>.
+    </p>
+  ) : (
+    <p class="m-0 leading-relaxed">
+      <span class="font-medium text-stone-700">Originated and canonically implemented by{' '}</span>
+      <a
+        href={SITE.implementer.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-stone-800 underline"
+      >
+        Value-First Team
+      </a>.
+      See it in practice at{' '}
+      <a
+        href={SITE.implementer.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-stone-800 underline"
+      >
+        valuefirstteam.com
+      </a>.
+    </p>
+  )}
+</aside>

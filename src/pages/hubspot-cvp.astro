@@ -10,6 +10,7 @@ import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
 import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
 
@@ -41,9 +42,7 @@ const effectiveDate = meta?.effectiveDate;
 
     <Prose html={html} />
 
-    <CrossCitation
-      peerPath="/hubspot"
-      peerLabel="HubSpot CVP work at valuefirstteam.com"
-    />
+    <CrossCitation path="/hubspot-cvp" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>

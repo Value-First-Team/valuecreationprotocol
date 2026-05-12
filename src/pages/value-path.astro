@@ -7,6 +7,7 @@ import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Diagram from '../components/Diagram.astro';
 import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 import { getValuePathStages } from '../lib/sanity/canon';
 
 const stages = await getValuePathStages();
@@ -117,9 +118,7 @@ const PATH_OF = stages.filter((s) => s.number >= 5);
       </>
     )}
 
-    <CrossCitation
-      peerPath="/methodology/value-path"
-      peerLabel="Value Path at valuefirstteam.com"
-    />
+    <CrossCitation path="/value-path" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>

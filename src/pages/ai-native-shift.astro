@@ -11,6 +11,7 @@ import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
 import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 ---
 
@@ -39,9 +40,7 @@ import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdow
 
     <Prose html={stripFirstH1(renderStagedMarkdown(STAGED_FILES.aiNativeShift).html)} />
 
-    <CrossCitation
-      peerPath="/catalyst"
-      peerLabel="AI-Native Shift program at valuefirstteam.com"
-    />
+    <CrossCitation path="/ai-native-shift" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>

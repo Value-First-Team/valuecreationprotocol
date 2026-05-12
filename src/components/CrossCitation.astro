@@ -4,35 +4,44 @@
  * canonical implementing firm's peer page on valuefirstteam.com.
  *
  * Mutual cross-citation pattern (TR-9). NOT a canonical link tag —
- * vcp.com remains canonical for itself (TR-8 hard rule).
+ * vcp.com remains canonical for itself (TR-8 hard rule, enforced by BaseLayout).
  *
- * Light visual weight per voice guidance — protocol doesn't need to keep
- * announcing where it's implemented. Trust the reader.
+ * Source of truth: the CROSS_CITATIONS map in src/lib/site.ts. Pass the current
+ * page path; the component looks up the peer slug + label. If the page has
+ * `peerSlug: null` in the map (vcp.com-only canon, hub page, or peer-pending),
+ * the component renders nothing — making it safe to drop on every page
+ * unconditionally.
+ *
+ * Voice (per "why so serious?" 2026-05 feedback):
+ *   - Light visual weight. One link, calm aside.
+ *   - Trust the reader; the protocol doesn't need to keep announcing itself.
  */
-import { SITE } from '../lib/site';
+import { getCrossCitation, SITE } from '../lib/site';
 
 export interface Props {
-  /** Path on valuefirstteam.com (e.g. "/methodology/value-path") */
-  peerPath: string;
-  /** Human label for the peer ("Value Path at valuefirstteam.com") */
-  peerLabel?: string;
+  /** Current page path, e.g. "/value-path". The component looks up the peer. */
+  path: string;
 }
 
-const { peerPath, peerLabel } = Astro.props;
-const peerUrl = `${SITE.implementer.url}${peerPath}`;
+const { path } = Astro.props;
+const entry = getCrossCitation(path);
+
+// Render only when a live peer slug exists. peerSlug: null = silent skip.
+const peerUrl = entry?.peerSlug ? `${SITE.implementer.url}${entry.peerSlug}` : null;
 ---
 
-<aside class="my-8 p-4 rounded-lg border border-stone-200 bg-stone-50/50 text-sm">
-  <p class="m-0 text-stone-600">
-    <span class="font-medium text-stone-700">Implementers:</span>
-    Canonically implemented by{' '}
-    <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-stone-700 underline">
-      Value-First Team
-    </a>{peerLabel ? ' — see ' : '.'}
-    {peerLabel && (
-      <a href={peerUrl} target="_blank" rel="noopener" class="text-stone-700 underline">
-        {peerLabel}
+{peerUrl && entry?.peerLabel && (
+  <aside class="my-8 p-4 rounded-lg border border-stone-200 bg-stone-50/50 text-sm">
+    <p class="m-0 text-stone-600 leading-relaxed">
+      <span class="font-medium text-stone-700">Cross-reference:</span>{' '}
+      <a
+        href={peerUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-stone-700 underline"
+      >
+        {entry.peerLabel}
       </a>
-    )}
-  </p>
-</aside>
+    </p>
+  </aside>
+)}

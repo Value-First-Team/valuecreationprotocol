@@ -20,6 +20,24 @@ export const SITE = {
 } as const;
 
 /**
+ * Peer protocols in the AI-native stack.
+ */
+export const PROTOCOL_PEERS = {
+  mcp: {
+    name: 'Model Context Protocol',
+    short: 'MCP',
+    url: 'https://modelcontextprotocol.io',
+    role: 'capability',
+  },
+  hcp: {
+    name: 'Human Context Protocol',
+    short: 'HCP',
+    url: 'https://humancontextprotocol.com',
+    role: 'human context',
+  },
+} as const;
+
+/**
  * Top navigation — five primary groupings + glossary. Engagement sits in footer.
  * Schema.org-adjacent: this is a documentation site, not a marketing site.
  */
@@ -120,18 +138,101 @@ export const MANIFESTO_PAGES: Array<{ label: string; href: string; summary: stri
 
 /**
  * Mutual cross-citations — vcp.com canon page → valuefirstteam.com peer.
- * Used by the CrossCitation component to display the small "canonically implemented at"
- * inline block. Lightweight per voice guidance; not every page carries one.
+ *
+ * Source of truth for cross-citation routing. Used by both the CrossCitation
+ * component (linked aside) and the Implementers component (one-line attribution).
+ *
+ * Peer slugs verified live on valuefirstteam.com as of 2026-05-12. Pages with
+ * `peerSlug: null` are intentionally peerless — either vcp.com-only canon
+ * (lexicon, vcp-lang, value-graph, encoding-stack, positioning, manifestos),
+ * hub pages (methodology, manifestos, protocol-stack), or pages whose peer
+ * has not yet shipped on valuefirstteam.com (flagged below).
  */
-export const CROSS_CITATIONS: Record<string, { peerSlug: string; peerLabel: string }> = {
-  '/beliefs': { peerSlug: '/methodology/core-beliefs', peerLabel: 'Core Beliefs at valuefirstteam.com' },
-  '/twelve-traps': { peerSlug: '/methodology/twelve-traps', peerLabel: 'Twelve Traps at valuefirstteam.com' },
-  '/value-path': { peerSlug: '/methodology/value-path', peerLabel: 'Value Path at valuefirstteam.com' },
-  '/three-orgs': { peerSlug: '/methodology/three-org-model', peerLabel: 'Three-Org Model at valuefirstteam.com' },
-  '/unified-views': { peerSlug: '/methodology/unified-views', peerLabel: 'Unified Views at valuefirstteam.com' },
-  '/teach': { peerSlug: '/methodology/teach', peerLabel: 'TEACH at valuefirstteam.com' },
-  '/value-loop': { peerSlug: '/methodology/value-loop', peerLabel: 'Value Loop at valuefirstteam.com' },
-  '/value-led-growth': { peerSlug: '/methodology/value-led-growth', peerLabel: 'Value-Led Growth at valuefirstteam.com' },
-  '/ai-native-shift': { peerSlug: '/catalyst', peerLabel: 'AI-Native Shift at valuefirstteam.com' },
-  '/hubspot-cvp': { peerSlug: '/hubspot', peerLabel: 'HubSpot CVP work at valuefirstteam.com' },
+export type CrossCitationEntry = {
+  /** Path on valuefirstteam.com (e.g. "/value-path"), or null if no peer exists. */
+  peerSlug: string | null;
+  /** Display label for the peer link. */
+  peerLabel?: string;
+  /** Optional note explaining peer status — surfaces in report-back, not in UI. */
+  note?: string;
 };
+
+export const CROSS_CITATIONS: Record<string, CrossCitationEntry> = {
+  // Verified-live peers on valuefirstteam.com (top-level canonical slugs per FR-15).
+  '/value-path': {
+    peerSlug: '/value-path',
+    peerLabel: 'Value Path at valuefirstteam.com',
+  },
+  '/twelve-traps': {
+    peerSlug: '/traps',
+    peerLabel: 'Twelve Traps at valuefirstteam.com',
+  },
+  '/unified-views': {
+    peerSlug: '/unified-views',
+    peerLabel: 'Four Unified Views at valuefirstteam.com',
+  },
+  '/realities': {
+    peerSlug: '/realities',
+    peerLabel: 'Value Realities at valuefirstteam.com',
+  },
+  '/ai-native-shift': {
+    peerSlug: '/ai-native-shift',
+    peerLabel: 'AI-Native Shift at valuefirstteam.com',
+  },
+  '/cvp-vs-vcp': {
+    peerSlug: '/cvp',
+    peerLabel: 'Customer Value Platform at valuefirstteam.com',
+  },
+  '/hubspot-cvp': {
+    peerSlug: '/how-we-help/hubspot-cvp',
+    peerLabel: 'HubSpot CVP at valuefirstteam.com',
+  },
+  '/value-loop': {
+    peerSlug: '/what-we-solve/the-value-loop',
+    peerLabel: 'The Value Loop at valuefirstteam.com',
+  },
+  '/teach': {
+    peerSlug: '/about',
+    peerLabel: 'TEACH section on About at valuefirstteam.com',
+  },
+
+  // Peer-pending — page exists on vcp.com but peer slug not yet live on
+  // valuefirstteam.com. Cross-citation suppressed until peer ships; Implementers
+  // band still renders. Surface these in FR-15 follow-ups.
+  '/beliefs': {
+    peerSlug: null,
+    note: 'valuefirstteam.com/beliefs returns 404 as of 2026-05-12 — peer page not yet shipped.',
+  },
+  '/three-orgs': {
+    peerSlug: null,
+    note: 'valuefirstteam.com/three-orgs returns 404 as of 2026-05-12 — peer page not yet shipped.',
+  },
+  '/value-led-growth': {
+    peerSlug: null,
+    note: 'valuefirstteam.com/value-led-growth returns 404 as of 2026-05-12 — peer page not yet shipped.',
+  },
+
+  // vcp.com-only canon — no peer expected.
+  '/lexicon': { peerSlug: null, note: 'vcp.com-only canon (encoding stack)' },
+  '/vcp-lang': { peerSlug: null, note: 'vcp.com-only canon (encoding stack)' },
+  '/value-graph': { peerSlug: null, note: 'vcp.com-only canon (encoding stack)' },
+  '/encoding-stack': { peerSlug: null, note: 'vcp.com-only canon' },
+  '/positioning': { peerSlug: null, note: 'vcp.com-only canon (protocol positioning)' },
+  '/manifestos/beyond-leads': { peerSlug: null, note: 'vcp.com-only canon (manifesto)' },
+  '/manifestos/value-led-growth': { peerSlug: null, note: 'vcp.com-only canon (manifesto)' },
+
+  // Hub / glossary — no per-page peer cross-citation.
+  '/glossary': { peerSlug: null, note: 'glossary — footer attribution sufficient' },
+  '/methodology': { peerSlug: null, note: 'hub page — footer attribution sufficient' },
+  '/manifestos': { peerSlug: null, note: 'hub page — footer attribution sufficient' },
+  '/protocol-stack': { peerSlug: null, note: 'hub page — footer attribution sufficient' },
+  '/engagement': { peerSlug: null, note: 'engagement page — implementer framing inline' },
+};
+
+/**
+ * Lookup helper for CrossCitation + Implementers components.
+ * Returns null if the path has no canonical entry (defensive).
+ */
+export function getCrossCitation(path: string): CrossCitationEntry | null {
+  return CROSS_CITATIONS[path] ?? null;
+}

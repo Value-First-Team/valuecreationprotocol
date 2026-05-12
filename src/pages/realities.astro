@@ -8,6 +8,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 import { getValueRealities } from '../lib/sanity/canon';
 
 const realities = await getValueRealities();
@@ -125,5 +127,8 @@ const total = realities.length;
       Realities and Traps are complementary. The Traps name what derails value creation;
       the Realities name what supports it. See <a href="/twelve-traps" class="text-stone-700 underline">Twelve Complexity Traps</a>.
     </p>
+
+    <CrossCitation path="/realities" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>

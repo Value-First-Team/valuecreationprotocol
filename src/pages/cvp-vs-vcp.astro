@@ -5,6 +5,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 ---
 
 <BaseLayout
@@ -111,5 +113,8 @@ import PageHeader from '../components/PageHeader.astro';
         <li><a href="/glossary">Glossary — full term index</a></li>
       </ul>
     </article>
+
+    <CrossCitation path="/cvp-vs-vcp" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>

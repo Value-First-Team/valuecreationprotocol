@@ -10,6 +10,7 @@ import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Prose from '../components/Prose.astro';
 import CrossCitation from '../components/CrossCitation.astro';
+import Implementers from '../components/Implementers.astro';
 import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const { html: rawHtml } = renderWikiCanonical(WIKI_CANONICAL.valueLedGrowth);
@@ -39,9 +40,7 @@ const html = stripFirstH1(rawHtml);
 
     <Prose html={html} />
 
-    <CrossCitation
-      peerPath="/methodology/value-led-growth"
-      peerLabel="Value-Led Growth at valuefirstteam.com"
-    />
+    <CrossCitation path="/value-led-growth" />
+    <Implementers />
   </PageContainer>
 </BaseLayout>
