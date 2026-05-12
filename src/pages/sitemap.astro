@@ -1,0 +1,142 @@
+---
+/**
+ * /sitemap — human-readable sitemap.
+ *
+ * Lists all 25 public routes grouped by archetype. Companion to the
+ * machine-readable /sitemap-index.xml produced by @astrojs/sitemap.
+ *
+ * Reads as a calm index — same warm-paper editorial tokens as the rest
+ * of the site, no decoration beyond what's needed to scan.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { METHODOLOGY_PAGES, MANIFESTO_PAGES } from '../lib/site';
+
+type Route = { href: string; label: string; note?: string };
+
+const HOMEPAGE: Route[] = [
+  { href: '/', label: 'Open Protocol Home' },
+];
+
+const HUBS: Route[] = [
+  { href: '/protocol-stack', label: 'The Protocol Stack', note: 'MCP · HCP · VCP reference' },
+  { href: '/methodology', label: 'Methodology Canon', note: 'Index of 12 chapters' },
+  { href: '/manifestos', label: 'Manifestos', note: 'Index of 03 long-form pieces' },
+  { href: '/engagement', label: 'Engagement Pathway', note: 'Read · Implement · Contribute · Reach' },
+];
+
+const ENCODING_STACK: Route[] = [
+  { href: '/encoding-stack', label: 'Encoding Stack — Overview' },
+  { href: '/lexicon', label: 'Layer A · Value-First Lexicon' },
+  { href: '/vcp-lang', label: 'Layer B · VCP-Lang' },
+  { href: '/value-graph', label: 'Layer C · Value Graph' },
+];
+
+const MANIFESTOS: Route[] = MANIFESTO_PAGES.map((m) => ({
+  href: m.href,
+  label: m.label,
+  note: m.summary,
+}));
+
+const REFERENCE: Route[] = [
+  { href: '/glossary', label: 'Glossary', note: 'Full canonical vocabulary' },
+  { href: '/sitemap-index.xml', label: '/sitemap-index.xml', note: 'Machine-readable XML sitemap' },
+];
+
+const GROUPS: Array<{ id: string; title: string; eyebrow: string; routes: Route[] }> = [
+  { id: 'home', title: 'Homepage', eyebrow: '§ 01', routes: HOMEPAGE },
+  { id: 'hubs', title: 'Hub Pages', eyebrow: '§ 02', routes: HUBS },
+  { id: 'methodology', title: 'Methodology Canon (12)', eyebrow: '§ 03', routes: METHODOLOGY_PAGES.map((m, i) => ({ href: m.href, label: `Chapter ${String(i + 1).padStart(2, '0')} · ${m.label}`, note: m.summary })) },
+  { id: 'encoding', title: 'Encoding Stack (3)', eyebrow: '§ 04', routes: ENCODING_STACK },
+  { id: 'manifestos', title: 'Manifestos (3)', eyebrow: '§ 05', routes: MANIFESTOS },
+  { id: 'reference', title: 'Reference', eyebrow: '§ 06', routes: REFERENCE },
+];
+
+const totalRoutes = GROUPS.reduce((n, g) => n + g.routes.length, 0);
+---
+
+<BaseLayout
+  title="Sitemap"
+  description="All public pages on valuecreationprotocol.com, grouped by archetype."
+  path="/sitemap"
+  ogImage="og-default.jpg"
+  schemaType="CollectionPage"
+>
+  <PageContainer wide>
+    <PageHeader
+      eyebrow="Reference · Index"
+      title="Sitemap"
+      lede={`Every public page on valuecreationprotocol.com, grouped by archetype. ${totalRoutes} routes total.`}
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/sitemap"
+    />
+
+    <!-- Group ToC -->
+    <nav class="mb-14 p-6 rounded-vcp-lg border border-vcp-border bg-vcp-surface-2">
+      <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
+        Groups
+      </p>
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none p-0 m-0 text-sm">
+        {GROUPS.map((g) => (
+          <li>
+            <a href={`#${g.id}`} class="text-vcp-ink-2 border-b border-vcp-border-strong no-underline hover:text-vcp-ink hover:border-vcp-ink">
+              {g.title}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    {GROUPS.map((group) => (
+      <section id={group.id} class="mb-16">
+        <div class="flex items-baseline gap-4 mb-6 pb-3 border-b border-vcp-border">
+          <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep">{group.eyebrow}</span>
+          <h2
+            class="font-display text-[28px] md:text-[32px] font-medium leading-snug tracking-vcp-h text-vcp-ink m-0"
+            style="font-variation-settings: 'opsz' 30"
+          >
+            {group.title}
+          </h2>
+        </div>
+        <ul class="space-y-3 list-none p-0 m-0">
+          {group.routes.map((r) => (
+            <li class="grid md:grid-cols-12 gap-4 items-baseline py-2.5 border-b border-vcp-border last:border-0">
+              <a
+                href={r.href}
+                target={r.href.startsWith('/sitemap-index') ? '_blank' : undefined}
+                rel={r.href.startsWith('/sitemap-index') ? 'noopener' : undefined}
+                class="md:col-span-4 font-display text-[17px] font-medium text-vcp-ink border-b border-vcp-border-strong no-underline hover:text-vcp-teal-deep hover:border-vcp-teal-deep"
+                style="font-variation-settings: 'opsz' 17"
+              >
+                {r.label}
+              </a>
+              <span class="md:col-span-3 font-mono text-[12px] text-vcp-ink-3 tracking-[0.04em]">
+                {r.href}
+              </span>
+              {r.note && (
+                <span class="md:col-span-5 text-[14px] text-vcp-ink-2 leading-relaxed">
+                  {r.note}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <aside class="mt-16 pt-10 border-t border-vcp-border">
+      <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
+        MACHINE-READABLE
+      </p>
+      <p class="font-display text-[16px] leading-[1.55] text-vcp-ink m-0 max-w-[68ch]" style="font-variation-settings: 'opsz' 19">
+        Machine-readable sitemap at{' '}
+        <a href="/sitemap-index.xml" target="_blank" rel="noopener" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">
+          /sitemap-index.xml
+        </a>{' '}
+        — auto-generated at build time by @astrojs/sitemap. The XML sitemap is what search engines use;
+        this page exists for humans navigating the protocol home.
+      </p>
+    </aside>
+  </PageContainer>
+</BaseLayout>

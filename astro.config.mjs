@@ -2,12 +2,21 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://valuecreationprotocol.com',
-  integrations: [react(), tailwind({ applyBaseStyles: false })],
+  integrations: [
+    react(),
+    tailwind({ applyBaseStyles: false }),
+    sitemap({
+      // Each route is canonical to vcp.com (TR-8). Sitemap exposes only public routes.
+      // Exclude the human-readable /sitemap page itself from the XML to avoid recursion.
+      filter: (page) => !page.endsWith('/sitemap') && !page.endsWith('/sitemap/'),
+    }),
+  ],
   output: 'server',
   adapter: vercel({
     imageService: true,
