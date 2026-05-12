@@ -4,7 +4,7 @@
 
 ---
 
-**Purpose:** Introduce the Value Creation Protocol (VCP) as the business-application layer that sits atop the Model Context Protocol (MCP) and the Human Context Protocol (HCP). Establish VFT's position in a three-layer stack and invite the market to build on it.
+**Purpose:** Introduce the Value Creation Protocol (VCP) as the business-application layer that sits atop the Model Context Protocol (MCP) and the Human Context Protocol (HCP). Establish the Value-First Team's position in a three-layer stack and invite the market to build on it.
 
 **Audience:** Business leaders, AI practitioners, HubSpot partners, and anyone asking the question: *now that AI can connect to everything and carry human context, how do we actually create value with it?*
 
@@ -80,7 +80,7 @@ MCP + HCP + VCP gives you an operating model where capability, context, and inte
 
 ## What VCP Encodes
 
-VCP is built on frameworks that have been operating inside VFT and its client work for years. They're not new. What's new is naming them as the applied layer of a protocol stack that the industry is already converging on.
+VCP is built on frameworks that have been operating inside the Value-First Team and its client work for years. They're not new. What's new is naming them as the applied layer of a protocol stack that the industry is already converging on.
 
 ### The Value Path
 
@@ -110,7 +110,7 @@ These are not decorative. They are the protocol's working parts.
 
 The pattern has been running for some time without its name.
 
-- **Inside VFT's own operations** — where AI handles coordination, documentation, and follow-through while humans hold relationships, judgment, and vision. The Three-Org Model in practice, not theory.
+- **Inside the Value-First Team's own operations** — where AI handles coordination, documentation, and follow-through while humans hold relationships, judgment, and vision. The Three-Org Model in practice, not theory.
 - **Inside the enforcement skill layer** — the executable rules that catch training-data defaults (funnels, pipelines, quick wins, phases) and correct them before they become implementation. VCP gives this layer its protocol-level name.
 - **Inside the AI-Native Shift program** — a four-rung progression from Office Hours through the Value-First OS deployment. Each rung is VCP being adopted at a different depth.
 - **Inside client work** — where VCP-encoded frameworks have replaced bolt-on sales-and-marketing machinery with relationship-first architectures that serve every stakeholder the organization touches.
@@ -139,7 +139,7 @@ That is the simplification.
 
 ## An Open Framework
 
-VCP is not a VFT product. It is a methodology the Value-First Team has been building, teaching, and refining — and the moment has arrived to release it as a named, shareable, extensible framework.
+VCP is not a Value-First Team product. It is a methodology the Value-First Team has been building, teaching, and refining — and the moment has arrived to release it as a named, shareable, extensible framework.
 
 Anyone can implement VCP. Anyone can build on it. Anyone can teach it. The Value-First Team has a specific implementation tuned for HubSpot-centered organizations and AI-native operations, but the protocol itself is not ours to gate.
 

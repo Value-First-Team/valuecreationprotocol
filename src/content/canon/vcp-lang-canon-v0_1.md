@@ -6,7 +6,7 @@
 
 **Authoritative source for:** the public-facing definition of VCP-Lang, its purpose within the VCP encoding stack, its primitive types, and the declarative pattern that distinguishes it from configuration language or templating.
 
-**Companion documents:** VCP Canonical Reference v1.0 (which establishes the encoding stack), VFT Lexicon Canon Doc v0.1 (Layer A), Value Graph Canon Doc v0.1 (Layer C).
+**Companion documents:** VCP Canonical Reference v1.0 (which establishes the encoding stack), Value-First Lexicon Canon Doc v0.1 (Layer A), Value Graph Canon Doc v0.1 (Layer C).
 
 **Lineage note:** VCP-Lang descends from earlier exploratory work on HCP-Lang (Human Context Protocol Language). The naming followed the broader VCP / HCP positioning shift documented in the VCP Canonical Reference.
 

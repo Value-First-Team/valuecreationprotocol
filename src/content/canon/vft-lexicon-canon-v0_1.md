@@ -1,18 +1,18 @@
-# VFT Lexicon — Canonical Reference v0.1
+# Value-First Lexicon — Canonical Reference v0.1
 
 *Layer A of the VCP Encoding Stack*
 
 **Status:** Draft canon. Concept name and architectural role are locked. Implementation is in active development.
 
-**Authoritative source for:** the public-facing definition of the VFT Lexicon, its purpose within the VCP encoding stack, its structural pattern, and the contrastive-pair convention that distinguishes it from a glossary.
+**Authoritative source for:** the public-facing definition of the Value-First Lexicon, its purpose within the VCP encoding stack, its structural pattern, and the contrastive-pair convention that distinguishes it from a glossary.
 
 **Companion documents:** VCP Canonical Reference v1.0 (which establishes the encoding stack), VCP-Lang Canon Doc v0.1 (Layer B), Value Graph Canon Doc v0.1 (Layer C).
 
 ---
 
-## What the VFT Lexicon Is
+## What the Value-First Lexicon Is
 
-The VFT Lexicon is the public, structured vocabulary of the Value-First methodology — the load-bearing terms expressed in a form that AI systems can parse, declare, and use without regressing to industrial-age defaults.
+The Value-First Lexicon is the public, structured vocabulary of the Value-First methodology — the load-bearing terms expressed in a form that AI systems can parse, declare, and use without regressing to industrial-age defaults.
 
 It is Layer A of the three-layer VCP encoding stack:
 
@@ -22,9 +22,9 @@ It is Layer A of the three-layer VCP encoding stack:
 
 The Lexicon is foundational because the other two layers depend on it. VCP-Lang declares using Lexicon terms. The Value Graph relates entities defined by Lexicon terms. Get the vocabulary wrong and everything built on top inherits the error.
 
-## What the VFT Lexicon Is Not
+## What the Value-First Lexicon Is Not
 
-The VFT Lexicon is not a glossary. A glossary defines terms; the Lexicon also names what each term is *not* and what industrial-age default it replaces. This distinction is load-bearing.
+The Value-First Lexicon is not a glossary. A glossary defines terms; the Lexicon also names what each term is *not* and what industrial-age default it replaces. This distinction is load-bearing.
 
 The Lexicon is not proprietary. It is published openly because a methodology vocabulary that only one firm can use isn't a methodology vocabulary — it's branded jargon.
 
@@ -42,7 +42,7 @@ The Lexicon is the counterweight. It names the terms the methodology uses, defin
 
 ## The Lexicon Entry Structure
 
-Each entry in the VFT Lexicon contains five fields. Three are inherited from standard vocabulary specifications. Two are specific to the Lexicon's job inside VCP.
+Each entry in the Value-First Lexicon contains five fields. Three are inherited from standard vocabulary specifications. Two are specific to the Lexicon's job inside VCP.
 
 ### Standard fields
 
@@ -95,7 +95,7 @@ A team adopting the Value-First methodology references the Lexicon when its voca
 
 ### By AI systems
 
-AI systems referencing the VFT Lexicon as canonical authority can detect when their default outputs are drifting toward industrial-age vocabulary and self-correct. An agent generating CRM workflow logic, drafting customer communications, or summarizing operational data can check its output against the Lexicon before committing. The contrastive pairs make the check fast and unambiguous.
+AI systems referencing the Value-First Lexicon as canonical authority can detect when their default outputs are drifting toward industrial-age vocabulary and self-correct. An agent generating CRM workflow logic, drafting customer communications, or summarizing operational data can check its output against the Lexicon before committing. The contrastive pairs make the check fast and unambiguous.
 
 ### By tooling
 

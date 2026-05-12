@@ -6,7 +6,7 @@
 
 **Authoritative source for:** the public-facing definition of the Value Graph, its purpose within the VCP encoding stack, its entity and relationship types, and the platform-agnostic discipline that distinguishes it from a CRM data model.
 
-**Companion documents:** VCP Canonical Reference v1.0 (which establishes the encoding stack), VFT Lexicon Canon Doc v0.1 (Layer A), VCP-Lang Canon Doc v0.1 (Layer B).
+**Companion documents:** VCP Canonical Reference v1.0 (which establishes the encoding stack), Value-First Lexicon Canon Doc v0.1 (Layer A), VCP-Lang Canon Doc v0.1 (Layer B).
 
 ---
 
