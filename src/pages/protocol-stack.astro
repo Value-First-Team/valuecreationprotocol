@@ -2,13 +2,13 @@
 /**
  * /protocol-stack — Overview of the AI-native protocol stack: MCP, HCP, VCP.
  *
- * Complements the homepage hero with a dedicated reference page.
- * Schema.org TechArticle.
+ * Hub archetype — chrome + PageHeader + ProtocolStackDiagram + prose reference.
+ * Complements the homepage § 01 stack section with a dedicated reference page.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
 import PageHeader from '../components/PageHeader.astro';
-import Diagram from '../components/Diagram.astro';
+import ProtocolStackDiagram from '../components/ProtocolStackDiagram.astro';
 import { PROTOCOL_PEERS } from '../lib/site';
 ---
 
@@ -16,21 +16,21 @@ import { PROTOCOL_PEERS } from '../lib/site';
   title="Protocol Stack"
   description="The AI-native protocol stack: MCP (capability), HCP (human context), VCP (methodology). Each layer is necessary; none is sufficient on its own."
   path="/protocol-stack"
-  ogImage="og-default.jpg"
+  ogImage="og-protocol-stack.jpg"
   schemaType="TechArticle"
 >
-  <PageContainer>
+  <PageContainer wide>
     <PageHeader
-      eyebrow="Reference"
+      eyebrow="Reference · The Stack"
       title="The Protocol Stack"
-      lede="Three layers, read bottom-up: capability, context, methodology. Each layer is necessary; none is sufficient on its own."
+      lede="Three layers, read as peers: capability, context, methodology. Each is necessary; none is sufficient on its own."
+      verified="12 May 2026"
+      citeUrl="valuecreationprotocol.com/protocol-stack"
     />
 
-    <Diagram
-      name="protocol-stack"
-      alt="Protocol stack: MCP, HCP, VCP."
-      caption="MCP gives AI capability. HCP gives it human context. VCP gives organizations methodology."
-    />
+    <div class="mb-16">
+      <ProtocolStackDiagram />
+    </div>
 
     <article class="prose mx-auto">
       <h2>MCP — Model Context Protocol</h2>
@@ -43,7 +43,7 @@ import { PROTOCOL_PEERS } from '../lib/site';
         integration glue.
       </p>
       <p>
-        MCP is the bottom of the stack because nothing higher matters if the
+        MCP is at one end of the stack because nothing higher matters if the
         models can't reach into the systems where work happens.
       </p>
 
@@ -58,9 +58,8 @@ import { PROTOCOL_PEERS } from '../lib/site';
         prompt-injected hints.
       </p>
       <p>
-        HCP sits above MCP because capability without human context produces
-        operations that are efficient but inhumane — a defect AI-native
-        systems should not perpetuate.
+        Capability without human context produces operations that are
+        efficient but inhumane — a defect AI-native systems should not perpetuate.
       </p>
 
       <h2>VCP — Value Creation Protocol</h2>
@@ -73,14 +72,13 @@ import { PROTOCOL_PEERS } from '../lib/site';
         problem, or to the right problem with the wrong frame.
       </p>
       <p>
-        VCP sits at the top because capability and context, without methodology,
-        produce efficient progress toward poor outcomes. The protocol exists
-        because foundation models default to industrial-age operating defaults
-        — leads, funnels, conversion, extraction — that VCP-aligned
-        organizations explicitly reject.
+        Capability and context, without methodology, produce efficient progress
+        toward poor outcomes. The protocol exists because foundation models default
+        to industrial-age operating defaults — leads, funnels, conversion, extraction —
+        that VCP-aligned organizations explicitly reject.
       </p>
 
-      <h2>Why three layers</h2>
+      <h2>Why three peers</h2>
       <p>
         Each layer is necessary; none is sufficient on its own.
       </p>

@@ -188,15 +188,15 @@ const jsonLdDefinedTerms = {
     />
 
     <!-- ToC -->
-    <nav class="mb-12 p-5 rounded-lg border border-stone-200 bg-stone-50">
-      <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-3">
+    <nav class="mb-14 p-6 rounded-vcp-lg border border-vcp-border bg-vcp-surface-2">
+      <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
         Sections
       </p>
-      <ul class="flex flex-wrap gap-x-5 gap-y-2 list-none p-0 m-0 text-sm">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none p-0 m-0 text-sm">
         {sections.map((s) => (
           <li>
-            <a href={`#${s.id}`} class="text-stone-700 underline">
-              {s.title} <span class="text-stone-400 font-mono text-xs">({s.entries.length})</span>
+            <a href={`#${s.id}`} class="text-vcp-ink-2 border-b border-vcp-border-strong no-underline hover:text-vcp-ink hover:border-vcp-ink">
+              {s.title} <span class="text-vcp-ink-4 font-mono text-xs">({s.entries.length})</span>
             </a>
           </li>
         ))}
@@ -207,16 +207,19 @@ const jsonLdDefinedTerms = {
 
     {sections.map((section) => (
       <section id={section.id} class="mb-16">
-        <h2 class="text-2xl md:text-3xl font-semibold text-stone-900 m-0 mb-2 pb-3 border-b border-stone-200">
+        <h2
+          class="font-display text-[28px] md:text-[32px] font-medium leading-snug tracking-vcp-h text-vcp-ink m-0 mb-3 pb-3 border-b border-vcp-border"
+          style="font-variation-settings: 'opsz' 30"
+        >
           {section.title}
         </h2>
-        <dl class="mt-6 divide-y divide-stone-100">
+        <dl class="mt-6 divide-y divide-vcp-border">
           {section.entries.map((entry) => (
             <div class="py-5 grid md:grid-cols-12 gap-x-6 gap-y-2">
-              <dt class="md:col-span-4 text-stone-900 font-semibold leading-snug">
+              <dt class="md:col-span-4 text-vcp-ink font-semibold leading-snug">
                 {entry.term}
               </dt>
-              <dd class="md:col-span-8 m-0 text-stone-700 leading-relaxed">
+              <dd class="md:col-span-8 m-0 text-vcp-ink-2 leading-relaxed">
                 {entry.def}
                 {entry.link && (
                   entry.link.startsWith('http') ? (
@@ -224,12 +227,12 @@ const jsonLdDefinedTerms = {
                       href={entry.link}
                       target="_blank"
                       rel="noopener"
-                      class="ml-1 text-stone-500 underline text-sm"
+                      class="ml-1 text-vcp-teal-deep underline text-sm"
                     >
                       ↗
                     </a>
                   ) : (
-                    <a href={entry.link} class="ml-1 text-stone-500 underline text-sm">
+                    <a href={entry.link} class="ml-1 text-vcp-teal-deep underline text-sm">
                       →
                     </a>
                   )
@@ -241,7 +244,7 @@ const jsonLdDefinedTerms = {
       </section>
     ))}
 
-    <p class="text-sm text-stone-500 mt-16 italic">
+    <p class="text-sm text-vcp-ink-3 mt-16 italic">
       Glossary entries are drawn from the canonical methodology records.
       For any conflict between this page and a canon page, the canon page wins.
     </p>

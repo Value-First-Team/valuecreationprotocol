@@ -2,8 +2,8 @@
 /**
  * /methodology — Methodology hub.
  *
- * Lists all twelve methodology canon pages with brief summaries.
- * Card grid layout, no marketing decoration.
+ * Hub archetype — chrome + PageHeader hero, then a card grid of the
+ * twelve canon pages.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContainer from '../../components/PageContainer.astro';
@@ -20,21 +20,27 @@ import { METHODOLOGY_PAGES } from '../../lib/site';
 >
   <PageContainer wide>
     <PageHeader
-      eyebrow="Methodology"
+      eyebrow="Methodology canon · Index of 12"
       title="Methodology Canon"
       lede="The frameworks VCP encodes. Each page is a canonical reference — built over years of practice, now machine-readable through the encoding stack."
     />
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      {METHODOLOGY_PAGES.map((m) => (
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      {METHODOLOGY_PAGES.map((m, i) => (
         <a
           href={m.href}
-          class="block p-5 md:p-6 rounded-lg border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-colors no-underline"
+          class="group block p-6 md:p-7 rounded-vcp-lg border border-vcp-border bg-vcp-paper hover:border-vcp-ink hover:-translate-y-0.5 transition-all duration-200 no-underline text-inherit"
         >
-          <h2 class="text-base md:text-lg font-semibold m-0 text-stone-900 leading-snug">
+          <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep block mb-3">
+            CHAPTER {String(i + 1).padStart(2, '0')}
+          </span>
+          <h2
+            class="font-display text-[20px] md:text-[22px] font-medium leading-snug text-vcp-ink m-0"
+            style="font-variation-settings: 'opsz' 22"
+          >
             {m.label}
           </h2>
-          <p class="text-sm text-stone-600 mt-2 mb-0 leading-relaxed">
+          <p class="text-[15px] text-vcp-ink-2 mt-2 mb-0 leading-relaxed">
             {m.summary}
           </p>
         </a>

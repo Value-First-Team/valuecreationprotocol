@@ -1,6 +1,9 @@
 ---
 /**
  * /manifestos — manifesto hub.
+ *
+ * Hub archetype — chrome + PageHeader hero, then a card list of the
+ * three manifestos.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageContainer from '../../components/PageContainer.astro';
@@ -17,23 +20,32 @@ import { MANIFESTO_PAGES } from '../../lib/site';
 >
   <PageContainer>
     <PageHeader
-      eyebrow="Long-form"
+      eyebrow="Long-form · Index of 03"
       title="Manifestos"
       lede="Why this protocol exists. Three long-form treatments of the conditions and reasoning that produced VCP."
     />
 
-    <div class="space-y-8">
-      {MANIFESTO_PAGES.map((m) => (
+    <div class="space-y-6">
+      {MANIFESTO_PAGES.map((m, i) => (
         <a
           href={m.href}
-          class="block p-6 md:p-7 rounded-lg border border-stone-200 hover:border-stone-400 hover:bg-stone-50 transition-colors no-underline"
+          class="group flex gap-6 md:gap-10 p-6 md:p-8 rounded-vcp-lg border border-vcp-border bg-vcp-paper hover:border-vcp-ink hover:-translate-y-0.5 transition-all duration-200 no-underline text-inherit"
         >
-          <h2 class="text-xl md:text-2xl font-semibold m-0 text-stone-900">
-            {m.label}
-          </h2>
-          <p class="text-stone-600 mt-2 mb-0 leading-relaxed">
-            {m.summary}
-          </p>
+          <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep flex-shrink-0 pt-1.5">
+            § {String(i + 1).padStart(2, '0')}
+          </span>
+          <div class="flex-1">
+            <h2
+              class="font-display text-[24px] md:text-[28px] font-medium leading-snug text-vcp-ink m-0"
+              style="font-variation-settings: 'opsz' 28"
+            >
+              {m.label}
+            </h2>
+            <p class="text-vcp-ink-2 mt-2 mb-0 leading-relaxed text-[15px]">
+              {m.summary}
+            </p>
+          </div>
+          <span class="text-vcp-teal-deep text-xl flex-shrink-0 self-center" aria-hidden="true">→</span>
         </a>
       ))}
     </div>
