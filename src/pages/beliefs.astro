@@ -15,6 +15,13 @@ import { getCoreBeliefs } from '../lib/sanity/canon';
 const beliefs = await getCoreBeliefs();
 // Only show beliefs with a numeric position (1–5). Excludes legacy records.
 const ordered = beliefs.filter((b) => typeof b.position === 'number' && b.position >= 1 && b.position <= 5);
+
+// Per-belief DefinedTerm entries for the auxiliary JSON-LD graph.
+const beliefDefinedTerms = ordered.map((b) => ({
+  name: b.name,
+  description: b.tagline ?? b.shortLabel ?? undefined,
+  termCode: b.shortLabel ?? undefined,
+}));
 ---
 
 <BaseLayout
@@ -22,7 +29,9 @@ const ordered = beliefs.filter((b) => typeof b.position === 'number' && b.positi
   description="The philosophical foundations of the Value-First Framework — five 'X over Y' statements that distinguish VCP from industrial-age defaults."
   path="/beliefs"
   ogImage="og-beliefs.jpg"
-  schemaType="TechArticle"
+  schemaType="DefinedTerm"
+  schemaTermCode="Five Core Beliefs"
+  schemaDefinedTerms={beliefDefinedTerms}
 >
   <PageContainer wide>
     <PageHeader

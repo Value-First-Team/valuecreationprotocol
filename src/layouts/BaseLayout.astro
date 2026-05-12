@@ -13,6 +13,14 @@
  */
 import { SITE, NAV } from '../lib/site';
 
+export type SchemaType =
+  | 'WebPage'
+  | 'DefinedTerm'
+  | 'TechArticle'
+  | 'Article'
+  | 'CollectionPage'
+  | 'DefinedTermSet';
+
 export interface Props {
   /** Page title (concatenated with "— Value Creation Protocol") */
   title: string;
@@ -23,9 +31,19 @@ export interface Props {
   /** Filename in /public/og/ — defaults to og-default.jpg. */
   ogImage?: string;
   /** Optional schema.org @type override. Defaults to "WebPage". */
-  schemaType?: 'WebPage' | 'DefinedTerm' | 'TechArticle' | 'Article';
-  /** Optional schema.org @id (canonical concept URI). */
+  schemaType?: SchemaType;
+  /** Optional schema.org termCode (short identifier for DefinedTerm). */
   schemaTermCode?: string;
+  /**
+   * For DefinedTerm pages, additional DefinedTerm entries to embed in the JSON-LD.
+   * Example: /beliefs emits one DefinedTerm per Core Belief; /realities emits
+   * one per Value Reality. Each entry is rendered as a sibling DefinedTerm.
+   */
+  schemaDefinedTerms?: Array<{ name: string; description?: string; termCode?: string }>;
+  /** For TechArticle/Article: ISO date. Defaults to undefined (omits the property). */
+  datePublished?: string;
+  /** For TechArticle/Article: ISO date. Defaults to undefined. */
+  dateModified?: string;
 }
 
 const {
@@ -35,35 +53,43 @@ const {
   ogImage = 'og-default.jpg',
   schemaType = 'WebPage',
   schemaTermCode,
+  schemaDefinedTerms,
+  datePublished,
+  dateModified,
 } = Astro.props;
 
 const fullTitle = path === '/' ? `${SITE.name} — Open Protocol Home` : `${title} — ${SITE.name}`;
+// Canonical URL — derived from SITE.url + path. NEVER cross-domain (TR-8 hard rule).
 const canonicalUrl = `${SITE.url}${path}`;
 const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE.url}/og/${ogImage}`;
-// Fallback to hero/og-default if og-{slug}.jpg doesn't exist — handled by file copy at build.
-const fallbackOg = `${SITE.url}/hero/og-default.jpg`;
 
-// JSON-LD schema
+// JSON-LD schema. Each branch adds the type-specific properties.
 const jsonLd: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': schemaType,
   name: title,
   description,
   url: canonicalUrl,
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'WebSite',
     name: SITE.name,
     url: SITE.url,
+    inLanguage: 'en',
   },
 };
-if (schemaType === 'DefinedTerm' && schemaTermCode) {
-  jsonLd.termCode = schemaTermCode;
+
+if (schemaType === 'DefinedTerm') {
+  if (schemaTermCode) {
+    jsonLd.termCode = schemaTermCode;
+  }
   jsonLd.inDefinedTermSet = {
     '@type': 'DefinedTermSet',
     name: 'Value Creation Protocol Glossary',
     url: `${SITE.url}/glossary`,
   };
 }
+
 if (schemaType === 'TechArticle' || schemaType === 'Article') {
   jsonLd.headline = title;
   jsonLd.author = {
@@ -71,7 +97,47 @@ if (schemaType === 'TechArticle' || schemaType === 'Article') {
     name: SITE.implementer.name,
     url: SITE.implementer.url,
   };
+  jsonLd.publisher = {
+    '@type': 'Organization',
+    name: SITE.implementer.name,
+    url: SITE.implementer.url,
+  };
+  if (datePublished) jsonLd.datePublished = datePublished;
+  if (dateModified) jsonLd.dateModified = dateModified;
 }
+
+if (schemaType === 'CollectionPage') {
+  // No additional fields by default — page-level CollectionPage signals
+  // a hub of related works. Pages embed their own item list if needed.
+}
+
+if (schemaType === 'DefinedTermSet') {
+  // Same shape as a DefinedTerm container; pages emit hasDefinedTerm inline.
+}
+
+/**
+ * On concept pages that emit a top-level DefinedTerm, the page can ALSO declare
+ * sub-terms (e.g. /beliefs lists five DefinedTerms — one per belief). These
+ * render as a separate JSON-LD block to keep the schema valid (one @type per
+ * graph node).
+ */
+const auxDefinedTerms =
+  schemaDefinedTerms && schemaDefinedTerms.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@graph': schemaDefinedTerms.map((t) => ({
+          '@type': 'DefinedTerm',
+          name: t.name,
+          description: t.description,
+          termCode: t.termCode,
+          inDefinedTermSet: {
+            '@type': 'DefinedTermSet',
+            name: 'Value Creation Protocol Glossary',
+            url: `${SITE.url}/glossary`,
+          },
+        })),
+      }
+    : null;
 ---
 
 <!DOCTYPE html>
@@ -117,6 +183,9 @@ if (schemaType === 'TechArticle' || schemaType === 'Article') {
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {auxDefinedTerms && (
+      <script type="application/ld+json" set:html={JSON.stringify(auxDefinedTerms)} />
+    )}
 
     <style is:global>
       :root {

@@ -14,6 +14,22 @@ import Implementers from '../components/Implementers.astro';
   description="Customer Value Platform (CVP) versus Value Creation Protocol (VCP). Disambiguation: one is the platform category, the other is the protocol that runs on top of it."
   path="/cvp-vs-vcp"
   ogImage="og-cvp-vs-vcp.jpg"
+  schemaType="DefinedTerm"
+  schemaTermCode="CVP vs VCP"
+  schemaDefinedTerms={[
+    {
+      name: 'Customer Value Platform',
+      termCode: 'CVP',
+      description:
+        'A platform category — software organized around customer relationships and value creation rather than internal record-keeping. HubSpot is the canonical implementing CVP for the Value-First method.',
+    },
+    {
+      name: 'Value Creation Protocol',
+      termCode: 'VCP',
+      description:
+        'The methodology layer of the AI-native protocol stack. Sits atop MCP (capability) and HCP (human context). Gives organizations the operating discipline to translate AI capability and human context into realized value.',
+    },
+  ]}
 >
   <PageContainer>
     <PageHeader
