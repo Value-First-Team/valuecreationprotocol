@@ -1,17 +1,599 @@
 ---
 /**
- * Homepage — temporary placeholder during Phase 1 rebuild.
+ * Homepage — protocol overview at /
  *
- * The full hand-crafted homepage lands in the next commit.
+ * Hand-crafted Astro. Structure:
+ *   1. Hero — eyebrow, display heading with italic "operable", lead paragraph,
+ *      CTA row, At-a-glance sidecar (right desktop, below mobile).
+ *   2. § 01 The Stack — three peer protocols rendered as a horizontal row of
+ *      three cards. Each card carries its protocol's identity color band,
+ *      mark image, name, description, owner.
+ *   3. § 02 Enter Here — three large entry cards (Encoding Stack, Methodology
+ *      Canon, Manifestos), each with section number, name, description, meta.
+ *   4. Implementer attribution band — Value-First Team named as originator
+ *      + canonical implementing firm. Dark inverted surface, ONE editorial
+ *      moment for emphasis. Single sentence + link.
+ *
+ * Typography uses the token utility classes (.t-eyebrow, .t-display, .t-lead,
+ * .t-h2, .t-body) defined in tokens.css. Tailwind handles layout only.
+ * No arbitrary-value classes (e.g. text-[44px]).
+ *
+ * Voice: direct, warm, confident, practical. One drop-cap (on the lead
+ * paragraph). Hairline rules above section labels. Generous whitespace.
+ *
+ * At-a-glance: Status, Verified, Canon pages, Peers. NO License row.
  */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+// At-a-glance content. License intentionally absent — no decision made.
+const AT_A_GLANCE = [
+  { label: 'Status', value: 'v0.1 · Draft · in review' },
+  { label: 'Verified', value: '12 May 2026' },
+  { label: 'Canon pages', value: '25 across 6 archetypes' },
+  { label: 'Peers', value: 'MCP · HCP' },
+] as const;
+
+// Three peer protocols — VCP center, MCP/HCP flank. No hierarchy implied.
+const PEER_PROTOCOLS = [
+  {
+    id: 'MCP',
+    name: 'Model Context Protocol',
+    desc: 'The machine-context layer. How AI accesses tools, data, and models.',
+    owner: 'Anthropic',
+    href: 'https://modelcontextprotocol.io',
+    mark: '/assets/marks/mcp-mark-tight.png',
+    band: 'mcp',
+  },
+  {
+    id: 'VCP',
+    name: 'Value Creation Protocol',
+    desc: 'The value-creation layer. What creates value, for whom, and why.',
+    owner: 'Value-First Team',
+    href: '/',
+    mark: '/assets/marks/vcp-mark-tight.png',
+    band: 'vcp',
+  },
+  {
+    id: 'HCP',
+    name: 'Human Context Protocol',
+    desc: 'The human-context layer. Human intent, authority, and history.',
+    owner: 'community',
+    href: 'https://humancontextprotocol.com',
+    mark: '/assets/marks/hcp-mark-tight.png',
+    band: 'hcp',
+  },
+];
+
+// Three entry doors. Section numbers, names, descriptions, meta.
+const ENTRY_CARDS = [
+  {
+    num: '§ 02.1',
+    eyebrow: 'Encoding stack',
+    title: 'Lexicon · VCP-Lang · Value Graph',
+    body: 'The technical specification: three layers that compile a value statement into an addressable graph the protocol can operate on.',
+    meta: '3 SPECS · v0.1',
+    href: '/encoding-stack',
+  },
+  {
+    num: '§ 02.2',
+    eyebrow: 'Methodology canon',
+    title: 'The Value Path, twelve traps, three orgs',
+    body: 'Twelve long-form chapters covering the operating model AI-native organizations adopt to create value across customer, operations, and finance.',
+    meta: '12 CHAPTERS',
+    href: '/methodology',
+  },
+  {
+    num: '§ 02.3',
+    eyebrow: 'Manifestos',
+    title: 'Beyond leads. Beyond funnels.',
+    body: 'Position pieces on why the industrial-age vocabulary of growth, sales, and operations can not carry an AI-native organization.',
+    meta: '3 ESSAYS',
+    href: '/manifestos',
+  },
+];
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Value Creation Protocol</title>
-  </head>
-  <body>
-    <p>Rebuilding.</p>
-  </body>
-</html>
+
+<BaseLayout
+  title="Open protocol home"
+  description="The Value Creation Protocol (VCP) is an open framework for designing systems where value flows naturally between people, organizations, and AI. A peer to MCP and HCP in the AI-native protocol stack."
+  path="/"
+  ogImage="og-home.jpg"
+  schemaType="DefinedTerm"
+  schemaTermCode="VCP"
+>
+  <!-- ============= HERO ============= -->
+  <section class="vcp-hero">
+    <div class="vcp-hero-inner">
+      <div class="vcp-hero-grid">
+        <div class="vcp-hero-text">
+          <p class="t-eyebrow vcp-hero-eyebrow">An open protocol · v0.1</p>
+          <h1 class="t-display vcp-hero-h1">
+            Value, drawn open and <em class="vcp-hero-accent">operable.</em>
+          </h1>
+          <p class="t-lead vcp-hero-lead vcp-hero-lead-cap">
+            The Value Creation Protocol is a peer-level open protocol for value creation
+            in AI-native organizations &mdash; authored, refined, and operated by
+            Value-First Team. Read, cite, and run it on your own work.
+          </p>
+          <div class="vcp-hero-ctas">
+            <a href="/encoding-stack" class="vcp-btn vcp-btn-primary">
+              Read the spec
+              <span aria-hidden="true" class="vcp-arrow">&rarr;</span>
+            </a>
+            <a href="/protocol-stack" class="vcp-btn vcp-btn-ghost">
+              See the protocol stack
+              <span aria-hidden="true" class="vcp-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="vcp-glance">
+          <h2 class="vcp-glance-head">At a glance</h2>
+          <dl class="vcp-glance-list">
+            {AT_A_GLANCE.map((row) => (
+              <div class="vcp-glance-row">
+                <dt class="vcp-glance-label">{row.label}</dt>
+                <dd class="vcp-glance-value">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= § 01 · THE STACK ============= -->
+  <section class="vcp-section vcp-section-stack">
+    <div class="vcp-section-inner">
+      <p class="t-eyebrow vcp-section-eyebrow">§ 01 · The Stack</p>
+      <h2 class="t-h2 vcp-section-h2">Three peer protocols. No hierarchy implied.</h2>
+      <p class="t-lead vcp-section-lead">
+        MCP is the machine-context layer. HCP is the human-context layer. VCP is the
+        value-creation layer &mdash; what creates value, for whom, and why. They are
+        peers because each addresses a layer the others do not reach.
+      </p>
+
+      <div class="vcp-peers">
+        {PEER_PROTOCOLS.map((p) => (
+          <a
+            href={p.href}
+            class={`vcp-peer vcp-peer-${p.band}`}
+            target={p.href.startsWith('http') ? '_blank' : undefined}
+            rel={p.href.startsWith('http') ? 'noopener' : undefined}
+          >
+            <div class="vcp-peer-band">
+              <img src={p.mark} alt="" width="36" height="36" class="vcp-peer-mark" />
+              <span class="vcp-peer-id">{p.id}</span>
+            </div>
+            <div class="vcp-peer-body">
+              <h3 class="vcp-peer-name">{p.name}</h3>
+              <p class="vcp-peer-desc">{p.desc}</p>
+              <p class="vcp-peer-owner">
+                <span class="vcp-peer-owner-label">owner</span>
+                <span class="vcp-peer-owner-name">{p.owner}</span>
+              </p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= § 02 · ENTER HERE ============= -->
+  <section class="vcp-section vcp-section-entries">
+    <div class="vcp-section-inner">
+      <p class="t-eyebrow vcp-section-eyebrow">§ 02 · Enter Here</p>
+      <h2 class="t-h2 vcp-section-h2">Three doors in.</h2>
+      <p class="t-lead vcp-section-lead">
+        The protocol resolves at three different reading depths. Pick one.
+        The others remain navigable from any page.
+      </p>
+
+      <div class="vcp-entries">
+        {ENTRY_CARDS.map((card) => (
+          <a href={card.href} class="vcp-entry">
+            <span class="vcp-entry-num">{card.num} &middot; {card.eyebrow}</span>
+            <h3 class="vcp-entry-title">{card.title}</h3>
+            <p class="vcp-entry-body">{card.body}</p>
+            <div class="vcp-entry-foot">
+              <span class="vcp-entry-meta">{card.meta}</span>
+              <span aria-hidden="true" class="vcp-entry-arrow">&rarr;</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= IMPLEMENTER ATTRIBUTION BAND ============= -->
+  <section class="vcp-implementer">
+    <div class="vcp-implementer-inner">
+      <p class="vcp-implementer-eyebrow">Implementers</p>
+      <p class="vcp-implementer-body">
+        VCP is originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener"
+          class="vcp-implementer-link">Value-First Team</a>.
+        Anyone may read, cite, and operate the protocol independently of firm engagement.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     Homepage — hand-crafted scoped CSS.
+     Reads from tokens.css variables. No Tailwind arbitrary values.
+     ============================================================ */
+
+  /* ============= Hero ============= */
+  .vcp-hero {
+    border-bottom: 1px solid var(--vcp-border);
+  }
+  .vcp-hero-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3.5rem;
+  }
+  .vcp-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+  .vcp-hero-eyebrow {
+    margin: 0 0 2rem;
+  }
+  .vcp-hero-h1 {
+    margin: 0;
+    max-width: 14ch;
+    font-variation-settings: "opsz" 72;
+  }
+  .vcp-hero-accent {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--vcp-teal-deep);
+  }
+  .vcp-hero-lead {
+    max-width: 56ch;
+    margin: 1.75rem 0 0;
+  }
+  /* Drop-cap on the lead paragraph — single editorial moment on the page. */
+  .vcp-hero-lead-cap::first-letter {
+    font-family: var(--vcp-font-display);
+    float: left;
+    font-size: 4.2em;
+    line-height: 0.86;
+    margin: 0.04em 0.1em 0 -0.04em;
+    font-weight: 500;
+    color: var(--vcp-teal-deep);
+    font-variation-settings: "opsz" 72;
+  }
+  .vcp-hero-ctas {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .vcp-arrow {
+    margin-left: 0.4em;
+    color: inherit;
+  }
+  .vcp-btn-ghost .vcp-arrow {
+    color: var(--vcp-teal-deep);
+  }
+
+  /* At-a-glance sidecar */
+  .vcp-glance {
+    background: var(--vcp-paper);
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-lg);
+    padding: 2rem;
+  }
+  .vcp-glance-head {
+    font-family: var(--vcp-font-body);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    margin: 0 0 1.25rem;
+  }
+  .vcp-glance-list {
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+  }
+  .vcp-glance-row { margin: 0; }
+  .vcp-glance-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.25rem;
+  }
+  .vcp-glance-value {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 16;
+  }
+
+  @media (min-width: 1024px) {
+    .vcp-hero-inner { padding: 6rem 1.5rem 5rem; }
+    .vcp-hero-grid {
+      grid-template-columns: 1.3fr 1fr;
+      gap: 5rem;
+    }
+  }
+
+  /* ============= Sections (shared shell) ============= */
+  .vcp-section {
+    border-bottom: 1px solid var(--vcp-border);
+  }
+  .vcp-section-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 5rem 1.5rem;
+  }
+  .vcp-section-eyebrow {
+    /* small hairline-friendly eyebrow on its own line */
+    margin: 0 0 1.5rem;
+  }
+  /* Override the .t-eyebrow ::after rule for in-section eyebrows so the
+     trailing hairline only shows in the hero context. */
+  .vcp-section-eyebrow::after { display: none !important; }
+
+  .vcp-section-h2 {
+    margin: 0;
+    max-width: 24ch;
+    font-variation-settings: "opsz" 44;
+  }
+  .vcp-section-lead {
+    max-width: 56ch;
+    margin: 1.5rem 0 0;
+  }
+  @media (min-width: 768px) {
+    .vcp-section-inner { padding: 6rem 1.5rem; }
+  }
+
+  /* ============= § 01 · Peer protocols ============= */
+  .vcp-peers {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .vcp-peer {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    background: var(--vcp-paper);
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--vcp-t-base), transform var(--vcp-t-base);
+  }
+  .vcp-peer:hover {
+    border-color: var(--vcp-border-strong);
+    transform: translateY(-2px);
+  }
+  .vcp-peer-band {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1.25rem 0.5rem;
+  }
+  .vcp-peer-mark {
+    width: 36px;
+    height: 36px;
+    display: block;
+  }
+  .vcp-peer-id {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .vcp-peer-mcp .vcp-peer-band {
+    background: var(--mcp-orange-soft);
+  }
+  .vcp-peer-mcp .vcp-peer-id { color: var(--mcp-orange-deep); }
+
+  .vcp-peer-vcp .vcp-peer-band {
+    background: var(--vcp-teal-soft);
+  }
+  .vcp-peer-vcp .vcp-peer-id { color: var(--vcp-teal-deep); }
+
+  .vcp-peer-hcp .vcp-peer-band {
+    background: var(--hcp-blue-soft);
+  }
+  .vcp-peer-hcp .vcp-peer-id { color: var(--hcp-blue-deep); }
+
+  .vcp-peer-body {
+    padding: 1.5rem 1.5rem;
+    border-left: 1px solid var(--vcp-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .vcp-peer-name {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .vcp-peer-desc {
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+  }
+  .vcp-peer-owner {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .vcp-peer-owner-name {
+    color: var(--vcp-ink);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  @media (min-width: 768px) {
+    .vcp-peers {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .vcp-peer {
+      grid-template-columns: 1fr;
+    }
+    .vcp-peer-body {
+      border-left: 0;
+      border-top: 1px solid var(--vcp-border);
+    }
+    .vcp-peer-band {
+      padding: 1.75rem 1rem;
+    }
+    .vcp-peer-vcp {
+      transform: translateY(-4px);
+    }
+    .vcp-peer-vcp:hover {
+      transform: translateY(-6px);
+    }
+  }
+
+  /* ============= § 02 · Entry doors ============= */
+  .vcp-entries {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .vcp-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--vcp-t-base), transform var(--vcp-t-base);
+    min-height: 16rem;
+  }
+  .vcp-entry:hover {
+    border-color: var(--vcp-ink);
+    transform: translateY(-2px);
+  }
+  .vcp-entry-num {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+  }
+  .vcp-entry-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 28;
+  }
+  .vcp-entry-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    font-variation-settings: "opsz" 17;
+  }
+  .vcp-entry-foot {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--vcp-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .vcp-entry-meta {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    color: var(--vcp-ink-3);
+    text-transform: uppercase;
+  }
+  .vcp-entry-arrow {
+    font-size: 1.25rem;
+    color: var(--vcp-teal-deep);
+  }
+  @media (min-width: 768px) {
+    .vcp-entries {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.75rem;
+    }
+  }
+
+  /* ============= Implementer band ============= */
+  .vcp-implementer {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+  }
+  .vcp-implementer-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  .vcp-implementer-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal);
+    margin: 0 0 1rem;
+  }
+  .vcp-implementer-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--vcp-surface);
+    max-width: 64ch;
+    margin: 0;
+    font-variation-settings: "opsz" 22;
+  }
+  .vcp-implementer-link {
+    color: var(--vcp-teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal);
+  }
+  .vcp-implementer-link:hover {
+    color: var(--vcp-d-teal);
+    border-bottom-color: var(--vcp-d-teal);
+  }
+</style>
