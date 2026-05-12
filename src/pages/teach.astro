@@ -1,0 +1,49 @@
+---
+/**
+ * /teach — TEACH v1.0 canonical reference.
+ *
+ * Renders the staged teach-values-canonical-reference.md document.
+ * Five values for teaching, leading, and operating.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+import { getCanonDoc } from '../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.teach);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('teach-v1-0');
+
+const version = meta?.version ?? 'v1.0';
+const status = meta?.status ?? 'Canon';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="TEACH"
+  description="Five values for teaching, leading, and operating in the Value-First method. Agile↔Adaptable, Confidence↔Conviction."
+  path="/teach"
+  ogImage="og-teach.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Methodology Canon"
+      title="TEACH"
+      lede="Five values for teaching, leading, and operating. Each pair holds a creative tension — neither pole alone produces value."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <Prose html={html} />
+
+    <CrossCitation
+      peerPath="/methodology/teach"
+      peerLabel="TEACH at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>

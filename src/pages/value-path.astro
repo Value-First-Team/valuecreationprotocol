@@ -1,0 +1,125 @@
+---
+/**
+ * /value-path — Eight stages from first signal through champion.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Diagram from '../components/Diagram.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { getValuePathStages } from '../lib/sanity/canon';
+
+const stages = await getValuePathStages();
+
+const PATH_TO = stages.filter((s) => s.number <= 4);
+const PATH_OF = stages.filter((s) => s.number >= 5);
+---
+
+<BaseLayout
+  title="Value Path"
+  description="Eight stages from first signal through champion. Path TO Value (stages 1–4) precedes Path OF Value (stages 5–8). Replaces the industrial-age sales funnel."
+  path="/value-path"
+  ogImage="og-value-path.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer wide>
+    <PageHeader
+      eyebrow="Methodology Canon"
+      title="Value Path"
+      lede="The eight-stage journey from first signal through champion. Path TO Value precedes Path OF Value — value activated separates them."
+      status="v1.1"
+    />
+
+    <Diagram
+      name="value-path"
+      alt="The eight Value Path stages, from Audience through Champion."
+      caption="Path TO Value (1–4) → Value Activated → Path OF Value (5–8)."
+    />
+
+    {stages.length > 0 && (
+      <>
+        <section class="mt-12">
+          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
+            Path TO Value
+          </p>
+          <h2 class="text-xl md:text-2xl font-semibold text-stone-900 m-0 mb-2">
+            Stages 1–4 — Before Value Activated
+          </h2>
+          <p class="text-stone-600 m-0 mb-6 text-[15px]">
+            A person moves from observable signal to commitment. The pre-commercial phase.
+          </p>
+          <div class="grid md:grid-cols-2 gap-5">
+            {PATH_TO.map((s) => (
+              <article class="p-6 rounded-lg border border-stone-200 bg-white">
+                <div class="flex items-center gap-3 mb-3">
+                  <span
+                    class="inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-mono text-sm font-semibold"
+                    style={`background:${s.color?.hex ?? '#0d9488'}`}
+                  >
+                    {s.number}
+                  </span>
+                  <h3 class="m-0 text-lg font-semibold text-stone-900">{s.name}</h3>
+                </div>
+                {s.mantra && (
+                  <p class="text-stone-800 font-medium m-0 mb-2 leading-snug">"{s.mantra}"</p>
+                )}
+                {s.description && (
+                  <p class="text-[15px] text-stone-600 m-0 leading-relaxed">{s.description}</p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div class="my-12 py-4 px-6 rounded-lg bg-vcp-teal/10 border border-vcp-teal/30 text-center">
+          <p class="m-0 text-stone-800 font-medium">
+            <span class="text-vcp-teal">▼</span>
+            <strong class="font-mono text-sm tracking-wider">VALUE ACTIVATED</strong>
+            <span class="text-vcp-teal">▼</span>
+          </p>
+          <p class="text-sm text-stone-600 mt-2 mb-0">
+            The relationship transitions from commitment to receiving value.
+          </p>
+        </div>
+
+        <section>
+          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-orange m-0 mb-3">
+            Path OF Value
+          </p>
+          <h2 class="text-xl md:text-2xl font-semibold text-stone-900 m-0 mb-2">
+            Stages 5–8 — After Value Activated
+          </h2>
+          <p class="text-stone-600 m-0 mb-6 text-[15px]">
+            Value flows. The relationship matures from creator to champion.
+          </p>
+          <div class="grid md:grid-cols-2 gap-5">
+            {PATH_OF.map((s) => (
+              <article class="p-6 rounded-lg border border-stone-200 bg-white">
+                <div class="flex items-center gap-3 mb-3">
+                  <span
+                    class="inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-mono text-sm font-semibold"
+                    style={`background:${s.color?.hex ?? '#ea580c'}`}
+                  >
+                    {s.number}
+                  </span>
+                  <h3 class="m-0 text-lg font-semibold text-stone-900">{s.name}</h3>
+                </div>
+                {s.mantra && (
+                  <p class="text-stone-800 font-medium m-0 mb-2 leading-snug">"{s.mantra}"</p>
+                )}
+                {s.description && (
+                  <p class="text-[15px] text-stone-600 m-0 leading-relaxed">{s.description}</p>
+                )}
+              </article>
+            ))}
+          </div>
+        </section>
+      </>
+    )}
+
+    <CrossCitation
+      peerPath="/methodology/value-path"
+      peerLabel="Value Path at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>

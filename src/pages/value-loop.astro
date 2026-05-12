@@ -1,0 +1,41 @@
+---
+/**
+ * /value-loop — Value Loop canonical reference.
+ *
+ * Discover → Codify → Deliver → Learn — continuous, not phased.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
+
+const { html: rawHtml } = renderWikiCanonical(WIKI_CANONICAL.valueLoop);
+const html = stripFirstH1(rawHtml);
+---
+
+<BaseLayout
+  title="Value Loop"
+  description="Discover → Codify → Deliver → Learn. The continuous loop that replaces sequential delivery and phased rollouts."
+  path="/value-loop"
+  ogImage="og-value-loop.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Methodology Canon"
+      title="Value Loop"
+      lede="Discover → Codify → Deliver → Learn. A continuous loop, not a sequential delivery pipeline. The unit of organizational learning in AI-native operations."
+      version="v1"
+      status="Canon"
+    />
+
+    <Prose html={html} />
+
+    <CrossCitation
+      peerPath="/methodology/value-loop"
+      peerLabel="Value Loop at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>

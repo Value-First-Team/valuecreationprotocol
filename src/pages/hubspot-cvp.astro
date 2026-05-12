@@ -1,0 +1,49 @@
+---
+/**
+ * /hubspot-cvp — HubSpot as Customer Value Platform v1.1.
+ *
+ * Renders staged hubspot-cvp-canonical-reference-v1_1.md.
+ * HubSpot as the canonical implementing substrate for VCP.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Prose from '../components/Prose.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+import { getCanonDoc } from '../lib/sanity/canon';
+
+const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.hubspotCvp);
+const html = stripFirstH1(rawHtml);
+const meta = await getCanonDoc('hubspot-cvp-v1-1');
+
+const version = meta?.version ?? 'v1.1';
+const status = meta?.status ?? 'Canon';
+const effectiveDate = meta?.effectiveDate;
+---
+
+<BaseLayout
+  title="HubSpot as Customer Value Platform"
+  description="HubSpot as the canonical implementing Customer Value Platform — the configuration approach that lets VCP operate on a commercial substrate without bespoke architecture."
+  path="/hubspot-cvp"
+  ogImage="og-hubspot-cvp.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer>
+    <PageHeader
+      eyebrow="Implementing Substrate"
+      title="HubSpot as CVP"
+      lede="HubSpot as the canonical Customer Value Platform. The configuration-over-customization approach that lets VCP run on a commercial substrate without bespoke architecture."
+      version={version}
+      status={status}
+      effectiveDate={effectiveDate}
+    />
+
+    <Prose html={html} />
+
+    <CrossCitation
+      peerPath="/hubspot"
+      peerLabel="HubSpot CVP work at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>

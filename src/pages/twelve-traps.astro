@@ -1,0 +1,102 @@
+---
+/**
+ * /twelve-traps — Twelve Complexity Traps (canonical Sanity records).
+ *
+ * Anti-patterns that derail value-creation work. Index page with brief
+ * summary per trap. Each trap renders with an anchor for cross-referencing
+ * from Value Realities and other canon pages.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageContainer from '../components/PageContainer.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CrossCitation from '../components/CrossCitation.astro';
+import { getTraps } from '../lib/sanity/canon';
+import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
+
+const traps = await getTraps();
+// Pull long-form overview from wiki canonical mirror for the intro section.
+const { html: trapOverviewHtml } = renderWikiCanonical(WIKI_CANONICAL.traps);
+---
+
+<BaseLayout
+  title="Twelve Complexity Traps"
+  description="Twelve anti-patterns that derail value-creation work. Each trap names a structural defect that AI-native operations must counter."
+  path="/twelve-traps"
+  ogImage="og-twelve-traps.jpg"
+  schemaType="TechArticle"
+>
+  <PageContainer wide>
+    <PageHeader
+      eyebrow="Methodology Canon"
+      title="Twelve Complexity Traps"
+      lede="Twelve anti-patterns that derail value creation. Recognize them in your own operations — they're load-bearing in industrial-age vocabulary."
+      status="Canon"
+    />
+
+    {traps.length === 0 ? (
+      <p class="text-stone-600 italic">Trap records loading from canon.</p>
+    ) : (
+      <>
+        <nav class="mb-12 p-5 rounded-lg border border-stone-200 bg-stone-50">
+          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-3">
+            Quick index
+          </p>
+          <ol class="grid md:grid-cols-2 gap-x-6 gap-y-1 list-none p-0 m-0 text-sm font-mono">
+            {traps.map((t, i) => (
+              <li>
+                <a href={`#${t.slug?.current ?? ''}`} class="text-stone-700 no-underline hover:underline">
+                  <span class="text-stone-400 inline-block w-7">{String(i + 1).padStart(2, '0')}.</span>
+                  <span class="font-sans">{t.name}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <ol class="space-y-10 list-none p-0">
+          {traps.map((t, i) => (
+            <li id={t.slug?.current ?? `trap-${i + 1}`} class="grid md:grid-cols-12 gap-6 scroll-mt-20">
+              <div class="md:col-span-3">
+                <span class="font-mono text-sm text-vcp-orange">
+                  Trap {String(i + 1).padStart(2, '0')}
+                </span>
+                <h2 class="text-lg md:text-xl font-semibold text-stone-900 mt-2 mb-0 leading-tight">
+                  {t.name}
+                </h2>
+              </div>
+              <div class="md:col-span-9">
+                <p class="text-[15px] text-stone-700 m-0 leading-relaxed">
+                  A pattern that derails value-creation work. See the canonical reference
+                  (linked below) for the full diagnostic, signals, and recovery pattern.
+                  {t.assessmentPath && (
+                    <>
+                      {' '}
+                      <a href={t.assessmentPath} class="text-stone-700 underline">Self-assessment</a>
+                      {' '}available at valuefirstteam.com.
+                    </>
+                  )}
+                </p>
+                <p class="text-sm text-stone-500 mt-3 mb-0">
+                  Counter: see <a href="/realities" class="text-stone-700 underline">Value Realities</a>
+                  for the operational commitments that address this trap.
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
+
+    <section class="mt-20 pt-12 border-t border-stone-200">
+      <h2 class="text-2xl md:text-3xl font-semibold text-stone-900 m-0 mb-6">
+        The pattern beneath the patterns
+      </h2>
+      <article class="prose mx-auto" set:html={stripFirstH1(trapOverviewHtml)} />
+    </section>
+
+    <CrossCitation
+      peerPath="/methodology/twelve-traps"
+      peerLabel="Twelve Traps at valuefirstteam.com"
+    />
+  </PageContainer>
+</BaseLayout>
