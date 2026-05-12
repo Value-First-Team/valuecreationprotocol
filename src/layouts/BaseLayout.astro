@@ -4,14 +4,15 @@
  *
  * Responsibilities:
  * - HTML head: title, description, canonical, OG/Twitter, favicon, JSON-LD
- * - Global typography + design tokens (Tailwind)
- * - Header (nav) + Footer
+ * - Global typography + design tokens (tokens.css + Google Fonts)
+ * - Header (nav with VCP compass-mark lockup) + Footer (implementer attribution)
  * - Slot for page body
  *
- * Reads as a calm protocol home. Mostly neutral surfaces. VF palette (teal/orange/blue)
- * is accent only — never the dominant chrome.
+ * Reads as a calm protocol home, warm-paper editorial. VF teal is the
+ * identity color; MCP orange and HCP blue are reserved for peer protocols.
  */
 import { SITE, NAV } from '../lib/site';
+import '../styles/tokens.css';
 
 export interface Props {
   /** Page title (concatenated with "— Value Creation Protocol") */
@@ -36,6 +37,11 @@ export interface Props {
   datePublished?: string;
   /** For TechArticle/Article: ISO date. Defaults to undefined. */
   dateModified?: string;
+  /**
+   * If true, suppress the standard header chrome (manifesto archetype uses
+   * a minimal nav rendered inline by the page).
+   */
+  minimalNav?: boolean;
 }
 
 const {
@@ -48,6 +54,7 @@ const {
   schemaDefinedTerms,
   datePublished,
   dateModified,
+  minimalNav = false,
 } = Astro.props;
 
 const fullTitle = path === '/' ? `${SITE.name} — Open Protocol Home` : `${title} — ${SITE.name}`;
@@ -99,20 +106,13 @@ if (schemaType === 'TechArticle' || schemaType === 'Article') {
 }
 
 if (schemaType === 'CollectionPage') {
-  // No additional fields by default — page-level CollectionPage signals
-  // a hub of related works. Pages embed their own item list if needed.
+  // No additional fields by default.
 }
 
 if (schemaType === 'DefinedTermSet') {
   // Same shape as a DefinedTerm container; pages emit hasDefinedTerm inline.
 }
 
-/**
- * On concept pages that emit a top-level DefinedTerm, the page can ALSO declare
- * sub-terms (e.g. /beliefs lists five DefinedTerms — one per belief). These
- * render as a separate JSON-LD block to keep the schema valid (one @type per
- * graph node).
- */
 const auxDefinedTerms =
   schemaDefinedTerms && schemaDefinedTerms.length > 0
     ? {
@@ -165,11 +165,11 @@ const auxDefinedTerms =
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
-    <!-- Fonts -->
+    <!-- Fonts: Newsreader (display + prose, opsz 6–72), Geist (UI body), Geist Mono (technical) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600;6..72,700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -178,248 +178,87 @@ const auxDefinedTerms =
     {auxDefinedTerms && (
       <script type="application/ld+json" set:html={JSON.stringify(auxDefinedTerms)} />
     )}
-
-    <style is:global>
-      :root {
-        --color-ink: #0c0a09;
-        --color-text: #1c1917;
-        --color-muted: #57534e;
-        --color-faint: #78716c;
-        --color-line: #e7e5e4;
-        --color-line-soft: #f5f5f4;
-        --color-surface: #ffffff;
-        --color-surface-alt: #fafaf9;
-        --color-teal: #0d9488;
-        --color-orange: #ea580c;
-        --color-blue: #2563eb;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        scroll-behavior: smooth;
-      }
-      body {
-        margin: 0;
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 17px;
-        line-height: 1.7;
-        color: var(--color-text);
-        background: var(--color-surface);
-      }
-      h1, h2, h3, h4, h5, h6 {
-        color: var(--color-ink);
-        line-height: 1.25;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-      }
-      a {
-        color: var(--color-blue);
-        text-underline-offset: 3px;
-      }
-      a:hover {
-        color: #1d4ed8;
-      }
-      code, pre {
-        font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
-        font-size: 0.9em;
-      }
-      code {
-        background: var(--color-line-soft);
-        padding: 0.1em 0.35em;
-        border-radius: 3px;
-      }
-      pre {
-        background: var(--color-line-soft);
-        padding: 1rem;
-        border-radius: 6px;
-        overflow-x: auto;
-        line-height: 1.5;
-      }
-      pre code {
-        background: transparent;
-        padding: 0;
-      }
-
-      /* Prose — applied to rendered markdown bodies */
-      .prose {
-        max-width: 72ch;
-      }
-      .prose > * + * { margin-top: 1.2em; }
-      .prose h2 {
-        font-size: 1.6rem;
-        margin-top: 2.4em;
-        margin-bottom: 0.6em;
-        padding-bottom: 0.3em;
-        border-bottom: 1px solid var(--color-line);
-      }
-      .prose h3 {
-        font-size: 1.25rem;
-        margin-top: 2em;
-        margin-bottom: 0.5em;
-      }
-      .prose h4 {
-        font-size: 1.05rem;
-        margin-top: 1.6em;
-        margin-bottom: 0.4em;
-      }
-      .prose p, .prose li {
-        font-size: 1.0625rem;
-        line-height: 1.75;
-      }
-      .prose ul, .prose ol {
-        padding-left: 1.4em;
-      }
-      .prose li + li { margin-top: 0.4em; }
-      .prose blockquote {
-        margin: 1.4em 0;
-        padding: 0.6em 1.2em;
-        border-left: 3px solid var(--color-teal);
-        background: var(--color-line-soft);
-        color: var(--color-text);
-        font-style: normal;
-      }
-      .prose blockquote p { margin: 0; }
-      .prose hr {
-        border: 0;
-        border-top: 1px solid var(--color-line);
-        margin: 2.4em 0;
-      }
-      .prose strong { color: var(--color-ink); font-weight: 600; }
-      .prose table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.95rem;
-        margin: 1.4em 0;
-      }
-      .prose th, .prose td {
-        text-align: left;
-        padding: 0.6em 0.8em;
-        border-bottom: 1px solid var(--color-line);
-        vertical-align: top;
-      }
-      .prose th {
-        background: var(--color-line-soft);
-        font-weight: 600;
-      }
-
-      /* Skip link */
-      .skip-link {
-        position: absolute;
-        left: -9999px;
-        top: 0;
-      }
-      .skip-link:focus {
-        position: absolute;
-        left: 1rem;
-        top: 1rem;
-        background: var(--color-ink);
-        color: white;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        z-index: 1000;
-      }
-    </style>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <header class="border-b border-stone-200 bg-white/95 backdrop-blur sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-6 py-2 flex items-center justify-between gap-6">
-        <a href="/" class="flex items-center gap-2 no-underline group">
-          <span class="text-[15px] font-semibold tracking-tight text-stone-900 group-hover:text-stone-700">
-            Value Creation Protocol
-          </span>
-          <span class="hidden sm:inline-block text-[10px] font-mono uppercase tracking-widest text-vcp-teal border border-vcp-teal/40 rounded px-1.5 py-0.5">
-            v0.1
-          </span>
-        </a>
-        <nav class="hidden md:flex items-center gap-4 text-[14px] font-medium">
-          {NAV.map((item) => (
-            <a
-              href={item.href}
-              class="inline-flex items-center min-h-11 px-2 text-stone-700 hover:text-stone-900 no-underline"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div class="md:hidden">
-          <details class="relative">
-            <summary class="list-none cursor-pointer text-stone-700 text-sm inline-flex items-center min-h-11 px-2">Menu</summary>
-            <div class="absolute right-0 mt-2 w-56 bg-white border border-stone-200 rounded-md shadow-lg p-3 flex flex-col gap-1 z-50">
-              {NAV.map((item) => (
-                <a href={item.href} class="text-sm text-stone-700 no-underline min-h-11 flex items-center px-3 hover:bg-stone-50 rounded">
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </details>
+    {!minimalNav && (
+      <header class="border-b border-vcp-border bg-vcp-surface/95 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-vcp-content mx-auto px-6 py-3 flex items-center justify-between gap-6">
+          <a href="/" class="flex items-center gap-3 no-underline group">
+            <img
+              src="/assets/marks/vcp-mark-tight.png"
+              alt="Value Creation Protocol"
+              class="h-10 md:h-12 w-auto block"
+              width="120"
+              height="48"
+            />
+            <span class="sr-only">Value Creation Protocol</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-1 text-[14px] font-medium" aria-label="Primary">
+            {NAV.map((item) => (
+              <a
+                href={item.href}
+                class="inline-flex items-center min-h-11 px-3 text-vcp-ink-2 hover:text-vcp-ink no-underline transition-colors"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+          <div class="hidden md:flex items-center gap-3 ml-2">
+            <span class="vcp-status-pill">v0.1 · DRAFT</span>
+          </div>
+          <div class="md:hidden">
+            <details class="relative">
+              <summary class="list-none cursor-pointer text-vcp-ink-2 text-sm inline-flex items-center min-h-11 px-2">Menu</summary>
+              <div class="absolute right-0 mt-2 w-56 bg-vcp-paper border border-vcp-border rounded-vcp-md shadow-md p-3 flex flex-col gap-1 z-50">
+                {NAV.map((item) => (
+                  <a href={item.href} class="text-sm text-vcp-ink-2 no-underline min-h-11 flex items-center px-3 hover:bg-vcp-surface-2 rounded">
+                    {item.label}
+                  </a>
+                ))}
+                <div class="border-t border-vcp-border mt-2 pt-2 px-3">
+                  <span class="vcp-status-pill">v0.1 · DRAFT</span>
+                </div>
+              </div>
+            </details>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+    )}
 
     <main id="main">
       <slot />
     </main>
 
-    <footer class="mt-24 border-t border-stone-200 bg-stone-50">
-      <div class="max-w-7xl mx-auto px-6 py-12 grid gap-10 md:grid-cols-4">
-        <div class="md:col-span-2">
-          <p class="text-[15px] font-semibold text-stone-900 m-0">
-            Value Creation Protocol
+    <!-- Implementer attribution + footer (Chrome.jsx VcpFoot pattern) -->
+    <footer class="mt-24 border-t border-vcp-border bg-vcp-surface">
+      <div class="max-w-vcp-content mx-auto px-6 pt-14 pb-10">
+        <!-- Attribution band -->
+        <div class="max-w-2xl mb-14">
+          <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
+            PROTOCOL HOME
           </p>
-          <p class="text-sm text-stone-600 mt-2 mb-0 max-w-md">
-            An open protocol for designing systems where value flows naturally between
-            people, organizations, and AI. A peer to
-            <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" class="text-stone-700 underline">
-              modelcontextprotocol.io
-            </a>
-            and
-            <a href="https://humancontextprotocol.com" target="_blank" rel="noopener noreferrer" class="text-stone-700 underline">
-              humancontextprotocol.com
-            </a>.
-          </p>
-          <p class="text-sm text-stone-600 mt-4 mb-0">
-            Originated and canonically implemented by
-            <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-stone-700 underline">
-              Value-First Team
-            </a>.
-            The protocol itself is open.
+          <p class="font-display text-[17px] leading-[1.55] text-vcp-ink m-0">
+            Operated and refined by{' '}
+            <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">Value-First Team</a>
+            {' '}— the originating and canonical implementing firm. The Value Creation Protocol is
+            published openly; anyone may read, cite, and operate on it independently of firm engagement.
           </p>
         </div>
 
-        <div>
-          <p class="text-[11px] uppercase tracking-widest text-stone-500 font-semibold m-0">
-            Read
-          </p>
-          <ul class="mt-3 space-y-2 text-sm list-none p-0">
-            <li><a href="/" class="text-stone-700 no-underline hover:underline">Protocol overview</a></li>
-            <li><a href="/encoding-stack" class="text-stone-700 no-underline hover:underline">Encoding stack</a></li>
-            <li><a href="/methodology" class="text-stone-700 no-underline hover:underline">Methodology canon</a></li>
-            <li><a href="/manifestos" class="text-stone-700 no-underline hover:underline">Manifestos</a></li>
-            <li><a href="/glossary" class="text-stone-700 no-underline hover:underline">Glossary</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <p class="text-[11px] uppercase tracking-widest text-stone-500 font-semibold m-0">
-            Engage
-          </p>
-          <ul class="mt-3 space-y-2 text-sm list-none p-0">
-            <li><a href="/engagement" class="text-stone-700 no-underline hover:underline">Read · Implement · Contribute</a></li>
-            <li><a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-stone-700 no-underline hover:underline">Canonical implementer</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-stone-200">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs text-stone-500">
-          <p class="m-0">
-            The protocol is open. Documentation © Value-First Team. Concepts free to implement.
-          </p>
-          <p class="m-0 font-mono">
+        <!-- Bottom row: link list + meta -->
+        <div class="pt-7 border-t border-vcp-border flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+          <div class="flex flex-wrap gap-6 font-mono text-[11px] tracking-[0.06em] text-vcp-ink-3">
+            <a href="/methodology" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Methodology</a>
+            <a href="/protocol-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Protocol stack</a>
+            <a href="/manifestos" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Manifestos</a>
+            <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Encoding stack</a>
+            <a href="/glossary" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Glossary</a>
+            <a href="/engagement" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Engagement</a>
+            <a href="/sitemap" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Sitemap</a>
+          </div>
+          <p class="font-mono text-[11px] tracking-[0.04em] text-vcp-ink-4 m-0">
             VCP v0.1 · 2026
           </p>
         </div>
