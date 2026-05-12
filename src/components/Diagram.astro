@@ -1,0 +1,37 @@
+---
+/**
+ * Diagram — inline figure for the four SVG diagrams in /public/diagrams.
+ *
+ * Diagrams: protocol-stack, encoding-stack, three-org, value-path.
+ * They are responsive viewBox SVGs — width 100% + max-width container.
+ */
+export interface Props {
+  /** Diagram slug (no extension): protocol-stack | encoding-stack | three-org | value-path */
+  name: 'protocol-stack' | 'encoding-stack' | 'three-org' | 'value-path';
+  /** Accessible alt / figcaption text */
+  alt: string;
+  /** Optional caption shown below the diagram */
+  caption?: string;
+  /** Max width in px (default 880) */
+  maxWidth?: number;
+}
+
+const { name, alt, caption, maxWidth = 880 } = Astro.props;
+const src = `/diagrams/${name}.svg`;
+---
+
+<figure class="my-10 mx-auto" style={`max-width:${maxWidth}px`}>
+  <div class="rounded-lg border border-stone-200 bg-stone-50 p-4 sm:p-6">
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      class="w-full h-auto block"
+    />
+  </div>
+  {caption && (
+    <figcaption class="text-sm text-stone-500 mt-3 text-center italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>

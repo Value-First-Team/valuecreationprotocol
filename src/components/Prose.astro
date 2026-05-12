@@ -1,0 +1,14 @@
+---
+/**
+ * Prose — wrapper for rendered-from-markdown HTML.
+ *
+ * Applies the .prose typography defined in BaseLayout.
+ * Use with set:html when the HTML is trusted (we control all input).
+ */
+export interface Props {
+  html: string;
+}
+const { html } = Astro.props;
+---
+
+<article class="prose mx-auto" set:html={html} />

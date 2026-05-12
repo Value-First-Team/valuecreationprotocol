@@ -1,0 +1,16 @@
+---
+/**
+ * PageContainer — standard content width wrapper for canon pages.
+ * Provides consistent horizontal padding + top padding.
+ */
+export interface Props {
+  /** Use the wide container (1100px) instead of standard reading width (880px). */
+  wide?: boolean;
+}
+const { wide = false } = Astro.props;
+const max = wide ? 'max-w-5xl' : 'max-w-4xl';
+---
+
+<div class={`${max} mx-auto px-6 py-12 md:py-16`}>
+  <slot />
+</div>

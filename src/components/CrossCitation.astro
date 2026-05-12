@@ -1,0 +1,38 @@
+---
+/**
+ * CrossCitation — small inline block on canon pages pointing to the
+ * canonical implementing firm's peer page on valuefirstteam.com.
+ *
+ * Mutual cross-citation pattern (TR-9). NOT a canonical link tag —
+ * vcp.com remains canonical for itself (TR-8 hard rule).
+ *
+ * Light visual weight per voice guidance — protocol doesn't need to keep
+ * announcing where it's implemented. Trust the reader.
+ */
+import { SITE } from '../lib/site';
+
+export interface Props {
+  /** Path on valuefirstteam.com (e.g. "/methodology/value-path") */
+  peerPath: string;
+  /** Human label for the peer ("Value Path at valuefirstteam.com") */
+  peerLabel?: string;
+}
+
+const { peerPath, peerLabel } = Astro.props;
+const peerUrl = `${SITE.implementer.url}${peerPath}`;
+---
+
+<aside class="my-8 p-4 rounded-lg border border-stone-200 bg-stone-50/50 text-sm">
+  <p class="m-0 text-stone-600">
+    <span class="font-medium text-stone-700">Implementers:</span>
+    Canonically implemented by{' '}
+    <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-stone-700 underline">
+      Value-First Team
+    </a>{peerLabel ? ' — see ' : '.'}
+    {peerLabel && (
+      <a href={peerUrl} target="_blank" rel="noopener" class="text-stone-700 underline">
+        {peerLabel}
+      </a>
+    )}
+  </p>
+</aside>

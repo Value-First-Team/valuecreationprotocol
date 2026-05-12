@@ -1,0 +1,134 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 800 500"
+  role="img"
+  aria-labelledby="three-org-title three-org-desc"
+>
+  <title id="three-org-title">Three-Org Model — Customer Org, Operations Org, Finance Org</title>
+  <desc id="three-org-desc">The Three-Org Model organizes capability into three interconnected centers. Customer Org (led by Sage, CCO) — human-led, AI-supported — covers Marketing, Sales, and Service, and holds the customer relationship. Operations Org (led by V, COO) — AI-led, human oversight — covers Data, Workflows, and Platform. Finance Org (led by Pax, CFO) — shared human and AI — covers Revenue, Quote-to-Cash, and Reporting. All three orgs exchange data flows and connect through the Four Unified Views.</desc>
+
+  <defs>
+    <style>
+      .f { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
+      .head  { font-size: 20px; font-weight: 700; fill: #111827; }
+      .deck  { font-size: 12px; fill: #6b7280; }
+      .label { font-size: 15px; font-weight: 700; }
+      .sub   { font-size: 11px; fill: #6b7280; }
+      .func  { font-size: 11px; fill: #4b5563; }
+      .mode  { font-size: 10px; font-weight: 600; }
+      .cap   { font-size: 10px; fill: #9ca3af; }
+      .ai-leader { font-size: 11px; font-weight: 600; }
+    </style>
+    <filter id="card-drop" x="-5%" y="-5%" width="110%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000014"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <circle cx="4" cy="4" r="2.5" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f9fafb"/>
+
+  <!-- Heading -->
+  <text x="400" y="40" text-anchor="middle" class="f head">The Three-Org Model</text>
+  <text x="400" y="60" text-anchor="middle" class="f deck">Three interconnected capability centers — the structural answer to organizational fragmentation.</text>
+
+  <!-- ─── Flow arrows between cards ─── -->
+  <!-- Customer → Ops -->
+  <path d="M 250 250 Q 280 270 310 260" stroke="#d1d5db" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <!-- Ops → Finance -->
+  <path d="M 490 260 Q 520 270 548 250" stroke="#d1d5db" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#arr)"/>
+  <!-- Finance → Customer (arc below) -->
+  <path d="M 534 360 Q 400 420 264 360" stroke="#d1d5db" stroke-width="1" fill="none" stroke-dasharray="3 4"/>
+
+  <!-- ─── Unified Views connector bar ─── -->
+  <rect x="260" y="368" width="280" height="44" rx="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="400" y="386" text-anchor="middle" class="f func" font-weight="600" fill="#374151">Four Unified Views</text>
+  <text x="400" y="402" text-anchor="middle" class="f cap">UCV · URV · UBC · UTE — shared visibility across all three orgs</text>
+
+  <!-- ─── Customer Org Card ─── -->
+  <g filter="url(#card-drop)">
+    <rect x="40" y="90" width="230" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="40" y="90" width="230" height="6" rx="3" fill="#ea580c"/>
+
+    <!-- Mode badge -->
+    <rect x="58" y="108" width="130" height="20" rx="10" fill="#ffedd5"/>
+    <text x="123" y="122" text-anchor="middle" class="f mode" fill="#c2410c">Human-led · AI-supported</text>
+
+    <text x="58" y="152" class="f label" fill="#c2410c">Customer Org</text>
+
+    <!-- AI leader chip -->
+    <rect x="58" y="160" width="96" height="20" rx="10" fill="#f3f4f6"/>
+    <text x="106" y="174" text-anchor="middle" class="f ai-leader" fill="#374151">Sage (CCO)</text>
+
+    <text x="58" y="204" class="f func">Marketing</text>
+    <text x="58" y="220" class="f sub">Awareness, content, community</text>
+    <text x="58" y="242" class="f func">Sales</text>
+    <text x="58" y="258" class="f sub">Conversations, discovery, proposals</text>
+    <text x="58" y="280" class="f func">Service</text>
+    <text x="58" y="296" class="f sub">Support, success, expansion</text>
+
+    <line x1="58" y1="312" x2="250" y2="312" stroke="#f3f4f6" stroke-width="1"/>
+    <text x="58" y="330" class="f cap">Primary view: UCV</text>
+    <text x="58" y="344" class="f cap">Humans own the relationship</text>
+  </g>
+
+  <!-- ─── Operations Org Card (center, slightly elevated) ─── -->
+  <g filter="url(#card-drop)">
+    <rect x="285" y="78" width="230" height="272" rx="12" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+    <rect x="285" y="78" width="230" height="6" rx="3" fill="#0d9488"/>
+
+    <!-- Mode badge -->
+    <rect x="303" y="96" width="136" height="20" rx="10" fill="#ccfbf1"/>
+    <text x="371" y="110" text-anchor="middle" class="f mode" fill="#0d9488">AI-led · Human oversight</text>
+
+    <text x="303" y="146" class="f label" fill="#0d9488">Operations Org</text>
+
+    <!-- AI leader chip -->
+    <rect x="303" y="154" width="80" height="20" rx="10" fill="#f3f4f6"/>
+    <text x="343" y="168" text-anchor="middle" class="f ai-leader" fill="#374151">V (COO)</text>
+
+    <text x="303" y="198" class="f func">Data</text>
+    <text x="303" y="214" class="f sub">Quality, integration, governance</text>
+    <text x="303" y="236" class="f func">Workflows</text>
+    <text x="303" y="252" class="f sub">Automation, orchestration, triggers</text>
+    <text x="303" y="274" class="f func">Platform</text>
+    <text x="303" y="290" class="f sub">Tools, systems, infrastructure</text>
+
+    <line x1="303" y1="306" x2="495" y2="306" stroke="#f3f4f6" stroke-width="1"/>
+    <text x="303" y="324" class="f cap">Primary view: UBC</text>
+    <text x="303" y="340" class="f cap">Highest AI leverage point</text>
+  </g>
+
+  <!-- ─── Finance Org Card ─── -->
+  <g filter="url(#card-drop)">
+    <rect x="530" y="90" width="230" height="260" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <rect x="530" y="90" width="230" height="6" rx="3" fill="#2563eb"/>
+
+    <!-- Mode badge -->
+    <rect x="548" y="108" width="96" height="20" rx="10" fill="#dbeafe"/>
+    <text x="596" y="122" text-anchor="middle" class="f mode" fill="#1d4ed8">Shared · Human + AI</text>
+
+    <text x="548" y="152" class="f label" fill="#1d4ed8">Finance Org</text>
+
+    <!-- AI leader chip -->
+    <rect x="548" y="160" width="92" height="20" rx="10" fill="#f3f4f6"/>
+    <text x="594" y="174" text-anchor="middle" class="f ai-leader" fill="#374151">Pax (CFO)</text>
+
+    <text x="548" y="204" class="f func">Revenue</text>
+    <text x="548" y="220" class="f sub">Recognition, forecasting, analysis</text>
+    <text x="548" y="242" class="f func">Quote-to-Cash</text>
+    <text x="548" y="258" class="f sub">Pricing, invoicing, collections</text>
+    <text x="548" y="280" class="f func">Reporting</text>
+    <text x="548" y="296" class="f sub">Metrics, compliance, visibility</text>
+
+    <line x1="548" y1="312" x2="740" y2="312" stroke="#f3f4f6" stroke-width="1"/>
+    <text x="548" y="330" class="f cap">Primary view: URV</text>
+    <text x="548" y="344" class="f cap">Humans own fiduciary judgment</text>
+  </g>
+
+  <!-- Bottom caption -->
+  <text x="400" y="440" text-anchor="middle" class="f cap">The Three-Org Model is a mental model for alignment — not necessarily a reorg. Clarity of ownership, not complexity of structure.</text>
+  <text x="400" y="458" text-anchor="middle" class="f cap">Reference implementation: Value-First Team's AI Leadership Team (Sage / V / Pax)</text>
+</svg>
