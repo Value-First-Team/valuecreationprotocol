@@ -2,26 +2,41 @@
  * Markdown rendering for staged canon documents.
  *
  * Sanity strategicDocument / encodingStackDoc records carry metadata (title, version,
- * status, effectiveDate) but not body content — body lives in staged markdown at
- * /mnt/d/Projects/VFT_Platform/.../valuecreationprotocol/*.md.
+ * status, effectiveDate) but not body content — body lives in markdown files that are
+ * bundled INTO this repo at src/content/canon/ and src/content/wiki-canonical/.
  *
- * This module loads those files at build/request time and renders to HTML with marked.
+ * Build inputs must live inside the repo Vercel builds from. Cross-repo absolute-path
+ * reads (e.g. /mnt/d/Projects/VFT_Platform/... or /mnt/d/Projects/value-first-operations/wiki/canonical/...)
+ * work locally but fail in Vercel CI because the build container only has access to
+ * this repo's filesystem.
+ *
+ * The files at src/content/canon/ mirror staged canon from
+ * /mnt/d/Projects/VFT_Platform/2026_VFT_Platform_Infrastructure/apps/sites/valuecreationprotocol/.
+ *
+ * The files at src/content/wiki-canonical/ mirror wiki canonical references from
+ * /mnt/d/Projects/value-first-operations/wiki/canonical/.
+ *
+ * To refresh: copy the updated markdown from the source location into the matching
+ * directory under src/content/, commit, push. The build picks up new content on the
+ * next deploy.
  */
 import { marked } from 'marked';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 
-const STAGED_DIR =
-  '/mnt/d/Projects/VFT_Platform/2026_VFT_Platform_Infrastructure/apps/sites/valuecreationprotocol';
+// Eagerly import all canon markdown as raw strings at build time. Vite/Astro
+// resolves these via the bundler, so the content is embedded in the build
+// output and is accessible from Vercel serverless functions without filesystem
+// access to the source tree.
+const STAGED_FILES_RAW = import.meta.glob('../content/canon/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
 
-/**
- * Wiki canonical mirror — Chris-authored canonical reference library.
- * Used as a fallback / supplement for methodology pages whose Sanity body
- * is not yet populated (Value Loop, Value-Led Growth framework, Three-Org Model,
- * Twelve Complexity Traps long-form treatment, etc.).
- */
-const WIKI_CANONICAL_DIR =
-  '/mnt/d/Projects/value-first-operations/wiki/canonical';
+const WIKI_FILES_RAW = import.meta.glob('../content/wiki-canonical/*.md', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
 
 // GitHub-Flavored Markdown, soft line breaks preserved as paragraphs (not <br>).
 marked.setOptions({
@@ -30,18 +45,33 @@ marked.setOptions({
 });
 
 /**
+ * Look up a raw markdown body by basename within a glob result map.
+ * The keys of import.meta.glob results are relative paths like
+ * "../content/canon/beyond_leads_manifesto_v2.md".
+ */
+function findByBasename(
+  glob: Record<string, string>,
+  basename: string
+): string | undefined {
+  const suffix = `/${basename}`;
+  for (const key of Object.keys(glob)) {
+    if (key.endsWith(suffix)) {
+      return glob[key];
+    }
+  }
+  return undefined;
+}
+
+/**
  * Read a staged canon markdown file and return rendered HTML.
  *
  * filename is the basename (e.g. "beyond_leads_manifesto_v2.md").
- * Returns { html, frontmatter } — frontmatter is currently always {} (no docs use it yet).
+ * Returns { html, raw }.
  */
 export function renderStagedMarkdown(filename: string): { html: string; raw: string } {
-  const path = join(STAGED_DIR, filename);
-  let raw: string;
-  try {
-    raw = readFileSync(path, 'utf-8');
-  } catch (e) {
-    console.error('[markdown] failed to read', path, e);
+  const raw = findByBasename(STAGED_FILES_RAW, filename);
+  if (!raw) {
+    console.error('[markdown] staged canon file not bundled:', filename);
     return { html: '<p><em>Source document unavailable.</em></p>', raw: '' };
   }
   const html = marked.parse(raw, { async: false }) as string;
@@ -79,12 +109,9 @@ export const STAGED_FILES = {
  * concepts (Value Loop, Three-Org Model, Twelve Traps long-form, etc.).
  */
 export function renderWikiCanonical(filename: string): { html: string; raw: string } {
-  const path = join(WIKI_CANONICAL_DIR, filename);
-  let raw: string;
-  try {
-    raw = readFileSync(path, 'utf-8');
-  } catch (e) {
-    console.error('[markdown] failed to read wiki canonical', path, e);
+  const raw = findByBasename(WIKI_FILES_RAW, filename);
+  if (!raw) {
+    console.error('[markdown] wiki canonical file not bundled:', filename);
     return { html: '<p><em>Canonical reference unavailable.</em></p>', raw: '' };
   }
   const html = marked.parse(raw, { async: false }) as string;
