@@ -3,11 +3,10 @@
  * /manifestos/value-led-growth — Value-Led Growth Manifesto.
  *
  * Distinct from /value-led-growth (the framework canon page).
- * This is the long-form manifesto treatment.
+ * This is the long-form manifesto treatment in the Manifesto.jsx archetype.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageContainer from '../../components/PageContainer.astro';
-import PageHeader from '../../components/PageHeader.astro';
+import ManifestoHero from '../../components/ManifestoHero.astro';
 import Prose from '../../components/Prose.astro';
 import Implementers from '../../components/Implementers.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../../lib/markdown';
@@ -17,9 +16,7 @@ const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.valueLedGrowth);
 const html = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('value-led-growth-manifesto');
 
-const version = meta?.version ?? 'v1';
-const status = meta?.status ?? 'Published';
-const effectiveDate = meta?.effectiveDate;
+const effectiveDate = meta?.effectiveDate ?? '2026';
 ---
 
 <BaseLayout
@@ -28,25 +25,27 @@ const effectiveDate = meta?.effectiveDate;
   path="/manifestos/value-led-growth"
   ogImage="og-manifestos-value-led-growth.jpg"
   schemaType="Article"
+  minimalNav
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Manifesto"
-      title={meta?.title ?? 'Value-Led Growth'}
-      lede="A manifesto for organizational transformation. Growth is what happens when value created exceeds value extracted."
-      version={version}
-      status={status}
-      effectiveDate={effectiveDate}
-    />
+  <ManifestoHero
+    date={effectiveDate}
+    position="02 of 03"
+    pullQuote={'Growth is <strong>what happens</strong> when value created exceeds value extracted.'}
+    author="Value-First Team"
+    filedUnder="Manifestos · Growth"
+    citeUrl="valuecreationprotocol.com/manifestos/value-led-growth"
+    readTime="11 MIN"
+  />
 
-    <Prose html={html} />
+  <article class="max-w-[720px] mx-auto px-6 md:px-8 pb-32">
+    <Prose html={html} manifesto />
 
-    <nav class="mt-16 pt-8 border-t border-stone-200 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
-      <a href="/value-led-growth" class="text-stone-700 underline">Value-Led Growth framework canon →</a>
-      <a href="/manifestos/beyond-leads" class="text-stone-700 underline">Beyond "Leads" manifesto →</a>
-      <a href="/positioning" class="text-stone-700 underline">Positioning paper →</a>
+    <nav class="mt-20 pt-10 border-t border-vcp-border flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.08em] uppercase text-vcp-ink-3">
+      <a href="/value-led-growth" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Value-Led Growth framework canon →</a>
+      <a href="/manifestos/beyond-leads" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Beyond "Leads" manifesto →</a>
+      <a href="/positioning" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Positioning paper →</a>
     </nav>
 
     <Implementers variant="manifesto" />
-  </PageContainer>
+  </article>
 </BaseLayout>
