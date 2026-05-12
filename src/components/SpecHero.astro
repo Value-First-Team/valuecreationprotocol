@@ -1,0 +1,88 @@
+---
+/**
+ * SpecHero — Spec.jsx archetype hero block for the encoding stack pages.
+ *
+ * Renders:
+ *  - Eyebrow with hairline rule: "Encoding stack · {layerNum} of 03"
+ *  - Newsreader display heading (smaller than canon — 64px max)
+ *  - Lead sentence
+ *  - Spec meta grid: Status (badge) · Last verified · Compiles to · Reference impl
+ *
+ * Used on /lexicon (A), /vcp-lang (B), /value-graph (C).
+ */
+export interface Props {
+  /** Eyebrow text e.g. "Encoding stack · Layer A of 03" */
+  eyebrow: string;
+  /** Spec title — supports HTML for emphasis */
+  title: string;
+  /** Lead sentence */
+  lede?: string;
+  /** Status string e.g. "v0.1 · DRAFT" */
+  status: string;
+  /** Status variant — controls the badge color (draft/stable/frozen) */
+  statusKind?: 'draft' | 'stable' | 'frozen';
+  /** Last verified date e.g. "12 May 2026" */
+  verified: string;
+  /** Compiles-to target e.g. "Value Graph (v0.1)" */
+  compilesTo?: string;
+  /** Reference implementation pointer e.g. "vcp-lang-rs · github" */
+  referenceImpl?: string;
+}
+
+const { eyebrow, title, lede, status, statusKind = 'draft', verified, compilesTo, referenceImpl } = Astro.props;
+
+const statusBadge: Record<'draft' | 'stable' | 'frozen', { bg: string; ink: string; dot: string }> = {
+  draft:  { bg: 'bg-[#fdf3e1]', ink: 'text-[#7a4a07]', dot: 'bg-[#b45309]' },
+  stable: { bg: 'bg-vcp-teal-soft', ink: 'text-vcp-teal-ink', dot: 'bg-vcp-teal-deep' },
+  frozen: { bg: 'bg-vcp-surface-3', ink: 'text-vcp-ink-3', dot: 'bg-vcp-ink-3' },
+};
+const badge = statusBadge[statusKind];
+---
+
+<header class="pb-14 mb-14 border-b border-vcp-border">
+  <p class="font-mono text-[12px] tracking-[0.16em] uppercase text-vcp-teal-deep m-0 mb-6 font-medium inline-flex items-center gap-3.5">
+    <span>{eyebrow}</span>
+    <span class="h-px bg-vcp-ink inline-block w-[88px] max-w-[88px]" aria-hidden="true"></span>
+  </p>
+
+  <h1
+    class="font-display text-[clamp(2.5rem,5vw,4rem)] font-medium leading-[1.05] tracking-vcp-display text-vcp-ink m-0 max-w-[18ch]"
+    style="font-variation-settings: 'opsz' 64"
+    set:html={title}
+  />
+
+  {lede && (
+    <p
+      class="font-display text-[20px] leading-[1.45] text-vcp-ink-2 mt-6 mb-0 max-w-[50ch] italic"
+      style="font-variation-settings: 'opsz' 20"
+    >
+      {lede}
+    </p>
+  )}
+
+  <dl class="mt-10 pt-7 border-t border-vcp-ink grid grid-cols-2 md:grid-cols-4 gap-7">
+    <div>
+      <dt class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-1.5">Status</dt>
+      <dd class={`m-0 inline-flex items-center gap-2 px-2.5 py-1 rounded-vcp-sm ${badge.bg} ${badge.ink} font-mono text-[11px] tracking-[0.06em]`}>
+        <span class={`w-1.5 h-1.5 rounded-full ${badge.dot}`} aria-hidden="true"></span>
+        {status}
+      </dd>
+    </div>
+    <div>
+      <dt class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-1.5">Last verified</dt>
+      <dd class="m-0 font-mono text-[14px] text-vcp-ink">{verified}</dd>
+    </div>
+    {compilesTo && (
+      <div>
+        <dt class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-1.5">Compiles to</dt>
+        <dd class="m-0 font-mono text-[14px] text-vcp-ink">{compilesTo}</dd>
+      </div>
+    )}
+    {referenceImpl && (
+      <div>
+        <dt class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-1.5">Reference impl.</dt>
+        <dd class="m-0 font-mono text-[14px] text-vcp-ink">{referenceImpl}</dd>
+      </div>
+    )}
+  </dl>
+</header>

@@ -2,8 +2,7 @@
 /**
  * /lexicon — Value-First Lexicon v0.1 (Layer A of the encoding stack).
  *
- * Renders staged markdown vft-lexicon-canon-v0_1.md. Sanity metadata from
- * the `lexicon-v0-1` doc when available.
+ * Spec archetype — SpecHero + spec meta grid + canon prose body.
  *
  * Note: "Value-First" spelled out per conventions.md — never "VFT" in
  * customer-facing prose. Staged markdown filename and Sanity doc ID retain
@@ -12,7 +11,7 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
+import SpecHero from '../components/SpecHero.astro';
 import Prose from '../components/Prose.astro';
 import CrossCitation from '../components/CrossCitation.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
@@ -23,8 +22,6 @@ const html = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('lexicon-v0-1');
 
 const version = meta?.version ?? 'v0.1';
-const status = meta?.status ?? 'Active';
-const effectiveDate = meta?.effectiveDate;
 ---
 
 <BaseLayout
@@ -34,20 +31,22 @@ const effectiveDate = meta?.effectiveDate;
   ogImage="og-lexicon.jpg"
   schemaType="TechArticle"
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Encoding Stack · Layer A — Lexical"
+  <PageContainer wide>
+    <SpecHero
+      eyebrow="Encoding stack · Layer A of 03"
       title="Value-First Lexicon"
       lede="The structured vocabulary of the Value-First methodology, encoded so AI systems can recognize, declare, and execute against it."
-      version={version}
-      status={status}
-      effectiveDate={effectiveDate}
+      status={`${version} · DRAFT`}
+      statusKind="draft"
+      verified="12 May 2026"
+      compilesTo="VCP-Lang (Layer B)"
+      referenceImpl="canonical · vcp.com"
     />
 
-    <nav class="mb-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-stone-600">
-      <a href="/encoding-stack" class="text-stone-700 underline">← Encoding stack overview</a>
-      <a href="/vcp-lang" class="text-stone-700 underline">Next: VCP-Lang (Layer B) →</a>
-      <a href="/value-graph" class="text-stone-700 underline">Then: Value Graph (Layer C) →</a>
+    <nav class="mb-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.06em] uppercase text-vcp-ink-3">
+      <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">← Encoding stack overview</a>
+      <a href="/vcp-lang" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Next: VCP-Lang (Layer B) →</a>
+      <a href="/value-graph" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Then: Value Graph (Layer C) →</a>
     </nav>
 
     <Prose html={html} />
