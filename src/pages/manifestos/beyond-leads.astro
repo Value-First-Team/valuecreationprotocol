@@ -1,15 +1,21 @@
 ---
 /**
- * /manifestos/beyond-leads — Beyond "Leads" Manifesto v2.
+ * /manifestos/beyond-leads — Beyond "Leads": A Manifesto for Humanized,
+ * Collaborative Growth.
  *
- * Renders staged markdown beyond_leads_manifesto_v2.md in the Manifesto.jsx
- * archetype: minimal nav, giant pull-quote hero, narrow body with loose
- * line-height and editorial drop-cap.
+ * The argument: the industrial-age vocabulary of B2B (leads, prospects,
+ * funnels, conversions, MQLs, SQLs) cannot carry an AI-native organization.
+ * The forbidden-vocab rule does not apply to manifesto prose that NAMES the
+ * terms it argues against — the prose argues with them in cited context.
+ *
+ * Body source: src/content/canon/beyond_leads_manifesto_v2.md
+ * Sanity meta: beyond-leads-manifesto-v2 (strategicDocument)
+ *
+ * Rendered through ManifestoArchetype — Phase 4 archetype, sibling to
+ * CanonArchetype + SpecArchetype.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ManifestoHero from '../../components/ManifestoHero.astro';
-import Prose from '../../components/Prose.astro';
-import Implementers from '../../components/Implementers.astro';
+import ManifestoArchetype from '../../components/ManifestoArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../../lib/markdown';
 import { getCanonDoc } from '../../lib/sanity/canon';
 
@@ -17,36 +23,49 @@ const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.beyondLeads);
 const html = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('beyond-leads-manifesto-v2');
 
-const effectiveDate = meta?.effectiveDate ?? 'February 2026';
+/* Format effectiveDate as "Month YYYY" if present. No invented date if absent. */
+let eyebrowDate: string | undefined;
+let isoDate: string | undefined;
+if (meta?.effectiveDate) {
+  isoDate = meta.effectiveDate;
+  const d = new Date(meta.effectiveDate);
+  if (!isNaN(d.getTime())) {
+    eyebrowDate = d.toLocaleString('en-US', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+  }
+}
 ---
 
 <BaseLayout
   title='Beyond "Leads"'
-  description="A manifesto for humanized, collaborative growth. The industrial-age lead vocabulary is no longer load-bearing in an AI-native era."
+  description="The industrial-age vocabulary of B2B cannot carry an AI-native organization. A manifesto for humanized, collaborative growth."
   path="/manifestos/beyond-leads"
   ogImage="og-manifestos-beyond-leads.jpg"
   schemaType="Article"
+  datePublished={isoDate}
   minimalNav
 >
-  <ManifestoHero
-    date={effectiveDate}
-    position="01 of 03"
-    pullQuote={'"Leads" is what you call a human when you have <strong>forgotten</strong> how to ask their name.'}
-    author="Value-First Team"
+  <ManifestoArchetype
+    eyebrowDate={eyebrowDate}
+    title='Beyond &ldquo;Leads&rdquo;'
+    lead="The vocabulary at the center of modern business is older than software, and it has stopped working. The math of AI-native discovery has rendered the funnel illegible — to humans and to the agents who increasingly accompany them."
+    byline="Value-First Team"
     filedUnder="Manifestos · Vocabulary"
-    citeUrl="valuecreationprotocol.com/manifestos/beyond-leads"
-    readTime="9 MIN"
-  />
+    path="/manifestos/beyond-leads"
+  >
+    <section slot="pull-quote" class="manifesto-pullquote">
+      <div class="manifesto-pullquote-inner">
+        <p class="manifesto-pullquote-body">
+          People never research alone anymore. They explore <strong>with</strong> Claude.
+          They evaluate <strong>with</strong> ChatGPT. They draft implementation plans
+          <strong>with</strong> AI assistants &mdash; all without ever entering your funnel.
+        </p>
+      </div>
+    </section>
 
-  <article class="max-w-[720px] mx-auto px-6 md:px-8 pb-32">
-    <Prose html={html} manifesto />
-
-    <nav class="mt-20 pt-10 border-t border-vcp-border flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.08em] uppercase text-vcp-ink-3">
-      <a href="/manifestos/value-led-growth" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Value-Led Growth manifesto →</a>
-      <a href="/positioning" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Positioning paper →</a>
-      <a href="/realities" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Value Realities →</a>
-    </nav>
-
-    <Implementers variant="manifesto" />
-  </article>
+    <div class="manifesto-prose" set:html={html} />
+  </ManifestoArchetype>
 </BaseLayout>

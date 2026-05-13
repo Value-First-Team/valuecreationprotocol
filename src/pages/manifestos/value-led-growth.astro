@@ -1,14 +1,17 @@
 ---
 /**
- * /manifestos/value-led-growth — Value-Led Growth Manifesto.
+ * /manifestos/value-led-growth — Value-Led Growth: A Manifesto for
+ * Organizational Transformation in the AI Era.
  *
- * Distinct from /value-led-growth (the framework canon page).
- * This is the long-form manifesto treatment in the Manifesto.jsx archetype.
+ * Distinct from /value-led-growth (the methodology canon page). This is the
+ * position piece — the argument that "growth" is reframed as what happens
+ * when value created exceeds value extracted.
+ *
+ * Body source: src/content/canon/value-led-growth-manifesto.md
+ * Sanity meta: value-led-growth-manifesto (strategicDocument)
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import ManifestoHero from '../../components/ManifestoHero.astro';
-import Prose from '../../components/Prose.astro';
-import Implementers from '../../components/Implementers.astro';
+import ManifestoArchetype from '../../components/ManifestoArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../../lib/markdown';
 import { getCanonDoc } from '../../lib/sanity/canon';
 
@@ -16,36 +19,46 @@ const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.valueLedGrowth);
 const html = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('value-led-growth-manifesto');
 
-const effectiveDate = meta?.effectiveDate ?? '2026';
+let eyebrowDate: string | undefined;
+let isoDate: string | undefined;
+if (meta?.effectiveDate) {
+  isoDate = meta.effectiveDate;
+  const d = new Date(meta.effectiveDate);
+  if (!isNaN(d.getTime())) {
+    eyebrowDate = d.toLocaleString('en-US', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+  }
+}
 ---
 
 <BaseLayout
-  title="Value-Led Growth Manifesto"
-  description="A manifesto for organizational transformation in the AI era. Growth as a consequence of value created, not a function pursued."
+  title="Value-Led Growth"
+  description="Organizational complexity has become the product. A manifesto for the transformation that turns capability, context, and intent into value created — for customers, for teams, for the business."
   path="/manifestos/value-led-growth"
   ogImage="og-manifestos-value-led-growth.jpg"
   schemaType="Article"
+  datePublished={isoDate}
   minimalNav
 >
-  <ManifestoHero
-    date={effectiveDate}
-    position="02 of 03"
-    pullQuote={'Growth is <strong>what happens</strong> when value created exceeds value extracted.'}
-    author="Value-First Team"
+  <ManifestoArchetype
+    eyebrowDate={eyebrowDate}
+    title="Value-Led Growth"
+    lead="Organizational complexity has quietly become the product — the thing that consumes resources, demands attention, and shapes every decision. Growth, properly understood, is what happens when an organization stops manufacturing complexity and starts creating value."
+    byline="Value-First Team"
     filedUnder="Manifestos · Growth"
-    citeUrl="valuecreationprotocol.com/manifestos/value-led-growth"
-    readTime="11 MIN"
-  />
+    path="/manifestos/value-led-growth"
+  >
+    <section slot="pull-quote" class="manifesto-pullquote">
+      <div class="manifesto-pullquote-inner">
+        <p class="manifesto-pullquote-body">
+          Growth is <strong>what happens</strong> when value created exceeds value extracted.
+        </p>
+      </div>
+    </section>
 
-  <article class="max-w-[720px] mx-auto px-6 md:px-8 pb-32">
-    <Prose html={html} manifesto />
-
-    <nav class="mt-20 pt-10 border-t border-vcp-border flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.08em] uppercase text-vcp-ink-3">
-      <a href="/value-led-growth" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Value-Led Growth framework canon →</a>
-      <a href="/manifestos/beyond-leads" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Beyond "Leads" manifesto →</a>
-      <a href="/positioning" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Positioning paper →</a>
-    </nav>
-
-    <Implementers variant="manifesto" />
-  </article>
+    <div class="manifesto-prose" set:html={html} />
+  </ManifestoArchetype>
 </BaseLayout>

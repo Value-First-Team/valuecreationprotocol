@@ -1,16 +1,20 @@
 ---
 /**
- * /positioning — VCP Positioning Paper.
+ * /positioning — Value Creation Protocol: A Positioning Paper.
  *
- * Manifesto archetype with a protocol-stack diagram aside — this paper sits
- * between manifesto (positional, long-form, declarative) and canon (technical
- * reference). The manifesto hero leads; the diagram surfaces inline.
+ * Locates VCP in the AI-native protocol stack alongside MCP (capability) and
+ * HCP (human context). The most cite-able single artifact for explaining the
+ * protocol's scope.
+ *
+ * Reads as manifesto-hero + canon-reference-spine + manifesto-prose-body.
+ * The protocol-stack reference aside surfaces between hero and body, because
+ * the body references the three peer protocols throughout.
+ *
+ * Body source: src/content/canon/Value-Creation-Protocol-Positioning-Paper.md
+ * Sanity meta: vcp-positioning-paper (strategicDocument)
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ManifestoHero from '../components/ManifestoHero.astro';
-import Prose from '../components/Prose.astro';
-import Diagram from '../components/Diagram.astro';
-import Implementers from '../components/Implementers.astro';
+import ManifestoArchetype from '../components/ManifestoArchetype.astro';
 import { PROTOCOL_PEERS } from '../lib/site';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
@@ -19,55 +23,71 @@ const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.positioning);
 const html = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('vcp-positioning-paper');
 
-const effectiveDate = meta?.effectiveDate ?? '2026';
+let eyebrowDate: string | undefined;
+let isoDate: string | undefined;
+if (meta?.effectiveDate) {
+  isoDate = meta.effectiveDate;
+  const d = new Date(meta.effectiveDate);
+  if (!isNaN(d.getTime())) {
+    eyebrowDate = d.toLocaleString('en-US', {
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC',
+    });
+  }
+}
 ---
 
 <BaseLayout
   title="Positioning Paper"
-  description="Where the Value Creation Protocol sits in the AI-native protocol stack — alongside MCP and HCP — and why it exists."
+  description="Where the Value Creation Protocol sits in the AI-native protocol stack — alongside MCP and HCP — and why a methodology layer exists at all."
   path="/positioning"
   ogImage="og-positioning.jpg"
-  schemaType="TechArticle"
+  schemaType="Article"
+  datePublished={isoDate}
   minimalNav
 >
-  <ManifestoHero
-    date={effectiveDate}
-    position="03 of 03"
-    pullQuote={'The protocol stack is <strong>not a hierarchy.</strong> It is a set of peers.'}
-    author="Value-First Team"
+  <ManifestoArchetype
+    eyebrowDate={eyebrowDate}
+    title="A Positioning Paper"
+    lead="Two protocols have emerged to solve the layers below value creation: MCP for capability, HCP for human context. Neither one creates value on its own. Neither one was ever supposed to. This is the layer that does."
+    byline="Value-First Team"
     filedUnder="Positioning · Protocol Stack"
-    citeUrl="valuecreationprotocol.com/positioning"
-    readTime="14 MIN"
-  />
-
-  <section class="max-w-vcp-content mx-auto px-6 md:px-8 mb-20">
-    <div class="grid lg:grid-cols-[1fr_320px] gap-12 items-start">
-      <div class="rounded-vcp-lg border border-vcp-border bg-vcp-paper p-6">
-        <Diagram
-          name="protocol-stack"
-          alt="Protocol stack: MCP (capability), HCP (human context), VCP (methodology)"
-          caption="Capability, context, methodology — read bottom-up."
-        />
+    path="/positioning"
+  >
+    <section slot="aside" class="manifesto-aside" aria-label="The protocol stack">
+      <div class="manifesto-aside-inner">
+        <div class="manifesto-aside-grid">
+          <figure class="manifesto-aside-figure">
+            <img
+              src="/diagrams/protocol-stack.svg"
+              alt="Protocol stack diagram: MCP for capability, HCP for human context, VCP for methodology — three peer protocols read bottom-up."
+              loading="lazy"
+            />
+          </figure>
+          <aside class="manifesto-aside-card">
+            <p class="manifesto-aside-card-eyebrow">The Stack</p>
+            <p class="manifesto-aside-card-body">
+              VCP sits atop{' '}
+              <a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer">{PROTOCOL_PEERS.mcp.short}</a>{' '}
+              ({PROTOCOL_PEERS.mcp.role}) and{' '}
+              <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer">{PROTOCOL_PEERS.hcp.short}</a>{' '}
+              ({PROTOCOL_PEERS.hcp.role}). Each layer is independent;
+              together they form the substrate for AI-native operations.
+            </p>
+          </aside>
+        </div>
       </div>
-      <aside class="rounded-vcp-lg border border-vcp-border-strong bg-vcp-surface-2 p-7">
-        <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-3 m-0 mb-3">
-          THE STACK
-        </p>
-        <p class="font-display text-[16px] leading-[1.55] text-vcp-ink m-0" style="font-variation-settings: 'opsz' 18">
-          VCP sits atop{' '}
-          <a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">{PROTOCOL_PEERS.mcp.short}</a>{' '}
-          (capability) and{' '}
-          <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">{PROTOCOL_PEERS.hcp.short}</a>{' '}
-          (human context). Each layer is independent; together they form the substrate
-          for AI-native operations.
-        </p>
-      </aside>
-    </div>
-  </section>
+    </section>
 
-  <article class="max-w-[720px] mx-auto px-6 md:px-8 pb-32">
-    <Prose html={html} manifesto />
+    <section slot="pull-quote" class="manifesto-pullquote">
+      <div class="manifesto-pullquote-inner">
+        <p class="manifesto-pullquote-body">
+          The protocol stack is <strong>not a hierarchy.</strong> It is a set of peers.
+        </p>
+      </div>
+    </section>
 
-    <Implementers variant="manifesto" />
-  </article>
+    <div class="manifesto-prose" set:html={html} />
+  </ManifestoArchetype>
 </BaseLayout>

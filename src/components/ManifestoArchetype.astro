@@ -1,0 +1,586 @@
+---
+/**
+ * ManifestoArchetype — shared shell for the three manifesto pages on vcp.com:
+ *   /manifestos/beyond-leads, /manifestos/value-led-growth, /positioning.
+ *
+ * Sibling to CanonArchetype + SpecArchetype. The manifesto archetype is the
+ * firm's strongest opinion artifact — typographically ambitious, generously
+ * spaced, written to be cited.
+ *
+ * Distinctions from the canon archetype:
+ *   - Larger display heading (var(--vcp-fs-display-xl), 56–104px).
+ *   - No spec-meta strip. Eyebrow date is the only wayfinding above body.
+ *   - Narrower body column (var(--vcp-max-narrow), 56ch) at looser line-height
+ *     (var(--vcp-lh-loose), 1.75) — read deeper, not wider.
+ *   - Larger drop-cap on first paragraph.
+ *   - Full-bleed pull-quote slot, opt-in, Newsreader italic at opsz 60.
+ *   - Cite line near page bottom — manifestos are citation artifacts.
+ *   - Implementer attribution band (same component pattern as canon/spec).
+ *   - No CrossCitation — manifesto slugs in CROSS_CITATIONS map to peerSlug: null.
+ *
+ * Anatomy (top → bottom):
+ *
+ *   1. Hero block (above the fold)
+ *      - Eyebrow: "A MANIFESTO · {date} · VALUECREATIONPROTOCOL.COM"
+ *        — Geist Mono, teal-deep, with hairline ink rule.
+ *      - Display heading: Newsreader, opsz 72, weight 500, line-height 1.05.
+ *      - Optional lead paragraph: Newsreader italic, size lead, ink-2.
+ *      - Optional byline strip: BY / FILED UNDER / CITE — mono, ink-3.
+ *
+ *   2. Optional <slot name="aside"> — sits between hero and body.
+ *      Used by /positioning to embed the protocol-stack diagram reference.
+ *
+ *   3. Optional <slot name="pull-quote"> — full-bleed pull-quote moment.
+ *      One per manifesto. Newsreader italic, opsz 60, hairline rules above + below.
+ *
+ *   4. <slot> — the body. Apply .manifesto-prose to the inner wrapper, which
+ *      renders the markdown HTML at 56ch / lh 1.75 with drop-cap.
+ *
+ *   5. Cite line — mono row near page bottom, the citation moment.
+ *
+ *   6. Implementer attribution band — dark surface, single sentence, single link.
+ *
+ * Voice: direct, warm, confident, philosophical when warranted. The manifesto
+ * is opinionated without being theatrical.
+ */
+import { SITE } from '../lib/site';
+
+export interface Props {
+  /**
+   * Eyebrow date — typically a "Month YYYY" string sourced from the Sanity
+   * record's effectiveDate. Omit (or pass undefined) to suppress the date
+   * segment of the eyebrow entirely (no invented dates).
+   */
+  eyebrowDate?: string;
+  /** Display heading — the manifesto's title. Supports HTML for emphasis. */
+  title: string;
+  /** Optional lead paragraph below the title. One paragraph, italic-set. */
+  lead?: string;
+  /** Optional byline row — typically "BY Value-First Team". */
+  byline?: string;
+  /** Optional filed-under row — e.g. "Manifestos · Vocabulary". */
+  filedUnder?: string;
+  /** Path on vcp.com (e.g. "/manifestos/beyond-leads"). Used in cite line. */
+  path: string;
+}
+
+const { eyebrowDate, title, lead, byline, filedUnder, path } = Astro.props;
+
+/* Eyebrow construction — segments only render if their data exists. */
+const eyebrowParts: string[] = ['A Manifesto'];
+if (eyebrowDate) eyebrowParts.push(eyebrowDate);
+eyebrowParts.push('valuecreationprotocol.com');
+const eyebrowText = eyebrowParts.join(' · ').toUpperCase();
+
+/* Cite URL — strip protocol for display, keep clean. */
+const citeUrl = `valuecreationprotocol.com${path}`;
+---
+
+<article class="manifesto">
+  <header class="manifesto-hero">
+    <div class="manifesto-hero-inner">
+      <p class="manifesto-eyebrow">
+        <span>{eyebrowText}</span>
+        <span class="manifesto-eyebrow-rule" aria-hidden="true"></span>
+      </p>
+      <h1 class="manifesto-display" set:html={title} />
+      {lead && <p class="manifesto-lead">{lead}</p>}
+      {(byline || filedUnder) && (
+        <div class="manifesto-byline">
+          {byline && (
+            <span class="manifesto-byline-row">
+              <span class="manifesto-byline-label">By</span>
+              <span class="manifesto-byline-value">{byline}</span>
+            </span>
+          )}
+          {filedUnder && (
+            <span class="manifesto-byline-row">
+              <span class="manifesto-byline-label">Filed under</span>
+              <span class="manifesto-byline-value">{filedUnder}</span>
+            </span>
+          )}
+        </div>
+      )}
+    </div>
+  </header>
+
+  <slot name="aside" />
+
+  <slot name="pull-quote" />
+
+  <div class="manifesto-body">
+    <div class="manifesto-body-inner">
+      <slot />
+    </div>
+  </div>
+
+  <section class="manifesto-cite" aria-label="Citation">
+    <div class="manifesto-cite-inner">
+      <span class="manifesto-cite-label">Cite</span>
+      <span class="manifesto-cite-url">{citeUrl}</span>
+    </div>
+  </section>
+
+  <section class="manifesto-impl">
+    <div class="manifesto-impl-inner">
+      <p class="manifesto-impl-eyebrow">Protocol home</p>
+      <p class="manifesto-impl-body">
+        VCP is originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="manifesto-impl-link">Value-First Team</a>.
+        The manifestos are published openly; anyone may read, cite, and operate the protocol independently of firm engagement.
+      </p>
+    </div>
+  </section>
+</article>
+
+<style is:global>
+  /* ============================================================
+     Manifesto Archetype — long-form opinion page shell.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     Typographically more ambitious than canon — larger display,
+     narrower column, looser line-height, drop-cap with more presence,
+     full-bleed pull-quote moment.
+     ============================================================ */
+
+  .manifesto { display: block; }
+
+  /* ============= Hero ============= */
+  .manifesto-hero {
+    border-bottom: 1px solid var(--vcp-border);
+    background: var(--vcp-surface);
+  }
+  .manifesto-hero-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 4rem;
+  }
+  @media (min-width: 768px) {
+    .manifesto-hero-inner { padding: 6.5rem 1.5rem 5rem; }
+  }
+
+  .manifesto-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0 0 2.25rem;
+  }
+  .manifesto-eyebrow-rule {
+    height: 1px;
+    width: 88px;
+    background: var(--vcp-ink);
+    display: inline-block;
+  }
+
+  .manifesto-display {
+    font-family: var(--vcp-font-display);
+    font-size: var(--vcp-fs-display-xl);
+    font-weight: 500;
+    line-height: var(--vcp-lh-tight);
+    letter-spacing: -0.018em;
+    color: var(--vcp-ink);
+    margin: 0;
+    max-width: 18ch;
+    font-variation-settings: "opsz" 72;
+  }
+
+  .manifesto-lead {
+    font-family: var(--vcp-font-display);
+    font-style: italic;
+    font-size: 1.4375rem;
+    line-height: 1.5;
+    color: var(--vcp-ink-2);
+    margin: 2.25rem 0 0;
+    max-width: 56ch;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .manifesto-byline {
+    margin: 3rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid var(--vcp-border);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+  }
+  .manifesto-byline-row {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.65rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  .manifesto-byline-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+  }
+  .manifesto-byline-value {
+    color: var(--vcp-ink);
+    font-weight: 500;
+  }
+
+  /* ============= Optional aside slot (e.g. positioning paper diagram) ============= */
+  .manifesto-aside {
+    background: var(--vcp-surface);
+    border-bottom: 1px solid var(--vcp-border);
+  }
+  .manifesto-aside-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .manifesto-aside-inner { padding: 4rem 1.5rem; }
+  }
+  .manifesto-aside-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .manifesto-aside-grid {
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+    }
+  }
+  .manifesto-aside-figure {
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    padding: 1.5rem;
+  }
+  .manifesto-aside-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .manifesto-aside-card {
+    border: 1px solid var(--vcp-border-strong);
+    background: var(--vcp-surface-2);
+    border-radius: var(--vcp-r-lg);
+    padding: 1.75rem;
+  }
+  .manifesto-aside-card-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.85rem;
+    font-weight: 500;
+  }
+  .manifesto-aside-card-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 18;
+  }
+  .manifesto-aside-card-body a {
+    color: var(--vcp-teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal-deep);
+  }
+  .manifesto-aside-card-body a:hover {
+    color: var(--vcp-link-hover);
+    border-bottom-color: var(--vcp-link-hover);
+  }
+
+  /* ============= Pull-quote slot — the manifesto's microphone moment ============= */
+  .manifesto-pullquote {
+    background: var(--vcp-surface);
+    border-top: 1px solid var(--vcp-teal-deep);
+    border-bottom: 1px solid var(--vcp-teal-deep);
+    margin: 0;
+  }
+  .manifesto-pullquote-inner {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .manifesto-pullquote-inner { padding: 5rem 2.5rem; }
+  }
+  .manifesto-pullquote-body {
+    font-family: var(--vcp-font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 60;
+  }
+  .manifesto-pullquote-body strong {
+    font-weight: 500;
+    color: var(--vcp-teal-deep);
+    font-style: italic;
+  }
+
+  /* ============= Body ============= */
+  .manifesto-body {
+    background: var(--vcp-surface);
+  }
+  .manifesto-body-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 5rem;
+  }
+  @media (min-width: 768px) {
+    .manifesto-body-inner { padding: 6rem 1.5rem 6.5rem; }
+  }
+
+  /* ============= Manifesto prose =============
+     Narrower column than canon (56ch vs 68ch). Looser line-height (1.75
+     vs 1.65). Bigger drop-cap. Italic emphasis carries more weight. */
+  .manifesto-prose {
+    max-width: var(--vcp-max-narrow);
+    margin: 0 auto;
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: var(--vcp-lh-loose);
+    color: var(--vcp-ink);
+    font-variation-settings: "opsz" 21;
+  }
+  .manifesto-prose > * + * { margin-top: 1.3em; }
+  .manifesto-prose > p { margin: 0 0 1.3em; }
+
+  /* Generous drop-cap on first paragraph. */
+  .manifesto-prose > p:first-of-type::first-letter {
+    font-family: var(--vcp-font-display);
+    float: left;
+    font-size: 6em;
+    line-height: 0.86;
+    margin: 0.05em 0.1em 0 -0.04em;
+    font-weight: 500;
+    color: var(--vcp-teal-deep);
+    font-variation-settings: "opsz" 72;
+  }
+
+  /* Section H2 — Newsreader display, hairline rule above. */
+  .manifesto-prose h2 {
+    font-family: var(--vcp-font-display);
+    font-size: 1.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin-top: 3em;
+    margin-bottom: 0.6em;
+    font-variation-settings: "opsz" 30;
+    position: relative;
+    padding-top: 1.5rem;
+  }
+  .manifesto-prose h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+
+  /* Section H3 — Geist, semibold. */
+  .manifesto-prose h3 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--vcp-ink);
+    margin-top: 2.2em;
+    margin-bottom: 0.55em;
+    letter-spacing: -0.005em;
+  }
+  .manifesto-prose h4 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--vcp-ink);
+    margin-top: 1.8em;
+    margin-bottom: 0.45em;
+  }
+
+  /* Paragraph + list. */
+  .manifesto-prose p,
+  .manifesto-prose li {
+    font-size: 1.1875rem;
+    line-height: var(--vcp-lh-loose);
+  }
+  .manifesto-prose ul,
+  .manifesto-prose ol {
+    padding-left: 1.4em;
+  }
+  .manifesto-prose li + li { margin-top: 0.55em; }
+  .manifesto-prose strong {
+    color: var(--vcp-ink);
+    font-weight: 600;
+  }
+  /* Italic emphasis carries more weight here — uses Newsreader italic
+     (already loaded by BaseLayout). */
+  .manifesto-prose em {
+    font-style: italic;
+    color: var(--vcp-ink);
+  }
+
+  /* Links. */
+  .manifesto-prose a {
+    color: var(--vcp-teal-deep);
+    text-decoration-color: rgba(13, 148, 136, 0.32);
+    text-underline-offset: 3px;
+  }
+  .manifesto-prose a:hover { color: var(--vcp-link-hover); }
+
+  /* Inline code — used sparingly in manifestos. */
+  .manifesto-prose code {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.92em;
+    background: var(--vcp-surface-2);
+    padding: 0.12em 0.4em;
+    border-radius: var(--vcp-r-xs);
+    color: var(--vcp-ink);
+  }
+  .manifesto-prose pre {
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    padding: 1.25rem 1.4rem;
+    border-radius: var(--vcp-r-md);
+    overflow-x: auto;
+    line-height: 1.55;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    margin: 1.8em 0;
+  }
+  .manifesto-prose pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  /* Inline blockquote — smaller than the full-bleed pull-quote.
+     Used for embedded callouts inside body prose. */
+  .manifesto-prose blockquote {
+    margin: 2em 0;
+    padding: 0.5em 0 0.5em 1.6em;
+    border-left: 2px solid var(--vcp-teal-deep);
+    color: var(--vcp-ink);
+    font-style: italic;
+    font-size: 1.25rem;
+    line-height: 1.55;
+    font-variation-settings: "opsz" 24;
+  }
+  .manifesto-prose blockquote p { margin: 0; }
+  .manifesto-prose blockquote p + p { margin-top: 0.7em; }
+
+  .manifesto-prose hr {
+    border: 0;
+    border-top: 1px solid var(--vcp-border);
+    margin: 2.6em 0;
+  }
+
+  /* Tables — rare in manifestos but render cleanly if present. */
+  .manifesto-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin: 1.8em 0;
+    font-family: var(--vcp-font-body);
+  }
+  .manifesto-prose th,
+  .manifesto-prose td {
+    text-align: left;
+    padding: 0.65em 0.9em;
+    border-bottom: 1px solid var(--vcp-border);
+    vertical-align: top;
+  }
+  .manifesto-prose th {
+    background: var(--vcp-surface-2);
+    font-weight: 600;
+    color: var(--vcp-ink);
+  }
+
+  /* ============= Cite line ============= */
+  .manifesto-cite {
+    background: var(--vcp-surface-2);
+    border-top: 1px solid var(--vcp-border);
+  }
+  .manifesto-cite-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 1.5rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+  }
+  .manifesto-cite-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    font-weight: 500;
+  }
+  .manifesto-cite-url {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    color: var(--vcp-ink);
+    word-break: break-word;
+  }
+
+  /* ============= Implementer band ============= */
+  .manifesto-impl {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+  }
+  .manifesto-impl-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+  }
+  .manifesto-impl-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal);
+    margin: 0 0 1rem;
+  }
+  .manifesto-impl-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--vcp-surface);
+    max-width: 62ch;
+    margin: 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .manifesto-impl-link {
+    color: var(--vcp-teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal);
+  }
+  .manifesto-impl-link:hover {
+    color: var(--vcp-d-teal);
+    border-bottom-color: var(--vcp-d-teal);
+  }
+</style>
