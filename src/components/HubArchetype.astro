@@ -1,0 +1,721 @@
+---
+/**
+ * HubArchetype — shared shell for the four hub pages on vcp.com:
+ *   /methodology, /manifestos, /protocol-stack, /engagement.
+ *
+ * Sibling to CanonArchetype, SpecArchetype, ManifestoArchetype.
+ * The hub archetype is the *lightest* of the four — hub pages are
+ * wayfinding surfaces, not destinations. The reader is choosing where
+ * to read, not yet reading. The hero's visual budget should not outweigh
+ * the canon pages it indexes.
+ *
+ * Distinctions from siblings:
+ *   - Smaller display heading (opsz 48, similar to spec). Hub heroes never
+ *     reach manifesto's display-xl scale.
+ *   - No spec-meta strip. No cite line. No drop-cap. No CrossCitation.
+ *   - Single editorial gesture: the hairline-marked eyebrow.
+ *   - Body is a card grid (or grouped card grid) — provided via <slot/>.
+ *   - Implementer attribution band closes the page (same as siblings).
+ *
+ * Anatomy (top → bottom):
+ *
+ *   1. Hero block (above the fold)
+ *      - Eyebrow: e.g. "§ METHODOLOGY · INDEX OF 12" (mono caps, teal-deep,
+ *        with hairline ink rule).
+ *      - Display heading: Newsreader, opsz 48, weight 500 — lighter than canon.
+ *      - Lead paragraph: one paragraph, declarative — states what this hub is
+ *        and what the reader is choosing between.
+ *
+ *   2. <slot> — body. The card grid lives here. Helper card styles are
+ *      provided as utility classes (hub-grid, hub-group, hub-group-label,
+ *      hub-card, hub-card-eyebrow, hub-card-title, hub-card-body,
+ *      hub-card-meta, hub-card-foot) — pages can compose them.
+ *
+ *   3. Implementer attribution band — same component pattern as canon/spec/
+ *      manifesto. Single sentence, single link.
+ *
+ * Voice: direct, warm, confident, practical. Hubs are organizers — be
+ * confident about the organization. Card descriptions lead with the
+ * value of the destination, not the destination's structural fact.
+ */
+import { SITE } from '../lib/site';
+
+export interface Props {
+  /**
+   * Eyebrow text. Mono caps. Hairline rule appended automatically.
+   * Examples: "§ METHODOLOGY · INDEX OF 12", "§ MANIFESTOS",
+   * "§ THE PROTOCOL STACK", "§ ENGAGEMENT".
+   */
+  eyebrow: string;
+  /** Display heading — the hub's name. Supports HTML for emphasis. */
+  title: string;
+  /** Lead paragraph below the title. One paragraph. */
+  lead: string;
+}
+
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<article class="hub">
+  <header class="hub-hero">
+    <div class="hub-hero-inner">
+      <p class="hub-eyebrow">
+        <span>{eyebrow}</span>
+        <span class="hub-eyebrow-rule" aria-hidden="true"></span>
+      </p>
+      <h1 class="hub-display" set:html={title} />
+      <p class="hub-lead">{lead}</p>
+    </div>
+  </header>
+
+  <div class="hub-body">
+    <div class="hub-body-inner">
+      <slot />
+    </div>
+  </div>
+
+  <section class="hub-impl">
+    <div class="hub-impl-inner">
+      <p class="hub-impl-eyebrow">Protocol home</p>
+      <p class="hub-impl-body">
+        VCP is originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hub-impl-link">Value-First Team</a>.
+        Anyone may read, cite, and operate the protocol independently of firm engagement.
+      </p>
+    </div>
+  </section>
+</article>
+
+<style is:global>
+  /* ============================================================
+     Hub Archetype — wayfinding page shell.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     The lightest of the four archetypes — the hero gives way to the
+     index. Cards do the work.
+     ============================================================ */
+
+  .hub { display: block; }
+
+  /* ============= Hero ============= */
+  .hub-hero {
+    border-bottom: 1px solid var(--vcp-border);
+    background: var(--vcp-surface);
+  }
+  .hub-hero-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 3rem;
+  }
+  @media (min-width: 768px) {
+    .hub-hero-inner { padding: 5rem 1.5rem 3.5rem; }
+  }
+
+  .hub-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+  }
+  .hub-eyebrow-rule {
+    height: 1px;
+    width: 88px;
+    background: var(--vcp-ink);
+    display: inline-block;
+  }
+
+  /* Hub display — smaller than canon (clamp 2.5..4.25rem) and much smaller
+     than manifesto (clamp 3.5..6.5rem). Sits at opsz 48. */
+  .hub-display {
+    font-family: var(--vcp-font-display);
+    font-size: clamp(2.25rem, 5vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    max-width: 22ch;
+    font-variation-settings: "opsz" 48;
+  }
+
+  .hub-lead {
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 1.5rem 0 0;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 20;
+  }
+
+  /* ============= Body ============= */
+  .hub-body {
+    background: var(--vcp-surface);
+  }
+  .hub-body-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 5rem;
+  }
+  @media (min-width: 768px) {
+    .hub-body-inner { padding: 4rem 1.5rem 6rem; }
+  }
+
+  /* ============= Hub grid =============
+     One-column on small, two on medium, three on wide for compact card sets.
+     Pages with 4 pathway cards or 3 protocol cards can override columns. */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 640px) {
+    .hub-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .hub-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.75rem; }
+  }
+  /* Variant: 2-up. Used by /manifestos (3 cards stacked wide). */
+  .hub-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .hub-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  /* Variant: pathway 2x2 used by /engagement. */
+  .hub-grid-pathways {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .hub-grid-pathways { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  /* ============= Group =============
+     Used by /methodology to split 12 canon cards into thematic sets.
+     Each group has a hairline-marked label + optional note + its own grid. */
+  .hub-group {
+    margin: 0;
+    padding: 0;
+  }
+  .hub-group + .hub-group {
+    margin-top: 3.5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .hub-group-label {
+    margin: 0 0 0.5rem;
+    padding-top: 1.25rem;
+    position: relative;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+  }
+  .hub-group-label::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+  .hub-group-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--vcp-ink);
+    line-height: 1.25;
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 24;
+  }
+  .hub-group-note {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    color: var(--vcp-ink-3);
+    margin: 0 0 2rem;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 17;
+  }
+
+  /* ============= Card =============
+     The unit of a hub. Hairline border, paper background, hover lifts
+     border to teal-deep and tint to teal-soft. Min-height keeps the grid
+     even when descriptions vary. */
+  .hub-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.75rem 1.85rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--vcp-t-base), background-color var(--vcp-t-base), transform var(--vcp-t-base);
+    min-height: 12rem;
+  }
+  .hub-card:hover {
+    border-color: var(--vcp-teal-deep);
+    background: var(--vcp-teal-soft);
+    transform: translateY(-2px);
+  }
+  .hub-card:focus-visible {
+    outline: 2px solid var(--vcp-teal-deep);
+    outline-offset: 2px;
+  }
+
+  .hub-card-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .hub-card-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.008em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 22;
+  }
+  @media (min-width: 768px) {
+    .hub-card-title {
+      font-size: 1.5rem;
+      font-variation-settings: "opsz" 24;
+    }
+  }
+
+  .hub-card-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    font-variation-settings: "opsz" 17;
+  }
+  .hub-card:hover .hub-card-body {
+    color: var(--vcp-teal-ink);
+  }
+
+  .hub-card-foot {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--vcp-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .hub-card:hover .hub-card-foot {
+    border-top-color: var(--vcp-teal-deep);
+  }
+  .hub-card-meta {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+  }
+  .hub-card:hover .hub-card-meta {
+    color: var(--vcp-teal-deep);
+  }
+  .hub-card-arrow {
+    font-size: 1.125rem;
+    color: var(--vcp-teal-deep);
+    line-height: 1;
+  }
+
+  /* Pull-quote excerpt — used by /manifestos cards to surface the strongest line. */
+  .hub-card-quote {
+    font-family: var(--vcp-font-display);
+    font-style: italic;
+    font-size: 1.125rem;
+    line-height: 1.4;
+    color: var(--vcp-ink);
+    margin: 0;
+    padding: 0.5rem 0 0.5rem 1.1rem;
+    border-left: 2px solid var(--vcp-teal-deep);
+    font-variation-settings: "opsz" 20;
+  }
+
+  /* ============= Protocol-card variants =============
+     Used by /protocol-stack. Same base as .hub-card with an identity band
+     (mark + id) on top. Identity colors are hooked per-protocol. */
+  .hub-protocol {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--vcp-t-base), transform var(--vcp-t-base);
+    min-height: 17rem;
+  }
+  .hub-protocol:hover {
+    border-color: var(--vcp-border-strong);
+    transform: translateY(-2px);
+  }
+  .hub-protocol-band {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+  }
+  .hub-protocol-mark {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
+  .hub-protocol-id {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .hub-protocol-mcp .hub-protocol-band { background: var(--mcp-orange-soft); }
+  .hub-protocol-mcp .hub-protocol-id { color: var(--mcp-orange-deep); }
+  .hub-protocol-vcp .hub-protocol-band { background: var(--vcp-teal-soft); }
+  .hub-protocol-vcp .hub-protocol-id { color: var(--vcp-teal-deep); }
+  .hub-protocol-hcp .hub-protocol-band { background: var(--hcp-blue-soft); }
+  .hub-protocol-hcp .hub-protocol-id { color: var(--hcp-blue-deep); }
+
+  .hub-protocol-body {
+    padding: 1.5rem 1.75rem 1.75rem;
+    border-top: 1px solid var(--vcp-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+  }
+  .hub-protocol-name {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.25;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 22;
+  }
+  .hub-protocol-scope {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    font-variation-settings: "opsz" 17;
+  }
+  .hub-protocol-meta {
+    margin: 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--vcp-border);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  @media (min-width: 480px) {
+    .hub-protocol-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .hub-protocol-meta-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .hub-protocol-meta-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+  }
+  .hub-protocol-meta-value {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.8125rem;
+    color: var(--vcp-ink);
+    word-break: break-word;
+  }
+  .hub-protocol-foot {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .hub-protocol-link {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-teal-deep);
+  }
+
+  /* ============= Aside diagram frame =============
+     Used by /protocol-stack to surface the protocol-stack.svg under the
+     three cards as a single editorial figure. */
+  .hub-figure {
+    margin: 3.5rem 0 0;
+  }
+  .hub-figure-frame {
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    padding: 1.75rem;
+  }
+  .hub-figure-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+    max-width: 880px;
+  }
+  .hub-figure-caption {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-ink-3);
+    margin: 1rem 0 0;
+    text-align: center;
+  }
+
+  /* ============= Pathway card variants =============
+     Used by /engagement. Larger, more declarative, ordered list semantics.
+     The fourth card (Reach) is the inverted variant. */
+  .hub-pathway {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 2rem 1.75rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    transition: border-color var(--vcp-t-base), background-color var(--vcp-t-base), transform var(--vcp-t-base);
+    min-height: 18rem;
+  }
+  .hub-pathway:hover {
+    border-color: var(--vcp-teal-deep);
+    transform: translateY(-2px);
+  }
+  .hub-pathway-head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+  }
+  .hub-pathway-num {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+  }
+  .hub-pathway-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 28;
+  }
+  .hub-pathway-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    font-variation-settings: "opsz" 19;
+  }
+  .hub-pathway-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .hub-pathway-list li {
+    margin: 0;
+  }
+  .hub-pathway-list a {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    text-decoration: none;
+    padding: 0.2rem 0;
+    transition: color var(--vcp-t-fast);
+  }
+  .hub-pathway-list a:hover {
+    color: var(--vcp-ink);
+  }
+  .hub-pathway-list a::before {
+    content: "→";
+    color: var(--vcp-teal-deep);
+  }
+  .hub-pathway-note {
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid var(--vcp-border);
+    font-family: var(--vcp-font-display);
+    font-style: italic;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--vcp-ink-3);
+    font-variation-settings: "opsz" 16;
+  }
+
+  /* Inverted pathway — for "Reach the implementer". Ink surface, teal accent. */
+  .hub-pathway-invert {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+    border-color: var(--vcp-ink);
+  }
+  .hub-pathway-invert:hover {
+    border-color: var(--vcp-teal);
+    background: var(--vcp-ink);
+    transform: translateY(-2px);
+  }
+  .hub-pathway-invert .hub-pathway-num { color: var(--vcp-teal); }
+  .hub-pathway-invert .hub-pathway-title { color: var(--vcp-surface); }
+  .hub-pathway-invert .hub-pathway-body { color: var(--vcp-surface); opacity: 0.92; }
+  .hub-pathway-invert .hub-pathway-note {
+    color: var(--vcp-surface);
+    opacity: 0.7;
+    border-top-color: rgba(255, 255, 255, 0.18);
+  }
+  .hub-pathway-invert .hub-pathway-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.1rem;
+    background: var(--vcp-surface);
+    color: var(--vcp-ink);
+    border-radius: var(--vcp-r-md);
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color var(--vcp-t-fast), color var(--vcp-t-fast);
+    min-height: 2.75rem;
+    align-self: flex-start;
+  }
+  .hub-pathway-invert .hub-pathway-cta:hover {
+    background: var(--vcp-teal);
+    color: var(--vcp-ink);
+  }
+
+  /* ============= Attribution band =============
+     Used by /engagement only — sits between the pathway grid and the
+     standard implementer band. The firm makes its quiet case here. */
+  .hub-attribution {
+    margin: 4rem 0 0;
+    padding: 2.25rem 0 0;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .hub-attribution-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.85rem;
+    font-weight: 500;
+  }
+  .hub-attribution-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0 0 1rem;
+    max-width: 30ch;
+    font-variation-settings: "opsz" 28;
+  }
+  .hub-attribution-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    max-width: 64ch;
+    font-variation-settings: "opsz" 19;
+  }
+  .hub-attribution-body a {
+    color: var(--vcp-teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal-deep);
+  }
+  .hub-attribution-body a:hover {
+    color: var(--vcp-link-hover);
+    border-bottom-color: var(--vcp-link-hover);
+  }
+
+  /* ============= Implementer band ============= */
+  .hub-impl {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+  }
+  .hub-impl-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+  }
+  .hub-impl-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal);
+    margin: 0 0 1rem;
+  }
+  .hub-impl-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--vcp-surface);
+    max-width: 60ch;
+    margin: 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .hub-impl-link {
+    color: var(--vcp-teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal);
+  }
+  .hub-impl-link:hover {
+    color: var(--vcp-d-teal);
+    border-bottom-color: var(--vcp-d-teal);
+  }
+</style>
