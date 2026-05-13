@@ -2,49 +2,158 @@
 /**
  * /methodology — Methodology hub.
  *
- * Hub archetype — chrome + PageHeader hero, then a card grid of the
- * twelve canon pages.
+ * Hub archetype, Phase 5. Indexes the twelve canon pages in five thematic
+ * groups so the reader picks where to start instead of scrolling a flat
+ * twelve-cell grid.
+ *
+ * Groupings (Showcase judgment, 2026-05-13):
+ *   1. Operating principles — Five Core Beliefs, Twelve Complexity Traps
+ *   2. Frameworks            — Value Path, Three-Org Model, Four Unified Views
+ *   3. Patterns              — Value Loop, TEACH, Value Realities
+ *   4. Programs              — AI-Native Shift, Value-Led Growth
+ *   5. Implementation        — HubSpot as CVP, CVP vs VCP
+ *
+ * Each card sources eyebrow / title / summary from METHODOLOGY_PAGES in
+ * lib/site.ts. No new data layer; the existing config is the single source
+ * of truth for canon ordering. Card hrefs match canonical slugs.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageContainer from '../../components/PageContainer.astro';
-import PageHeader from '../../components/PageHeader.astro';
-import { METHODOLOGY_PAGES } from '../../lib/site';
+import HubArchetype from '../../components/HubArchetype.astro';
+import { METHODOLOGY_PAGES, SITE } from '../../lib/site';
+
+type Slug =
+  | '/beliefs' | '/twelve-traps'
+  | '/value-path' | '/three-orgs' | '/unified-views'
+  | '/value-loop' | '/teach' | '/realities'
+  | '/ai-native-shift' | '/value-led-growth'
+  | '/hubspot-cvp' | '/cvp-vs-vcp';
+
+interface Group {
+  label: string;       // "§ 01 · Operating principles"
+  title: string;       // "Operating principles"
+  note: string;        // one-line framing
+  slugs: Slug[];
+  meta?: Partial<Record<Slug, string>>;  // optional small mono caption per card
+}
+
+const GROUPS: Group[] = [
+  {
+    label: '§ 01 · Operating principles',
+    title: 'Operating principles',
+    note: 'The philosophical foundation. Read these first; everything else assumes them.',
+    slugs: ['/beliefs', '/twelve-traps'],
+    meta: {
+      '/beliefs': '5 beliefs',
+      '/twelve-traps': '12 traps',
+    },
+  },
+  {
+    label: '§ 02 · Frameworks',
+    title: 'Frameworks',
+    note: 'The structural models the protocol encodes — relationships, organizations, visibility.',
+    slugs: ['/value-path', '/three-orgs', '/unified-views'],
+    meta: {
+      '/value-path': '8 stages',
+      '/three-orgs': '3 orgs',
+      '/unified-views': '4 views',
+    },
+  },
+  {
+    label: '§ 03 · Patterns',
+    title: 'Patterns',
+    note: 'The operating loops and values that turn the frameworks into daily practice.',
+    slugs: ['/value-loop', '/teach', '/realities'],
+    meta: {
+      '/value-loop': '4 stages',
+      '/teach': '5 values',
+      '/realities': '15 realities',
+    },
+  },
+  {
+    label: '§ 04 · Programs',
+    title: 'Programs',
+    note: 'Two named programs that shape how organizations grow and how teams transform.',
+    slugs: ['/ai-native-shift', '/value-led-growth'],
+    meta: {
+      '/ai-native-shift': 'transformation',
+      '/value-led-growth': 'growth',
+    },
+  },
+  {
+    label: '§ 05 · Implementation',
+    title: 'Implementation',
+    note: 'Where the protocol meets the substrate — and how to keep them straight.',
+    slugs: ['/hubspot-cvp', '/cvp-vs-vcp'],
+    meta: {
+      '/hubspot-cvp': 'substrate',
+      '/cvp-vs-vcp': 'disambiguation',
+    },
+  },
+];
+
+// Build slug → page lookup from METHODOLOGY_PAGES so card content stays
+// in one source of truth.
+const PAGE_BY_SLUG = Object.fromEntries(
+  METHODOLOGY_PAGES.map((p) => [p.href, p])
+);
+
+// Schema.org ItemList of canon pages — discoverability for the canon set.
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Methodology Canon',
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: METHODOLOGY_PAGES.length,
+  itemListElement: METHODOLOGY_PAGES.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: p.label,
+    url: `${SITE.url}${p.href}`,
+  })),
+};
 ---
 
 <BaseLayout
   title="Methodology Canon"
-  description="The full methodology canon — twelve pages covering the frameworks VCP encodes."
+  description="The methodology canon. Twelve pages indexing the operating principles, frameworks, patterns, programs, and implementation guidance the Value Creation Protocol encodes."
   path="/methodology"
-  ogImage="og-default.jpg"
+  ogImage="og-methodology.jpg"
   schemaType="CollectionPage"
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Methodology canon · Index of 12"
-      title="Methodology Canon"
-      lede="The frameworks VCP encodes. Each page is a canonical reference — built over years of practice, now machine-readable through the encoding stack."
-    />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListLd)} />
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-      {METHODOLOGY_PAGES.map((m, i) => (
-        <a
-          href={m.href}
-          class="group block p-6 md:p-7 rounded-vcp-lg border border-vcp-border bg-vcp-paper hover:border-vcp-ink hover:-translate-y-0.5 transition-all duration-200 no-underline text-inherit"
-        >
-          <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep block mb-3">
-            CHAPTER {String(i + 1).padStart(2, '0')}
-          </span>
-          <h2
-            class="font-display text-[20px] md:text-[22px] font-medium leading-snug text-vcp-ink m-0"
-            style="font-variation-settings: 'opsz' 22"
-          >
-            {m.label}
-          </h2>
-          <p class="text-[15px] text-vcp-ink-2 mt-2 mb-0 leading-relaxed">
-            {m.summary}
-          </p>
-        </a>
-      ))}
-    </div>
-  </PageContainer>
+  <HubArchetype
+    eyebrow="§ Methodology · Index of 12"
+    title="The methodology canon."
+    lead="Twelve pages — five sets — covering the operating principles, frameworks, patterns, programs, and implementation guidance the protocol encodes. Pick the set that matches what you're trying to do; the canon is navigable from any page once you're in."
+  >
+    {GROUPS.map((group, gIdx) => (
+      <section class="hub-group" aria-labelledby={`hub-group-${gIdx}`}>
+        <p class="hub-group-label">{group.label}</p>
+        <h2 class="hub-group-title" id={`hub-group-${gIdx}`}>{group.title}</h2>
+        <p class="hub-group-note">{group.note}</p>
+
+        <ul class="hub-grid">
+          {group.slugs.map((slug) => {
+            const page = PAGE_BY_SLUG[slug];
+            if (!page) return null;
+            const meta = group.meta?.[slug];
+            return (
+              <li>
+                <a href={page.href} class="hub-card">
+                  <p class="hub-card-eyebrow">{group.title}</p>
+                  <h3 class="hub-card-title">{page.label}</h3>
+                  <p class="hub-card-body">{page.summary}</p>
+                  <div class="hub-card-foot">
+                    <span class="hub-card-meta">{meta ?? 'Canon page'}</span>
+                    <span aria-hidden="true" class="hub-card-arrow">&rarr;</span>
+                  </div>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </HubArchetype>
 </BaseLayout>

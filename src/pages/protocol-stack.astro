@@ -1,118 +1,155 @@
 ---
 /**
- * /protocol-stack — Overview of the AI-native protocol stack: MCP, HCP, VCP.
+ * /protocol-stack — Wayfinding hub for the three-protocol comparison.
  *
- * Hub archetype — chrome + PageHeader + ProtocolStackDiagram + prose reference.
- * Complements the homepage § 01 stack section with a dedicated reference page.
+ * Hub archetype, Phase 5. NOT a canon page — a hub that explains the stack
+ * and routes the reader into the right destination (modelcontextprotocol.io,
+ * vcp.com canon, humancontextprotocol.com, or the positioning paper).
+ *
+ * The hero echoes the homepage § 01 stack section ("Three peer protocols.
+ * No hierarchy implied.") so the page feels like an extension of that
+ * section, not a duplicate.
+ *
+ * Card order mirrors the protocol-stack diagram: MCP (capability) on the
+ * left, VCP (value) in the middle, HCP (context) on the right. Each card
+ * carries its identity color in the band.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import ProtocolStackDiagram from '../components/ProtocolStackDiagram.astro';
-import { PROTOCOL_PEERS } from '../lib/site';
+import HubArchetype from '../components/HubArchetype.astro';
+import { SITE, PROTOCOL_PEERS } from '../lib/site';
+
+interface ProtocolCard {
+  band: 'mcp' | 'vcp' | 'hcp';
+  id: string;
+  name: string;
+  scope: string;
+  owner: string;
+  status: string;
+  href: string;
+  linkLabel: string;
+  external: boolean;
+}
+
+const PROTOCOLS: ProtocolCard[] = [
+  {
+    band: 'mcp',
+    id: 'MCP',
+    name: 'Model Context Protocol',
+    scope: 'The machine-context layer. How AI systems reach tools, data, and external context — capability surfaces that make models operate against arbitrary software substrates.',
+    owner: 'Anthropic',
+    status: 'Released · 2024',
+    href: PROTOCOL_PEERS.mcp.url,
+    linkLabel: 'modelcontextprotocol.io',
+    external: true,
+  },
+  {
+    band: 'vcp',
+    id: 'VCP',
+    name: 'Value Creation Protocol',
+    scope: 'The value-creation layer. What creates value, for whom, and why — the operating methodology that translates capability and context into realized outcomes across customer, operations, and finance.',
+    owner: 'Value-First Team',
+    status: 'v0.1 · Draft',
+    href: '/positioning',
+    linkLabel: 'Read the positioning paper',
+    external: false,
+  },
+  {
+    band: 'hcp',
+    id: 'HCP',
+    name: 'Human Context Protocol',
+    scope: 'The human-context layer. How AI systems represent and respect human intent, authority, preferences, and history — so capability never gets aimed at the wrong audience.',
+    owner: 'Community',
+    status: 'HCP-Lang · Mar 2026',
+    href: PROTOCOL_PEERS.hcp.url,
+    linkLabel: 'humancontextprotocol.com',
+    external: true,
+  },
+];
+
+// Schema.org ItemList — the three peer protocols, in stack order.
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'AI-native protocol stack',
+  itemListOrder: 'https://schema.org/ItemListUnordered',
+  numberOfItems: PROTOCOLS.length,
+  itemListElement: PROTOCOLS.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: `${p.id} — ${p.name}`,
+    url: p.external ? p.href : `${SITE.url}${p.href}`,
+  })),
+};
 ---
 
 <BaseLayout
-  title="Protocol Stack"
-  description="The AI-native protocol stack: MCP (capability), HCP (human context), VCP (methodology). Each layer is necessary; none is sufficient on its own."
+  title="The Protocol Stack"
+  description="Three peer protocols for AI-native operations: MCP (capability), VCP (value creation), HCP (human context). Each layer is necessary; none is sufficient on its own."
   path="/protocol-stack"
   ogImage="og-protocol-stack.jpg"
-  schemaType="TechArticle"
+  schemaType="CollectionPage"
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Reference · The Stack"
-      title="The Protocol Stack"
-      lede="Three layers, read as peers: capability, context, methodology. Each is necessary; none is sufficient on its own."
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/protocol-stack"
-    />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListLd)} />
 
-    <div class="mb-16">
-      <ProtocolStackDiagram />
-    </div>
+  <HubArchetype
+    eyebrow="§ The Protocol Stack"
+    title="Three peer protocols. No hierarchy implied."
+    lead="MCP is the machine-context layer. HCP is the human-context layer. VCP is the value-creation layer — what creates value, for whom, and why. They are peers because each addresses a layer the others do not reach. This page indexes the three; the bodies live on their own homes."
+  >
+    <ul class="hub-grid">
+      {PROTOCOLS.map((p) => (
+        <li>
+          <a
+            href={p.href}
+            class={`hub-protocol hub-protocol-${p.band}`}
+            target={p.external ? '_blank' : undefined}
+            rel={p.external ? 'noopener noreferrer' : undefined}
+          >
+            <div class="hub-protocol-band">
+              <img
+                src={`/assets/marks/${p.band}-mark-tight.png`}
+                alt=""
+                width="32"
+                height="32"
+                class="hub-protocol-mark"
+              />
+              <span class="hub-protocol-id">{p.id}</span>
+            </div>
+            <div class="hub-protocol-body">
+              <h2 class="hub-protocol-name">{p.name}</h2>
+              <p class="hub-protocol-scope">{p.scope}</p>
+              <dl class="hub-protocol-meta">
+                <div class="hub-protocol-meta-row">
+                  <dt class="hub-protocol-meta-label">Owner</dt>
+                  <dd class="hub-protocol-meta-value">{p.owner}</dd>
+                </div>
+                <div class="hub-protocol-meta-row">
+                  <dt class="hub-protocol-meta-label">Status</dt>
+                  <dd class="hub-protocol-meta-value">{p.status}</dd>
+                </div>
+              </dl>
+              <div class="hub-protocol-foot">
+                <span class="hub-protocol-link">{p.linkLabel} &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
 
-    <article class="prose mx-auto">
-      <h2>MCP — Model Context Protocol</h2>
-      <p>
-        <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a>
-        gives AI systems <strong>capability</strong>. It standardizes how language
-        models call tools, read external context, and act on the world through
-        servers exposing capability surfaces. MCP made AI systems capable of
-        operating against arbitrary software substrates without per-vendor
-        integration glue.
-      </p>
-      <p>
-        MCP is at one end of the stack because nothing higher matters if the
-        models can't reach into the systems where work happens.
-      </p>
-
-      <h2>HCP — Human Context Protocol</h2>
-      <p>
-        <a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer">Human Context Protocol</a>
-        gives AI systems <strong>human context</strong>.
-        It standardizes how AI systems represent and respect the interests,
-        agency, preferences, and lived reality of the humans whose work they
-        affect. HCP-Lang (March 2026) is the declarative grammar layer that
-        lets humans express context as parseable statements rather than
-        prompt-injected hints.
-      </p>
-      <p>
-        Capability without human context produces operations that are
-        efficient but inhumane — a defect AI-native systems should not perpetuate.
-      </p>
-
-      <h2>VCP — Value Creation Protocol</h2>
-      <p>
-        <a href="/positioning">Value Creation Protocol</a>
-        gives organizations <strong>methodology</strong>. It encodes the operating
-        discipline that translates AI capability and human context into realized
-        value for all stakeholders. VCP is the methodology layer — the part
-        that prevents capability and context from being applied to the wrong
-        problem, or to the right problem with the wrong frame.
-      </p>
-      <p>
-        Capability and context, without methodology, produce efficient progress
-        toward poor outcomes. The protocol exists because foundation models default
-        to industrial-age operating defaults — leads, funnels, conversion, extraction —
-        that VCP-aligned organizations explicitly reject.
-      </p>
-
-      <h2>Why three peers</h2>
-      <p>
-        Each layer is necessary; none is sufficient on its own.
-      </p>
-      <ul>
-        <li><strong>MCP only:</strong> AI that can act but doesn't know who it's acting for or why.</li>
-        <li><strong>HCP only:</strong> AI that respects humans but can't reach the systems where work happens.</li>
-        <li><strong>VCP only:</strong> Methodology with no machine-readable substrate or capability surface.</li>
-        <li><strong>MCP + HCP only:</strong> Substrate for AI-native operations, but no operating discipline.</li>
-        <li><strong>MCP + VCP only:</strong> Methodology that can execute, but doesn't respect human context.</li>
-        <li><strong>HCP + VCP only:</strong> Operating discipline that respects humans but can't act on systems.</li>
-        <li><strong>All three:</strong> AI-native operations with capability, context, and discipline.</li>
-      </ul>
-
-      <h2>Independence and complementarity</h2>
-      <p>
-        The three protocols are independent. VCP does not require any particular
-        MCP implementation, nor does it mandate a specific HCP. Each layer is
-        free to evolve at its own pace, with its own governance, in its own
-        community.
-      </p>
-      <p>
-        They are also complementary. A VCP-aligned system that exposes MCP
-        servers can be operated by AI agents that respect HCP declarations.
-        The three protocols stack cleanly because they were defined at
-        different layers of the same problem.
-      </p>
-
-      <h2>Related</h2>
-      <ul>
-        <li><a href="/positioning">VCP Positioning Paper</a> — full positioning document</li>
-        <li><a href="/encoding-stack">Encoding Stack</a> — Lexicon, VCP-Lang, Value Graph</li>
-        <li><a href={PROTOCOL_PEERS.mcp.url} target="_blank" rel="noopener noreferrer">modelcontextprotocol.io</a> — the canonical MCP home</li>
-        <li><a href={PROTOCOL_PEERS.hcp.url} target="_blank" rel="noopener noreferrer">humancontextprotocol.com</a> — the canonical HCP home</li>
-      </ul>
-    </article>
-  </PageContainer>
+    <figure class="hub-figure">
+      <div class="hub-figure-frame">
+        <img
+          src="/diagrams/protocol-stack.svg"
+          alt="Diagram of the AI-native protocol stack: MCP for capability, VCP for value creation, HCP for human context, shown as three peer layers."
+          width="880"
+          height="440"
+          loading="lazy"
+        />
+      </div>
+      <figcaption class="hub-figure-caption">
+        Three layers, read as peers. Each is necessary; none is sufficient on its own.
+      </figcaption>
+    </figure>
+  </HubArchetype>
 </BaseLayout>

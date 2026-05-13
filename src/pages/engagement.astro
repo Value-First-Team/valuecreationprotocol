@@ -1,147 +1,186 @@
 ---
 /**
- * /engagement — Read · Implement · Contribute · Reach canonical implementation pathway.
+ * /engagement — Read · Implement · Contribute · Reach pathway hub.
  *
- * Hub archetype on warm-paper surface. Reads as protocol-home guidance,
- * NOT a sales surface. Mentions valuefirstteam.com as the canonical
- * implementing firm without making it the punchline.
+ * Hub archetype, Phase 5. Four pathway cards in a 2×2 grid, then an
+ * implementer-attribution band where the firm makes its quiet case as
+ * the canonical implementing organization. NOT a sales surface; a credit
+ * + handoff.
+ *
+ * Pathways:
+ *   01 Read       — cold-reader pathway (vcp.com canon)
+ *   02 Implement  — organizations operationalizing the protocol
+ *   03 Contribute — practitioners adding to the protocol
+ *   04 Reach      — guided implementation by the originating firm (inverted card)
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
+import HubArchetype from '../components/HubArchetype.astro';
 import { SITE } from '../lib/site';
+
+interface PathwayLink {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+interface Pathway {
+  num: string;
+  title: string;
+  body: string;
+  links: PathwayLink[];
+  note?: string;
+}
+
+const PATHWAYS: Pathway[] = [
+  {
+    num: '§ 01 · Read',
+    title: 'Read',
+    body:
+      'Start here if you are new. The protocol home is navigable in a session: positioning paper for the why, methodology canon for the operating model, manifestos for the arguments behind the frame.',
+    links: [
+      { label: 'Protocol home', href: '/' },
+      { label: 'Positioning paper', href: '/positioning' },
+      { label: 'Methodology canon', href: '/methodology' },
+      { label: 'Manifestos', href: '/manifestos' },
+      { label: 'Glossary', href: '/glossary' },
+    ],
+  },
+  {
+    num: '§ 02 · Implement',
+    title: 'Implement',
+    body:
+      'Apply VCP in your own organization. The protocol is platform-agnostic; the canonical implementing substrate documented here is HubSpot, but the methodology operates on any system you can configure.',
+    links: [
+      { label: 'Encoding stack', href: '/encoding-stack' },
+      { label: 'HubSpot as CVP', href: '/hubspot-cvp' },
+      { label: 'AI-Native Shift', href: '/ai-native-shift' },
+      { label: 'Three-Org Model', href: '/three-orgs' },
+      { label: 'Four Unified Views', href: '/unified-views' },
+    ],
+    note: 'No license, no permission required. The protocol is open.',
+  },
+  {
+    num: '§ 03 · Contribute',
+    title: 'Contribute',
+    body:
+      'The encoding stack is in active development. Lexicon entries, VCP-Lang refinements, Value Graph extensions, and methodology canon corrections are welcome — under the editorial governance of the originating firm.',
+    links: [
+      { label: 'Lexicon', href: '/lexicon' },
+      { label: 'VCP-Lang', href: '/vcp-lang' },
+      { label: 'Value Graph', href: '/value-graph' },
+      { label: 'GitHub', href: SITE.github, external: true },
+    ],
+    note: 'A formal contribution process is being formed. In the meantime, reach the originating firm.',
+  },
+];
+
+// The fourth pathway — "Reach" — renders separately as the inverted card.
+const REACH = {
+  num: '§ 04 · Reach',
+  title: 'Reach the implementer',
+  body:
+    'For organizations that want guided implementation — pattern recognition, architecture review, methodology coaching, or substrate configuration — the originating firm is the canonical place to begin. The protocol does not require the firm; the firm exists because protocols benefit from a reference implementer, and because the distance between reading a protocol and operating an organization on top of it is bigger than most teams realize on first read.',
+  cta: 'valuefirstteam.com',
+  href: SITE.implementer.url,
+};
+
+// Schema.org ItemList — the four pathways as a structured set.
+const itemListLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Engagement pathways',
+  itemListOrder: 'https://schema.org/ItemListOrderAscending',
+  numberOfItems: 4,
+  itemListElement: [
+    ...PATHWAYS.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: p.title,
+      url: `${SITE.url}/engagement#${p.title.toLowerCase()}`,
+    })),
+    {
+      '@type': 'ListItem',
+      position: 4,
+      name: REACH.title,
+      url: REACH.href,
+    },
+  ],
+};
 ---
 
 <BaseLayout
-  title="Engagement Pathway"
-  description="Four ways to engage with the Value Creation Protocol: read it, implement it, contribute to it, or reach the canonical implementing firm."
+  title="Engagement"
+  description="Four ways to engage with the Value Creation Protocol: read it, implement it, contribute to it, or reach the originating firm for guided implementation."
   path="/engagement"
   ogImage="og-engagement.jpg"
+  schemaType="CollectionPage"
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Engagement · Four Pathways"
-      title="Read · Implement · Contribute · Reach"
-      lede="The protocol is open. Anyone can read, implement, and contribute. The canonical implementing firm exists for organizations that want guided implementation."
-    />
+  <script type="application/ld+json" set:html={JSON.stringify(itemListLd)} />
 
-    <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+  <HubArchetype
+    eyebrow="§ Engagement · Four Pathways"
+    title="Three doors in. One open protocol."
+    lead="The protocol is open. Anyone can read it, implement it, and contribute to it. The originating firm exists for organizations that want guided implementation — the fourth door, opened by request."
+  >
+    <ul class="hub-grid hub-grid-pathways">
+      {PATHWAYS.map((p) => (
+        <li id={p.title.toLowerCase()}>
+          <article class="hub-pathway">
+            <header class="hub-pathway-head">
+              <span class="hub-pathway-num">{p.num}</span>
+            </header>
+            <h2 class="hub-pathway-title">{p.title}</h2>
+            <p class="hub-pathway-body">{p.body}</p>
+            <ul class="hub-pathway-list">
+              {p.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >{link.label}</a>
+                </li>
+              ))}
+            </ul>
+            {p.note && <p class="hub-pathway-note">{p.note}</p>}
+          </article>
+        </li>
+      ))}
 
-      <!-- READ -->
-      <article class="rounded-vcp-lg border border-vcp-border bg-vcp-paper p-7 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-[12px] tracking-[0.14em] text-vcp-teal-deep">§ 01</span>
-          <h2 class="font-display text-[22px] md:text-[26px] font-medium text-vcp-ink m-0" style="font-variation-settings: 'opsz' 24">Read</h2>
-        </div>
-        <p class="text-vcp-ink-2 m-0 mb-5 leading-relaxed text-[15px]">
-          Start with the positioning paper. Then the encoding stack. The methodology
-          canon is the deep reference — twelve pages covering the frameworks VCP
-          encodes. Cold readers should be able to navigate the protocol home in
-          a session.
-        </p>
-        <ul class="space-y-2 list-none p-0 m-0 text-sm font-mono text-[12px] tracking-[0.04em] uppercase">
-          <li><a href="/positioning" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Positioning paper</a></li>
-          <li><a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Encoding stack</a></li>
-          <li><a href="/methodology" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Methodology canon</a></li>
-          <li><a href="/manifestos" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Manifestos</a></li>
-          <li><a href="/glossary" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Glossary</a></li>
-        </ul>
-      </article>
-
-      <!-- IMPLEMENT -->
-      <article class="rounded-vcp-lg border border-vcp-border bg-vcp-paper p-7 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-[12px] tracking-[0.14em] text-vcp-teal-deep">§ 02</span>
-          <h2 class="font-display text-[22px] md:text-[26px] font-medium text-vcp-ink m-0" style="font-variation-settings: 'opsz' 24">Implement</h2>
-        </div>
-        <p class="text-vcp-ink-2 m-0 mb-5 leading-relaxed text-[15px]">
-          Apply VCP in your own organization. The protocol is platform-agnostic;
-          the canonical implementing substrate (HubSpot CVP) is one path among
-          several. Configuration-over-customization is the operating principle.
-        </p>
-        <ul class="space-y-2 list-none p-0 m-0 text-sm font-mono text-[12px] tracking-[0.04em] uppercase">
-          <li><a href="/hubspot-cvp" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ HubSpot as CVP</a></li>
-          <li><a href="/three-orgs" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Three-Org Model</a></li>
-          <li><a href="/unified-views" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ Four Unified Views</a></li>
-          <li><a href="/ai-native-shift" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">→ AI-Native Shift</a></li>
-        </ul>
-        <p class="text-[13px] text-vcp-ink-3 mt-5 mb-0 italic">
-          No license, no permission required. The protocol is open.
-        </p>
-      </article>
-
-      <!-- CONTRIBUTE -->
-      <article class="rounded-vcp-lg border border-vcp-border bg-vcp-paper p-7 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-[12px] tracking-[0.14em] text-vcp-teal-deep">§ 03</span>
-          <h2 class="font-display text-[22px] md:text-[26px] font-medium text-vcp-ink m-0" style="font-variation-settings: 'opsz' 24">Contribute</h2>
-        </div>
-        <p class="text-vcp-ink-2 m-0 mb-5 leading-relaxed text-[15px]">
-          The encoding stack is in active development. Lexicon entries, VCP-Lang
-          refinements, Value Graph extensions, and methodology canon corrections
-          are welcome. Open the protocol to scrutiny; contribute under the
-          editorial governance of the originating firm.
-        </p>
-        <ul class="space-y-2 list-none p-0 m-0 text-[14px] leading-relaxed">
-          <li class="text-vcp-ink-2">Propose <a href="/lexicon" class="text-vcp-teal-deep border-b border-vcp-teal-deep/40 no-underline">Lexicon</a> entries</li>
-          <li class="text-vcp-ink-2">Refine <a href="/vcp-lang" class="text-vcp-teal-deep border-b border-vcp-teal-deep/40 no-underline">VCP-Lang</a></li>
-          <li class="text-vcp-ink-2">Extend <a href="/value-graph" class="text-vcp-teal-deep border-b border-vcp-teal-deep/40 no-underline">Value Graph</a></li>
-        </ul>
-        <p class="text-[13px] text-vcp-ink-3 mt-5 mb-0">
-          Reach out via the canonical implementing firm while a formal contribution
-          process is being formed.
-        </p>
-      </article>
-
-      <!-- REACH -->
-      <article class="rounded-vcp-lg border border-vcp-ink bg-vcp-ink text-vcp-surface p-7 md:p-8">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-[12px] tracking-[0.14em] text-vcp-teal">§ 04</span>
-          <h2 class="font-display text-[22px] md:text-[26px] font-medium m-0" style="font-variation-settings: 'opsz' 24">Reach the implementer</h2>
-        </div>
-        <p class="m-0 mb-5 leading-relaxed text-[15px] opacity-90">
-          VCP was originated and is canonically implemented by
-          <a href={SITE.implementer.url} target="_blank" rel="noopener" class="text-vcp-teal border-b border-vcp-teal no-underline">
-            Value-First Team
-          </a>.
-          For organizations that want guided implementation — pattern recognition,
-          architecture review, methodology coaching, or production substrate
-          configuration — the team is the canonical place to begin.
-        </p>
-        <p class="m-0 mb-5 leading-relaxed text-[14px] opacity-80">
-          The protocol does not require the firm. The firm exists because
-          protocols benefit from a reference implementation — and because
-          the gap between reading a protocol and operating an organization
-          on top of it is bigger than most teams realize on their first read.
-        </p>
-        <p class="mt-7 mb-0">
+      <li id={REACH.title.toLowerCase().replace(/\s+/g, '-')}>
+        <article class="hub-pathway hub-pathway-invert">
+          <header class="hub-pathway-head">
+            <span class="hub-pathway-num">{REACH.num}</span>
+          </header>
+          <h2 class="hub-pathway-title">{REACH.title}</h2>
+          <p class="hub-pathway-body">{REACH.body}</p>
           <a
-            href={SITE.implementer.url}
+            href={REACH.href}
             target="_blank"
-            rel="noopener"
-            class="vcp-btn vcp-btn-primary"
-            style="background: var(--vcp-surface); color: var(--vcp-ink); border-color: var(--vcp-surface);"
+            rel="noopener noreferrer"
+            class="hub-pathway-cta"
           >
-            valuefirstteam.com <span aria-hidden="true">→</span>
+            {REACH.cta} <span aria-hidden="true">&rarr;</span>
           </a>
-        </p>
-      </article>
-    </div>
+          <p class="hub-pathway-note">
+            VCP was originated and is canonically implemented by Value-First Team.
+            The protocol does not require firm engagement.
+          </p>
+        </article>
+      </li>
+    </ul>
 
-    <section class="mt-16 pt-12 border-t border-vcp-border">
-      <h2 class="font-display text-[28px] md:text-[32px] font-medium tracking-vcp-h text-vcp-ink m-0 mb-5" style="font-variation-settings: 'opsz' 30">
-        Open protocol, opinionated implementation
-      </h2>
-      <p class="text-vcp-ink-2 leading-relaxed max-w-3xl">
-        The protocol is open. The implementation is opinionated. Both statements
-        are load-bearing. Anyone can implement VCP — the methodology is
-        documented, the encoding stack is published, the principles are stated
-        with the contrastive precision protocols require. The canonical
-        implementer holds opinions about how to do that well, formed over years
-        of practice across many organizations. Those opinions are available
-        through the canonical implementing firm; they are not preconditions
-        for using the protocol.
+    <section class="hub-attribution">
+      <p class="hub-attribution-eyebrow">Open protocol, opinionated implementation</p>
+      <h2 class="hub-attribution-title">The protocol is open. The implementation is opinionated.</h2>
+      <p class="hub-attribution-body">
+        Both statements carry weight. Anyone can implement VCP — the methodology is documented, the encoding stack is published, the principles are stated with the contrastive precision protocols require. The originating firm holds opinions about how to do that well, formed over years of practice across many organizations. Those opinions are available through{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >Value-First Team</a>; they are not preconditions for using the protocol.
       </p>
     </section>
-  </PageContainer>
+  </HubArchetype>
 </BaseLayout>
