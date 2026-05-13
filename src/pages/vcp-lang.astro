@@ -3,17 +3,17 @@
  * /vcp-lang — VCP-Lang v0.1 (Layer B of the encoding stack).
  *
  * Spec archetype. Renders staged markdown vcp-lang-canon-v0_1.md.
+ *
+ * VCP-Lang descends from earlier HCP-Lang exploratory work — lineage noted
+ * in the canon body itself.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import SpecHero from '../components/SpecHero.astro';
-import Prose from '../components/Prose.astro';
-import CrossCitation from '../components/CrossCitation.astro';
+import SpecArchetype from '../components/SpecArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
 
 const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.vcpLang);
-const html = stripFirstH1(rawHtml);
+const bodyHtml = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('vcp-lang-v0-1');
 
 const version = meta?.version ?? 'v0.1';
@@ -21,31 +21,25 @@ const version = meta?.version ?? 'v0.1';
 
 <BaseLayout
   title="VCP-Lang"
-  description="The grammar for declaring Values, Context, and Trust in parseable syntax. Layer B of the VCP encoding stack — descended from the March 2026 HCP-Lang work."
+  description="A declarative grammar for stating values, context, and trust in parseable form. Layer B of the VCP encoding stack — descended from the HCP-Lang exploratory work."
   path="/vcp-lang"
   ogImage="og-vcp-lang.jpg"
   schemaType="TechArticle"
+  dateModified="2026-05-12"
 >
-  <PageContainer wide>
-    <SpecHero
-      eyebrow="Encoding stack · Layer B of 03"
-      title="VCP-Lang"
-      lede="A declarative grammar for value. AI systems can read, validate, and execute against VCP-Lang declarations."
-      status={`${version} · DRAFT`}
-      statusKind="draft"
-      verified="12 May 2026"
-      compilesTo="Value Graph (Layer C)"
-      referenceImpl="canonical · vcp.com"
-    />
-
-    <nav class="mb-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.06em] uppercase text-vcp-ink-3">
-      <a href="/lexicon" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">← Lexicon (Layer A)</a>
-      <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Encoding stack overview</a>
-      <a href="/value-graph" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Next: Value Graph (Layer C) →</a>
-    </nav>
-
-    <Prose html={html} />
-
-    <CrossCitation path="/vcp-lang" />
-  </PageContainer>
+  <SpecArchetype
+    layer="B"
+    title="VCP-Lang"
+    lead="A declarative grammar for value. Organizations state what they are creating, for whom, and under what trust conditions; AI systems read those declarations as authoritative and act inside them."
+    meta={[
+      { label: 'Status', value: `${version} · DRAFT IN REVIEW`, emphasis: 'status' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Layer', value: 'B of 3 · grammar' },
+      { label: 'Depends on', value: 'Lexicon (A)' },
+      { label: 'Compiles to', value: 'Value Graph (C)' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/vcp-lang' },
+    ]}
+  >
+    <div class="spec-prose" set:html={bodyHtml} />
+  </SpecArchetype>
 </BaseLayout>

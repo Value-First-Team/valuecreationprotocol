@@ -2,23 +2,20 @@
 /**
  * /lexicon — Value-First Lexicon v0.1 (Layer A of the encoding stack).
  *
- * Spec archetype — SpecHero + spec meta grid + canon prose body.
+ * Spec archetype — SpecArchetype shell + canon prose body.
  *
- * Note: "Value-First" spelled out per conventions.md — never "VFT" in
- * customer-facing prose. Staged markdown filename and Sanity doc ID retain
- * the `vft-` slug (internal identifier); Sanity doc `title` field is Canon's
- * domain to update.
+ * Note: "Value-First" spelled out per conventions.md — never "VF" in
+ * customer-facing prose. Staged markdown filename retains the `vft-`
+ * slug as an internal identifier; Sanity doc title carries the corrected
+ * "Value-First Lexicon" name (verified live, 2026-05-12).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import SpecHero from '../components/SpecHero.astro';
-import Prose from '../components/Prose.astro';
-import CrossCitation from '../components/CrossCitation.astro';
+import SpecArchetype from '../components/SpecArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
 
 const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.lexicon);
-const html = stripFirstH1(rawHtml);
+const bodyHtml = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('lexicon-v0-1');
 
 const version = meta?.version ?? 'v0.1';
@@ -26,31 +23,25 @@ const version = meta?.version ?? 'v0.1';
 
 <BaseLayout
   title="Value-First Lexicon"
-  description="The structured vocabulary of VCP — Layer A of the encoding stack. Each entry encodes a load-bearing term with its industrial counterpart, operational definition, and contrastive training pairs."
+  description="The structured vocabulary of VCP — Layer A of the encoding stack. Each entry encodes a load-bearing term with its industrial counterpart, operational definition, and contrastive pair."
   path="/lexicon"
   ogImage="og-lexicon.jpg"
   schemaType="TechArticle"
+  dateModified="2026-05-12"
 >
-  <PageContainer wide>
-    <SpecHero
-      eyebrow="Encoding stack · Layer A of 03"
-      title="Value-First Lexicon"
-      lede="The structured vocabulary of the Value-First methodology, encoded so AI systems can recognize, declare, and execute against it."
-      status={`${version} · DRAFT`}
-      statusKind="draft"
-      verified="12 May 2026"
-      compilesTo="VCP-Lang (Layer B)"
-      referenceImpl="canonical · vcp.com"
-    />
-
-    <nav class="mb-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.06em] uppercase text-vcp-ink-3">
-      <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">← Encoding stack overview</a>
-      <a href="/vcp-lang" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Next: VCP-Lang (Layer B) →</a>
-      <a href="/value-graph" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Then: Value Graph (Layer C) →</a>
-    </nav>
-
-    <Prose html={html} />
-
-    <CrossCitation path="/lexicon" />
-  </PageContainer>
+  <SpecArchetype
+    layer="A"
+    title="Value-First Lexicon"
+    lead="The structured vocabulary of the Value-First methodology — load-bearing terms encoded so AI systems can recognize, declare, and execute against them. VCP-Lang and the Value Graph both depend on it."
+    meta={[
+      { label: 'Status', value: `${version} · DRAFT IN REVIEW`, emphasis: 'status' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Layer', value: 'A of 3 · vocabulary' },
+      { label: 'Depended on by', value: 'VCP-Lang (B), Value Graph (C)' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/lexicon' },
+      { label: 'Maintained by', value: 'Value-First Team + Collective' },
+    ]}
+  >
+    <div class="spec-prose" set:html={bodyHtml} />
+  </SpecArchetype>
 </BaseLayout>

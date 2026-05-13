@@ -3,17 +3,18 @@
  * /value-graph — Value Graph v0.1 (Layer C of the encoding stack).
  *
  * Spec archetype. Renders staged markdown value-graph-canon-v0_1.md.
+ *
+ * Platform-agnostic: the Graph is a specification, not a graph database
+ * product. Reference implementations on HubSpot (the canonical CVP) and
+ * other substrates are in active development.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import SpecHero from '../components/SpecHero.astro';
-import Prose from '../components/Prose.astro';
-import CrossCitation from '../components/CrossCitation.astro';
+import SpecArchetype from '../components/SpecArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
 
 const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.valueGraph);
-const html = stripFirstH1(rawHtml);
+const bodyHtml = stripFirstH1(rawHtml);
 const meta = await getCanonDoc('value-graph-v0-1');
 
 const version = meta?.version ?? 'v0.1';
@@ -21,31 +22,25 @@ const version = meta?.version ?? 'v0.1';
 
 <BaseLayout
   title="Value Graph"
-  description="The specification for encoding mutual value creation as a platform-agnostic relational structure. Layer C of the VCP encoding stack."
+  description="A platform-agnostic relational structure for representing mutual value creation across all stakeholders. Layer C of the VCP encoding stack."
   path="/value-graph"
   ogImage="og-value-graph.jpg"
   schemaType="TechArticle"
+  dateModified="2026-05-12"
 >
-  <PageContainer wide>
-    <SpecHero
-      eyebrow="Encoding stack · Layer C of 03"
-      title="Value Graph"
-      lede="The relational structure VCP-Lang compiles to. Three-Org Model and Value Path expressed as graph traversal."
-      status={`${version} · DRAFT`}
-      statusKind="draft"
-      verified="12 May 2026"
-      compilesTo="Platform substrates (HubSpot CVP, etc.)"
-      referenceImpl="canonical · vcp.com"
-    />
-
-    <nav class="mb-10 flex flex-wrap gap-x-8 gap-y-3 font-mono text-[11px] tracking-[0.06em] uppercase text-vcp-ink-3">
-      <a href="/lexicon" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">← Lexicon (Layer A)</a>
-      <a href="/vcp-lang" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">← VCP-Lang (Layer B)</a>
-      <a href="/encoding-stack" class="text-vcp-ink-3 no-underline hover:text-vcp-ink">Encoding stack overview</a>
-    </nav>
-
-    <Prose html={html} />
-
-    <CrossCitation path="/value-graph" />
-  </PageContainer>
+  <SpecArchetype
+    layer="C"
+    title="Value Graph"
+    lead="The relational structure VCP-Lang compiles into. Participants, Relationships, Value Flows, Contexts, and Investments — composed into a graph that AI systems can traverse without regressing to industrial-age defaults."
+    meta={[
+      { label: 'Status', value: `${version} · DRAFT IN REVIEW`, emphasis: 'status' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Layer', value: 'C of 3 · relational structure' },
+      { label: 'Depends on', value: 'Lexicon (A), VCP-Lang (B)' },
+      { label: 'Reference impl', value: 'HubSpot CVP · others to follow' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/value-graph' },
+    ]}
+  >
+    <div class="spec-prose" set:html={bodyHtml} />
+  </SpecArchetype>
 </BaseLayout>

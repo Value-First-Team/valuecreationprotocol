@@ -1,0 +1,596 @@
+---
+/**
+ * SpecArchetype — shared shell for the three encoding-stack spec pages
+ * (/lexicon, /vcp-lang, /value-graph) on vcp.com.
+ *
+ * Sibling to CanonArchetype: same chrome and implementer attribution band,
+ * different body treatment. Spec pages earn trust as rigorous, navigable,
+ * citable technical reference — closer in feel to an IETF draft than an
+ * editorial canon page.
+ *
+ * Anatomy (top → bottom):
+ *
+ *   1. Hero block
+ *      - Eyebrow: "§ ENCODING STACK · LAYER {A|B|C}" (mono caps, teal-deep)
+ *      - Display heading: spec name (Newsreader opsz 48, weight 500)
+ *      - Lead paragraph: what the layer does and what depends on it
+ *      - Spec status strip — substantial definition-list grid (status, verified,
+ *        layer, depends-on, compiles-to, cite). Where technical authority lives.
+ *
+ *   2. <slot> — body. Long-form technical prose styled in Newsreader 17px / 1.65.
+ *      - NO drop-cap. Status strip already carries visual weight.
+ *      - Section H2s use Newsreader display opsz 30, hairline rule above.
+ *      - Section H3s use Geist 600.
+ *      - Inline code references / declarations are first-class typography.
+ *
+ *   3. Encoding-stack navigator — three-pill layer nav, current highlighted.
+ *      Unique to spec pages; readers cross-reference layers constantly.
+ *
+ *   4. Implementer attribution band — same component pattern as canon.
+ *
+ *   5. No CrossCitation — encoding stack is vcp.com-only canon.
+ *
+ * Voice: direct, technical, confident. Working substrate, not tutorial.
+ */
+import { SITE } from '../lib/site';
+
+export type SpecLayer = 'A' | 'B' | 'C';
+
+export interface SpecMetaRow {
+  /** Label (e.g. "Status", "Verified", "Layer", "Cite"). */
+  label: string;
+  /** Value text. Word-broken in mono. */
+  value: string;
+  /** Optional visual emphasis on the value (e.g. status row). */
+  emphasis?: 'status' | 'plain';
+}
+
+export interface Props {
+  /** Which layer (A=Lexicon, B=VCP-Lang, C=Value Graph). Drives navigator + eyebrow. */
+  layer: SpecLayer;
+  /** Display heading — the spec name. */
+  title: string;
+  /** Lead paragraph below the title. One paragraph, declarative. */
+  lead: string;
+  /**
+   * Spec status meta rows. Omit rows entirely rather than padding.
+   * Order is preserved as given. Typical rows: Status, Verified, Layer,
+   * Depends on, Compiles to, Cite.
+   */
+  meta?: SpecMetaRow[];
+}
+
+const { layer, title, lead, meta = [] } = Astro.props;
+
+/* Layer descriptor — drives eyebrow text + navigator state. */
+const LAYERS: Record<SpecLayer, { name: string; href: string; short: string }> = {
+  A: { name: 'Lexicon', short: 'A', href: '/lexicon' },
+  B: { name: 'VCP-Lang', short: 'B', href: '/vcp-lang' },
+  C: { name: 'Value Graph', short: 'C', href: '/value-graph' },
+};
+
+const eyebrowText = `§ Encoding Stack · Layer ${layer}`;
+---
+
+<article class="spec">
+  <header class="spec-hero">
+    <div class="spec-hero-inner">
+      <p class="spec-eyebrow">
+        <span>{eyebrowText}</span>
+        <span class="spec-eyebrow-rule" aria-hidden="true"></span>
+      </p>
+      <h1 class="spec-display">{title}</h1>
+      <p class="spec-lead">{lead}</p>
+
+      {meta.length > 0 && (
+        <dl class="spec-status-strip" aria-label="Specification status">
+          {meta.map((row) => (
+            <div class={`spec-meta-row${row.emphasis === 'status' ? ' is-status' : ''}`}>
+              <dt class="spec-meta-label">{row.label}</dt>
+              <dd class="spec-meta-value">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </div>
+  </header>
+
+  <div class="spec-body">
+    <div class="spec-body-inner">
+      <slot />
+    </div>
+  </div>
+
+  {/* Encoding-stack navigator — three layers, current highlighted. */}
+  <nav class="spec-nav" aria-label="Encoding stack layers">
+    <div class="spec-nav-inner">
+      <p class="spec-nav-eyebrow">Encoding stack</p>
+      <ol class="spec-nav-list">
+        {(['A', 'B', 'C'] as SpecLayer[]).map((key) => {
+          const L = LAYERS[key];
+          const isCurrent = key === layer;
+          return (
+            <li class={`spec-nav-item${isCurrent ? ' is-current' : ''}`}>
+              {isCurrent ? (
+                <span class="spec-nav-link" aria-current="page">
+                  <span class="spec-nav-mark">Layer {L.short}</span>
+                  <span class="spec-nav-name">{L.name}</span>
+                </span>
+              ) : (
+                <a href={L.href} class="spec-nav-link">
+                  <span class="spec-nav-mark">Layer {L.short}</span>
+                  <span class="spec-nav-name">{L.name}</span>
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+      <p class="spec-nav-trail">
+        <a href="/encoding-stack" class="spec-nav-overview">Encoding stack overview →</a>
+      </p>
+    </div>
+  </nav>
+
+  <section class="spec-impl">
+    <div class="spec-impl-inner">
+      <p class="spec-impl-eyebrow">Protocol home</p>
+      <p class="spec-impl-body">
+        VCP is originated and canonically implemented by{' '}
+        <a
+          href={SITE.implementer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="spec-impl-link">Value-First Team</a>.
+        The encoding stack is published openly; anyone may read, cite, and operate the spec independently of firm engagement.
+      </p>
+    </div>
+  </section>
+</article>
+
+<style is:global>
+  /* ============================================================
+     Spec Archetype — encoding-stack spec page shell.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     ============================================================ */
+
+  .spec { display: block; }
+
+  /* ============= Hero ============= */
+  .spec-hero {
+    border-bottom: 1px solid var(--vcp-border);
+    background: var(--vcp-surface);
+  }
+  .spec-hero-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3rem;
+  }
+  @media (min-width: 768px) {
+    .spec-hero-inner { padding: 5.5rem 1.5rem 3.5rem; }
+  }
+
+  .spec-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0 0 1.5rem;
+  }
+  .spec-eyebrow-rule {
+    height: 1px;
+    width: 88px;
+    background: var(--vcp-ink);
+    display: inline-block;
+  }
+
+  .spec-display {
+    font-family: var(--vcp-font-display);
+    /* Slightly more restrained than canon — spec heading scans better tighter. */
+    font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    max-width: 22ch;
+    font-variation-settings: "opsz" 48;
+  }
+
+  .spec-lead {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+    line-height: 1.5;
+    color: var(--vcp-ink-2);
+    margin: 1.5rem 0 0;
+    max-width: 58ch;
+    font-variation-settings: "opsz" 22;
+  }
+
+  /* ============= Spec status strip =============
+     More prominent than canon's spec-meta — spec pages live and die
+     by their version state. Substantial border + grid. */
+  .spec-status-strip {
+    margin: 2.75rem 0 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid var(--vcp-border-strong);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .spec-status-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.1rem 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .spec-status-strip {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .spec-meta-row {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .spec-meta-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    margin: 0;
+    font-weight: 500;
+  }
+  .spec-meta-value {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+    color: var(--vcp-ink);
+    margin: 0;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  .spec-meta-row.is-status .spec-meta-value {
+    color: var(--vcp-teal-deep);
+    font-weight: 600;
+  }
+
+  /* ============= Body ============= */
+  .spec-body {
+    background: var(--vcp-surface);
+  }
+  .spec-body-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 4.5rem;
+  }
+  @media (min-width: 768px) {
+    .spec-body-inner { padding: 4.5rem 1.5rem 5.5rem; }
+  }
+
+  /* ============= Spec prose =============
+     Long-form technical prose. No drop-cap — the status strip carries
+     the visual weight. Slightly tighter rhythm than canon for scanning. */
+  .spec-prose {
+    max-width: var(--vcp-max-prose);
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--vcp-ink);
+    font-variation-settings: "opsz" 19;
+  }
+  .spec-prose > * + * { margin-top: 1.15em; }
+  .spec-prose > p { margin: 0 0 1.15em; }
+
+  /* Section H2 — Newsreader display, hairline rule above. */
+  .spec-prose h2 {
+    font-family: var(--vcp-font-display);
+    font-size: 1.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin-top: 2.6em;
+    margin-bottom: 0.6em;
+    font-variation-settings: "opsz" 30;
+    position: relative;
+    padding-top: 1.5rem;
+  }
+  .spec-prose h2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+
+  /* Section H3 — Geist, semibold. */
+  .spec-prose h3 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.35;
+    color: var(--vcp-ink);
+    margin-top: 1.9em;
+    margin-bottom: 0.5em;
+    letter-spacing: -0.005em;
+  }
+
+  /* Section H4. */
+  .spec-prose h4 {
+    font-family: var(--vcp-font-body);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--vcp-ink);
+    margin-top: 1.6em;
+    margin-bottom: 0.4em;
+  }
+
+  /* Paragraph + list. */
+  .spec-prose p, .spec-prose li {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  .spec-prose ul, .spec-prose ol {
+    padding-left: 1.4em;
+  }
+  .spec-prose li + li { margin-top: 0.45em; }
+  .spec-prose strong { color: var(--vcp-ink); font-weight: 600; }
+  .spec-prose em { font-style: italic; color: var(--vcp-ink); }
+
+  /* Cross-layer links — teal, hairline underline. */
+  .spec-prose a {
+    color: var(--vcp-teal-deep);
+    text-decoration-color: rgba(13, 148, 136, 0.32);
+    text-underline-offset: 3px;
+  }
+  .spec-prose a:hover { color: var(--vcp-link-hover); }
+
+  /* Inline code — first-class typography for spec pages. */
+  .spec-prose code {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.92em;
+    background: var(--vcp-surface-2);
+    padding: 0.12em 0.4em;
+    border-radius: var(--vcp-r-xs);
+    color: var(--vcp-ink);
+    letter-spacing: 0;
+  }
+
+  /* Code blocks — full-width panel, generous padding. */
+  .spec-prose pre {
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    padding: 1.25rem 1.4rem;
+    border-radius: var(--vcp-r-md);
+    overflow-x: auto;
+    line-height: 1.55;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    margin: 1.8em 0;
+  }
+  .spec-prose pre code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+  }
+
+  /* Definition lists — Geist Mono dt, Newsreader dd. */
+  .spec-prose dl {
+    margin: 1.5em 0;
+    padding: 0;
+  }
+  .spec-prose dl > div,
+  .spec-prose dl > dt {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .spec-prose dl > div:first-child,
+  .spec-prose dl > dt:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .spec-prose dt {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    color: var(--vcp-ink);
+    letter-spacing: 0.01em;
+    font-weight: 500;
+    margin-top: 0;
+  }
+  .spec-prose dd {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--vcp-ink-2);
+    margin: 0.35em 0 0;
+    font-variation-settings: "opsz" 19;
+  }
+
+  /* Tables. */
+  .spec-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    margin: 1.6em 0;
+    font-family: var(--vcp-font-body);
+  }
+  .spec-prose th, .spec-prose td {
+    text-align: left;
+    padding: 0.65em 0.9em;
+    border-bottom: 1px solid var(--vcp-border);
+    vertical-align: top;
+  }
+  .spec-prose th {
+    background: var(--vcp-surface-2);
+    font-weight: 600;
+    color: var(--vcp-ink);
+  }
+
+  /* Blockquote — used for example entries in the Lexicon body. */
+  .spec-prose blockquote {
+    margin: 1.8em 0;
+    padding: 1.2em 1.4em;
+    border-left: 2px solid var(--vcp-teal-deep);
+    background: var(--vcp-surface-2);
+    color: var(--vcp-ink);
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 1.6;
+    border-radius: 0 var(--vcp-r-sm) var(--vcp-r-sm) 0;
+  }
+  .spec-prose blockquote p { margin: 0 0 0.7em; }
+  .spec-prose blockquote p:last-child { margin-bottom: 0; }
+  .spec-prose blockquote strong { color: var(--vcp-ink); }
+  .spec-prose blockquote em { font-style: italic; }
+
+  /* Horizontal rule. */
+  .spec-prose hr {
+    border: 0;
+    border-top: 1px solid var(--vcp-border);
+    margin: 2.6em 0;
+  }
+
+  /* ============= Encoding-stack navigator ============= */
+  .spec-nav {
+    border-top: 1px solid var(--vcp-border);
+    background: var(--vcp-surface-2);
+  }
+  .spec-nav-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+  }
+  .spec-nav-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    margin: 0 0 1rem;
+    font-weight: 500;
+  }
+  .spec-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+  @media (min-width: 640px) {
+    .spec-nav-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+  }
+  .spec-nav-item { margin: 0; }
+  .spec-nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.95rem 1.1rem;
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-md);
+    background: var(--vcp-paper);
+    text-decoration: none;
+    color: var(--vcp-ink-2);
+    transition: border-color var(--vcp-t-fast), color var(--vcp-t-fast);
+    min-height: 2.75rem;
+  }
+  a.spec-nav-link:hover {
+    border-color: var(--vcp-ink);
+    color: var(--vcp-ink);
+  }
+  .spec-nav-item.is-current .spec-nav-link {
+    border-color: var(--vcp-teal-deep);
+    background: var(--vcp-teal-soft);
+    color: var(--vcp-teal-ink);
+    cursor: default;
+  }
+  .spec-nav-mark {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+  }
+  .spec-nav-item.is-current .spec-nav-mark {
+    color: var(--vcp-teal-deep);
+  }
+  .spec-nav-name {
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: inherit;
+    font-variation-settings: "opsz" 19;
+    letter-spacing: -0.005em;
+  }
+  .spec-nav-trail {
+    margin: 1.25rem 0 0;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-ink-3);
+  }
+  .spec-nav-overview {
+    color: var(--vcp-ink-3);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--vcp-t-fast), border-color var(--vcp-t-fast);
+  }
+  .spec-nav-overview:hover {
+    color: var(--vcp-ink);
+    border-bottom-color: var(--vcp-ink);
+  }
+
+  /* ============= Implementer band ============= */
+  .spec-impl {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+  }
+  .spec-impl-inner {
+    max-width: var(--vcp-max-content);
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem;
+  }
+  .spec-impl-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal);
+    margin: 0 0 1rem;
+  }
+  .spec-impl-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1.1875rem;
+    line-height: 1.55;
+    color: var(--vcp-surface);
+    max-width: 62ch;
+    margin: 0;
+    font-variation-settings: "opsz" 20;
+  }
+  .spec-impl-link {
+    color: var(--vcp-teal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal);
+  }
+  .spec-impl-link:hover {
+    color: var(--vcp-d-teal);
+    border-bottom-color: var(--vcp-d-teal);
+  }
+</style>
