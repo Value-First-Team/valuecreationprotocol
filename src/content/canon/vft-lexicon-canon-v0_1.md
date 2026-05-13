@@ -129,5 +129,5 @@ The Lexicon is the foundation of the encoding stack. It is also the part most re
 
 *Version: 0.1*
 *Status: Draft canon. Active development.*
-*Authoritative location: valuefirstteam.com/vcp/lexicon*
+*Authoritative location: valuecreationprotocol.com/lexicon*
 *Maintained by: the Value-First Team and the Value-First Collective.*

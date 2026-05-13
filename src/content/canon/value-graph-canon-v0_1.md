@@ -143,5 +143,5 @@ The Value Graph is the relational layer of the encoding stack. It is the deepest
 
 *Version: 0.1*
 *Status: Draft canon. Active development.*
-*Authoritative location: valuefirstteam.com/vcp/value-graph*
+*Authoritative location: valuecreationprotocol.com/value-graph*
 *Maintained by: the Value-First Team and the Value-First Collective.*

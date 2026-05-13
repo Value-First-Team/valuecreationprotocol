@@ -137,5 +137,5 @@ VCP-Lang is the grammar layer of the encoding stack. It is where the methodology
 
 *Version: 0.1*
 *Status: Draft canon. Active development.*
-*Authoritative location: valuefirstteam.com/vcp/vcp-lang*
+*Authoritative location: valuecreationprotocol.com/vcp-lang*
 *Maintained by: the Value-First Team and the Value-First Collective.*
