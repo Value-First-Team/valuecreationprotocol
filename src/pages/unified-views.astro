@@ -2,125 +2,141 @@
 /**
  * /unified-views — Four Unified Views (UCV, URV, UBC, UTE).
  *
- * Renders Sanity unifiedGoal records. Three-Org mapping shown alongside.
+ * Source: Sanity unifiedGoal records. Three-Org mapping:
+ *   UCV → Customer Org · URV → Finance Org · UBC + UTE → Operations Org.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { getUnifiedGoals } from '../lib/sanity/canon';
+import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const goals = await getUnifiedGoals();
-
-// Canonical ordering: UCV, URV, UBC, UTE
 const ORDER = ['UCV', 'URV', 'UBC', 'UTE'];
 const ordered = [...goals].sort((a, b) => {
   const ai = ORDER.findIndex((k) => a.name?.includes(k));
   const bi = ORDER.findIndex((k) => b.name?.includes(k));
   return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
 });
+
+const { html: framingHtml } = renderWikiCanonical(WIKI_CANONICAL.unifiedViews);
+const framingBody = stripFirstH1(framingHtml);
+
+const viewDefinedTerms = ordered.map((g) => ({
+  name: g.name,
+  description: g.description,
+  termCode: (g.name?.match(/\b([A-Z]{3})\b/)?.[1] ?? '').toLowerCase(),
+}));
 ---
 
 <BaseLayout
   title="Four Unified Views"
-  description="The visibility framework: UCV, URV, UBC, UTE. Four unified views that an AI-native organization must operate against to avoid fragmented context."
+  description="UCV, URV, UBC, UTE. The visibility framework — four unified views that an AI-native organization must operate against to refuse the fragmented context of industrial-age dashboards."
   path="/unified-views"
   ogImage="og-unified-views.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="Four Unified Views"
+  schemaDefinedTerms={viewDefinedTerms}
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 05 of 12"
-      title="Four Unified Views"
-      lede="UCV, URV, UBC, UTE — the visibility framework. Each view is a unified context surface; together they replace the fragmented dashboards of industrial-age operations."
-      status="Canon"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/unified-views"
-    />
+  <CanonArchetype
+    eyebrow="Four Unified Views"
+    title="Four views that refuse fragmented context."
+    lead="UCV, URV, UBC, UTE — Unified Customer View, Unified Revenue View, Unified Business Context, Unified Team Enablement. Each view is a single, addressable surface that an AI-native organization operates against. Together they replace the dashboard sprawl of industrial-age operations with the visibility the Three-Org Model requires."
+    path="/unified-views"
+    specMeta={[
+      { label: 'Status', value: 'canonical' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/unified-views' },
+      { label: 'Views', value: `${ordered.length} — UCV · URV · UBC · UTE` },
+    ]}
+  >
+    <section class="canon-prose">
+      <p>
+        Visibility decides what an organization can act on. The four Unified Views
+        are the surfaces against which the Three-Org Model operates: each view is
+        complete, integrated, and addressable from one place — not assembled in a
+        person's head from seven dashboards.
+      </p>
+      <p>
+        Three-Org mapping is direct: UCV is owned by the Customer Org. URV is owned
+        by the Finance Org. UBC and UTE are owned by the Operations Org. A view that
+        crosses an org boundary is not a unified view — it is a coordination cost.
+      </p>
+    </section>
 
-    {ordered.length === 0 ? (
-      <p class="text-stone-600 italic">Unified view records loading from canon.</p>
-    ) : (
-      <div class="space-y-8">
-        {ordered.map((g) => (
-          <article class="rounded-lg border border-stone-200 overflow-hidden">
-            <div
-              class="px-6 md:px-8 py-5 border-b border-stone-200"
-              style={`background:${g.color?.hex ?? '#0d9488'}10`}
-            >
-              <div class="flex items-start gap-4">
-                <div class="flex-1 min-w-0">
-                  <h2 class="text-xl md:text-2xl font-semibold text-stone-900 m-0 leading-tight">
-                    {g.name}
-                  </h2>
+    {ordered.length > 0 && (
+      <>
+        <p class="canon-section-label">The four, in canonical order</p>
+        <h2 class="canon-section-sub">Each view, named and owned.</h2>
+        <p class="canon-section-note">
+          Sourced from Sanity. Read top to bottom as a complete visibility model.
+        </p>
+
+        <ol class="canon-records">
+          {ordered.map((g) => {
+            const code = g.name?.match(/\b([A-Z]{3})\b/)?.[1] ?? '';
+            const slug = code.toLowerCase() || g.name?.toLowerCase().replace(/\s+/g, '-') || 'view';
+            return (
+              <li class="canon-record" id={slug}>
+                <p class="canon-record-eyebrow">{code || 'View'}</p>
+                <h3 class="canon-record-title">{g.name}</h3>
+                {g.description && (
+                  <p class="canon-record-body">{g.description}</p>
+                )}
+                <div class="canon-record-meta">
                   {g.primaryOrg && (
-                    <p class="mt-2 mb-0 text-sm text-stone-600">
-                      <span class="font-mono uppercase tracking-wider text-xs text-stone-500">Primary org:</span>{' '}
-                      <strong class="text-stone-800">{g.primaryOrg}</strong>
-                    </p>
+                    <div>
+                      <p class="canon-record-meta-label">Primary org</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{g.primaryOrg}</li>
+                      </ul>
+                    </div>
+                  )}
+                  {g.howItTransforms && (
+                    <div>
+                      <p class="canon-record-meta-label">How it transforms operations</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{g.howItTransforms}</li>
+                      </ul>
+                    </div>
                   )}
                 </div>
-              </div>
-              {g.description && (
-                <p class="text-[15px] text-stone-700 mt-4 mb-0 leading-relaxed">
-                  {g.description}
-                </p>
-              )}
-            </div>
-
-            <div class="px-6 md:px-8 py-6 bg-white">
-              {g.howItTransforms && (
-                <div class="mb-5">
-                  <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-2">
-                    How it transforms operations
-                  </p>
-                  <p class="text-[15px] text-stone-700 m-0 leading-relaxed">
-                    {g.howItTransforms}
-                  </p>
-                </div>
-              )}
-
-              {g.keyQuestions && g.keyQuestions.length > 0 && (
-                <div class="mb-5">
-                  <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-2">
-                    Key questions this view answers
-                  </p>
-                  <ul class="m-0 mt-2 space-y-1.5 pl-5 text-[15px] text-stone-700">
-                    {g.keyQuestions.map((q) => (
-                      <li>{q}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {g.relatedTraps && g.relatedTraps.length > 0 && (
-                <div>
-                  <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-stone-500 m-0 mb-2">
-                    Traps this view counters
-                  </p>
-                  <ul class="flex flex-wrap gap-2 list-none p-0 m-0">
+                {g.keyQuestions && g.keyQuestions.length > 0 && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">Key questions this view answers</p>
+                      <ul class="canon-record-meta-list">
+                        {g.keyQuestions.map((q) => <li>{q}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+                {g.relatedTraps && g.relatedTraps.length > 0 && (
+                  <ul class="canon-record-tags">
                     {g.relatedTraps.map((t) => (
                       <li>
-                        <a
-                          href={`/twelve-traps#${t.slug?.current ?? ''}`}
-                          class="inline-block px-2.5 py-1 rounded text-xs bg-stone-100 text-stone-700 border border-stone-200 no-underline hover:bg-stone-200"
-                        >
-                          {t.name}
+                        <a href={`/twelve-traps#${t.slug?.current ?? ''}`} class="canon-record-tag">
+                          <span class="canon-record-tag-label">counters</span>{t.name}
                         </a>
                       </li>
                     ))}
                   </ul>
-                </div>
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </>
     )}
 
-    <CrossCitation path="/unified-views" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-callout">
+      <p class="canon-callout-label">Where this fits</p>
+      <p class="canon-callout-body">
+        Unified views are operated by the <a href="/three-orgs">Three-Org Model</a>.
+        Each view counters a set of <a href="/twelve-traps">Complexity Traps</a> — the
+        per-view trap mapping above is canonical, not illustrative.
+      </p>
+    </div>
+
+    <section class="canon-prose" set:html={framingBody} />
+  </CanonArchetype>
 </BaseLayout>

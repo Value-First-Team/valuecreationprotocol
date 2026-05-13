@@ -1,50 +1,68 @@
 ---
 /**
- * /three-orgs — Three-Org Model canonical reference.
+ * /three-orgs — The Three-Org Model.
  *
- * Customer Org, Operations Org, Finance Org. Every concern maps to one.
- * Renders wiki/canonical/three-org-model-canonical-reference.md (Chris-authored).
+ * Source: wiki canonical reference three-org-model-canonical-reference.md.
+ * Embeds three-org.svg diagram.
+ *
+ * Cross-citation suppressed (peer 404s on valuefirstteam.com/three-orgs;
+ * confirmed 2026-05-12). Will re-enable when Showcase ships firm-side page.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import Diagram from '../components/Diagram.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
-const { html: rawHtml } = renderWikiCanonical(WIKI_CANONICAL.threeOrg);
-const html = stripFirstH1(rawHtml);
+const { html } = renderWikiCanonical(WIKI_CANONICAL.threeOrg);
+const bodyHtml = stripFirstH1(html);
 ---
 
 <BaseLayout
   title="Three-Org Model"
-  description="Customer, Operations, Finance — every concern maps to one. The organizational framing that replaces functional silos."
+  description="Customer, Operations, Finance. Every concern in an AI-native organization maps to one of three orgs — each with its own leader, its own canonical objects, and its own unified view."
   path="/three-orgs"
   ogImage="og-three-orgs.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="Three-Org Model"
+  schemaDefinedTerms={[
+    { name: 'Customer Org', description: 'Led by the Chief Customer Officer. Owns relationships and value flow.', termCode: 'customer-org' },
+    { name: 'Operations Org', description: 'Led by the Chief Operating Officer. Owns the machine of the firm.', termCode: 'operations-org' },
+    { name: 'Finance Org', description: 'Led by the Chief Financial Officer. Owns revenue truth and capital flow.', termCode: 'finance-org' },
+  ]}
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 04 of 12"
-      title="Three-Org Model"
-      lede="Customer Org, Operations Org, Finance Org. Every business concern maps to one of the three. Functional silos dissolve into clear ownership."
-      status="Canon"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/three-orgs"
-    />
+  <CanonArchetype
+    eyebrow="The Three-Org Model"
+    title="Three orgs. One firm. Every concern has a home."
+    lead="Customer, Operations, Finance. Each org carries its own leader, its own canonical objects, and its own unified view. The Three-Org Model replaces the functional silo map of industrial-age operations with a structure built for AI-native value flow."
+    path="/three-orgs"
+    specMeta={[
+      { label: 'Status', value: 'v1.1 · canonical' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/three-orgs' },
+      { label: 'Orgs', value: '3 — Customer · Operations · Finance' },
+    ]}
+  >
+    <figure class="canon-figure">
+      <div class="canon-figure-frame">
+        <img
+          src="/diagrams/three-org.svg"
+          alt="The Three-Org Model — Customer, Operations, Finance — with each org's leader and canonical objects."
+          loading="lazy"
+        />
+      </div>
+      <figcaption class="canon-figure-caption">
+        Customer · Operations · Finance — three orgs, three unified views.
+      </figcaption>
+    </figure>
 
-    <Diagram
-      name="three-org"
-      alt="The Three-Org Model: Customer, Operations, Finance"
-      caption="Every concern, every agent, every BU maps to one of the three orgs."
-    />
+    <section class="canon-prose" set:html={bodyHtml} />
 
-    <Prose html={html} canon />
-
-    <CrossCitation path="/three-orgs" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-callout">
+      <p class="canon-callout-label">Where this fits</p>
+      <p class="canon-callout-body">
+        Each org carries one of the <a href="/unified-views">Four Unified Views</a>:
+        UCV → Customer, URV → Finance, UBC and UTE → Operations. The
+        <a href="/value-path">Value Path</a> is read across all three.
+      </p>
+    </div>
+  </CanonArchetype>
 </BaseLayout>

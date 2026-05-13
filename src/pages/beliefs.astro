@@ -1,85 +1,110 @@
 ---
 /**
- * /beliefs — Five Core Beliefs (canonical Sanity records).
+ * /beliefs — Five Core Beliefs.
  *
- * Belief #5 is now Emergence over Predictability (position 5).
- * Legacy coreBelief-evolution is excluded by the position-ordering.
+ * Source: Sanity coreBelief records ordered by position 1..5.
+ *         Belief #5 is Emergence over Predictability (patched 2026-05).
+ *
+ * Cross-citation suppressed (peer 404s on valuefirstteam.com/beliefs;
+ * confirmed 2026-05-12). Will re-enable when Showcase ships firm-side page.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { getCoreBeliefs } from '../lib/sanity/canon';
+import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const beliefs = await getCoreBeliefs();
-// Only show beliefs with a numeric position (1–5). Excludes legacy records.
-const ordered = beliefs.filter((b) => typeof b.position === 'number' && b.position >= 1 && b.position <= 5);
+const ordered = beliefs.filter(
+  (b) => typeof b.position === 'number' && b.position >= 1 && b.position <= 5
+);
 
-// Per-belief DefinedTerm entries for the auxiliary JSON-LD graph.
+// Pull canonical framing prose from the wiki mirror for the body intro.
+const { html: framingHtml } = renderWikiCanonical(WIKI_CANONICAL.beliefs);
+const framingBody = stripFirstH1(framingHtml);
+
 const beliefDefinedTerms = ordered.map((b) => ({
   name: b.name,
   description: b.tagline ?? b.shortLabel ?? undefined,
-  termCode: b.shortLabel ?? undefined,
+  termCode: b.shortLabel ?? `belief-${b.position}`,
 }));
 ---
 
 <BaseLayout
   title="Five Core Beliefs"
-  description="The philosophical foundations of the Value-First Framework — five 'X over Y' statements that distinguish VCP from industrial-age defaults."
+  description="The philosophical foundations of the Value Creation Protocol. Five 'X over Y' statements that distinguish AI-native value creation from industrial-age defaults."
   path="/beliefs"
   ogImage="og-beliefs.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="Five Core Beliefs"
   schemaDefinedTerms={beliefDefinedTerms}
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 01 of 12"
-      title="Five Core Beliefs"
-      lede="The philosophical foundations of the Value-First Framework. Each belief is an 'X over Y' statement — the VCP-aligned approach over the industrial-age default."
-      status="v1.0"
-      effectiveDate="2025-12-08"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/beliefs"
-    />
+  <CanonArchetype
+    eyebrow="Five Core Beliefs"
+    title="Five beliefs that decide everything else."
+    lead="Each belief is an 'X over Y' statement — the Value-First approach over the industrial-age default. They are the philosophical foundation from which the Value Path, the Twelve Traps, and the Three-Org Model are derived. Read them once; they will rearrange the rest of the protocol."
+    path="/beliefs"
+    specMeta={[
+      { label: 'Status', value: 'v1.0 · canonical' },
+      { label: 'Effective', value: '08 December 2025' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/beliefs' },
+    ]}
+  >
+    <section class="canon-prose">
+      <p>
+        Beliefs come before frameworks. The five below decide which patterns the
+        protocol amplifies and which it refuses. Every other canon page on this
+        site can be derived from them — and read against them.
+      </p>
+      <p>
+        Each belief names the operating habit the protocol holds (the X) and the
+        industrial-age habit it leaves behind (the Y). The structure is intentional:
+        beliefs are positional, not abstract.
+      </p>
+    </section>
 
-    {ordered.length === 0 ? (
-      <p class="text-stone-600">Belief records loading from canon.</p>
-    ) : (
-      <ol class="space-y-12 list-none p-0">
-        {ordered.map((b) => (
-          <li class="grid md:grid-cols-12 gap-8 items-start pb-12 border-b border-stone-100 last:border-0">
-            <div class="md:col-span-3">
-              <span class="font-mono text-vcp-teal text-sm">
-                Belief {String(b.position).padStart(2, '0')}
-              </span>
-              <h2 class="text-xl md:text-2xl font-semibold text-stone-900 mt-2 mb-0 leading-tight">
-                {b.name}
-              </h2>
-              {b.shortLabel && (
-                <p class="text-sm text-stone-500 mt-2 mb-0 font-mono">
-                  {b.shortLabel}
-                </p>
-              )}
-            </div>
-            <div class="md:col-span-9">
-              {b.tagline && (
-                <p class="text-lg md:text-xl text-stone-800 m-0 leading-relaxed font-medium">
-                  {b.tagline}
-                </p>
-              )}
-              <p class="text-sm text-stone-500 mt-6 mb-0">
-                See <a href="/glossary#beliefs" class="text-stone-700 underline">glossary entry</a> ·
-                Position #{b.position} in the canonical ordering.
-              </p>
-            </div>
-          </li>
-        ))}
-      </ol>
+    {ordered.length > 0 && (
+      <>
+        <p class="canon-section-label">The five, in canonical order</p>
+        <h2 class="canon-section-sub">Each belief, named and addressable.</h2>
+        <p class="canon-section-note">
+          Sourced from Sanity. Position 1 through 5. Each carries its own anchor.
+        </p>
+
+        <ol class="canon-records">
+          {ordered.map((b) => {
+            const slug = b.shortLabel
+              ? b.shortLabel.toLowerCase().replace(/\s+/g, '-')
+              : `belief-${b.position}`;
+            return (
+              <li class="canon-record" id={slug}>
+                <p class="canon-record-eyebrow">Belief {String(b.position).padStart(2, '0')}</p>
+                <h3 class="canon-record-title">{b.name}</h3>
+                {b.tagline && (
+                  <p class="canon-record-mantra">"{b.tagline}"</p>
+                )}
+                {b.shortLabel && (
+                  <p class="canon-record-body">
+                    Short label: <strong>{b.shortLabel}</strong>.
+                    Read in the canonical ordering as Position #{b.position}.
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      </>
     )}
 
-    <CrossCitation path="/beliefs" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-callout">
+      <p class="canon-callout-label">Where this fits</p>
+      <p class="canon-callout-body">
+        Beliefs are upstream. The <a href="/value-path">Value Path</a> is one
+        downstream expression of them. The <a href="/twelve-traps">Twelve Traps</a>
+        name what happens when a team adopts the Y instead of the X.
+      </p>
+    </div>
+
+    <section class="canon-prose" set:html={framingBody} />
+  </CanonArchetype>
 </BaseLayout>

@@ -1,127 +1,215 @@
 ---
 /**
- * /value-path — Eight stages from first signal through champion.
+ * /value-path — The eight stages from Audience to Champion.
+ *
+ * Source: Sanity valuePathStage records (Tier 1 canonical) +
+ *         wiki canonical reference v1.1 for the framing prose.
+ *
+ * Layout: hero, value-path diagram, two-part per-record render
+ * (Path TO Value 1–4 → Value Activated pivot → Path OF Value 5–8),
+ * cross-citation (live: /value-path on valuefirstteam.com),
+ * implementer attribution.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Diagram from '../components/Diagram.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { getValuePathStages } from '../lib/sanity/canon';
 
 const stages = await getValuePathStages();
-
 const PATH_TO = stages.filter((s) => s.number <= 4);
 const PATH_OF = stages.filter((s) => s.number >= 5);
+
+// Per-stage DefinedTerm entries for the auxiliary JSON-LD graph.
+const stageDefinedTerms = stages.map((s) => ({
+  name: `${s.name} (Value Path Stage ${s.number})`,
+  description: s.mantra ? `"${s.mantra}" — ${s.description ?? ''}`.trim() : s.description,
+  termCode: `vp-${s.number}`,
+}));
 ---
 
 <BaseLayout
   title="Value Path"
-  description="Eight stages from first signal through champion. Path TO Value (stages 1–4) precedes Path OF Value (stages 5–8). Replaces the industrial-age sales funnel."
+  description="The eight-stage journey from first signal through champion. Path TO Value (1–4) precedes Path OF Value (5–8). The canonical replacement for industrial-age sales funnels."
   path="/value-path"
   ogImage="og-value-path.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="Value Path"
+  schemaDefinedTerms={stageDefinedTerms}
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 03 of 12"
-      title="Value Path"
-      lede="The eight-stage journey from first signal through champion. Path TO Value precedes Path OF Value — value activated separates them."
-      status="v1.1"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/value-path"
-    />
+  <CanonArchetype
+    eyebrow="The Value Path"
+    title="Eight stages of natural progression."
+    lead="A person moves through value discovery and creation in eight observable stages. Path TO Value (1–4) is discovery and evaluation. Path OF Value (5–8) is creation and multiplication. The pivot — Value Activated — is the moment of commitment. Each stage carries its own mantra, its own signals of readiness, and its own operating commitments."
+    path="/value-path"
+    specMeta={[
+      { label: 'Status', value: 'v1.1 · canonical' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/value-path' },
+      { label: 'Stages', value: '8 — sourced from canon' },
+    ]}
+  >
+    <figure class="canon-figure">
+      <div class="canon-figure-frame">
+        <img
+          src="/diagrams/value-path.svg"
+          alt="The eight Value Path stages, from Audience through Champion, with the Value Activated pivot between Path TO (1–4) and Path OF (5–8)."
+          loading="lazy"
+        />
+      </div>
+      <figcaption class="canon-figure-caption">
+        Path TO Value (1–4) → Value Activated → Path OF Value (5–8)
+      </figcaption>
+    </figure>
 
-    <Diagram
-      name="value-path"
-      alt="The eight Value Path stages, from Audience through Champion."
-      caption="Path TO Value (1–4) → Value Activated → Path OF Value (5–8)."
-    />
+    <section class="canon-prose">
+      <p>
+        The Value Path describes how humans actually move through relationships with an
+        organization — not how an industrial-age operating model assumes they should.
+        It honors readiness over manufactured advancement, signals over scores, and
+        natural progression over engineered pressure.
+      </p>
+      <p>
+        Each stage is observable. A person occupies one stage at a time. The transitions
+        are quiet: a Researcher does not announce that they have moved into Hand Raiser;
+        they simply ask a different kind of question. The protocol reads those questions.
+      </p>
+      <p>
+        The eight stages render below as canonical records. Each carries its own anchor
+        URL — meaning a practitioner in a client meeting can cite a single stage directly
+        without losing context (for example,
+        <a href="#hand-raiser">valuecreationprotocol.com/value-path#hand-raiser</a>).
+      </p>
+    </section>
 
-    {stages.length > 0 && (
-      <>
-        <section class="mt-12">
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-            Path TO Value
-          </p>
-          <h2 class="text-xl md:text-2xl font-semibold text-stone-900 m-0 mb-2">
-            Stages 1–4 — Before Value Activated
-          </h2>
-          <p class="text-stone-600 m-0 mb-6 text-[15px]">
-            A person moves from observable signal to commitment. The pre-commercial phase.
-          </p>
-          <div class="grid md:grid-cols-2 gap-5">
-            {PATH_TO.map((s) => (
-              <article class="p-6 rounded-lg border border-stone-200 bg-white">
-                <div class="flex items-center gap-3 mb-3">
-                  <span
-                    class="inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-mono text-sm font-semibold"
-                    style={`background:${s.color?.hex ?? '#0d9488'}`}
-                  >
-                    {s.number}
-                  </span>
-                  <h3 class="m-0 text-lg font-semibold text-stone-900">{s.name}</h3>
+    <p class="canon-section-label" id="path-to">Path TO Value</p>
+    <h2 class="canon-section-sub">Stages 1 through 4 — discovery and evaluation.</h2>
+    <p class="canon-section-note">
+      A person moves from observable signal to commitment. This is the pre-Value-Activated
+      phase. Sourcing happens here; pressure does not belong here.
+    </p>
+
+    {PATH_TO.length > 0 && (
+      <ol class="canon-records">
+        {PATH_TO.map((s) => {
+          const slug = s.slug?.current ?? s.name.toLowerCase().replace(/\s+/g, '-');
+          return (
+            <li class="canon-record" id={slug}>
+              <p class="canon-record-eyebrow">Stage {String(s.number).padStart(2, '0')}</p>
+              <h3 class="canon-record-title">{s.name}</h3>
+              {s.mantra && (
+                <p class="canon-record-mantra">"{s.mantra}"</p>
+              )}
+              {s.description && (
+                <p class="canon-record-body">{s.description}</p>
+              )}
+              {(s.signalsOfReadiness?.length || s.typicalChallenges?.length) && (
+                <div class="canon-record-meta">
+                  {s.signalsOfReadiness && s.signalsOfReadiness.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">Signals of readiness</p>
+                      <ul class="canon-record-meta-list">
+                        {s.signalsOfReadiness.map((sig) => <li>{sig}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {s.typicalChallenges && s.typicalChallenges.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">Typical challenges</p>
+                      <ul class="canon-record-meta-list">
+                        {s.typicalChallenges.map((c) => <li>{c}</li>)}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-                {s.mantra && (
-                  <p class="text-stone-800 font-medium m-0 mb-2 leading-snug">"{s.mantra}"</p>
-                )}
-                {s.description && (
-                  <p class="text-[15px] text-stone-600 m-0 leading-relaxed">{s.description}</p>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <div class="my-12 py-4 px-6 rounded-lg bg-vcp-teal/10 border border-vcp-teal/30 text-center">
-          <p class="m-0 text-stone-800 font-medium">
-            <span class="text-vcp-teal">▼</span>
-            <strong class="font-mono text-sm tracking-wider">VALUE ACTIVATED</strong>
-            <span class="text-vcp-teal">▼</span>
-          </p>
-          <p class="text-sm text-stone-600 mt-2 mb-0">
-            The relationship transitions from commitment to receiving value.
-          </p>
-        </div>
-
-        <section>
-          <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-orange m-0 mb-3">
-            Path OF Value
-          </p>
-          <h2 class="text-xl md:text-2xl font-semibold text-stone-900 m-0 mb-2">
-            Stages 5–8 — After Value Activated
-          </h2>
-          <p class="text-stone-600 m-0 mb-6 text-[15px]">
-            Value flows. The relationship matures from creator to champion.
-          </p>
-          <div class="grid md:grid-cols-2 gap-5">
-            {PATH_OF.map((s) => (
-              <article class="p-6 rounded-lg border border-stone-200 bg-white">
-                <div class="flex items-center gap-3 mb-3">
-                  <span
-                    class="inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-mono text-sm font-semibold"
-                    style={`background:${s.color?.hex ?? '#ea580c'}`}
-                  >
-                    {s.number}
-                  </span>
-                  <h3 class="m-0 text-lg font-semibold text-stone-900">{s.name}</h3>
-                </div>
-                {s.mantra && (
-                  <p class="text-stone-800 font-medium m-0 mb-2 leading-snug">"{s.mantra}"</p>
-                )}
-                {s.description && (
-                  <p class="text-[15px] text-stone-600 m-0 leading-relaxed">{s.description}</p>
-                )}
-              </article>
-            ))}
-          </div>
-        </section>
-      </>
+              )}
+              {s.typicalTraps && s.typicalTraps.length > 0 && (
+                <ul class="canon-record-tags">
+                  {s.typicalTraps.map((t: any) => (
+                    <li>
+                      <a href={`/twelve-traps#${t.slug?.current ?? ''}`} class="canon-record-tag">
+                        <span class="canon-record-tag-label">trap</span>{t.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ol>
     )}
 
-    <CrossCitation path="/value-path" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-pivot">
+      <p class="canon-pivot-mark">▼  Value Activated  ▼</p>
+      <p class="canon-pivot-note">
+        The relationship transitions from commitment to receiving value. Path TO ends here; Path OF begins.
+      </p>
+    </div>
+
+    <p class="canon-section-label" id="path-of">Path OF Value</p>
+    <h2 class="canon-section-sub">Stages 5 through 8 — creation and multiplication.</h2>
+    <p class="canon-section-note">
+      Value flows. The relationship matures from implementer to champion. This is where
+      industrial-age operating models go quiet; the protocol pays attention.
+    </p>
+
+    {PATH_OF.length > 0 && (
+      <ol class="canon-records">
+        {PATH_OF.map((s) => {
+          const slug = s.slug?.current ?? s.name.toLowerCase().replace(/\s+/g, '-');
+          return (
+            <li class="canon-record" id={slug}>
+              <p class="canon-record-eyebrow">Stage {String(s.number).padStart(2, '0')}</p>
+              <h3 class="canon-record-title">{s.name}</h3>
+              {s.mantra && (
+                <p class="canon-record-mantra">"{s.mantra}"</p>
+              )}
+              {s.description && (
+                <p class="canon-record-body">{s.description}</p>
+              )}
+              {(s.signalsOfReadiness?.length || s.typicalChallenges?.length) && (
+                <div class="canon-record-meta">
+                  {s.signalsOfReadiness && s.signalsOfReadiness.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">Signals of readiness</p>
+                      <ul class="canon-record-meta-list">
+                        {s.signalsOfReadiness.map((sig) => <li>{sig}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {s.typicalChallenges && s.typicalChallenges.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">Typical challenges</p>
+                      <ul class="canon-record-meta-list">
+                        {s.typicalChallenges.map((c) => <li>{c}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+              {s.typicalTraps && s.typicalTraps.length > 0 && (
+                <ul class="canon-record-tags">
+                  {s.typicalTraps.map((t: any) => (
+                    <li>
+                      <a href={`/twelve-traps#${t.slug?.current ?? ''}`} class="canon-record-tag">
+                        <span class="canon-record-tag-label">trap</span>{t.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    )}
+
+    <div class="canon-callout">
+      <p class="canon-callout-label">Related canon</p>
+      <p class="canon-callout-body">
+        Read the <a href="/twelve-traps">Twelve Complexity Traps</a> to see what derails
+        natural progression. Read <a href="/realities">Value Realities</a> for the
+        operational commitments each stage demands.
+      </p>
+    </div>
+  </CanonArchetype>
 </BaseLayout>
