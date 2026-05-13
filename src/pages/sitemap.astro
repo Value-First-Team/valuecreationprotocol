@@ -1,142 +1,399 @@
 ---
 /**
- * /sitemap — human-readable sitemap.
+ * /sitemap — Human-readable sitemap. The wayfinding-of-wayfinding surface.
  *
- * Lists all 25 public routes grouped by archetype. Companion to the
- * machine-readable /sitemap-index.xml produced by @astrojs/sitemap.
+ * Hub archetype, Phase 5 (rebuilt 2026-05-13). Indexes every public route on
+ * valuecreationprotocol.com grouped by archetype so a reader landing here
+ * understands the shape of the protocol home, not just its file list.
  *
- * Reads as a calm index — same warm-paper editorial tokens as the rest
- * of the site, no decoration beyond what's needed to scan.
+ * Companion to the machine-readable /sitemap-index.xml fanning out to
+ * /sitemap-0.xml, auto-generated at build time by @astrojs/sitemap and
+ * filtered to exclude /sitemap itself (avoiding recursive listing).
+ *
+ * Reads as the lightest hub on the site: cards are smaller, descriptions
+ * are short, the editorial gesture is the hairline that separates each
+ * archetype cluster. The point is to scan, not to read.
+ *
+ * Single source of truth for canon ordering: METHODOLOGY_PAGES and
+ * MANIFESTO_PAGES in lib/site.ts. Everything else is enumerated locally.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import { METHODOLOGY_PAGES, MANIFESTO_PAGES } from '../lib/site';
+import HubArchetype from '../components/HubArchetype.astro';
+import { METHODOLOGY_PAGES, MANIFESTO_PAGES, SITE } from '../lib/site';
 
-type Route = { href: string; label: string; note?: string };
+interface Route {
+  href: string;
+  title: string;
+  summary: string;
+  meta?: string;
+}
 
+// ---- Group 1: Homepage --------------------------------------------------
 const HOMEPAGE: Route[] = [
-  { href: '/', label: 'Open Protocol Home' },
+  {
+    href: '/',
+    title: 'Open Protocol Home',
+    summary:
+      'The protocol home. A peer to modelcontextprotocol.io and humancontextprotocol.com — the value layer of the AI-native stack.',
+    meta: 'Root',
+  },
 ];
 
+// ---- Group 2: Hubs ------------------------------------------------------
 const HUBS: Route[] = [
-  { href: '/protocol-stack', label: 'The Protocol Stack', note: 'MCP · HCP · VCP reference' },
-  { href: '/methodology', label: 'Methodology Canon', note: 'Index of 12 chapters' },
-  { href: '/manifestos', label: 'Manifestos', note: 'Index of 03 long-form pieces' },
-  { href: '/engagement', label: 'Engagement Pathway', note: 'Read · Implement · Contribute · Reach' },
+  {
+    href: '/methodology',
+    title: 'Methodology Canon',
+    summary:
+      'Index of the twelve canon pages — operating principles, frameworks, patterns, programs, implementation.',
+    meta: '12 canon pages',
+  },
+  {
+    href: '/manifestos',
+    title: 'Manifestos',
+    summary:
+      'Three long-form artifacts arguing the case the protocol formalizes — Beyond Leads, Value-Led Growth, Positioning.',
+    meta: '3 manifestos',
+  },
+  {
+    href: '/protocol-stack',
+    title: 'The Protocol Stack',
+    summary:
+      'How VCP sits beside MCP (capability) and HCP (human context) in the AI-native protocol substrate.',
+    meta: 'MCP · HCP · VCP',
+  },
+  {
+    href: '/engagement',
+    title: 'Engagement Pathways',
+    summary:
+      'Four pathways through the protocol home — Read, Implement, Contribute, Reach the implementer.',
+    meta: '4 pathways',
+  },
 ];
 
-const ENCODING_STACK: Route[] = [
-  { href: '/encoding-stack', label: 'Encoding Stack — Overview' },
-  { href: '/lexicon', label: 'Layer A · Value-First Lexicon' },
-  { href: '/vcp-lang', label: 'Layer B · VCP-Lang' },
-  { href: '/value-graph', label: 'Layer C · Value Graph' },
-];
-
-const MANIFESTOS: Route[] = MANIFESTO_PAGES.map((m) => ({
-  href: m.href,
-  label: m.label,
-  note: m.summary,
+// ---- Group 3: Methodology canon (from lib/site.ts) ---------------------
+// METHODOLOGY_PAGES is the single source of truth — ordering and copy live
+// there so this page and /methodology stay in sync automatically.
+const METHODOLOGY: Route[] = METHODOLOGY_PAGES.map((p, i) => ({
+  href: p.href,
+  title: p.label,
+  summary: p.summary,
+  meta: `Chapter ${String(i + 1).padStart(2, '0')}`,
 }));
 
+// ---- Group 4: Encoding stack -------------------------------------------
+// The three-layer substrate plus its overview. Listed as 4 entries — the
+// overview is intentionally separate from the layer specs because the
+// overview is wayfinding (hub-shaped) and the layers are canon-class specs.
+const ENCODING: Route[] = [
+  {
+    href: '/encoding-stack',
+    title: 'Encoding Stack — Overview',
+    summary:
+      'The three-layer substrate that makes VCP machine-parseable — lexical, structural, relational.',
+    meta: 'Overview',
+  },
+  {
+    href: '/lexicon',
+    title: 'Value-First Lexicon',
+    summary:
+      'Layer A — the lexical substrate. The canonical vocabulary every implementation reads from.',
+    meta: 'Layer A',
+  },
+  {
+    href: '/vcp-lang',
+    title: 'VCP-Lang',
+    summary:
+      'Layer B — the structural substrate. The grammar that encodes value relationships in machine-parseable form.',
+    meta: 'Layer B',
+  },
+  {
+    href: '/value-graph',
+    title: 'Value Graph',
+    summary:
+      'Layer C — the relational substrate. The graph topology that describes how value moves between actors.',
+    meta: 'Layer C',
+  },
+];
+
+// ---- Group 5: Manifestos (from lib/site.ts) ----------------------------
+const MANIFESTOS: Route[] = MANIFESTO_PAGES.map((m, i) => ({
+  href: m.href,
+  title: m.label,
+  summary: m.summary,
+  meta: `Manifesto ${String(i + 1).padStart(2, '0')}`,
+}));
+
+// ---- Group 6: Reference -------------------------------------------------
 const REFERENCE: Route[] = [
-  { href: '/glossary', label: 'Glossary', note: 'Full canonical vocabulary' },
-  { href: '/sitemap-index.xml', label: '/sitemap-index.xml', note: 'Machine-readable XML sitemap' },
+  {
+    href: '/glossary',
+    title: 'Glossary',
+    summary:
+      'The canonical vocabulary in one place — every defined term used across the protocol home.',
+    meta: 'Defined terms',
+  },
 ];
 
-const GROUPS: Array<{ id: string; title: string; eyebrow: string; routes: Route[] }> = [
-  { id: 'home', title: 'Homepage', eyebrow: '§ 01', routes: HOMEPAGE },
-  { id: 'hubs', title: 'Hub Pages', eyebrow: '§ 02', routes: HUBS },
-  { id: 'methodology', title: 'Methodology Canon (12)', eyebrow: '§ 03', routes: METHODOLOGY_PAGES.map((m, i) => ({ href: m.href, label: `Chapter ${String(i + 1).padStart(2, '0')} · ${m.label}`, note: m.summary })) },
-  { id: 'encoding', title: 'Encoding Stack (3)', eyebrow: '§ 04', routes: ENCODING_STACK },
-  { id: 'manifestos', title: 'Manifestos (3)', eyebrow: '§ 05', routes: MANIFESTOS },
-  { id: 'reference', title: 'Reference', eyebrow: '§ 06', routes: REFERENCE },
+// ---- Group 7: This page -------------------------------------------------
+const SITEMAP_SELF: Route[] = [
+  {
+    href: '/sitemap',
+    title: 'Sitemap',
+    summary:
+      "You are here. Human-readable wayfinding for the protocol home. Machine-readable companion at /sitemap-index.xml.",
+    meta: 'You are here',
+  },
 ];
 
-const totalRoutes = GROUPS.reduce((n, g) => n + g.routes.length, 0);
+interface Group {
+  id: string;
+  label: string;
+  title: string;
+  note: string;
+  routes: Route[];
+}
+
+const GROUPS: Group[] = [
+  {
+    id: 'home',
+    label: '§ 01 · Homepage',
+    title: 'Homepage',
+    note: 'The protocol home. One page — declarative, calm, no pitch.',
+    routes: HOMEPAGE,
+  },
+  {
+    id: 'hubs',
+    label: '§ 02 · Hubs',
+    title: 'Hubs',
+    note: 'Four wayfinding surfaces that index the canon. Pick the one that matches what you are trying to do.',
+    routes: HUBS,
+  },
+  {
+    id: 'methodology',
+    label: '§ 03 · Methodology canon',
+    title: 'Methodology canon',
+    note: 'Twelve canon pages — the operating principles, frameworks, patterns, programs, and implementation guidance the protocol encodes.',
+    routes: METHODOLOGY,
+  },
+  {
+    id: 'encoding',
+    label: '§ 04 · Encoding stack',
+    title: 'Encoding stack',
+    note: 'The substrate that makes VCP machine-parseable. Three layers — lexical, structural, relational — plus a short overview.',
+    routes: ENCODING,
+  },
+  {
+    id: 'manifestos',
+    label: '§ 05 · Manifestos',
+    title: 'Manifestos',
+    note: 'Three long-form arguments for why the protocol exists.',
+    routes: MANIFESTOS,
+  },
+  {
+    id: 'reference',
+    label: '§ 06 · Reference',
+    title: 'Reference',
+    note: 'Defined vocabulary, in one place.',
+    routes: REFERENCE,
+  },
+  {
+    id: 'sitemap',
+    label: '§ 07 · This page',
+    title: 'This page',
+    note: 'The wayfinding-of-wayfinding. Machine-readable companion linked below.',
+    routes: SITEMAP_SELF,
+  },
+];
+
+const totalRoutes = GROUPS.reduce((sum, g) => sum + g.routes.length, 0);
+
+// Schema.org CollectionPage with an embedded ItemList — this page indexes
+// every other page on the site, so search engines see it as a structured
+// table of contents (a hint, not a replacement for sitemap-index.xml).
+const allRoutes: Route[] = GROUPS.flatMap((g) => g.routes);
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Sitemap — Value Creation Protocol',
+  description: `Human-readable sitemap for valuecreationprotocol.com. ${totalRoutes} routes grouped by archetype.`,
+  url: `${SITE.url}/sitemap`,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+  },
+  hasPart: {
+    '@type': 'ItemList',
+    name: 'All public routes',
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    numberOfItems: allRoutes.length,
+    itemListElement: allRoutes.map((r, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: r.title,
+      url: `${SITE.url}${r.href}`,
+    })),
+  },
+};
 ---
 
 <BaseLayout
   title="Sitemap"
-  description="All public pages on valuecreationprotocol.com, grouped by archetype."
+  description={`Human-readable sitemap for valuecreationprotocol.com — ${totalRoutes} public routes grouped by archetype. The wayfinding-of-wayfinding surface.`}
   path="/sitemap"
   ogImage="og-default.jpg"
   schemaType="CollectionPage"
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Reference · Index"
-      title="Sitemap"
-      lede={`Every public page on valuecreationprotocol.com, grouped by archetype. ${totalRoutes} routes total.`}
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/sitemap"
-    />
+  <script type="application/ld+json" set:html={JSON.stringify(collectionLd)} />
 
-    <!-- Group ToC -->
-    <nav class="mb-14 p-6 rounded-vcp-lg border border-vcp-border bg-vcp-surface-2">
-      <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
-        Groups
-      </p>
-      <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none p-0 m-0 text-sm">
+  <HubArchetype
+    eyebrow={`§ Sitemap · ${totalRoutes} routes`}
+    title="Every page, grouped."
+    lead="Wayfinding for the protocol home. Every public route on valuecreationprotocol.com, grouped by archetype. The machine-readable companion lives at /sitemap-index.xml — this page is for humans."
+  >
+    <nav class="sitemap-toc" aria-label="Sitemap groups">
+      <p class="sitemap-toc-label">Groups</p>
+      <ul class="sitemap-toc-list">
         {GROUPS.map((g) => (
           <li>
-            <a href={`#${g.id}`} class="text-vcp-ink-2 border-b border-vcp-border-strong no-underline hover:text-vcp-ink hover:border-vcp-ink">
-              {g.title}
-            </a>
+            <a href={`#${g.id}`} class="sitemap-toc-link">{g.title}</a>
           </li>
         ))}
       </ul>
     </nav>
 
-    {GROUPS.map((group) => (
-      <section id={group.id} class="mb-16">
-        <div class="flex items-baseline gap-4 mb-6 pb-3 border-b border-vcp-border">
-          <span class="font-mono text-[11px] tracking-[0.14em] text-vcp-teal-deep">{group.eyebrow}</span>
-          <h2
-            class="font-display text-[28px] md:text-[32px] font-medium leading-snug tracking-vcp-h text-vcp-ink m-0"
-            style="font-variation-settings: 'opsz' 30"
-          >
-            {group.title}
-          </h2>
-        </div>
-        <ul class="space-y-3 list-none p-0 m-0">
+    {GROUPS.map((group, gIdx) => (
+      <section id={group.id} class="hub-group" aria-labelledby={`hub-group-${gIdx}`}>
+        <p class="hub-group-label">{group.label}</p>
+        <h2 class="hub-group-title" id={`hub-group-${gIdx}`}>{group.title}</h2>
+        <p class="hub-group-note">{group.note}</p>
+
+        <ul class="hub-grid">
           {group.routes.map((r) => (
-            <li class="grid md:grid-cols-12 gap-4 items-baseline py-2.5 border-b border-vcp-border last:border-0">
-              <a
-                href={r.href}
-                target={r.href.startsWith('/sitemap-index') ? '_blank' : undefined}
-                rel={r.href.startsWith('/sitemap-index') ? 'noopener' : undefined}
-                class="md:col-span-4 font-display text-[17px] font-medium text-vcp-ink border-b border-vcp-border-strong no-underline hover:text-vcp-teal-deep hover:border-vcp-teal-deep"
-                style="font-variation-settings: 'opsz' 17"
-              >
-                {r.label}
+            <li>
+              <a href={r.href} class="hub-card">
+                <p class="hub-card-eyebrow">{r.meta ?? 'Route'}</p>
+                <h3 class="hub-card-title">{r.title}</h3>
+                <p class="hub-card-body">{r.summary}</p>
+                <div class="hub-card-foot">
+                  <span class="hub-card-meta sitemap-card-path">{r.href}</span>
+                  <span aria-hidden="true" class="hub-card-arrow">&rarr;</span>
+                </div>
               </a>
-              <span class="md:col-span-3 font-mono text-[12px] text-vcp-ink-3 tracking-[0.04em]">
-                {r.href}
-              </span>
-              {r.note && (
-                <span class="md:col-span-5 text-[14px] text-vcp-ink-2 leading-relaxed">
-                  {r.note}
-                </span>
-              )}
             </li>
           ))}
         </ul>
       </section>
     ))}
 
-    <aside class="mt-16 pt-10 border-t border-vcp-border">
-      <p class="font-mono text-[10px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
-        MACHINE-READABLE
-      </p>
-      <p class="font-display text-[16px] leading-[1.55] text-vcp-ink m-0 max-w-[68ch]" style="font-variation-settings: 'opsz' 19">
-        Machine-readable sitemap at{' '}
-        <a href="/sitemap-index.xml" target="_blank" rel="noopener" class="text-vcp-teal-deep border-b border-vcp-teal-deep no-underline">
-          /sitemap-index.xml
-        </a>{' '}
-        — auto-generated at build time by @astrojs/sitemap. The XML sitemap is what search engines use;
-        this page exists for humans navigating the protocol home.
+    <aside class="sitemap-xml">
+      <p class="sitemap-xml-eyebrow">Machine-readable</p>
+      <p class="sitemap-xml-body">
+        Search engines read the XML sitemap at{' '}
+        <a href="/sitemap-index.xml" target="_blank" rel="noopener" class="sitemap-xml-link">/sitemap-index.xml</a>
+        {' '}— auto-generated at build time, fanning out to{' '}
+        <a href="/sitemap-0.xml" target="_blank" rel="noopener" class="sitemap-xml-link">/sitemap-0.xml</a>.
+        This page is filtered out of the XML to keep the index from referencing itself.
       </p>
     </aside>
-  </PageContainer>
+  </HubArchetype>
 </BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     Sitemap — page-local helpers that compose on top of HubArchetype.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     ============================================================ */
+
+  /* ============= Group ToC ============= */
+  .sitemap-toc {
+    margin: 0 0 3rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-lg);
+  }
+  .sitemap-toc-label {
+    margin: 0 0 0.85rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+  }
+  .sitemap-toc-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .sitemap-toc-link {
+    display: inline-flex;
+    align-items: baseline;
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    color: var(--vcp-ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-border-strong);
+    padding: 0.15rem 0;
+    transition: color var(--vcp-t-fast), border-color var(--vcp-t-fast);
+  }
+  .sitemap-toc-link:hover {
+    color: var(--vcp-teal-deep);
+    border-bottom-color: var(--vcp-teal-deep);
+  }
+
+  /* ============= Card path override =============
+     Sitemap cards surface the path as the foot-meta — mono so the path
+     scans as an identifier, not as prose. */
+  .sitemap-card-path {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--vcp-ink-3);
+    text-transform: none;
+  }
+  .hub-card:hover .sitemap-card-path {
+    color: var(--vcp-teal-deep);
+  }
+
+  /* ============= XML aside =============
+     Closes the page before the implementer band. Reads as a calm pointer,
+     not a CTA. */
+  .sitemap-xml {
+    margin: 4rem 0 0;
+    padding: 2.25rem 0 0;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .sitemap-xml-eyebrow {
+    margin: 0 0 0.75rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+  }
+  .sitemap-xml-body {
+    margin: 0;
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--vcp-ink-2);
+    max-width: 64ch;
+    font-variation-settings: "opsz" 19;
+  }
+  .sitemap-xml-link {
+    color: var(--vcp-teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal-deep);
+  }
+  .sitemap-xml-link:hover {
+    color: var(--vcp-link-hover);
+    border-bottom-color: var(--vcp-link-hover);
+  }
+</style>
