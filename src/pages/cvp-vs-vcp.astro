@@ -1,17 +1,17 @@
 ---
 /**
- * /cvp-vs-vcp — Disambiguation page for the two acronyms.
+ * /cvp-vs-vcp — Disambiguation: Customer Value Platform vs Value Creation Protocol.
+ *
+ * Two acronyms, one letter apart, completely different layers. This page is
+ * the canonical boundary.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 ---
 
 <BaseLayout
   title="CVP vs VCP"
-  description="Customer Value Platform (CVP) versus Value Creation Protocol (VCP). Disambiguation: one is the platform category, the other is the protocol that runs on top of it."
+  description="Customer Value Platform (CVP) versus Value Creation Protocol (VCP). Disambiguation — one is the platform category, the other is the protocol that runs on top of it."
   path="/cvp-vs-vcp"
   ogImage="og-cvp-vs-vcp.jpg"
   schemaType="DefinedTerm"
@@ -31,108 +31,108 @@ import Implementers from '../components/Implementers.astro';
     },
   ]}
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 12 of 12 · Disambiguation"
-      title="CVP vs VCP"
-      lede="Two acronyms, one letter off, completely different layers. Here is the boundary."
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/cvp-vs-vcp"
-    />
-
-    <div class="grid md:grid-cols-2 gap-6 mb-12">
-      <article class="rounded-lg border border-stone-200 bg-white p-6 md:p-7">
-        <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-teal m-0 mb-3">
-          Customer Value Platform
-        </p>
-        <h2 class="text-2xl font-semibold text-stone-900 m-0 mb-3">CVP</h2>
-        <p class="text-stone-700 m-0 leading-relaxed">
+  <CanonArchetype
+    eyebrow="CVP vs VCP"
+    title="One letter apart. Two different layers."
+    lead="Customer Value Platform and Value Creation Protocol are not synonyms. They are not competing names for the same idea. They name two different layers of the AI-native stack — and they were designed to compose with each other, not to be heard in isolation. This page is the canonical boundary."
+    path="/cvp-vs-vcp"
+    specMeta={[
+      { label: 'Status', value: 'canonical disambiguation' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/cvp-vs-vcp' },
+    ]}
+  >
+    <ol class="canon-records">
+      <li class="canon-record" id="cvp">
+        <p class="canon-record-eyebrow">Customer Value Platform · the substrate</p>
+        <h3 class="canon-record-title">CVP</h3>
+        <p class="canon-record-mantra">"The software your customer-facing team operates from."</p>
+        <p class="canon-record-body">
           A <strong>platform category</strong>. Software organized around customer
           relationships and value creation rather than internal record-keeping.
-          HubSpot is the canonical implementing CVP for the Value-First method.
+          Configuration-driven, native-object-first. HubSpot is the canonical
+          implementing CVP for the Value-First method. Other CVPs are possible;
+          the category is not vendor-locked.
         </p>
-        <p class="text-stone-600 mt-4 mb-0 text-sm leading-relaxed">
-          When you hear "CVP," think substrate. The software your customer-facing
-          team operates from. Configuration-driven, native-object-first.
+        <p class="canon-record-body">
+          When you hear "CVP," think substrate.
         </p>
-        <p class="mt-6 mb-0">
-          <a href="/hubspot-cvp" class="text-stone-700 underline text-sm">HubSpot as CVP →</a>
-        </p>
-      </article>
+        <ul class="canon-record-tags">
+          <li><a href="/hubspot-cvp" class="canon-record-tag"><span class="canon-record-tag-label">read</span>HubSpot as CVP</a></li>
+        </ul>
+      </li>
 
-      <article class="rounded-lg border border-stone-200 bg-white p-6 md:p-7">
-        <p class="text-[11px] uppercase tracking-[0.15em] font-semibold text-vcp-orange m-0 mb-3">
-          Value Creation Protocol
-        </p>
-        <h2 class="text-2xl font-semibold text-stone-900 m-0 mb-3">VCP</h2>
-        <p class="text-stone-700 m-0 leading-relaxed">
+      <li class="canon-record" id="vcp">
+        <p class="canon-record-eyebrow">Value Creation Protocol · the methodology</p>
+        <h3 class="canon-record-title">VCP</h3>
+        <p class="canon-record-mantra">"The operating protocol the system runs."</p>
+        <p class="canon-record-body">
           A <strong>protocol</strong>. The methodology layer of the AI-native
           protocol stack. Sits atop MCP (capability) and HCP (human context).
           Gives organizations the operating discipline to translate AI capability
-          and human context into realized value.
+          and human context into realized value. Open, platform-agnostic,
+          declarable.
         </p>
-        <p class="text-stone-600 mt-4 mb-0 text-sm leading-relaxed">
-          When you hear "VCP," think methodology. The operating protocol the
-          system runs. Open, platform-agnostic, declarable.
+        <p class="canon-record-body">
+          When you hear "VCP," think methodology.
         </p>
-        <p class="mt-6 mb-0">
-          <a href="/positioning" class="text-stone-700 underline text-sm">Positioning paper →</a>
-        </p>
-      </article>
-    </div>
+        <ul class="canon-record-tags">
+          <li><a href="/positioning" class="canon-record-tag"><span class="canon-record-tag-label">read</span>VCP positioning paper</a></li>
+        </ul>
+      </li>
+    </ol>
 
-    <article class="prose mx-auto">
+    <section class="canon-prose">
       <h2>The boundary</h2>
       <p>
         CVP is what you operate <em>on</em>. VCP is what you operate <em>by</em>.
       </p>
       <p>
-        A team using HubSpot (a CVP) without VCP has the platform but no
-        operating discipline — they will configure the platform around
-        industrial-age defaults because that's what the foundation models in
-        their AI tooling want to do, and that's what the historical training
-        data of the platform suggests.
+        A team using HubSpot — a CVP — without VCP has the platform but no
+        operating discipline. They will configure the platform around
+        industrial-age defaults because that is what the foundation models in
+        their AI tooling are trained to produce, and that is what the
+        historical training data of the platform itself suggests.
       </p>
       <p>
-        A team committed to VCP without a CVP has the operating discipline
-        but no machine-executable substrate. They can teach the method to
-        humans, but AI systems they deploy will default to the vocabulary
-        VCP rejects.
+        A team committed to VCP without a CVP has the operating discipline but
+        no machine-executable substrate. They can teach the method to humans,
+        but the AI systems they deploy will default to the vocabulary VCP
+        rejects, and the gap between the team's language and the system's
+        language will widen with every release.
       </p>
       <p>
-        VCP plus a configured CVP is the operating arrangement. The CVP is
-        the substrate where VCP runs. Other substrates are possible — the
-        protocol is platform-agnostic — but HubSpot is the canonical
-        implementing CVP for the Value-First method because it has the
-        native objects, the configuration depth, and the public
-        accessibility to make the configuration-over-customization principle
-        operable.
+        VCP plus a configured CVP is the operating arrangement. The CVP is the
+        substrate where VCP runs. Other substrates are possible — the protocol
+        is platform-agnostic by design — but HubSpot is the canonical
+        implementing CVP for the Value-First method because it has the native
+        objects, the configuration depth, and the public accessibility to make
+        the configuration-over-customization principle operable.
       </p>
 
       <h2>Why the naming hurts</h2>
       <p>
-        The acronyms differ by a single letter and live in adjacent
-        conceptual space. This is unfortunate and intentional: both names
-        come from the same lineage. CVP names the platform category that
-        VCP runs on top of. They were never meant to be heard in isolation,
-        and they aren't competing for the same slot.
+        The acronyms differ by a single letter and live in adjacent conceptual
+        space. This is unfortunate and intentional: both names come from the
+        same lineage. CVP names the platform category that VCP runs on top of.
+        They were never meant to be heard in isolation, and they are not
+        competing for the same slot.
       </p>
       <p>
-        When you need to be exact, say it long: "Customer Value Platform"
-        for the substrate, "Value Creation Protocol" for the methodology.
-        When you're working inside the team, context disambiguates.
+        When you need to be exact, say it long: <em>Customer Value Platform</em>
+        for the substrate, <em>Value Creation Protocol</em> for the methodology.
+        When you are working inside the team, context disambiguates — but when
+        you are introducing either concept to someone for the first time, name
+        the layer first and the acronym second.
       </p>
 
-      <h2>Related</h2>
+      <h2>Related canon</h2>
       <ul>
-        <li><a href="/hubspot-cvp">HubSpot as CVP — the canonical implementing substrate</a></li>
-        <li><a href="/positioning">VCP Positioning Paper — where VCP sits in the protocol stack</a></li>
-        <li><a href="/encoding-stack">Encoding Stack — what makes VCP machine-parseable</a></li>
-        <li><a href="/glossary">Glossary — full term index</a></li>
+        <li><a href="/hubspot-cvp">HubSpot as CVP</a> — the canonical implementing substrate</li>
+        <li><a href="/positioning">VCP positioning paper</a> — where VCP sits in the protocol stack</li>
+        <li><a href="/encoding-stack">Encoding stack</a> — what makes VCP machine-parseable</li>
+        <li><a href="/glossary">Glossary</a> — full term index</li>
       </ul>
-    </article>
-
-    <CrossCitation path="/cvp-vs-vcp" />
-    <Implementers />
-  </PageContainer>
+    </section>
+  </CanonArchetype>
 </BaseLayout>

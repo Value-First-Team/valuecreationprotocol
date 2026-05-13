@@ -1,51 +1,53 @@
 ---
 /**
- * /teach — TEACH v1.0 canonical reference.
+ * /teach — TEACH framework v1.0.
  *
- * Renders the staged teach-values-canonical-reference.md document.
- * Five values for teaching, leading, and operating.
+ * Source: src/content/canon/teach-values-canonical-reference.md
+ * Five values for teaching, leading, and operating. Pairs:
+ * Agile↔Adaptable, Confidence↔Conviction (per the canonical reference).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
 import { getCanonDoc } from '../lib/sanity/canon';
 
-const { html: rawHtml } = renderStagedMarkdown(STAGED_FILES.teach);
-const html = stripFirstH1(rawHtml);
+const { html } = renderStagedMarkdown(STAGED_FILES.teach);
+const bodyHtml = stripFirstH1(html);
 const meta = await getCanonDoc('teach-v1-0');
-
 const version = meta?.version ?? 'v1.0';
-const status = meta?.status ?? 'Canon';
-const effectiveDate = meta?.effectiveDate;
+const effective = meta?.effectiveDate ?? '6 May 2026';
 ---
 
 <BaseLayout
   title="TEACH"
-  description="Five values for teaching, leading, and operating in the Value-First method. Agile↔Adaptable, Confidence↔Conviction."
+  description="The five values for teaching, leading, and operating an AI-native organization. Agile↔Adaptable. Confidence↔Conviction. The TEACH framework decides how value-first work is taught and held."
   path="/teach"
   ogImage="og-teach.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="TEACH"
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 07 of 12"
-      title="TEACH"
-      lede="Five values for teaching, leading, and operating. Each pair holds a creative tension — neither pole alone produces value."
-      version={version}
-      status={status}
-      effectiveDate={effectiveDate}
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/teach"
-    />
+  <CanonArchetype
+    eyebrow="TEACH"
+    title="Five values for how value-first work is taught."
+    lead="TEACH names the five values that decide how Value-First work is taught, led, and operated. Two of them are intentional pairings — Agile and Adaptable, Confidence and Conviction — because each pair holds a tension that an AI-native operating model has to keep alive. TEACH is upstream of the practitioner taxonomy."
+    path="/teach"
+    specMeta={[
+      { label: 'Status', value: `${version} · canonical` },
+      { label: 'Effective', value: effective },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/teach' },
+    ]}
+  >
+    <section class="canon-prose" set:html={bodyHtml} />
 
-    <Prose html={html} canon />
-
-    <CrossCitation path="/teach" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-callout">
+      <p class="canon-callout-label">Where this fits</p>
+      <p class="canon-callout-body">
+        TEACH is the operating discipline by which the protocol is taught. It is the
+        upstream of the <a href="/value-path">Value Path</a> — how practitioners hold
+        a person at each stage — and the operating contract for any team that adopts
+        VCP through the <a href="/ai-native-shift">AI-Native Shift</a>.
+      </p>
+    </div>
+  </CanonArchetype>
 </BaseLayout>

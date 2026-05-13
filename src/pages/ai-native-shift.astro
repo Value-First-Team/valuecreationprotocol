@@ -1,49 +1,59 @@
 ---
 /**
- * /ai-native-shift — methodology page (cohort-agnostic).
+ * /ai-native-shift — The AI-Native Shift methodology (cohort-agnostic).
  *
- * Renders the pattern of organizational transformation. Distinct from any
- * firm-program description. No pricing, no enrollment. Reads from staged
- * VCP-Newsletter-Part3.md which carries the methodology framings.
+ * Source: src/content/canon/VCP-Newsletter-Part3.md
+ *
+ * This page describes the pattern of organizational transformation. The
+ * firm cohort program is a separate concern living at vft.com/programs/
+ * ai-native-shift. No pricing, no enrollment, no delivery cadence here.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Prose from '../components/Prose.astro';
-import CrossCitation from '../components/CrossCitation.astro';
-import Implementers from '../components/Implementers.astro';
+import CanonArchetype from '../components/CanonArchetype.astro';
 import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
+
+const { html } = renderStagedMarkdown(STAGED_FILES.aiNativeShift);
+const bodyHtml = stripFirstH1(html);
 ---
 
 <BaseLayout
   title="The AI-Native Shift"
-  description="The pattern of organizational transformation toward AI-native operations — methodology only. No program, no enrollment."
+  description="The methodology pattern of organizational transformation toward AI-native operations. A protocol, not a program — read it, adapt it, run it on your own substrate."
   path="/ai-native-shift"
   ogImage="og-ai-native-shift.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="AI-Native Shift"
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Methodology canon · Chapter 08 of 12"
-      title="The AI-Native Shift"
-      lede="The pattern of organizational transformation toward AI-native operations. A methodology, not a program. Read it, adapt it, run it on your own substrate."
-      status="Canon"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/ai-native-shift"
-    />
-
-    <aside class="mb-10 p-5 rounded-lg border border-stone-200 bg-stone-50 text-sm text-stone-700">
-      <p class="m-0">
-        <strong class="text-stone-900">This page describes the pattern.</strong>
-        Specific cohort delivery, pricing, and enrollment live with implementing
-        firms. The protocol is open; the implementation is opinionated.
+  <CanonArchetype
+    eyebrow="The AI-Native Shift"
+    title="The pattern of becoming AI-native."
+    lead="Becoming AI-native is not a tooling decision. It is an organizational shift — in operating model, in vocabulary, in what the team takes for granted about how value flows. This page describes the methodology pattern of that shift, decoupled from any specific cohort or program. The protocol is open; implementations are opinionated."
+    path="/ai-native-shift"
+    specMeta={[
+      { label: 'Status', value: 'canonical' },
+      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Cite', value: 'valuecreationprotocol.com/ai-native-shift' },
+      { label: 'Scope', value: 'methodology · cohort-agnostic' },
+    ]}
+  >
+    <div class="canon-callout">
+      <p class="canon-callout-label">Methodology, not program</p>
+      <p class="canon-callout-body">
+        This page is the pattern. Specific cohort delivery, pricing, and enrollment
+        live with implementing firms — see <a href="https://valuefirstteam.com/ai-native-shift" target="_blank" rel="noopener">the firm's AI-Native Shift program</a>
+        for the canonical implementation.
       </p>
-    </aside>
+    </div>
 
-    <Prose html={stripFirstH1(renderStagedMarkdown(STAGED_FILES.aiNativeShift).html)} canon />
+    <section class="canon-prose" set:html={bodyHtml} />
 
-    <CrossCitation path="/ai-native-shift" />
-    <Implementers />
-  </PageContainer>
+    <div class="canon-callout">
+      <p class="canon-callout-label">Where this fits</p>
+      <p class="canon-callout-body">
+        The Shift is operated against the <a href="/three-orgs">Three-Org Model</a>
+        through the <a href="/value-loop">Value Loop</a>. <a href="/teach">TEACH</a>
+        is the discipline by which it is held.
+      </p>
+    </div>
+  </CanonArchetype>
 </BaseLayout>
