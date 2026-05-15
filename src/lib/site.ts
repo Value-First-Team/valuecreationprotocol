@@ -196,12 +196,11 @@ export const CROSS_CITATIONS: Record<string, CrossCitationEntry> = {
     peerLabel: 'TEACH section on About at valuefirstteam.com',
   },
 
-  // /beliefs peer still pending on valuefirstteam.com; suppress until shipped.
+  // Re-enabled 2026-05-14: firm-side pages shipped.
   '/beliefs': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/beliefs returns 404 (verified 2026-05-12); suppress until shipped',
+    peerSlug: '/beliefs',
+    peerLabel: 'Five Core Beliefs at valuefirstteam.com',
   },
-  // Re-enabled 2026-05-14: firm-side pages shipped concurrently in Task #3.
   '/three-orgs': {
     peerSlug: '/three-orgs',
     peerLabel: 'Three-Org Model at valuefirstteam.com',

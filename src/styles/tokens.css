@@ -154,7 +154,7 @@
 /* ============================================================
    Base elements — warm paper, editorial typography
    ============================================================ */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background-color: var(--vcp-surface); }
 body {
   margin: 0;
   background: var(--vcp-surface);
