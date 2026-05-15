@@ -2,20 +2,21 @@
 /**
  * /value-led-growth — Value-Led Growth canonical framework reference.
  *
- * Source: src/content/wiki-canonical/value-led-growth-canonical-reference.md
+ * Source: Sanity `valueLedGrowth` singleton (_id: valueLedGrowth).
+ *         Per ADR 0008, Sanity is canonical for framework concepts that render
+ *         on the website. Wiki is a prose mirror, not a render source.
  *
  * Distinct from /manifestos/value-led-growth (manifesto treatment).
  * This page is the framework canon — declarative and operable.
  *
- * Cross-citation suppressed (valuefirstteam.com/value-led-growth returns 404;
- * verified 2026-05-12). Will re-enable when Showcase ships firm-side page.
+ * Cross-citation re-enabled 2026-05-14: firm-side /value-led-growth ships
+ * concurrently with this migration in the Task #3 Showcase session.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
+import { getValueLedGrowth } from '../lib/sanity/canon';
 
-const { html } = renderWikiCanonical(WIKI_CANONICAL.valueLedGrowth);
-const bodyHtml = stripFirstH1(html);
+const vlg = await getValueLedGrowth();
 ---
 
 <BaseLayout
@@ -28,12 +29,12 @@ const bodyHtml = stripFirstH1(html);
 >
   <CanonArchetype
     eyebrow="Value-Led Growth"
-    title="Growth as the consequence of value created."
-    lead="Value-Led Growth is the operating framework that replaces industrial-age growth motions. Growth happens because value flowed — through customers, through practitioners, through the firm itself — and the protocol made that flow legible. This page is the framework canon. The accompanying manifesto reads it aloud."
+    title={vlg?.tagline ?? 'Growth as the consequence of value created.'}
+    lead={vlg?.fullDefinition ?? vlg?.oneLineDefinition ?? 'Value-Led Growth is the operating framework that replaces industrial-age growth motions. Growth happens because value flowed — through customers, through practitioners, through the firm itself — and the protocol made that flow legible. This page is the framework canon. The accompanying manifesto reads it aloud.'}
     path="/value-led-growth"
     specMeta={[
       { label: 'Status', value: 'v1.0 · canonical' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/value-led-growth' },
       { label: 'See also', value: '/manifestos/value-led-growth' },
     ]}
@@ -47,15 +48,394 @@ const bodyHtml = stripFirstH1(html);
       </p>
     </div>
 
-    <section class="canon-prose" set:html={bodyHtml} />
+    {(vlg?.theQuestion || vlg?.theAnswer) && (
+      <section class="vlg-qa">
+        {vlg.theQuestion && (
+          <p class="vlg-qa-question">{vlg.theQuestion}</p>
+        )}
+        {vlg.theAnswer && (
+          <p class="vlg-qa-answer">{vlg.theAnswer}</p>
+        )}
+      </section>
+    )}
+
+    {vlg?.oneLineDefinition && (
+      <section class="canon-prose">
+        <p>{vlg.oneLineDefinition}</p>
+        {vlg.fullDefinition && vlg.fullDefinition !== vlg.oneLineDefinition && (
+          <p>{vlg.fullDefinition}</p>
+        )}
+      </section>
+    )}
+
+    {/* ============= THE REFRAME ============= */}
+    {vlg?.reframePairs && vlg.reframePairs.length > 0 && (
+      <>
+        <p class="canon-section-label">The reframe</p>
+        <h2 class="canon-section-sub">Traditional thinking → Value-Led thinking.</h2>
+        {vlg.reframeIntro && (
+          <p class="canon-section-note">{vlg.reframeIntro}</p>
+        )}
+
+        <ol class="vlg-reframe-list">
+          {vlg.reframePairs.map((p, i) => (
+            <li class="vlg-reframe-row">
+              <span class="vlg-reframe-num">{String(i + 1).padStart(2, '0')}</span>
+              <div class="vlg-reframe-cols">
+                <div class="vlg-reframe-col">
+                  <p class="vlg-reframe-col-label">Traditional</p>
+                  <p class="vlg-reframe-col-body">{p.traditional}</p>
+                </div>
+                <div class="vlg-reframe-arrow" aria-hidden="true">→</div>
+                <div class="vlg-reframe-col vlg-reframe-col-valueled">
+                  <p class="vlg-reframe-col-label">Value-Led</p>
+                  <p class="vlg-reframe-col-body">{p.valueLed}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
+
+    {/* ============= 4-COMPONENT OPERATING SYSTEM ============= */}
+    {(vlg?.componentWhere || vlg?.componentWho || vlg?.componentWhat || vlg?.componentHow) && (
+      <>
+        <p class="canon-section-label">The operating system</p>
+        <h2 class="canon-section-sub">Where · Who · What · How.</h2>
+        {vlg.componentsIntro && (
+          <p class="canon-section-note">{vlg.componentsIntro}</p>
+        )}
+
+        <ol class="canon-records">
+          {vlg.componentWhere && (
+            <li class="canon-record" id="where">
+              <p class="canon-record-eyebrow">{vlg.componentWhere.label ?? 'Where'}</p>
+              <h3 class="canon-record-title">{vlg.componentWhere.componentName ?? 'The Value Path'}</h3>
+              {vlg.componentWhere.description && (
+                <p class="canon-record-body">{vlg.componentWhere.description}</p>
+              )}
+              {vlg.componentWhere.stages && vlg.componentWhere.stages.length > 0 && (
+                <ul class="canon-record-tags">
+                  {vlg.componentWhere.stages.map((s) => (
+                    <li>
+                      <a href={`/value-path#${s.slug?.current ?? ''}`} class="canon-record-tag">
+                        <span class="canon-record-tag-label">{String(s.number).padStart(2, '0')}</span>{s.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          )}
+
+          {vlg.componentWho && (
+            <li class="canon-record" id="who">
+              <p class="canon-record-eyebrow">{vlg.componentWho.label ?? 'Who'}</p>
+              <h3 class="canon-record-title">{vlg.componentWho.componentName ?? 'The Three-Org Model'}</h3>
+              {vlg.componentWho.description && (
+                <p class="canon-record-body">{vlg.componentWho.description}</p>
+              )}
+              {vlg.componentWho.orgs && vlg.componentWho.orgs.length > 0 && (
+                <ul class="canon-record-tags">
+                  {vlg.componentWho.orgs.map((org) => (
+                    <li>
+                      <a href={`/three-orgs#${org.slug?.current ?? ''}`} class="canon-record-tag">
+                        <span class="canon-record-tag-label">org</span>{org.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          )}
+
+          {vlg.componentWhat && (
+            <li class="canon-record" id="what">
+              <p class="canon-record-eyebrow">{vlg.componentWhat.label ?? 'What'}</p>
+              <h3 class="canon-record-title">{vlg.componentWhat.componentName ?? 'The Four Unified Views'}</h3>
+              {vlg.componentWhat.description && (
+                <p class="canon-record-body">{vlg.componentWhat.description}</p>
+              )}
+              {vlg.componentWhat.views && vlg.componentWhat.views.length > 0 && (
+                <ul class="canon-record-tags">
+                  {vlg.componentWhat.views.map((v) => (
+                    <li>
+                      <a href={`/unified-views#${v.slug?.current ?? ''}`} class="canon-record-tag">
+                        <span class="canon-record-tag-label">view</span>{v.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          )}
+
+          {vlg.componentHow && (
+            <li class="canon-record" id="how">
+              <p class="canon-record-eyebrow">{vlg.componentHow.label ?? 'How'}</p>
+              <h3 class="canon-record-title">{vlg.componentHow.componentName ?? 'The Value Steward'}</h3>
+              {vlg.componentHow.description && (
+                <p class="canon-record-body">{vlg.componentHow.description}</p>
+              )}
+              {(vlg.componentHow.aiHandles?.length || vlg.componentHow.humanHandles?.length) && (
+                <div class="canon-record-meta">
+                  {vlg.componentHow.aiHandles && vlg.componentHow.aiHandles.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">AI handles</p>
+                      <ul class="canon-record-meta-list">
+                        {vlg.componentHow.aiHandles.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {vlg.componentHow.humanHandles && vlg.componentHow.humanHandles.length > 0 && (
+                    <div>
+                      <p class="canon-record-meta-label">Humans handle</p>
+                      <ul class="canon-record-meta-list">
+                        {vlg.componentHow.humanHandles.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+              {vlg.componentHow.leverageStatement && (
+                <p class="canon-record-mantra">"{vlg.componentHow.leverageStatement}"</p>
+              )}
+            </li>
+          )}
+        </ol>
+      </>
+    )}
+
+    {/* ============= COMPARISONS TO OTHER GROWTH MODELS ============= */}
+    {vlg?.comparisons && vlg.comparisons.length > 0 && (
+      <>
+        <p class="canon-section-label">In context</p>
+        <h2 class="canon-section-sub">How Value-Led Growth relates to peer models.</h2>
+        <p class="canon-section-note">
+          Sales-Led, Product-Led, Marketing-Led, Community-Led — each names a real
+          motion. Value-Led Growth doesn't compete with them; it reorganizes the
+          firm so they all serve a common question: are we creating more value
+          today than yesterday?
+        </p>
+
+        <ol class="canon-records">
+          {vlg.comparisons.map((c) => {
+            const slug = c.modelName.toLowerCase().replace(/\s+/g, '-');
+            return (
+              <li class="canon-record" id={slug}>
+                <p class="canon-record-eyebrow">Comparison</p>
+                <h3 class="canon-record-title">{c.modelName}</h3>
+                {c.definition && (
+                  <p class="canon-record-body">{c.definition}</p>
+                )}
+                <div class="canon-record-meta">
+                  {c.limitation && (
+                    <div>
+                      <p class="canon-record-meta-label">Limitation</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{c.limitation}</li>
+                      </ul>
+                    </div>
+                  )}
+                  {c.valueLedDifference && (
+                    <div>
+                      <p class="canon-record-meta-label">Value-Led difference</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{c.valueLedDifference}</li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </>
+    )}
+
+    {/* ============= WHAT WE BELIEVE ============= */}
+    {vlg?.beliefStatements && vlg.beliefStatements.length > 0 && (
+      <>
+        <p class="canon-section-label">What we believe</p>
+        <h2 class="canon-section-sub">The convictions Value-Led Growth carries.</h2>
+
+        <ol class="canon-records">
+          {vlg.beliefStatements.map((b, i) => (
+            <li class="canon-record">
+              <p class="canon-record-eyebrow">Belief {String(i + 1).padStart(2, '0')}</p>
+              <h3 class="canon-record-title">{b.headline}</h3>
+              {b.elaboration && (
+                <p class="canon-record-body">{b.elaboration}</p>
+              )}
+            </li>
+          ))}
+        </ol>
+      </>
+    )}
+
+    {/* ============= TRANSFORMATION PATH ============= */}
+    {(vlg?.honestAssessment || (vlg?.transformationStages && vlg.transformationStages.length > 0) || vlg?.timelineFraming) && (
+      <>
+        <p class="canon-section-label">The transformation path</p>
+        <h2 class="canon-section-sub">Pilot → Collapse → Separation → Evolution.</h2>
+
+        {vlg.honestAssessment && (
+          <div class="canon-callout">
+            <p class="canon-callout-label">An honest assessment</p>
+            <p class="canon-callout-body">{vlg.honestAssessment}</p>
+          </div>
+        )}
+
+        {vlg.transformationStages && vlg.transformationStages.length > 0 && (
+          <ol class="canon-records">
+            {vlg.transformationStages.map((s, i) => (
+              <li class="canon-record">
+                <p class="canon-record-eyebrow">Stage {String(i + 1).padStart(2, '0')}</p>
+                <h3 class="canon-record-title">{s.name}</h3>
+                {s.description && (
+                  <p class="canon-record-body">{s.description}</p>
+                )}
+              </li>
+            ))}
+          </ol>
+        )}
+
+        {vlg.timelineFraming && (
+          <div class="canon-callout">
+            <p class="canon-callout-label">Timeline framing</p>
+            <p class="canon-callout-body">{vlg.timelineFraming}</p>
+          </div>
+        )}
+      </>
+    )}
+
+    {/* ============= THE INVITATION ============= */}
+    {vlg?.theInvitation && (
+      <>
+        <p class="canon-section-label">The invitation</p>
+        <h2 class="canon-section-sub">The question the framework asks of its reader.</h2>
+        <section class="canon-prose">
+          <p>{vlg.theInvitation}</p>
+        </section>
+      </>
+    )}
 
     <div class="canon-callout">
       <p class="canon-callout-label">Where this fits</p>
       <p class="canon-callout-body">
         Read alongside the <a href="/value-path">Value Path</a>: the Path is the
         relational map; Value-Led Growth is what compounds across it. The
-        <a href="/value-loop">Value Loop</a> is the cadence.
+        <a href="/three-orgs">Three-Org Model</a> is the structure the philosophy
+        produces. The <a href="/value-loop">Value Loop</a> is the cadence.
       </p>
     </div>
   </CanonArchetype>
 </BaseLayout>
+
+<style is:global>
+  /* ============= Value-Led Growth — local page styles ============= */
+
+  /* The Question → The Answer hero strip. */
+  .vlg-qa {
+    margin: 2.5rem 0;
+    padding: 2rem 1.75rem;
+    border-top: 1px solid var(--vcp-border);
+    border-bottom: 1px solid var(--vcp-border);
+    background: var(--vcp-teal-soft);
+    text-align: center;
+  }
+  .vlg-qa-question {
+    font-family: var(--vcp-font-display);
+    font-size: 1.5rem;
+    font-style: italic;
+    color: var(--vcp-teal-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 24;
+  }
+  .vlg-qa-answer {
+    font-family: var(--vcp-font-display);
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: var(--vcp-ink);
+    margin: 0.6rem 0 0;
+    letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 30;
+  }
+
+  /* Reframe pairs — paired columns, mono labels, arrow between. */
+  .vlg-reframe-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .vlg-reframe-row {
+    display: grid;
+    grid-template-columns: 2.5rem 1fr;
+    gap: 1rem;
+    align-items: flex-start;
+    border-top: 1px solid var(--vcp-border);
+    padding-top: 1.5rem;
+  }
+  .vlg-reframe-row:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .vlg-reframe-num {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    color: var(--vcp-ink-4);
+    padding-top: 0.25rem;
+  }
+  .vlg-reframe-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+    .vlg-reframe-cols {
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1.25rem;
+    }
+  }
+  .vlg-reframe-col {
+    padding: 1rem 1.25rem;
+    background: var(--vcp-surface-2);
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-md);
+  }
+  .vlg-reframe-col-valueled {
+    background: var(--vcp-teal-soft);
+    border-color: var(--vcp-teal-deep);
+  }
+  .vlg-reframe-col-label {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.5rem;
+  }
+  .vlg-reframe-col-valueled .vlg-reframe-col-label {
+    color: var(--vcp-teal-deep);
+  }
+  .vlg-reframe-col-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 18;
+  }
+  .vlg-reframe-arrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 1.25rem;
+    color: var(--vcp-teal-deep);
+    text-align: center;
+    align-self: center;
+  }
+</style>

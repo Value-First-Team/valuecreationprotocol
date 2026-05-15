@@ -2,18 +2,33 @@
 /**
  * /three-orgs — The Three-Org Model.
  *
- * Source: wiki canonical reference three-org-model-canonical-reference.md.
+ * Source: Sanity `threeOrg` records, ordered by sortOrder asc.
+ *         Per ADR 0008, Sanity is canonical for framework concepts that render
+ *         on the website. Wiki is a prose mirror, not a render source.
+ *
  * Embeds three-org.svg diagram.
  *
- * Cross-citation suppressed (peer 404s on valuefirstteam.com/three-orgs;
- * confirmed 2026-05-12). Will re-enable when Showcase ships firm-side page.
+ * Cross-citation re-enabled 2026-05-14: firm-side /three-orgs ships concurrently
+ * with this migration in the Task #3 Showcase session.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
+import { getThreeOrgs } from '../lib/sanity/canon';
 
-const { html } = renderWikiCanonical(WIKI_CANONICAL.threeOrg);
-const bodyHtml = stripFirstH1(html);
+const orgs = await getThreeOrgs();
+
+// Map leadership mode to display label.
+const MODE_LABEL: Record<string, string> = {
+  'human-led': 'Human-led (AI supports)',
+  'ai-led': 'AI-led (humans direct + escalate)',
+  'shared': 'Shared (human + AI co-own)',
+};
+
+const orgDefinedTerms = orgs.map((o) => ({
+  name: o.name,
+  description: o.oneLineDefinition ?? o.purpose ?? undefined,
+  termCode: o.slug?.current ?? `org-${o.sortOrder}`,
+}));
 ---
 
 <BaseLayout
@@ -23,11 +38,7 @@ const bodyHtml = stripFirstH1(html);
   ogImage="og-three-orgs.jpg"
   schemaType="DefinedTerm"
   schemaTermCode="Three-Org Model"
-  schemaDefinedTerms={[
-    { name: 'Customer Org', description: 'Led by the Chief Customer Officer. Owns relationships and value flow.', termCode: 'customer-org' },
-    { name: 'Operations Org', description: 'Led by the Chief Operating Officer. Owns the machine of the firm.', termCode: 'operations-org' },
-    { name: 'Finance Org', description: 'Led by the Chief Financial Officer. Owns revenue truth and capital flow.', termCode: 'finance-org' },
-  ]}
+  schemaDefinedTerms={orgDefinedTerms}
 >
   <CanonArchetype
     eyebrow="The Three-Org Model"
@@ -36,9 +47,9 @@ const bodyHtml = stripFirstH1(html);
     path="/three-orgs"
     specMeta={[
       { label: 'Status', value: 'v1.1 · canonical' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/three-orgs' },
-      { label: 'Orgs', value: '3 — Customer · Operations · Finance' },
+      { label: 'Orgs', value: `${orgs.length} — Customer · Operations · Finance` },
     ]}
   >
     <figure class="canon-figure">
@@ -54,14 +65,203 @@ const bodyHtml = stripFirstH1(html);
       </figcaption>
     </figure>
 
-    <section class="canon-prose" set:html={bodyHtml} />
+    <section class="canon-prose">
+      <p>
+        Industrial-age operations sliced firms by function: sales, marketing,
+        customer success, support, finance, ops. Each slice optimized for its own
+        metric and handed the customer across boundaries the customer never agreed
+        to. The Three-Org Model refuses that geometry. Every concern in a value-creating
+        firm maps to one of three orgs — and each org has one leader, one operating
+        principle, and one unified view it produces.
+      </p>
+      <p>
+        The split is not about people; it is about ownership. The Customer Org owns
+        the value journey end to end — no handoffs between stages. The Operations
+        Org owns coordination, integration, and the machinery that lets the Customer
+        Org operate seamlessly. The Finance Org owns resource stewardship and value
+        accounting, expanding finance beyond revenue capture to measure value
+        delivered.
+      </p>
+    </section>
+
+    {orgs.length > 0 && (
+      <>
+        <p class="canon-section-label">The three, in canonical order</p>
+        <h2 class="canon-section-sub">Each org, named and owned.</h2>
+        <p class="canon-section-note">
+          Sourced from Sanity. Read top to bottom — Customer first, then Operations,
+          then Finance. Each carries its own anchor.
+        </p>
+
+        <ol class="canon-records">
+          {orgs.map((o) => {
+            const slug = o.slug?.current ?? `org-${o.sortOrder}`;
+            const modeLabel = o.leadershipMode ? MODE_LABEL[o.leadershipMode] ?? o.leadershipMode : undefined;
+            return (
+              <li
+                class="canon-record"
+                id={slug}
+                style={o.accentColor ? `border-top-color:${o.accentColor}` : undefined}
+              >
+                <p class="canon-record-eyebrow">Org {String(o.sortOrder).padStart(2, '0')}</p>
+                <h3 class="canon-record-title">{o.name}</h3>
+                {o.oneLineDefinition && (
+                  <p class="canon-record-mantra">"{o.oneLineDefinition}"</p>
+                )}
+                {o.purpose && (
+                  <p class="canon-record-body">{o.purpose}</p>
+                )}
+
+                {(o.humanRole || o.aiLeaderName || modeLabel) && (
+                  <div class="canon-record-meta">
+                    {o.humanRole && (
+                      <div>
+                        <p class="canon-record-meta-label">Human leader</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{o.humanRole}</li>
+                        </ul>
+                      </div>
+                    )}
+                    {o.aiLeaderName && (
+                      <div>
+                        <p class="canon-record-meta-label">AI leader (VFT)</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{o.aiLeaderName}</li>
+                        </ul>
+                      </div>
+                    )}
+                    {modeLabel && (
+                      <div>
+                        <p class="canon-record-meta-label">Leadership mode</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{modeLabel}</li>
+                        </ul>
+                      </div>
+                    )}
+                    {o.primaryUV?.name && (
+                      <div>
+                        <p class="canon-record-meta-label">Primary unified view</p>
+                        <ul class="canon-record-meta-list">
+                          <li>
+                            <a href="/unified-views">{o.primaryUV.name}</a>
+                          </li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {o.keyPrinciple && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">Key principle</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{o.keyPrinciple}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {o.owns && o.owns.length > 0 && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">What this org owns</p>
+                      <ul class="canon-record-meta-list">
+                        {o.owns.map((item) => <li>{item}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {o.doesNotOwn && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">What this org does not own</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{o.doesNotOwn}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {(o.aiHandles || o.humanHandles) && (
+                  <div class="canon-record-meta">
+                    {o.aiHandles && (
+                      <div>
+                        <p class="canon-record-meta-label">AI handles</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{o.aiHandles}</li>
+                        </ul>
+                      </div>
+                    )}
+                    {o.humanHandles && (
+                      <div>
+                        <p class="canon-record-meta-label">Humans handle</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{o.humanHandles}</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {o.whoBelongsHere && o.whoBelongsHere.length > 0 && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">Who belongs here</p>
+                      <ul class="canon-record-meta-list">
+                        {o.whoBelongsHere.map((role) => <li>{role}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {o.firmLivedExample && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">How we live it (VFT specifics)</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{o.firmLivedExample}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {(o.supportingUVs && o.supportingUVs.length > 0) || (o.traps && o.traps.length > 0) ? (
+                  <ul class="canon-record-tags">
+                    {o.supportingUVs?.map((v) => (
+                      <li>
+                        <a href="/unified-views" class="canon-record-tag">
+                          <span class="canon-record-tag-label">also produces</span>{v.name}
+                        </a>
+                      </li>
+                    ))}
+                    {o.traps?.map((t) => (
+                      <li>
+                        <a
+                          href={`/twelve-traps#${t.slug?.current ?? ''}`}
+                          class="canon-record-tag">
+                          <span class="canon-record-tag-label">counters</span>{t.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+              </li>
+            );
+          })}
+        </ol>
+      </>
+    )}
 
     <div class="canon-callout">
       <p class="canon-callout-label">Where this fits</p>
       <p class="canon-callout-body">
         Each org carries one of the <a href="/unified-views">Four Unified Views</a>:
         UCV → Customer, URV → Finance, UBC and UTE → Operations. The
-        <a href="/value-path">Value Path</a> is read across all three.
+        <a href="/value-path">Value Path</a> is read across all three, with the
+        Customer Org owning end-to-end stewardship. <a href="/value-led-growth">Value-Led
+        Growth</a> is the operating philosophy this structure produces.
       </p>
     </div>
   </CanonArchetype>

@@ -185,6 +185,139 @@ export async function getUnifiedGoals() {
 }
 
 /**
+ * Get the 3 Three-Org records, ordered by sortOrder asc (Customer=1, Operations=2, Finance=3).
+ *
+ * Each org carries its full structured field set: name, slug, sortOrder, accentColor,
+ * purpose, oneLineDefinition, owns[], doesNotOwn, keyPrinciple, whoBelongsHere[],
+ * humanRole, leadershipMode, aiLeaderName, aiHandles, humanHandles, firmLivedExample,
+ * plus resolved primaryUnifiedView and supportingUnifiedViews references and relatedTraps.
+ */
+export async function getThreeOrgs() {
+  const result = await sanityQuery<
+    Array<{
+      _id: string;
+      name: string;
+      slug?: { current: string };
+      sortOrder: number;
+      accentColor?: string;
+      icon?: string;
+      purpose?: string;
+      oneLineDefinition?: string;
+      owns?: string[];
+      doesNotOwn?: string;
+      keyPrinciple?: string;
+      whoBelongsHere?: string[];
+      humanRole?: string;
+      leadershipMode?: 'human-led' | 'ai-led' | 'shared';
+      aiLeaderName?: string;
+      aiHandles?: string;
+      humanHandles?: string;
+      firmLivedExample?: string;
+      primaryUV?: { _id: string; name: string; slug?: { current: string } } | null;
+      supportingUVs?: Array<{ _id: string; name: string; slug?: { current: string } }> | null;
+      traps?: Array<{ _id: string; name: string; slug?: { current: string } }> | null;
+    }>
+  >(
+    `*[_type == "threeOrg"] | order(sortOrder asc){
+      _id, name, slug, sortOrder, accentColor, icon,
+      purpose, oneLineDefinition,
+      owns, doesNotOwn, keyPrinciple, whoBelongsHere,
+      humanRole, leadershipMode, aiLeaderName, aiHandles, humanHandles, firmLivedExample,
+      "primaryUV": primaryUnifiedView->{_id, name, slug},
+      "supportingUVs": supportingUnifiedViews[]->{_id, name, slug},
+      "traps": relatedTraps[]->{_id, name, slug}
+    }`
+  );
+  return result ?? [];
+}
+
+/**
+ * Get the Value-Led Growth singleton document.
+ *
+ * Returns null if the document doesn't exist. Resolves nested references inside
+ * componentWhere.stages (valuePathStage), componentWho.orgs (threeOrg),
+ * componentWhat.views (unifiedGoal). componentHow has no references — only arrays of strings.
+ */
+export interface ValueLedGrowth {
+  _id: string;
+  title?: string;
+  tagline?: string;
+  theQuestion?: string;
+  theAnswer?: string;
+  oneLineDefinition?: string;
+  fullDefinition?: string;
+  reframeIntro?: string;
+  reframePairs?: Array<{ _key?: string; traditional: string; valueLed: string }>;
+  componentsIntro?: string;
+  componentWhere?: {
+    label?: string;
+    componentName?: string;
+    description?: string;
+    stages?: Array<{ _id: string; name: string; number: number; slug?: { current: string } }>;
+  };
+  componentWho?: {
+    label?: string;
+    componentName?: string;
+    description?: string;
+    orgs?: Array<{ _id: string; name: string; slug?: { current: string }; sortOrder?: number }>;
+  };
+  componentWhat?: {
+    label?: string;
+    componentName?: string;
+    description?: string;
+    views?: Array<{ _id: string; name: string; slug?: { current: string } }>;
+  };
+  componentHow?: {
+    label?: string;
+    componentName?: string;
+    description?: string;
+    aiHandles?: string[];
+    humanHandles?: string[];
+    leverageStatement?: string;
+  };
+  comparisons?: Array<{
+    _key?: string;
+    modelName: string;
+    definition?: string;
+    limitation?: string;
+    valueLedDifference?: string;
+  }>;
+  beliefStatements?: Array<{ _key?: string; headline: string; elaboration?: string }>;
+  honestAssessment?: string;
+  transformationStages?: Array<{ _key?: string; name: string; description?: string }>;
+  timelineFraming?: string;
+  theInvitation?: string;
+}
+
+export async function getValueLedGrowth(): Promise<ValueLedGrowth | null> {
+  const result = await sanityQuery<ValueLedGrowth>(
+    `*[_id == "valueLedGrowth"][0]{
+      _id, title, tagline, theQuestion, theAnswer,
+      oneLineDefinition, fullDefinition,
+      reframeIntro, reframePairs,
+      componentsIntro,
+      "componentWhere": componentWhere{
+        label, componentName, description,
+        "stages": stages[]->{_id, name, number, slug}
+      },
+      "componentWho": componentWho{
+        label, componentName, description,
+        "orgs": orgs[]->{_id, name, slug, sortOrder}
+      },
+      "componentWhat": componentWhat{
+        label, componentName, description,
+        "views": views[]->{_id, name, slug}
+      },
+      componentHow,
+      comparisons,
+      beliefStatements,
+      honestAssessment, transformationStages, timelineFraming, theInvitation
+    }`
+  );
+  return result;
+}
+
+/**
  * Get all 15 valueReality records with their commitments.
  *
  * Each Reality carries:

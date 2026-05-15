@@ -196,20 +196,19 @@ export const CROSS_CITATIONS: Record<string, CrossCitationEntry> = {
     peerLabel: 'TEACH section on About at valuefirstteam.com',
   },
 
-  // Verified 2026-05-12 (canon Phase 2 build): these three peers 404 on
-  // valuefirstteam.com. Suppressing the cross-citation until they ship.
-  // When Showcase ships the firm-side pages, flip peerSlug back on.
+  // /beliefs peer still pending on valuefirstteam.com; suppress until shipped.
   '/beliefs': {
     peerSlug: null,
     note: 'valuefirstteam.com/beliefs returns 404 (verified 2026-05-12); suppress until shipped',
   },
+  // Re-enabled 2026-05-14: firm-side pages shipped concurrently in Task #3.
   '/three-orgs': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/three-orgs returns 404 (verified 2026-05-12); suppress until shipped',
+    peerSlug: '/three-orgs',
+    peerLabel: 'Three-Org Model at valuefirstteam.com',
   },
   '/value-led-growth': {
-    peerSlug: null,
-    note: 'valuefirstteam.com/value-led-growth returns 404 (verified 2026-05-12); suppress until shipped',
+    peerSlug: '/value-led-growth',
+    peerLabel: 'Value-Led Growth at valuefirstteam.com',
   },
 
   // vcp.com-only canon — no peer expected.
