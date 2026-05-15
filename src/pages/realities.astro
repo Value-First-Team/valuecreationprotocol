@@ -2,26 +2,27 @@
 /**
  * /realities — Value Realities.
  *
- * Source: Sanity valueReality records, ordered by number. Each reality
- * carries commitments and (where set) a relatedTrap pointer.
+ * Source: Sanity `valueReality` records, ordered by number. Each Reality carries
+ *         corePrinciple, headline, shiftFrom/shiftTo operating pair, keyPractices,
+ *         numbered commitments with actions, and a `countersTrap` reference.
  *
- * Realities and Traps are paired. The Traps name what derails value
- * creation; the Realities name what supports it.
+ *         Per ADR 0008, Sanity is canonical for framework concepts that render
+ *         on the website. Wiki is a prose mirror, not a render source — this
+ *         page renders entirely from structured Sanity data.
+ *
+ * Realities and Traps are paired. The Traps name what derails value creation;
+ * the Realities name the operating habit that supports it.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
 import { getValueRealities } from '../lib/sanity/canon';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const realities = await getValueRealities();
 const total = realities.length;
 
-const { html: framingHtml } = renderWikiCanonical(WIKI_CANONICAL.valueRealities);
-const framingBody = stripFirstH1(framingHtml);
-
 const realityDefinedTerms = realities.map((r) => ({
-  name: r.title ?? r.name ?? `Reality ${r.number ?? ''}`.trim(),
-  description: r.summary,
+  name: r.name ?? `Reality ${r.number ?? ''}`.trim(),
+  description: r.corePrinciple ?? r.headline,
   termCode: r.slug?.current ?? `reality-${r.number ?? ''}`,
 }));
 ---
@@ -42,7 +43,7 @@ const realityDefinedTerms = realities.map((r) => ({
     path="/realities"
     specMeta={[
       { label: 'Status', value: 'canonical' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/realities' },
       { label: 'Count', value: `${total} realities · ordered by number` },
     ]}
@@ -68,29 +69,68 @@ const realityDefinedTerms = realities.map((r) => ({
         <p class="canon-section-label">The realities, in canonical order</p>
         <h2 class="canon-section-sub">Each reality, each commitment, each trap it counters.</h2>
         <p class="canon-section-note">
-          Sourced from Sanity. Ordered by canonical number. Each carries its own anchor.
+          Sourced from Sanity. Ordered by canonical number. Each carries its own anchor,
+          its core principle, the operating shift it demands, and the Trap it counters.
         </p>
 
         <ol class="canon-records">
           {realities.map((r) => {
-            const name = r.title ?? r.name ?? `Reality ${r.number ?? ''}`.trim();
+            const name = r.name ?? `Reality ${r.number ?? ''}`.trim();
             const slug = r.slug?.current ?? `reality-${r.number ?? ''}`;
             return (
               <li class="canon-record" id={slug}>
                 <p class="canon-record-eyebrow">
                   Reality {r.number != null ? String(r.number).padStart(2, '0') : '·'}
                 </p>
-                <h3 class="canon-record-title">{name}</h3>
-                {r.summary && (
-                  <p class="canon-record-body">{r.summary}</p>
+                <h3 class="canon-record-title">
+                  {r.icon ? <span style="margin-right:0.4em">{r.icon}</span> : null}
+                  {name}
+                </h3>
+                {r.corePrinciple && (
+                  <p class="canon-record-mantra">"{r.corePrinciple}"</p>
                 )}
-                {r.relatedTrap && (
+                {r.headline && (
+                  <p class="canon-record-body" style="color:var(--vcp-ink-3);font-style:italic">
+                    {r.headline}
+                  </p>
+                )}
+                {(r.shiftFrom || r.shiftTo) && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr 1fr">
+                    {r.shiftFrom && (
+                      <div>
+                        <p class="canon-record-meta-label">Shift from</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{r.shiftFrom}</li>
+                        </ul>
+                      </div>
+                    )}
+                    {r.shiftTo && (
+                      <div>
+                        <p class="canon-record-meta-label">Shift to</p>
+                        <ul class="canon-record-meta-list">
+                          <li>{r.shiftTo}</li>
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {r.keyPractices && r.keyPractices.length > 0 && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">Key practices</p>
+                      <ul class="canon-record-meta-list">
+                        {r.keyPractices.map((p) => <li>{p}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+                {r.countersTrap && (
                   <ul class="canon-record-tags">
                     <li>
                       <a
-                        href={`/twelve-traps#${r.relatedTrap.slug?.current ?? ''}`}
+                        href={`/twelve-traps#${r.countersTrap.slug?.current ?? ''}`}
                         class="canon-record-tag">
-                        <span class="canon-record-tag-label">counters</span>{r.relatedTrap.name}
+                        <span class="canon-record-tag-label">counters</span>{r.countersTrap.name}
                       </a>
                     </li>
                   </ul>
@@ -132,10 +172,9 @@ const realityDefinedTerms = realities.map((r) => ({
       <p class="canon-callout-body">
         Realities pair one-for-one with the <a href="/twelve-traps">Twelve Complexity Traps</a>.
         The trap names the failure mode; the reality names the operating assumption that
-        prevents it. Read them as pairs.
+        prevents it. Read them as pairs. The <a href="/beliefs">Five Core Beliefs</a> are
+        upstream of both.
       </p>
     </div>
-
-    <section class="canon-prose" set:html={framingBody} />
   </CanonArchetype>
 </BaseLayout>

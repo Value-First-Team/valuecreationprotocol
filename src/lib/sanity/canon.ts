@@ -65,20 +65,25 @@ export async function getCanonDocs(ids: string[]): Promise<CanonDocMeta[]> {
 /**
  * Get all 6 core belief records, ordered by position (Belief #5 = Emergence over Predictability).
  * Legacy coreBelief-evolution (position null) appears at the end.
+ *
+ * `principle` carries the canonical "X over Y" form (e.g. "Natural Value Flow over Artificial Control");
+ * `name` carries the short X (e.g. "Natural Value Flow"). Both are populated; tagline/shortLabel are not.
  */
 export async function getCoreBeliefs() {
   const result = await sanityQuery<
     Array<{
       _id: string;
       name: string;
+      principle?: string;
       position: number | null;
+      slug?: { current: string };
       shortLabel?: string;
       tagline?: string;
       body?: unknown;
     }>
   >(
     `*[_type == "coreBelief"] | order(coalesce(position, 99) asc){
-      _id, name, position, shortLabel, tagline, body
+      _id, name, principle, position, slug, shortLabel, tagline, body
     }`
   );
   return result ?? [];
@@ -86,6 +91,12 @@ export async function getCoreBeliefs() {
 
 /**
  * Get all 12 Twelve Traps records, ordered alphabetically by name.
+ *
+ * Sanity carries rich structured fields per trap — `tagline` is the one-line
+ * definition, `oneLineDefinition` is a slightly longer canonical sentence,
+ * `headline` is the "When X meets Y" framing, `subheadline` is the long-form
+ * diagnostic paragraph, `keySymptoms[]` is the recognition list, `theAlternative`
+ * is the inverted operating habit, `valueFirstAlternative` is the Reality name.
  */
 export async function getTraps() {
   const result = await sanityQuery<
@@ -94,11 +105,22 @@ export async function getTraps() {
       name: string;
       slug: { current: string };
       assessmentPath?: string;
+      category?: string;
+      tagline?: string;
+      oneLineDefinition?: string;
+      headline?: string;
+      subheadline?: string;
+      keySymptoms?: string[];
+      theAlternative?: string;
+      valueFirstAlternative?: string;
       body?: unknown;
     }>
   >(
     `*[_type == "trap"] | order(name asc){
-      _id, name, slug, assessmentPath, body
+      _id, name, slug, assessmentPath, category,
+      tagline, oneLineDefinition, headline, subheadline,
+      keySymptoms, theAlternative, valueFirstAlternative,
+      body
     }`
   );
   return result ?? [];
@@ -134,12 +156,18 @@ export async function getValuePathStages() {
 
 /**
  * Get all 4 Unified Views (UCV, URV, UBC, UTE).
+ *
+ * Each view has a `tagline` (the one-line elevator), a long `description`,
+ * `primaryOrg` (customer-org / finance-org / operations-org), `howItTransforms`
+ * (the before→after operating shift), `keyQuestions[]` the view answers, and
+ * `relatedTraps[]` references — the traps each view counters by existing.
  */
 export async function getUnifiedGoals() {
   const result = await sanityQuery<
     Array<{
       _id: string;
       name: string;
+      tagline?: string;
       description: string;
       primaryOrg?: string;
       howItTransforms?: string;
@@ -149,7 +177,7 @@ export async function getUnifiedGoals() {
     }>
   >(
     `*[_type == "unifiedGoal"]{
-      _id, name, description, primaryOrg, howItTransforms, keyQuestions, color,
+      _id, name, tagline, description, primaryOrg, howItTransforms, keyQuestions, color,
       "relatedTraps": relatedTraps[]->{_id, name, slug}
     }`
   );
@@ -158,30 +186,51 @@ export async function getUnifiedGoals() {
 
 /**
  * Get all 15 valueReality records with their commitments.
+ *
+ * Each Reality carries:
+ *   - `name` — the Reality name (e.g. "Value-First Communication")
+ *   - `number` — canonical ordering (1..15)
+ *   - `corePrinciple` — the one-line operating principle
+ *   - `headline` — the failure-mode framing ("When X, Y happens")
+ *   - `manifestoTitle` — long-form section title
+ *   - `shiftFrom` / `shiftTo` — the operating shift this Reality demands
+ *   - `keyPractices[]` — short practice statements
+ *   - `icon` — emoji identifier
+ *   - `commitments[]` — numbered commitments with actions[]
+ *   - `countersTrap` — reference to the Trap this Reality counters
+ *   - `accentColor` / `pillar` — display + grouping metadata
  */
 export async function getValueRealities() {
   const result = await sanityQuery<
     Array<{
       _id: string;
-      title?: string;
       name?: string;
-      summary?: string;
       number?: number;
-      accentColor?: string;
       slug?: { current: string };
+      corePrinciple?: string;
+      headline?: string;
+      manifestoTitle?: string;
+      shiftFrom?: string;
+      shiftTo?: string;
+      keyPractices?: string[];
+      icon?: string;
+      accentColor?: string;
+      pillar?: string;
       commitments?: Array<{
         _key: string;
         number: number;
         title: string;
         actions?: string[];
       }>;
-      relatedTrap?: { _id: string; name: string; slug: { current: string } };
+      countersTrap?: { _id: string; name: string; slug: { current: string } };
     }>
   >(
     `*[_type == "valueReality"] | order(number asc, _createdAt asc){
-      _id, title, name, summary, number, accentColor, slug,
+      _id, name, number, slug,
+      corePrinciple, headline, manifestoTitle,
+      shiftFrom, shiftTo, keyPractices, icon, accentColor, pillar,
       commitments,
-      "relatedTrap": relatedTrap->{_id, name, slug}
+      "countersTrap": countersTrap->{_id, name, slug}
     }`
   );
   return result ?? [];

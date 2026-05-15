@@ -2,8 +2,14 @@
 /**
  * /beliefs — Five Core Beliefs.
  *
- * Source: Sanity coreBelief records ordered by position 1..5.
+ * Source: Sanity coreBelief records, ordered by position 1..5.
  *         Belief #5 is Emergence over Predictability (patched 2026-05).
+ *         A legacy `coreBelief-evolution` record exists with position=null and
+ *         is excluded from the canonical five via the position filter below.
+ *
+ * Per ADR 0008 (Sanity = canonical for framework concepts that render on the website),
+ * this page renders 100% from Sanity coreBelief records. No wiki-canonical markdown
+ * fallback — Wiki is a prose mirror, not a render source.
  *
  * Cross-citation suppressed (peer 404s on valuefirstteam.com/beliefs;
  * confirmed 2026-05-12). Will re-enable when Showcase ships firm-side page.
@@ -11,21 +17,16 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
 import { getCoreBeliefs } from '../lib/sanity/canon';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const beliefs = await getCoreBeliefs();
 const ordered = beliefs.filter(
   (b) => typeof b.position === 'number' && b.position >= 1 && b.position <= 5
 );
 
-// Pull canonical framing prose from the wiki mirror for the body intro.
-const { html: framingHtml } = renderWikiCanonical(WIKI_CANONICAL.beliefs);
-const framingBody = stripFirstH1(framingHtml);
-
 const beliefDefinedTerms = ordered.map((b) => ({
   name: b.name,
-  description: b.tagline ?? b.shortLabel ?? undefined,
-  termCode: b.shortLabel ?? `belief-${b.position}`,
+  description: b.principle ?? b.tagline ?? b.shortLabel ?? undefined,
+  termCode: b.slug?.current ?? `belief-${b.position}`,
 }));
 ---
 
@@ -46,7 +47,7 @@ const beliefDefinedTerms = ordered.map((b) => ({
     specMeta={[
       { label: 'Status', value: 'v1.0 · canonical' },
       { label: 'Effective', value: '08 December 2025' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/beliefs' },
     ]}
   >
@@ -73,21 +74,37 @@ const beliefDefinedTerms = ordered.map((b) => ({
 
         <ol class="canon-records">
           {ordered.map((b) => {
-            const slug = b.shortLabel
-              ? b.shortLabel.toLowerCase().replace(/\s+/g, '-')
-              : `belief-${b.position}`;
+            const slug = b.slug?.current ?? `belief-${b.position}`;
+            // Split "X over Y" into X and Y when principle is in that form.
+            const principle = b.principle ?? '';
+            const overMatch = principle.match(/^(.+?)\s+over\s+(.+)$/i);
+            const xPart = overMatch?.[1]?.trim();
+            const yPart = overMatch?.[2]?.trim();
             return (
               <li class="canon-record" id={slug}>
                 <p class="canon-record-eyebrow">Belief {String(b.position).padStart(2, '0')}</p>
                 <h3 class="canon-record-title">{b.name}</h3>
-                {b.tagline && (
-                  <p class="canon-record-mantra">"{b.tagline}"</p>
+                {b.principle && (
+                  <p class="canon-record-mantra">"{b.principle}"</p>
                 )}
-                {b.shortLabel && (
-                  <p class="canon-record-body">
-                    Short label: <strong>{b.shortLabel}</strong>.
-                    Read in the canonical ordering as Position #{b.position}.
-                  </p>
+                {xPart && yPart && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr 1fr">
+                    <div>
+                      <p class="canon-record-meta-label">The Value-First habit (X)</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{xPart}</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p class="canon-record-meta-label">The industrial-age default (Y)</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{yPart}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+                {b.tagline && (
+                  <p class="canon-record-body">{b.tagline}</p>
                 )}
               </li>
             );
@@ -101,10 +118,10 @@ const beliefDefinedTerms = ordered.map((b) => ({
       <p class="canon-callout-body">
         Beliefs are upstream. The <a href="/value-path">Value Path</a> is one
         downstream expression of them. The <a href="/twelve-traps">Twelve Traps</a>
-        name what happens when a team adopts the Y instead of the X.
+        name what happens when a team adopts the Y instead of the X. The
+        <a href="/realities">Value Realities</a> name the operating commitments the
+        beliefs imply.
       </p>
     </div>
-
-    <section class="canon-prose" set:html={framingBody} />
   </CanonArchetype>
 </BaseLayout>

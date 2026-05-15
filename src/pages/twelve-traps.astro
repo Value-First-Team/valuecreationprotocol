@@ -2,25 +2,34 @@
 /**
  * /twelve-traps — Twelve Complexity Traps that derail value creation.
  *
- * Source: Sanity trap records (Tier 1 canonical) ordered alphabetically by name +
- *         wiki canonical reference for the framing prose. Per-trap anchor URLs
- *         so each trap can be cited individually.
+ * Source: Sanity `trap` records — fully structured, no wiki fallback.
+ *         Per ADR 0008, Sanity is canonical for framework concepts that render
+ *         on the website. Wiki is a prose mirror, not a render source.
  *
  * Note: Trap names that include forbidden vocabulary ("The Leads Trap") are
  * canonical names of the trap that exists to refuse those terms — these are
  * not enforcement violations.
+ *
+ * The schema carries 15 records but only the canonical 12 of `category` ==
+ * "core-framework" or "foundational" render on this page; the additional
+ * three (Scoring, Company, Community) are reserved for related expansion
+ * pages and are filtered out below.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
 import { getTraps } from '../lib/sanity/canon';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
-const traps = await getTraps();
-const { html: trapOverviewHtml } = renderWikiCanonical(WIKI_CANONICAL.traps);
+const allTraps = await getTraps();
+
+// Render only the canonical Twelve — anything outside core-framework/foundational
+// (e.g. Scoring, Company, Community traps which extend the canon) is excluded.
+const traps = allTraps.filter(
+  (t) => t.category === 'core-framework' || t.category === 'foundational'
+);
 
 const trapDefinedTerms = traps.map((t) => ({
   name: t.name,
-  description: `Complexity Trap — anti-pattern that derails value-creation work.`,
+  description: t.tagline ?? t.oneLineDefinition ?? 'Complexity Trap — anti-pattern that derails value-creation work.',
   termCode: t.slug?.current ?? t.name.toLowerCase().replace(/\s+/g, '-'),
 }));
 ---
@@ -41,7 +50,7 @@ const trapDefinedTerms = traps.map((t) => ({
     path="/twelve-traps"
     specMeta={[
       { label: 'Status', value: 'canonical' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/twelve-traps' },
       { label: 'Count', value: `${traps.length} traps · alphabetical` },
     ]}
@@ -85,37 +94,73 @@ const trapDefinedTerms = traps.map((t) => ({
         <p class="canon-section-label">The twelve, in canonical order</p>
         <h2 class="canon-section-sub">Each trap, named and addressable.</h2>
         <p class="canon-section-note">
-          Sourced from Sanity. Ordered alphabetically. Each carries its own anchor.
+          Sourced from Sanity. Ordered alphabetically. Each carries its own anchor,
+          its one-line definition, recognition symptoms, and the Reality that counters it.
         </p>
 
         <ol class="canon-records">
           {traps.map((t, i) => {
             const slug = t.slug?.current ?? `trap-${i + 1}`;
+            const counterSlug = t.valueFirstAlternative
+              ? t.valueFirstAlternative.toLowerCase().replace(/\s+/g, '-')
+              : slug;
             return (
               <li class="canon-record" id={slug}>
                 <p class="canon-record-eyebrow">Trap {String(i + 1).padStart(2, '0')}</p>
                 <h3 class="canon-record-title">{t.name}</h3>
-                <p class="canon-record-body">
-                  A pattern that derails value-creation work. See the canonical reference
-                  below for the long-form diagnostic, the signals that surface it, and
-                  the Reality that counters it.
-                </p>
-                {t.assessmentPath && (
+                {t.headline && (
+                  <p class="canon-record-mantra">"{t.headline}"</p>
+                )}
+                {(t.oneLineDefinition ?? t.tagline) && (
+                  <p class="canon-record-body">
+                    {t.oneLineDefinition ?? t.tagline}
+                  </p>
+                )}
+                {t.subheadline && (
+                  <p class="canon-record-body" style="color:var(--vcp-ink-3);font-size:0.9375rem">
+                    {t.subheadline}
+                  </p>
+                )}
+                {t.keySymptoms && t.keySymptoms.length > 0 && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">Recognition symptoms</p>
+                      <ul class="canon-record-meta-list">
+                        {t.keySymptoms.map((s) => <li>{s}</li>)}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+                {t.theAlternative && (
+                  <div class="canon-record-meta" style="grid-template-columns:1fr">
+                    <div>
+                      <p class="canon-record-meta-label">The Value-First alternative</p>
+                      <ul class="canon-record-meta-list">
+                        <li>{t.theAlternative}</li>
+                      </ul>
+                    </div>
+                  </div>
+                )}
+                {(t.valueFirstAlternative || t.assessmentPath) && (
                   <ul class="canon-record-tags">
-                    <li>
-                      <a
-                        href={`https://valuefirstteam.com${t.assessmentPath}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="canon-record-tag">
-                        <span class="canon-record-tag-label">assess</span>self-assessment
-                      </a>
-                    </li>
-                    <li>
-                      <a href={`/realities#${slug}`} class="canon-record-tag">
-                        <span class="canon-record-tag-label">counter</span>related reality
-                      </a>
-                    </li>
+                    {t.valueFirstAlternative && (
+                      <li>
+                        <a href={`/realities#${counterSlug}`} class="canon-record-tag">
+                          <span class="canon-record-tag-label">counter</span>{t.valueFirstAlternative}
+                        </a>
+                      </li>
+                    )}
+                    {t.assessmentPath && (
+                      <li>
+                        <a
+                          href={`https://valuefirstteam.com${t.assessmentPath}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="canon-record-tag">
+                          <span class="canon-record-tag-label">assess</span>self-assessment
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 )}
               </li>
@@ -129,11 +174,10 @@ const trapDefinedTerms = traps.map((t) => ({
       <p class="canon-callout-label">The pattern beneath the patterns</p>
       <p class="canon-callout-body">
         Every trap shares the same deep structure: it preserves an industrial-age
-        habit by giving it a polite, professional name. Below is the long-form
-        canonical reference — the framework that produced the list.
+        habit by giving it a polite, professional name. The
+        <a href="/realities">Value Realities</a> name the inverted habit a team
+        operates against to refuse the trap. Read each trap with its paired Reality.
       </p>
     </div>
-
-    <section class="canon-prose" set:html={stripFirstH1(trapOverviewHtml)} />
   </CanonArchetype>
 </BaseLayout>

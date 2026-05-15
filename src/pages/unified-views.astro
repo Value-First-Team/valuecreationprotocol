@@ -2,29 +2,50 @@
 /**
  * /unified-views — Four Unified Views (UCV, URV, UBC, UTE).
  *
- * Source: Sanity unifiedGoal records. Three-Org mapping:
- *   UCV → Customer Org · URV → Finance Org · UBC + UTE → Operations Org.
+ * Source: Sanity `unifiedGoal` records — fully structured, no wiki fallback.
+ *         Per ADR 0008, Sanity is canonical for framework concepts that render
+ *         on the website. Wiki is a prose mirror, not a render source.
+ *
+ * Three-Org mapping (from `primaryOrg` field):
+ *   UCV → customer-org (Sage)
+ *   URV → finance-org (Pax)
+ *   UBC → operations-org (V)
+ *   UTE → operations-org (V)
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
 import { getUnifiedGoals } from '../lib/sanity/canon';
-import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '../lib/markdown';
 
 const goals = await getUnifiedGoals();
 const ORDER = ['UCV', 'URV', 'UBC', 'UTE'];
+
+// Map view name to code (UCV / URV / UBC / UTE).
+function codeFor(name?: string): string {
+  if (!name) return '';
+  if (/Customer/i.test(name)) return 'UCV';
+  if (/Revenue/i.test(name)) return 'URV';
+  if (/Business Context/i.test(name)) return 'UBC';
+  if (/Team Enablement/i.test(name)) return 'UTE';
+  return name.match(/\b([A-Z]{3})\b/)?.[1] ?? '';
+}
+
 const ordered = [...goals].sort((a, b) => {
-  const ai = ORDER.findIndex((k) => a.name?.includes(k));
-  const bi = ORDER.findIndex((k) => b.name?.includes(k));
+  const ai = ORDER.indexOf(codeFor(a.name));
+  const bi = ORDER.indexOf(codeFor(b.name));
   return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi);
 });
 
-const { html: framingHtml } = renderWikiCanonical(WIKI_CANONICAL.unifiedViews);
-const framingBody = stripFirstH1(framingHtml);
+// Map primaryOrg slug to display label.
+const ORG_LABEL: Record<string, string> = {
+  'customer-org': 'Customer Org (Sage)',
+  'finance-org': 'Finance Org (Pax)',
+  'operations-org': 'Operations Org (V)',
+};
 
 const viewDefinedTerms = ordered.map((g) => ({
   name: g.name,
-  description: g.description,
-  termCode: (g.name?.match(/\b([A-Z]{3})\b/)?.[1] ?? '').toLowerCase(),
+  description: g.tagline ?? g.description,
+  termCode: codeFor(g.name).toLowerCase(),
 }));
 ---
 
@@ -44,7 +65,7 @@ const viewDefinedTerms = ordered.map((g) => ({
     path="/unified-views"
     specMeta={[
       { label: 'Status', value: 'canonical' },
-      { label: 'Verified', value: '12 May 2026' },
+      { label: 'Verified', value: '14 May 2026' },
       { label: 'Cite', value: 'valuecreationprotocol.com/unified-views' },
       { label: 'Views', value: `${ordered.length} — UCV · URV · UBC · UTE` },
     ]}
@@ -73,21 +94,25 @@ const viewDefinedTerms = ordered.map((g) => ({
 
         <ol class="canon-records">
           {ordered.map((g) => {
-            const code = g.name?.match(/\b([A-Z]{3})\b/)?.[1] ?? '';
+            const code = codeFor(g.name);
             const slug = code.toLowerCase() || g.name?.toLowerCase().replace(/\s+/g, '-') || 'view';
+            const orgLabel = g.primaryOrg ? ORG_LABEL[g.primaryOrg] ?? g.primaryOrg : undefined;
             return (
               <li class="canon-record" id={slug}>
                 <p class="canon-record-eyebrow">{code || 'View'}</p>
                 <h3 class="canon-record-title">{g.name}</h3>
+                {g.tagline && (
+                  <p class="canon-record-mantra">"{g.tagline}"</p>
+                )}
                 {g.description && (
                   <p class="canon-record-body">{g.description}</p>
                 )}
                 <div class="canon-record-meta">
-                  {g.primaryOrg && (
+                  {orgLabel && (
                     <div>
                       <p class="canon-record-meta-label">Primary org</p>
                       <ul class="canon-record-meta-list">
-                        <li>{g.primaryOrg}</li>
+                        <li>{orgLabel}</li>
                       </ul>
                     </div>
                   )}
@@ -133,10 +158,10 @@ const viewDefinedTerms = ordered.map((g) => ({
       <p class="canon-callout-body">
         Unified views are operated by the <a href="/three-orgs">Three-Org Model</a>.
         Each view counters a set of <a href="/twelve-traps">Complexity Traps</a> — the
-        per-view trap mapping above is canonical, not illustrative.
+        per-view trap mapping above is canonical, not illustrative. The
+        <a href="/realities">Value Realities</a> name the operating commitments each
+        view depends on.
       </p>
     </div>
-
-    <section class="canon-prose" set:html={framingBody} />
   </CanonArchetype>
 </BaseLayout>
