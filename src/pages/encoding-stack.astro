@@ -4,11 +4,44 @@
  *
  * The three-layer substrate that makes VCP machine-parseable. Links into
  * each canon page. Uses encoding-stack.svg as the central diagram.
+ *
+ * Shell: HubArchetype — encoding-stack is a wayfinding surface for three
+ * spec children (Lexicon, VCP-Lang, Value Graph), each of which lives on
+ * SpecArchetype. The hub shell shares the token utility class system with
+ * /methodology, /manifestos, /protocol-stack, /engagement. The closing
+ * prose section uses the global `.prose` style from tokens.css.
+ *
+ * No arbitrary-value Tailwind. All visual rhythm comes from HubArchetype's
+ * scoped CSS (which references tokens.css variables only) and the token
+ * utility classes.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
+import HubArchetype from '../components/HubArchetype.astro';
 import Diagram from '../components/Diagram.astro';
+
+const LAYER_CARDS = [
+  {
+    eyebrow: 'Layer A',
+    title: 'Lexicon (lexical)',
+    body: 'The structured vocabulary of VCP. Each entry encodes a load-bearing term with its industrial counterpart, operational definition, distinguishing signals, and contrastive training pairs. The Lexicon is the formal evolution of the Value-First Language Translation Guide.',
+    cta: 'Read the Lexicon v0.1',
+    href: '/lexicon',
+  },
+  {
+    eyebrow: 'Layer B',
+    title: 'VCP-Lang (structural)',
+    body: 'The grammar for declaring Values, Context, and Trust in parseable syntax. VCP-Lang declarations are structured statements AI systems can read, validate, and execute against. VCP-Lang descends from the March 2026 HCP-Lang work.',
+    cta: 'Read the VCP-Lang spec v0.1',
+    href: '/vcp-lang',
+  },
+  {
+    eyebrow: 'Layer C',
+    title: 'Value Graph (relational)',
+    body: 'The specification for encoding mutual value creation as a platform-agnostic relational structure. The Value Graph formalizes relationships the Value-First methodology already describes — particularly the Three-Org Model and the Value Path — into a graph specification AI systems can traverse.',
+    cta: 'Read the Value Graph spec v0.1',
+    href: '/value-graph',
+  },
+];
 ---
 
 <BaseLayout
@@ -18,16 +51,29 @@ import Diagram from '../components/Diagram.astro';
   ogImage="og-encoding-stack.jpg"
   schemaType="TechArticle"
 >
-  <PageContainer>
-    <PageHeader
-      eyebrow="Substrate · Overview"
-      title="The Encoding Stack"
-      lede="VCP requires substrate to be machine-parseable. The substrate is a three-layer encoding stack — lexical, structural, relational."
-      version="v0.1"
-      status="Active"
-      verified="12 May 2026"
-      citeUrl="valuecreationprotocol.com/encoding-stack"
-    />
+  <HubArchetype
+    eyebrow="Substrate · Overview"
+    title="The Encoding Stack"
+    lead="VCP requires substrate to be machine-parseable. The substrate is a three-layer encoding stack — lexical, structural, relational."
+  >
+    <dl class="encoding-meta" aria-label="Document status">
+      <div class="encoding-meta-row">
+        <dt class="encoding-meta-label">Version</dt>
+        <dd class="encoding-meta-value">v0.1</dd>
+      </div>
+      <div class="encoding-meta-row">
+        <dt class="encoding-meta-label">Status</dt>
+        <dd class="encoding-meta-value encoding-meta-status">Active</dd>
+      </div>
+      <div class="encoding-meta-row">
+        <dt class="encoding-meta-label">Verified</dt>
+        <dd class="encoding-meta-value">12 May 2026</dd>
+      </div>
+      <div class="encoding-meta-row">
+        <dt class="encoding-meta-label">Cite</dt>
+        <dd class="encoding-meta-value">valuecreationprotocol.com/encoding-stack</dd>
+      </div>
+    </dl>
 
     <Diagram
       name="encoding-stack"
@@ -35,8 +81,8 @@ import Diagram from '../components/Diagram.astro';
       caption="Each layer makes a different aspect of VCP machine-executable."
     />
 
-    <article class="prose mx-auto">
-      <h2>Why an encoding stack</h2>
+    <section class="encoding-intro">
+      <h2 class="t-h2">Why an encoding stack</h2>
       <p>
         Foundation models default to industrial-age vocabulary because that
         vocabulary dominates training data. Prompt engineering can shift
@@ -49,44 +95,29 @@ import Diagram from '../components/Diagram.astro';
         prompt-level overrides. Each layer makes a different aspect of VCP
         machine-executable.
       </p>
+    </section>
 
-      <h2>The three layers</h2>
+    <section class="encoding-layers">
+      <p class="t-eyebrow encoding-layers-eyebrow">The three layers</p>
+      <ul class="hub-grid">
+        {LAYER_CARDS.map((card) => (
+          <li>
+            <a href={card.href} class="hub-card">
+              <p class="hub-card-eyebrow">{card.eyebrow}</p>
+              <h3 class="hub-card-title">{card.title}</h3>
+              <p class="hub-card-body">{card.body}</p>
+              <div class="hub-card-foot">
+                <span class="hub-card-meta">{card.cta}</span>
+                <span aria-hidden="true" class="hub-card-arrow">&rarr;</span>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-      <h3>Layer A — Lexicon (lexical)</h3>
-      <p>
-        The structured vocabulary of VCP. Each entry encodes a load-bearing
-        term with its industrial counterpart, operational definition,
-        distinguishing signals, and contrastive training pairs. The Lexicon
-        is the formal evolution of the Value-First Language Translation Guide.
-      </p>
-      <p>
-        <a href="/lexicon"><strong>Read the Lexicon v0.1 →</strong></a>
-      </p>
-
-      <h3>Layer B — VCP-Lang (structural)</h3>
-      <p>
-        The grammar for declaring Values, Context, and Trust in parseable
-        syntax. VCP-Lang declarations are structured statements AI systems
-        can read, validate, and execute against. VCP-Lang descends from the
-        March 2026 HCP-Lang work.
-      </p>
-      <p>
-        <a href="/vcp-lang"><strong>Read the VCP-Lang spec v0.1 →</strong></a>
-      </p>
-
-      <h3>Layer C — Value Graph (relational)</h3>
-      <p>
-        The specification for encoding mutual value creation as a
-        platform-agnostic relational structure. The Value Graph formalizes
-        relationships the Value-First methodology already describes —
-        particularly the Three-Org Model and the Value Path — into a graph
-        specification AI systems can traverse.
-      </p>
-      <p>
-        <a href="/value-graph"><strong>Read the Value Graph spec v0.1 →</strong></a>
-      </p>
-
-      <h2>How the layers work together</h2>
+    <section class="encoding-close">
+      <h2 class="t-h2">How the layers work together</h2>
       <p>
         A VCP-aligned system declares its values, context, and trust
         commitments using <em>VCP-Lang</em>, references terms whose meaning
@@ -97,7 +128,7 @@ import Diagram from '../components/Diagram.astro';
         methodology from natural-language description.
       </p>
 
-      <h2>Status</h2>
+      <h2 class="t-h2">Status</h2>
       <p>
         All three layers are at v0.1 — defined, scoped, and entering
         implementation. The Lexicon has the longest history (descended from
@@ -110,6 +141,112 @@ import Diagram from '../components/Diagram.astro';
         stack; the encoding stack should not be referenced without invoking
         VCP, because the stack exists to serve the protocol.
       </p>
-    </article>
-  </PageContainer>
+    </section>
+  </HubArchetype>
+
+<style is:global>
+  /* ============================================================
+     /encoding-stack — local layout above and below the layer grid.
+     All values reference tokens.css variables. No Tailwind arbitrary
+     values. Body type inherits the global `body` style from tokens.css,
+     which is already Geist 17px / 1.65 — adequate for this overview.
+     ============================================================ */
+  .encoding-intro,
+  .encoding-close {
+    max-width: var(--vcp-max-prose);
+    margin: 3rem 0 0;
+    color: var(--vcp-ink);
+    font-family: var(--vcp-font-display);
+    font-size: var(--vcp-fs-body);
+    line-height: var(--vcp-lh-body);
+    font-variation-settings: "opsz" 19;
+  }
+  .encoding-intro > h2,
+  .encoding-close > h2 {
+    margin: 2.6rem 0 0.6rem;
+  }
+  .encoding-intro > h2:first-child {
+    margin-top: 0;
+  }
+  .encoding-intro p + p,
+  .encoding-close p + p {
+    margin-top: 1.15em;
+  }
+  .encoding-intro p,
+  .encoding-close p {
+    margin: 0;
+    color: var(--vcp-ink);
+  }
+  .encoding-intro em,
+  .encoding-close em {
+    font-style: italic;
+    color: var(--vcp-ink);
+  }
+
+  .encoding-meta {
+    margin: 0 0 3rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    border-top: 1px solid var(--vcp-border-strong);
+    padding-top: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .encoding-meta {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .encoding-meta {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .encoding-meta-row {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .encoding-meta-label {
+    font-family: var(--vcp-font-mono);
+    font-size: var(--vcp-fs-eyebrow);
+    letter-spacing: var(--vcp-ls-eyebrow);
+    text-transform: uppercase;
+    color: var(--vcp-ink-3);
+    margin: 0;
+    font-weight: var(--vcp-fw-500);
+  }
+  .encoding-meta-value {
+    font-family: var(--vcp-font-mono);
+    font-size: var(--vcp-fs-xs);
+    color: var(--vcp-ink);
+    margin: 0;
+    word-break: break-word;
+    line-height: 1.5;
+  }
+  .encoding-meta-status {
+    color: var(--vcp-teal-deep);
+    font-weight: var(--vcp-fw-600);
+  }
+
+  .encoding-layers {
+    margin: 3.5rem 0 0;
+  }
+  .encoding-layers-eyebrow {
+    margin: 0 0 1.25rem;
+    padding-top: 1rem;
+    position: relative;
+  }
+  .encoding-layers-eyebrow::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 3.5rem;
+    background: var(--vcp-teal-deep);
+  }
+</style>
 </BaseLayout>

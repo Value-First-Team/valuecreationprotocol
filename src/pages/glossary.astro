@@ -11,8 +11,7 @@
  * Schema.org DefinedTerm per entry.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageContainer from '../components/PageContainer.astro';
-import PageHeader from '../components/PageHeader.astro';
+import HubArchetype from '../components/HubArchetype.astro';
 import {
   getCoreBeliefs,
   getTraps,
@@ -180,46 +179,40 @@ const jsonLdDefinedTerms = {
   ogImage="og-glossary.jpg"
   schemaType="DefinedTermSet"
 >
-  <PageContainer wide>
-    <PageHeader
-      eyebrow="Reference"
-      title="Glossary"
-      lede="The vocabulary VCP fixes. Industrial-age defaults sit nearby in the encoding work; this page lists the load-bearing terms VCP commits to."
-    />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdDefinedTerms)} />
 
+  <HubArchetype
+    eyebrow="Reference"
+    title="Glossary"
+    lead="The vocabulary VCP fixes. Industrial-age defaults sit nearby in the encoding work; this page lists the load-bearing terms VCP commits to."
+  >
     <!-- ToC -->
-    <nav class="mb-14 p-6 rounded-vcp-lg border border-vcp-border bg-vcp-surface-2">
-      <p class="font-mono text-[11px] tracking-[0.14em] uppercase text-vcp-ink-4 m-0 mb-3">
-        Sections
-      </p>
-      <ul class="flex flex-wrap gap-x-6 gap-y-2 list-none p-0 m-0 text-sm">
+    <nav class="glossary-toc" aria-label="Glossary sections">
+      <p class="t-eyebrow glossary-toc-label">Sections</p>
+      <ul class="glossary-toc-list">
         {sections.map((s) => (
-          <li>
-            <a href={`#${s.id}`} class="text-vcp-ink-2 border-b border-vcp-border-strong no-underline hover:text-vcp-ink hover:border-vcp-ink">
-              {s.title} <span class="text-vcp-ink-4 font-mono text-xs">({s.entries.length})</span>
+          <li class="glossary-toc-item">
+            <a href={`#${s.id}`} class="glossary-toc-link">
+              <span>{s.title}</span>
+              <span class="glossary-toc-count">({s.entries.length})</span>
             </a>
           </li>
         ))}
       </ul>
     </nav>
 
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLdDefinedTerms)} />
-
     {sections.map((section) => (
-      <section id={section.id} class="mb-16">
-        <h2
-          class="font-display text-[28px] md:text-[32px] font-medium leading-snug tracking-vcp-h text-vcp-ink m-0 mb-3 pb-3 border-b border-vcp-border"
-          style="font-variation-settings: 'opsz' 30"
-        >
+      <section id={section.id} class="glossary-section">
+        <h2 class="t-h2 glossary-section-title">
           {section.title}
         </h2>
-        <dl class="mt-6 divide-y divide-vcp-border">
+        <dl class="glossary-entries">
           {section.entries.map((entry) => (
-            <div class="py-5 grid md:grid-cols-12 gap-x-6 gap-y-2">
-              <dt class="md:col-span-4 text-vcp-ink font-semibold leading-snug">
+            <div class="glossary-entry">
+              <dt class="glossary-term">
                 {entry.term}
               </dt>
-              <dd class="md:col-span-8 m-0 text-vcp-ink-2 leading-relaxed">
+              <dd class="glossary-def">
                 {entry.def}
                 {entry.link && (
                   entry.link.startsWith('http') ? (
@@ -227,12 +220,12 @@ const jsonLdDefinedTerms = {
                       href={entry.link}
                       target="_blank"
                       rel="noopener"
-                      class="ml-1 text-vcp-teal-deep underline text-sm"
+                      class="glossary-link"
                     >
                       ↗
                     </a>
                   ) : (
-                    <a href={entry.link} class="ml-1 text-vcp-teal-deep underline text-sm">
+                    <a href={entry.link} class="glossary-link">
                       →
                     </a>
                   )
@@ -244,9 +237,135 @@ const jsonLdDefinedTerms = {
       </section>
     ))}
 
-    <p class="text-sm text-vcp-ink-3 mt-16 italic">
+    <p class="glossary-foot">
       Glossary entries are drawn from the canonical methodology records.
       For any conflict between this page and a canon page, the canon page wins.
     </p>
-  </PageContainer>
+  </HubArchetype>
 </BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     /glossary — local layout for ToC, section blocks, dt/dd grid.
+     All values reference tokens.css variables. No Tailwind arbitrary
+     values. Hosted inside HubArchetype's hub-body container.
+     ============================================================ */
+
+  .glossary-toc {
+    margin: 0 0 3.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-surface-2);
+    border-radius: var(--vcp-r-lg);
+  }
+  .glossary-toc-label {
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.75rem;
+  }
+  .glossary-toc-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .glossary-toc-item {
+    margin: 0;
+  }
+  .glossary-toc-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    font-family: var(--vcp-font-body);
+    font-size: var(--vcp-fs-sm);
+    color: var(--vcp-ink-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-border-strong);
+    transition: color var(--vcp-t-fast), border-color var(--vcp-t-fast);
+  }
+  .glossary-toc-link:hover {
+    color: var(--vcp-ink);
+    border-bottom-color: var(--vcp-ink);
+  }
+  .glossary-toc-count {
+    font-family: var(--vcp-font-mono);
+    font-size: var(--vcp-fs-micro);
+    color: var(--vcp-ink-4);
+  }
+
+  .glossary-section {
+    margin: 0 0 4rem;
+  }
+  .glossary-section-title {
+    color: var(--vcp-ink);
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--vcp-border);
+  }
+
+  .glossary-entries {
+    margin: 1.5rem 0 0;
+    padding: 0;
+  }
+  .glossary-entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 1.5rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .glossary-entry:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  @media (min-width: 768px) {
+    .glossary-entry {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+  .glossary-term {
+    color: var(--vcp-ink);
+    font-weight: var(--vcp-fw-600);
+    line-height: var(--vcp-lh-snug);
+    font-family: var(--vcp-font-body);
+    font-size: var(--vcp-fs-body);
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .glossary-term {
+      grid-column: span 4 / span 4;
+    }
+  }
+  .glossary-def {
+    color: var(--vcp-ink-2);
+    line-height: var(--vcp-lh-body);
+    font-family: var(--vcp-font-body);
+    font-size: var(--vcp-fs-body);
+    margin: 0;
+  }
+  @media (min-width: 768px) {
+    .glossary-def {
+      grid-column: span 8 / span 8;
+    }
+  }
+  .glossary-link {
+    margin-left: 0.35rem;
+    color: var(--vcp-teal-deep);
+    font-size: var(--vcp-fs-sm);
+    text-decoration: underline;
+    text-decoration-color: rgba(13, 148, 136, 0.32);
+    text-underline-offset: 3px;
+  }
+  .glossary-link:hover {
+    color: var(--vcp-link-hover);
+  }
+
+  .glossary-foot {
+    margin: 4rem 0 0;
+    font-family: var(--vcp-font-body);
+    font-size: var(--vcp-fs-sm);
+    color: var(--vcp-ink-3);
+    font-style: italic;
+  }
+</style>
