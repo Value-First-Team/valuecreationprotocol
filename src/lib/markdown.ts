@@ -100,7 +100,10 @@ export const STAGED_FILES = {
   beyondLeads: 'beyond_leads_manifesto_v2.md',
   valueLedGrowth: 'value-led-growth-manifesto.md',
   positioning: 'Value-Creation-Protocol-Positioning-Paper.md',
-  aiNativeShift: 'VCP-Newsletter-Part3.md',
+  // aiNativeShift removed 2026-05-17 — Part 3 essay moved to its canonical home
+  // as a blogPost on valuefirstteam.com. The source markdown
+  // (VCP-Newsletter-Part3.md) remains in src/content/canon/ for editorial
+  // reference and is no longer rendered by any vcp.com page.
 } as const;
 
 /**

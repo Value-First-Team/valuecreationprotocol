@@ -1,59 +1,213 @@
 ---
 /**
- * /ai-native-shift — The AI-Native Shift methodology (cohort-agnostic).
+ * /ai-native-shift — Implementation handoff route.
  *
- * Source: src/content/canon/VCP-Newsletter-Part3.md
+ * VCP is the protocol. The AI-Native Shift is Value-First Team's delivery
+ * vehicle for VCP in mid-market B2B organizations. This page is the gentle
+ * handoff: it explains the distinction, points to the canonical program page
+ * at valuefirstteam.com/ai-native-shift, and offers a path for teams that
+ * want to talk to the firm about implementation.
  *
- * This page describes the pattern of organizational transformation. The
- * firm cohort program is a separate concern living at vft.com/programs/
- * ai-native-shift. No pricing, no enrollment, no delivery cadence here.
+ * Prior to 2026-05-17 this URL rendered the body of VCP-Newsletter-Part3.md
+ * (the long-form essay version of the methodology). That essay has moved to
+ * its canonical home as a blogPost on valuefirstteam.com. The source markdown
+ * remains in src/content/canon/ for editorial reference but is no longer
+ * rendered. The mapping in src/lib/markdown.ts STAGED_FILES has been removed
+ * accordingly.
+ *
+ * Voice: calm, technical, protocol home. The reader arriving here is either
+ * looking for the canon doc (now elsewhere) or looking for an implementer to
+ * talk to. Both readers leave with a clear next step.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
-import { renderStagedMarkdown, stripFirstH1, STAGED_FILES } from '../lib/markdown';
-
-const { html } = renderStagedMarkdown(STAGED_FILES.aiNativeShift);
-const bodyHtml = stripFirstH1(html);
+import { SITE } from '../lib/site';
 ---
 
 <BaseLayout
-  title="The AI-Native Shift"
-  description="The methodology pattern of organizational transformation toward AI-native operations. A protocol, not a program — read it, adapt it, run it on your own substrate."
+  title="Implementing the Value Creation Protocol"
+  description="The AI-Native Shift is Value-First Team's delivery vehicle for the Value Creation Protocol — the structured engagement through which mid-market B2B organizations implement VCP. The protocol is open; this page is the handoff to the canonical implementing firm."
   path="/ai-native-shift"
   ogImage="og-ai-native-shift.jpg"
-  schemaType="DefinedTerm"
-  schemaTermCode="AI-Native Shift"
+  schemaType="WebPage"
 >
   <CanonArchetype
-    eyebrow="The AI-Native Shift"
-    title="The pattern of becoming AI-native."
-    lead="Becoming AI-native is not a tooling decision. It is an organizational shift — in operating model, in vocabulary, in what the team takes for granted about how value flows. This page describes the methodology pattern of that shift, decoupled from any specific cohort or program. The protocol is open; implementations are opinionated."
+    eyebrow="Implementation"
+    title="Implementing the Value Creation Protocol."
+    lead="VCP is a protocol — an open framework for naming what value means in an AI-native business operating model. Implementations are opinionated. The AI-Native Shift is Value-First Team's implementation: the structured engagement through which mid-market B2B organizations operationalize VCP. This page is the handoff."
     path="/ai-native-shift"
     specMeta={[
-      { label: 'Status', value: 'canonical' },
-      { label: 'Verified', value: '12 May 2026' },
-      { label: 'Cite', value: 'valuecreationprotocol.com/ai-native-shift' },
-      { label: 'Scope', value: 'methodology · cohort-agnostic' },
+      { label: 'Status', value: 'handoff route' },
+      { label: 'Verified', value: '17 May 2026' },
+      { label: 'Canonical implementation', value: 'valuefirstteam.com/ai-native-shift' },
     ]}
   >
-    <div class="canon-callout">
-      <p class="canon-callout-label">Methodology, not program</p>
-      <p class="canon-callout-body">
-        This page is the pattern. Specific cohort delivery, pricing, and enrollment
-        live with implementing firms — see <a href="https://valuefirstteam.com/ai-native-shift" target="_blank" rel="noopener">the firm's AI-Native Shift program</a>
-        for the canonical implementation.
+    <section class="canon-prose">
+      <h2>Protocol and implementation are different layers</h2>
+      <p>
+        The Value Creation Protocol describes how value flows in an AI-native
+        business — the vocabulary, the operating model, the architectural
+        commitments. It is platform-agnostic, declarable, and open. Anyone can
+        read it, cite it, and operate on it without engaging the originating
+        firm.
       </p>
-    </div>
-
-    <section class="canon-prose" set:html={bodyHtml} />
-
-    <div class="canon-callout">
-      <p class="canon-callout-label">Where this fits</p>
-      <p class="canon-callout-body">
-        The Shift is operated against the <a href="/three-orgs">Three-Org Model</a>
-        through the <a href="/value-loop">Value Loop</a>. <a href="/teach">TEACH</a>
-        is the discipline by which it is held.
+      <p>
+        The AI-Native Shift is one delivery vehicle for VCP. Specifically, it
+        is the way Value-First Team brings VCP into mid-market B2B
+        organizations as a structured engagement — pattern recognition,
+        architecture review, methodology coaching, and substrate
+        configuration on the canonical implementing platform (HubSpot).
+        Other implementations of VCP are welcome. The protocol does not
+        require this one.
       </p>
-    </div>
+
+      <h2>If you are reading to implement</h2>
+      <p>
+        If you are a leadership team looking to operationalize VCP in your own
+        organization — not just study the protocol — the AI-Native Shift is
+        where the implementation work happens. The canonical program page
+        lives with the firm that runs it.
+      </p>
+    </section>
+
+    <aside class="canon-handoff">
+      <p class="canon-handoff-eyebrow">Canonical implementation</p>
+      <h3 class="canon-handoff-title">The AI-Native Shift at Value-First Team</h3>
+      <p class="canon-handoff-body">
+        The structured engagement. Scope, cadence, deliverables, and the
+        team that runs it — documented at the implementing firm.
+      </p>
+      <a
+        class="canon-handoff-link"
+        href={`${SITE.implementer.url}/ai-native-shift`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        valuefirstteam.com/ai-native-shift <span aria-hidden="true">&rarr;</span>
+      </a>
+    </aside>
+
+    <section class="canon-prose">
+      <h2>If you want to talk to the implementer</h2>
+      <p>
+        Office Hours is the open-door path. A weekly working session run by
+        Value-First Team — no scope review, no commercial pressure, no
+        prepared pitch. Show up, ask a question, see whether the operating
+        model and the firm are a fit before there is anything to commit to.
+      </p>
+    </section>
+
+    <aside class="canon-handoff canon-handoff-quiet">
+      <p class="canon-handoff-eyebrow">Open door</p>
+      <h3 class="canon-handoff-title">Office Hours</h3>
+      <p class="canon-handoff-body">
+        Weekly, no commitment, no pitch. The way most implementation
+        conversations begin.
+      </p>
+      <a
+        class="canon-handoff-link"
+        href={`${SITE.implementer.url}/office-hours`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        valuefirstteam.com/office-hours <span aria-hidden="true">&rarr;</span>
+      </a>
+    </aside>
+
+    <section class="canon-prose">
+      <h2>Other implementations</h2>
+      <p>
+        The protocol is open. Practitioners and firms outside Value-First Team
+        are free to implement VCP on their own terms — adapt it, cite it,
+        operate by it. If you are building such an implementation, the
+        encoding stack (<a href="/encoding-stack">Lexicon</a>, <a href="/vcp-lang">VCP-Lang</a>, <a href="/value-graph">Value Graph</a>)
+        is where the protocol is machine-parseable.
+      </p>
+      <p>Build on it.</p>
+    </section>
   </CanonArchetype>
 </BaseLayout>
+
+<style is:global>
+  /* ============================================================
+     /ai-native-shift handoff blocks
+     Small additive component — sits inside CanonArchetype's body slot.
+     References tokens.css variables only. No Tailwind arbitrary values.
+     Two variants: default (teal-deep emphasis) and quiet (border-only).
+     ============================================================ */
+
+  .canon-handoff {
+    margin: 2.5rem 0;
+    padding: 1.85rem 2rem;
+    border: 1px solid var(--vcp-border-strong);
+    background: var(--vcp-teal-soft);
+    border-radius: var(--vcp-r-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  @media (min-width: 768px) {
+    .canon-handoff {
+      padding: 2.25rem 2.5rem;
+    }
+  }
+
+  .canon-handoff-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .canon-handoff-title {
+    font-family: var(--vcp-font-display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.22;
+    letter-spacing: -0.008em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 22;
+  }
+
+  .canon-handoff-body {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    max-width: 60ch;
+    font-variation-settings: "opsz" 17;
+  }
+
+  .canon-handoff-link {
+    align-self: flex-start;
+    margin-top: 0.35rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.875rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid var(--vcp-teal-deep);
+    padding-bottom: 1px;
+    transition: color var(--vcp-t-fast), border-bottom-color var(--vcp-t-fast);
+  }
+  .canon-handoff-link:hover {
+    color: var(--vcp-link-hover);
+    border-bottom-color: var(--vcp-link-hover);
+  }
+
+  /* Quiet variant — paper background, no teal tint. Used for the secondary
+     handoff (Office Hours) so the page has one primary emphasis and one
+     gentler echo, not two competing teal blocks. */
+  .canon-handoff-quiet {
+    background: var(--vcp-paper);
+    border-color: var(--vcp-border);
+  }
+  .canon-handoff-quiet .canon-handoff-eyebrow {
+    color: var(--vcp-ink-3);
+  }
+</style>
