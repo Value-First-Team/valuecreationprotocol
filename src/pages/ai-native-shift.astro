@@ -3,21 +3,21 @@
  * /ai-native-shift — Implementation handoff route.
  *
  * VCP is the protocol. The AI-Native Shift is Value-First Team's delivery
- * vehicle for VCP in mid-market B2B organizations. This page is the gentle
- * handoff: it explains the distinction, points to the canonical program page
- * at valuefirstteam.com/ai-native-shift, and offers a path for teams that
- * want to talk to the firm about implementation.
+ * vehicle for VCP — a daily show + transformation program for business
+ * leaders making the shift from industrial-age defaults to AI-native
+ * operations. This page is the handoff: it explains the protocol-vs-
+ * implementation distinction and points to ainativeshift.com, the
+ * standalone home for the show + program, with a reciprocal target on
+ * ainativeshift.com/framework/vcp.
  *
- * Prior to 2026-05-17 this URL rendered the body of VCP-Newsletter-Part3.md
- * (the long-form essay version of the methodology). That essay has moved to
- * its canonical home as a blogPost on valuefirstteam.com. The source markdown
- * remains in src/content/canon/ for editorial reference but is no longer
- * rendered. The mapping in src/lib/markdown.ts STAGED_FILES has been removed
- * accordingly.
+ * Updated 2026-05-25 (Wave 3): canonical implementation URL moved from
+ * valuefirstteam.com/ai-native-shift to ainativeshift.com (standalone
+ * site launched May 26). Office Hours stays at valuefirstteam.com.
  *
  * Voice: calm, technical, protocol home. The reader arriving here is either
- * looking for the canon doc (now elsewhere) or looking for an implementer to
- * talk to. Both readers leave with a clear next step.
+ * looking for the canon doc (moved to a blogPost on valuefirstteam.com) or
+ * looking for an implementer to talk to. Both readers leave with a clear
+ * next step.
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CanonArchetype from '../components/CanonArchetype.astro';
@@ -34,12 +34,12 @@ import { SITE } from '../lib/site';
   <CanonArchetype
     eyebrow="Implementation"
     title="Implementing the Value Creation Protocol."
-    lead="VCP is a protocol — an open framework for naming what value means in an AI-native business operating model. Implementations are opinionated. The AI-Native Shift is Value-First Team's implementation: the structured engagement through which mid-market B2B organizations operationalize VCP. This page is the handoff."
+    lead="VCP is a protocol — an open framework for naming what value means in an AI-native business operating model. Implementations are opinionated. The AI-Native Shift is Value-First Team's implementation: a daily show and transformation program through which business leaders operationalize VCP. This page is the handoff."
     path="/ai-native-shift"
     specMeta={[
       { label: 'Status', value: 'handoff route' },
-      { label: 'Verified', value: '17 May 2026' },
-      { label: 'Canonical implementation', value: 'valuefirstteam.com/ai-native-shift' },
+      { label: 'Verified', value: '25 May 2026' },
+      { label: 'Canonical implementation', value: 'ainativeshift.com' },
     ]}
   >
     <section class="canon-prose">
@@ -52,38 +52,50 @@ import { SITE } from '../lib/site';
         firm.
       </p>
       <p>
-        The AI-Native Shift is one delivery vehicle for VCP. Specifically, it
-        is the way Value-First Team brings VCP into mid-market B2B
-        organizations as a structured engagement — pattern recognition,
-        architecture review, methodology coaching, and substrate
-        configuration on the canonical implementing platform (HubSpot).
-        Other implementations of VCP are welcome. The protocol does not
-        require this one.
+        The AI-Native Shift is one delivery vehicle for VCP. It is the way
+        Value-First Team brings VCP to business leaders: a daily show that
+        works through the operating model in public, and a structured
+        program that brings the protocol into the inside of an organization.
+        Both the show and the program live at ainativeshift.com. Other
+        implementations of VCP are welcome. The protocol does not require
+        this one.
       </p>
 
       <h2>If you are reading to implement</h2>
       <p>
         If you are a leadership team looking to operationalize VCP in your own
         organization — not just study the protocol — the AI-Native Shift is
-        where the implementation work happens. The canonical program page
-        lives with the firm that runs it.
+        where the implementation work happens. The standalone home for the
+        show, the program, and the framework reference (including the
+        reciprocal page at <code>ainativeshift.com/framework/vcp</code>) is
+        ainativeshift.com.
       </p>
     </section>
 
     <aside class="canon-handoff">
       <p class="canon-handoff-eyebrow">Canonical implementation</p>
-      <h3 class="canon-handoff-title">The AI-Native Shift at Value-First Team</h3>
+      <h3 class="canon-handoff-title">The AI-Native Shift</h3>
       <p class="canon-handoff-body">
-        The structured engagement. Scope, cadence, deliverables, and the
-        team that runs it — documented at the implementing firm.
+        The show, the program, and the framework reference — the standalone
+        home for Value-First Team&apos;s implementation of the Value Creation
+        Protocol.
       </p>
       <a
         class="canon-handoff-link"
-        href={`${SITE.implementer.url}/ai-native-shift`}
+        href="https://ainativeshift.com"
         target="_blank"
         rel="noopener noreferrer"
       >
-        valuefirstteam.com/ai-native-shift <span aria-hidden="true">&rarr;</span>
+        ainativeshift.com <span aria-hidden="true">&rarr;</span>
+      </a>
+      <a
+        class="canon-handoff-link"
+        href="https://ainativeshift.com/framework/vcp"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="margin-top: 0.1rem;"
+      >
+        ainativeshift.com/framework/vcp <span aria-hidden="true">&rarr;</span>
       </a>
     </aside>
 

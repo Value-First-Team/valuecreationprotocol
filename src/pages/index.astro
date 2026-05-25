@@ -92,6 +92,22 @@ const ENTRY_CARDS = [
     href: '/manifestos',
   },
 ];
+
+// Implementations of the protocol. The protocol is open; implementations are
+// opinionated. Linux/Red Hat: the protocol is the kernel, an implementation
+// is a distribution. As more implementations emerge, they land here. For now,
+// AI-Native Shift (Value-First Team's daily show + transformation program) is
+// the canonical implementation referenced from the protocol home.
+const IMPLEMENTATIONS = [
+  {
+    name: 'The AI-Native Shift',
+    operator: 'Value-First Team',
+    desc: 'A daily show and transformation program for business leaders making the shift from industrial-age defaults to AI-native operations. Built on VCP; reciprocal framework reference at ainativeshift.com/framework/vcp.',
+    handoff: '/ai-native-shift',
+    external: 'https://ainativeshift.com',
+    status: 'Canonical',
+  },
+];
 ---
 
 <BaseLayout
@@ -200,6 +216,40 @@ const ENTRY_CARDS = [
               <span class="vcp-entry-meta">{card.meta}</span>
               <span aria-hidden="true" class="vcp-entry-arrow">&rarr;</span>
             </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= § 03 · IMPLEMENTATIONS ============= -->
+  <section class="vcp-section vcp-section-implementations">
+    <div class="vcp-section-inner">
+      <p class="t-eyebrow vcp-section-eyebrow">§ 03 · Implementations</p>
+      <h2 class="t-h2 vcp-section-h2">Implementations built on the protocol.</h2>
+      <p class="t-lead vcp-section-lead">
+        The protocol is open and platform-agnostic. Implementations are opinionated &mdash;
+        they make choices about substrate, cadence, and delivery. Anyone may build one.
+        The canonical implementation maintained by the originating firm is listed below.
+      </p>
+
+      <div class="vcp-implementations">
+        {IMPLEMENTATIONS.map((impl) => (
+          <a href={impl.handoff} class="vcp-impl-card">
+            <div class="vcp-impl-head">
+              <span class="vcp-impl-status">{impl.status}</span>
+              <span class="vcp-impl-arrow" aria-hidden="true">&rarr;</span>
+            </div>
+            <h3 class="vcp-impl-name">{impl.name}</h3>
+            <p class="vcp-impl-operator">
+              <span class="vcp-impl-operator-label">operator</span>
+              <span class="vcp-impl-operator-name">{impl.operator}</span>
+            </p>
+            <p class="vcp-impl-desc">{impl.desc}</p>
+            <p class="vcp-impl-foot">
+              <span class="vcp-impl-handoff">VCP handoff: {impl.handoff}</span>
+              <span class="vcp-impl-external">{impl.external.replace(/^https?:\/\//, '')}</span>
+            </p>
           </a>
         ))}
       </div>
@@ -556,6 +606,109 @@ const ENTRY_CARDS = [
     .vcp-entries {
       grid-template-columns: 1fr 1fr 1fr;
       gap: 1.75rem;
+    }
+  }
+
+  /* ============= § 03 · Implementations ============= */
+  .vcp-implementations {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .vcp-impl-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 2rem;
+    border: 1px solid var(--vcp-border);
+    background: var(--vcp-paper);
+    border-radius: var(--vcp-r-lg);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--vcp-t-base), transform var(--vcp-t-base);
+  }
+  .vcp-impl-card:hover {
+    border-color: var(--vcp-ink);
+    transform: translateY(-2px);
+  }
+  .vcp-impl-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .vcp-impl-status {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+  }
+  .vcp-impl-arrow {
+    font-size: 1.25rem;
+    color: var(--vcp-teal-deep);
+  }
+  .vcp-impl-name {
+    font-family: var(--vcp-font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+    color: var(--vcp-ink);
+    margin: 0;
+    font-variation-settings: "opsz" 24;
+  }
+  .vcp-impl-operator {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    color: var(--vcp-ink-3);
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+  }
+  .vcp-impl-operator-label {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .vcp-impl-operator-name {
+    color: var(--vcp-ink);
+    font-weight: 500;
+    font-family: var(--vcp-font-body);
+  }
+  .vcp-impl-desc {
+    font-family: var(--vcp-font-display);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    margin: 0;
+    max-width: 64ch;
+    font-variation-settings: "opsz" 17;
+  }
+  .vcp-impl-foot {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--vcp-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: var(--vcp-ink-3);
+  }
+  .vcp-impl-handoff {
+    color: var(--vcp-ink-3);
+  }
+  .vcp-impl-external {
+    color: var(--vcp-teal-deep);
+  }
+  @media (min-width: 768px) {
+    .vcp-impl-foot {
+      flex-direction: row;
+      gap: 1.25rem;
+      align-items: baseline;
     }
   }
 
