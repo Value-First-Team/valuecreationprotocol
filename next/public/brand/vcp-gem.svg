@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- VCP Protocol Mark — Faceted Gem on Dark Background -->
+  <!-- Pairs with Value-First Team compass via shared teal/navy palette -->
+  <!-- Reads distinctly as the protocol symbol (not the firm) -->
+
+  <!-- Background rounded square -->
+  <rect width="180" height="180" rx="30" ry="30" fill="#080c18"/>
+
+  <!-- Faceted gem / protocol diamond -->
+  <!-- Top vertex: 90, 35 -->
+  <!-- Bottom vertex: 90, 125 -->
+  <!-- Left vertex: 28, 85 -->
+  <!-- Right vertex: 152, 85 -->
+  <!-- Inner center: 90, 72 -->
+
+  <!-- Top face — lightest (catches light) -->
+  <polygon points="90,35 68,62 90,72 112,62" fill="#b4f5ff" opacity="0.92"/>
+
+  <!-- Left upper face -->
+  <polygon points="90,35 68,62 90,72" fill="#67e8f9" opacity="0.90"/>
+
+  <!-- Right upper face — slightly darker -->
+  <polygon points="90,35 112,62 90,72" fill="#2d8ca5" opacity="0.92"/>
+
+  <!-- Left face -->
+  <polygon points="28,85 68,62 90,72 68,98" fill="#67e8f9" opacity="0.85"/>
+
+  <!-- Right face — darker -->
+  <polygon points="152,85 112,62 90,72 112,98" fill="#1e6482" opacity="0.92"/>
+
+  <!-- Left bottom face -->
+  <polygon points="28,85 68,98 90,125" fill="#2d8ca5" opacity="0.80"/>
+
+  <!-- Right bottom face — darkest -->
+  <polygon points="152,85 112,98 90,125" fill="#143c52" opacity="0.92"/>
+
+  <!-- Center bottom panel -->
+  <polygon points="68,98 90,72 112,98 90,125" fill="#142030" opacity="0.88"/>
+
+  <!-- Outer silhouette lines — teal edge highlight -->
+  <polyline points="90,35 152,85 90,125 28,85 90,35" fill="none" stroke="#67e8f9" stroke-width="2.5" stroke-linejoin="round"/>
+
+  <!-- Internal facet lines -->
+  <line x1="90" y1="35" x2="90" y2="72" stroke="#b4f5ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="28" y1="85" x2="90" y2="72" stroke="#67e8f9" stroke-width="1" opacity="0.5"/>
+  <line x1="152" y1="85" x2="90" y2="72" stroke="#67e8f9" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="72" x2="90" y2="125" stroke="#2d8ca5" stroke-width="1" opacity="0.5"/>
+
+  <!-- Platform layer (amber) — encoding substrate below gem -->
+  <polygon points="34,133 146,133 136,148 44,148" fill="#f59e0b" opacity="0.70"/>
+  <line x1="34" y1="133" x2="146" y2="133" stroke="#f5c850" stroke-width="1.5" opacity="0.7"/>
+</svg>

@@ -21,6 +21,7 @@ import './globals.css';
 import { SiteShell } from '@vf/site-kit';
 import { SHELL_CONFIG } from '@/lib/shell-config';
 import { SITE } from '@/lib/site';
+import { HEADER_BRAND_MARK, FOOTER_BRAND_MARK } from '@/components/VcpBrandMark';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -84,6 +85,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           logoHref="/"
           brandLabel="Value Creation Protocol"
           brandTagline="An open protocol · operated by Value-First Team"
+          /* Per-node brand mark — VCP renders ITS OWN compass + serif wordmark in
+             the logo slot, not the VF Team lockup. The Astro original carried the
+             VCP mark; Value-First Team is named only as the implementing firm in
+             the footer attribution. Header + footer marks are theme-safe (live
+             serif text in --vf-text + the self-contained faceted-gem SVG). */
+          headerBrandMark={HEADER_BRAND_MARK}
+          footerBrandMark={FOOTER_BRAND_MARK}
           sticky
         >
           {children}

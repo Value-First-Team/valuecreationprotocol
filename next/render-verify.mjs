@@ -89,6 +89,18 @@ async function main() {
           const vcpSurface = getComputedStyle(html).getPropertyValue('--vcp-surface').trim();
           const vcpInk = getComputedStyle(html).getPropertyValue('--vcp-ink').trim();
           const vfBrand = getComputedStyle(html).getPropertyValue('--vf-brand').trim();
+          // Brand-mark fidelity: VCP must render ITS OWN mark (the faceted-gem
+          // SVG at /brand/vcp-gem.svg + the serif wordmark in the logo slot),
+          // NOT the homogenized VF Team LogoLockup (.logo-team-lockup / a "team
+          // lockup" alt). The gem appears once in header + once in footer.
+          const ownMarkCount = document.querySelectorAll('img[src*="/brand/vcp-gem.svg"]').length;
+          const ownWordmark = Array.from(document.querySelectorAll('header, footer'))
+            .some((el) => /Value Creation Protocol/i.test(el.textContent || ''));
+          const vfLockup =
+            !!document.querySelector('.logo-team-lockup') ||
+            !!document.querySelector('[class*="logo-team-lockup"]') ||
+            Array.from(document.querySelectorAll('header img, footer img'))
+              .some((img) => /team[-\s]?lockup|value-first team/i.test(img.getAttribute('alt') || ''));
           return {
             isDark: html.classList.contains('dark'),
             bg, fg,
@@ -96,6 +108,7 @@ async function main() {
             hasHeader: !!header,
             hasFooter: !!footer,
             vcpSurface, vcpInk, vfBrand,
+            ownMarkCount, ownWordmark, vfLockup,
           };
         });
 
@@ -115,16 +128,19 @@ async function main() {
   const WHITE = 'rgb(255, 255, 255)';
   const BLACK = 'rgb(0, 0, 0)';
   for (const r of results) {
-    const { isDark, bg, fg, vcpSurface, vcpInk, vfBrand, hasH1, hasHeader, hasFooter } = r.probe;
+    const { isDark, bg, fg, vcpSurface, vcpInk, vfBrand, hasH1, hasHeader, hasFooter,
+            ownMarkCount, ownWordmark, vfLockup } = r.probe;
     const tag = `${r.page} / ${r.theme} / ${r.vp}`;
     const themeMatches = isDark === (r.theme === 'dark');
     // styled = VCP token scale is bound AND body bg is not the unstyled default
     const tokensBound = vcpSurface.length > 0 && vcpInk.length > 0 && vfBrand.length > 0;
     const styled = tokensBound && bg !== '' && !(bg === WHITE && fg === BLACK);
-    const ok = themeMatches && styled && hasH1 && hasHeader && hasFooter;
+    // brand fidelity: own mark present (gem + wordmark), VF lockup absent
+    const brandOwn = ownMarkCount >= 1 && ownWordmark && !vfLockup;
+    const ok = themeMatches && styled && hasH1 && hasHeader && hasFooter && brandOwn;
     if (!ok) failures++;
     console.log(
-      `${ok ? 'PASS' : 'FAIL'}  ${tag.padEnd(34)} bg=${bg} dark=${isDark} surface=[${vcpSurface}] ink=[${vcpInk}] vfBrand=[${vfBrand}] h1=${hasH1} hdr=${hasHeader} ftr=${hasFooter}`
+      `${ok ? 'PASS' : 'FAIL'}  ${tag.padEnd(34)} bg=${bg} dark=${isDark} surface=[${vcpSurface}] ink=[${vcpInk}] vfBrand=[${vfBrand}] h1=${hasH1} hdr=${hasHeader} ftr=${hasFooter} ownMark=${ownMarkCount} wordmark=${ownWordmark} vfLockup=${vfLockup}`
     );
   }
   console.log(`\n${results.length - failures}/${results.length} render checks passed. Shots in ${OUT}`);
