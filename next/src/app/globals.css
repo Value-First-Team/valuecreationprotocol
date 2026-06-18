@@ -1,0 +1,41 @@
+/*
+ * valuecreationprotocol.com — Next.js global stylesheet.
+ *
+ * Import order (load-bearing), all wired through layout.tsx as JS side-effect
+ * imports (which respect package exports / Next's nested-project CSS loader):
+ *   1. @vf/design-engine/tokens.css   — the shared --vf-* tokens the SiteShell
+ *                                       chrome resolves against (header/footer).
+ *   2. ../styles/vcp-tokens.css       — VCP's OWN protocol-identity preset
+ *                                       (the vcp-* tokens + serif base + utility
+ *                                       classes). This is the per-node identity.
+ *   3. ../styles/vcp-archetypes.css   — the ported archetype + page scoped CSS.
+ *   4. ../styles/vcp-dark.css         — dark-mode bridge for the vcp-* tokens.
+ *   5. this file                      — Tailwind layers + skip-link.
+ *
+ * Tailwind utilities here reference both the design-engine --vf-* tokens (via the
+ * site-kit preset) and the vcp-* tokens (via the tailwind.config extend).
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Skip link — VCP's own treatment (matches the Astro tokens.css .skip-link).
+     Redeclared here so it survives even if vcp-tokens load order shifts. */
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+  }
+  .skip-link:focus {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+    padding: 0.5rem 1rem;
+    border-radius: var(--vcp-r-sm);
+    z-index: 1000;
+  }
+}

@@ -1,0 +1,546 @@
+/* ============================================================
+   Value Creation Protocol — Design Tokens
+   v0.1 · sibling to valuefirstteam.com
+
+   Imported globally by BaseLayout.astro. Google Fonts loaded
+   via <link> tag in BaseLayout <head> (preconnect-optimized).
+   ============================================================ */
+
+:root {
+  /* ============= Surface (warm paper, not cool grey) ============= */
+  --vcp-paper:          #ffffff;
+  --vcp-surface:        #fbfaf7;   /* warm off-white, editorial paper */
+  --vcp-surface-2:      #f5f3ec;   /* tinted band, callout panel */
+  --vcp-surface-3:      #ecebe3;   /* hairline-divided section */
+
+  /* ============= Ink ============= */
+  --vcp-ink:            #1a1815;   /* rich near-black with warm bias */
+  --vcp-ink-2:          #3f3c36;   /* secondary copy */
+  --vcp-ink-3:          #6b6760;   /* muted / captions */
+  --vcp-ink-4:          #9a958c;   /* tertiary, timestamps */
+  --vcp-ink-5:          #c4bfb4;   /* hairline rules on cream */
+
+  /* ============= Border ============= */
+  --vcp-border:         #e6e3d9;   /* default hairline on cream */
+  --vcp-border-strong:  #cfcabb;
+  --vcp-border-ink:     #1a1815;   /* used for editorial rules */
+
+  /* ============= Protocol identity (fixed) ============= */
+  --vcp-teal:           #0d9488;   /* VCP — identity */
+  --vcp-teal-deep:      #0b7a70;   /* link hover, ink-on-cream */
+  --vcp-teal-soft:      #d6efed;   /* tint surface */
+  --vcp-teal-ink:       #064e47;   /* readable text on teal-soft */
+
+  --mcp-orange:         #ea580c;   /* MCP — peer protocol */
+  --mcp-orange-deep:    #c2410c;
+  --mcp-orange-soft:    #fde7d3;
+  --mcp-orange-ink:     #7c2d12;
+
+  --hcp-blue:           #2563eb;   /* HCP — peer protocol */
+  --hcp-blue-deep:      #1d4ed8;
+  --hcp-blue-soft:      #dbe7fb;
+  --hcp-blue-ink:       #1e3a8a;
+
+  /* ============= Semantic ============= */
+  --vcp-link:           var(--vcp-teal-deep);
+  --vcp-link-hover:     #074842;
+  --vcp-visited:        #6b4ba6;
+  --vcp-success:        #15803d;
+  --vcp-warning:        #b45309;
+  --vcp-danger:         #b91c1c;
+
+  /* ============= Status badge ink ============= */
+  --vcp-status-draft:   #b45309;
+  --vcp-status-stable:  #0d9488;
+  --vcp-status-frozen:  #6b6760;
+
+  /* ============= Type ============= */
+  --vcp-font-display:   'Newsreader', 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --vcp-font-body:      'Geist', 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --vcp-font-mono:      'Geist Mono', 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Editorial scale — wider rhythm than the firm. Modular ~1.25 */
+  --vcp-fs-eyebrow:     0.6875rem;  /* 11px — uppercase tracking eyebrows */
+  --vcp-fs-micro:       0.75rem;    /* 12px — timestamps, captions */
+  --vcp-fs-xs:          0.8125rem;  /* 13px */
+  --vcp-fs-sm:          0.9375rem;  /* 15px — UI body */
+  --vcp-fs-body:        1.0625rem;  /* 17px — canon body */
+  --vcp-fs-lead:        1.25rem;    /* 20px — lead paragraph */
+  --vcp-fs-h3:          1.625rem;   /* 26px */
+  --vcp-fs-h2:          2.25rem;    /* 36px */
+  --vcp-fs-h1:          3rem;       /* 48px */
+  --vcp-fs-display:     clamp(2.75rem, 6vw, 4.75rem);  /* 44–76px — hero */
+  --vcp-fs-display-xl:  clamp(3.5rem, 8vw, 6.5rem);    /* 56–104px — manifesto */
+
+  /* Weights — Newsreader has 300–700; Geist has 300–700 */
+  --vcp-fw-300: 300;
+  --vcp-fw-400: 400;
+  --vcp-fw-500: 500;
+  --vcp-fw-600: 600;
+  --vcp-fw-700: 700;
+
+  /* Line height — generous for editorial breath */
+  --vcp-lh-tight:       1.05;       /* display */
+  --vcp-lh-snug:        1.18;       /* h1/h2 */
+  --vcp-lh-h3:          1.3;
+  --vcp-lh-body:        1.65;       /* canon prose */
+  --vcp-lh-loose:       1.75;       /* manifesto prose */
+
+  /* Letter-spacing */
+  --vcp-ls-display:     -0.02em;    /* serif display */
+  --vcp-ls-h:           -0.012em;
+  --vcp-ls-body:        0;
+  --vcp-ls-eyebrow:     0.14em;     /* uppercase tracking */
+  --vcp-ls-mono:        0;
+
+  /* ============= Spacing (4pt base) ============= */
+  --vcp-1:   0.25rem;   /*  4 */
+  --vcp-2:   0.5rem;    /*  8 */
+  --vcp-3:   0.75rem;   /* 12 */
+  --vcp-4:   1rem;      /* 16 */
+  --vcp-5:   1.5rem;    /* 24 */
+  --vcp-6:   2rem;      /* 32 */
+  --vcp-7:   2.5rem;    /* 40 */
+  --vcp-8:   3rem;      /* 48 */
+  --vcp-9:   4rem;      /* 64 */
+  --vcp-10:  5rem;      /* 80 */
+  --vcp-11:  6rem;      /* 96 */
+  --vcp-12:  8rem;      /* 128 */
+  --vcp-13:  10rem;     /* 160 */
+
+  /* ============= Container widths ============= */
+  --vcp-max-prose:      68ch;        /* canon long-form */
+  --vcp-max-narrow:     56ch;        /* manifesto */
+  --vcp-max-content:    1120px;      /* hub / homepage */
+  --vcp-max-doc:        1280px;      /* this design doc */
+
+  /* ============= Radii — restrained, editorial ============= */
+  --vcp-r-xs:  2px;
+  --vcp-r-sm:  4px;
+  --vcp-r-md:  6px;
+  --vcp-r-lg:  10px;
+  --vcp-r-xl:  16px;
+  --vcp-r-pill: 9999px;
+
+  /* ============= Elevation — soft, paper-like ============= */
+  --vcp-shadow-sm:  0 1px 2px rgba(26,24,21,0.04), 0 1px 1px rgba(26,24,21,0.03);
+  --vcp-shadow-md:  0 2px 4px rgba(26,24,21,0.04), 0 6px 12px rgba(26,24,21,0.05);
+  --vcp-shadow-lg:  0 8px 16px rgba(26,24,21,0.06), 0 20px 36px rgba(26,24,21,0.08);
+
+  /* ============= Motion ============= */
+  --vcp-t-fast: 120ms ease;
+  --vcp-t-base: 200ms ease;
+  --vcp-t-slow: 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* ============= Dark mode tokens (one-source variant) ============= */
+  --vcp-d-paper:        #131210;
+  --vcp-d-surface:      #1a1815;
+  --vcp-d-surface-2:    #211f1b;
+  --vcp-d-surface-3:    #2a2722;
+  --vcp-d-ink:          #f6f3ec;
+  --vcp-d-ink-2:        #c8c3b8;
+  --vcp-d-ink-3:        #8e8a80;
+  --vcp-d-border:       #2f2c26;
+  --vcp-d-border-strong:#403c33;
+
+  --vcp-d-teal:         #2dd4bf;   /* lifts on dark */
+  --vcp-d-teal-deep:    #14b8a6;
+  --vcp-d-teal-soft:    #0f3a36;
+
+  --vcp-d-mcp:          #fb923c;
+  --vcp-d-hcp:          #60a5fa;
+}
+
+/* ============================================================
+   Base elements — warm paper, editorial typography
+   ============================================================ */
+html { scroll-behavior: smooth; background-color: var(--vcp-surface); }
+body {
+  margin: 0;
+  background: var(--vcp-surface);
+  color: var(--vcp-ink);
+  font-family: var(--vcp-font-body);
+  font-size: var(--vcp-fs-body);
+  line-height: var(--vcp-lh-body);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+*, *::before, *::after { box-sizing: border-box; }
+img, svg { display: block; max-width: 100%; }
+
+/* Selection */
+::selection { background: var(--vcp-teal); color: white; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--vcp-ink);
+  letter-spacing: var(--vcp-ls-h);
+}
+
+a {
+  color: var(--vcp-link);
+  text-underline-offset: 3px;
+}
+a:hover { color: var(--vcp-link-hover); }
+
+code, pre {
+  font-family: var(--vcp-font-mono);
+  font-size: 0.94em;
+}
+code {
+  background: var(--vcp-surface-2);
+  padding: 0.1em 0.35em;
+  border-radius: var(--vcp-r-xs);
+  color: var(--vcp-ink);
+}
+pre {
+  background: var(--vcp-surface-2);
+  padding: 1rem;
+  border-radius: var(--vcp-r-md);
+  overflow-x: auto;
+  line-height: 1.5;
+  border: 1px solid var(--vcp-border);
+}
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* ============================================================
+   Type primitives
+   ============================================================ */
+.t-display {
+  font-family: var(--vcp-font-display);
+  font-size: var(--vcp-fs-display);
+  font-weight: var(--vcp-fw-500);
+  line-height: var(--vcp-lh-tight);
+  letter-spacing: var(--vcp-ls-display);
+  font-variation-settings: "opsz" 60;
+  color: var(--vcp-ink);
+}
+.t-h1 {
+  font-family: var(--vcp-font-display);
+  font-size: var(--vcp-fs-h1);
+  font-weight: var(--vcp-fw-500);
+  line-height: var(--vcp-lh-snug);
+  letter-spacing: var(--vcp-ls-h);
+  font-variation-settings: "opsz" 36;
+}
+.t-h2 {
+  font-family: var(--vcp-font-display);
+  font-size: var(--vcp-fs-h2);
+  font-weight: var(--vcp-fw-500);
+  line-height: var(--vcp-lh-snug);
+  letter-spacing: var(--vcp-ls-h);
+  font-variation-settings: "opsz" 30;
+}
+.t-h3 {
+  font-family: var(--vcp-font-body);
+  font-size: var(--vcp-fs-h3);
+  font-weight: var(--vcp-fw-600);
+  line-height: var(--vcp-lh-h3);
+  letter-spacing: -0.005em;
+}
+.t-lead {
+  font-family: var(--vcp-font-display);
+  font-size: var(--vcp-fs-lead);
+  font-weight: var(--vcp-fw-400);
+  line-height: 1.45;
+  color: var(--vcp-ink-2);
+  font-variation-settings: "opsz" 20;
+}
+.t-body {
+  font-size: var(--vcp-fs-body);
+  line-height: var(--vcp-lh-body);
+  color: var(--vcp-ink-2);
+}
+.t-small {
+  font-size: var(--vcp-fs-sm);
+  color: var(--vcp-ink-3);
+  line-height: 1.55;
+}
+.t-eyebrow {
+  font-family: var(--vcp-font-mono);
+  font-size: var(--vcp-fs-eyebrow);
+  font-weight: var(--vcp-fw-500);
+  text-transform: uppercase;
+  letter-spacing: var(--vcp-ls-eyebrow);
+  color: var(--vcp-teal-deep);
+}
+.t-mono {
+  font-family: var(--vcp-font-mono);
+  font-size: 0.94em;
+  letter-spacing: var(--vcp-ls-mono);
+}
+.t-caption {
+  font-family: var(--vcp-font-mono);
+  font-size: var(--vcp-fs-micro);
+  color: var(--vcp-ink-3);
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Prose — used on markdown-rendered bodies (Prose component)
+   ============================================================ */
+.prose {
+  max-width: var(--vcp-max-prose);
+  font-family: var(--vcp-font-display);
+  font-size: 1.0625rem;
+  line-height: var(--vcp-lh-body);
+  color: var(--vcp-ink);
+  font-variation-settings: "opsz" 19;
+}
+.prose > * + * { margin-top: 1.2em; }
+.prose > p { margin: 0 0 1.2em; }
+.prose h2 {
+  font-family: var(--vcp-font-display);
+  font-size: 1.875rem;
+  font-weight: var(--vcp-fw-500);
+  line-height: var(--vcp-lh-snug);
+  letter-spacing: var(--vcp-ls-h);
+  color: var(--vcp-ink);
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--vcp-border);
+  font-variation-settings: "opsz" 30;
+}
+.prose h3 {
+  font-family: var(--vcp-font-body);
+  font-size: 1.25rem;
+  font-weight: var(--vcp-fw-600);
+  line-height: var(--vcp-lh-h3);
+  color: var(--vcp-ink);
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+}
+.prose h4 {
+  font-family: var(--vcp-font-body);
+  font-size: 1.0625rem;
+  font-weight: var(--vcp-fw-600);
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  color: var(--vcp-ink);
+}
+.prose p, .prose li {
+  font-size: 1.0625rem;
+  line-height: var(--vcp-lh-body);
+}
+.prose ul, .prose ol {
+  padding-left: 1.4em;
+}
+.prose li + li { margin-top: 0.4em; }
+.prose blockquote {
+  margin: 1.8em 0;
+  padding: 0.2em 0 0.2em 1.4em;
+  border-left: 2px solid var(--vcp-ink);
+  color: var(--vcp-ink-2);
+  font-style: italic;
+}
+.prose blockquote p { margin: 0; }
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--vcp-border);
+  margin: 2.4em 0;
+}
+.prose strong { color: var(--vcp-ink); font-weight: var(--vcp-fw-600); }
+.prose em { font-style: italic; color: var(--vcp-ink); }
+.prose a {
+  color: var(--vcp-teal-deep);
+  text-decoration-color: rgba(13, 148, 136, 0.3);
+  text-underline-offset: 3px;
+}
+.prose a:hover { color: var(--vcp-link-hover); }
+.prose code {
+  font-family: var(--vcp-font-mono);
+  font-size: 0.92em;
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1.4em 0;
+  font-family: var(--vcp-font-body);
+}
+.prose th, .prose td {
+  text-align: left;
+  padding: 0.65em 0.9em;
+  border-bottom: 1px solid var(--vcp-border);
+  vertical-align: top;
+}
+.prose th {
+  background: var(--vcp-surface-2);
+  font-weight: var(--vcp-fw-600);
+  color: var(--vcp-ink);
+}
+
+/* Drop-cap variant — opt in via .prose-canon on the parent */
+.prose-canon > p:first-of-type::first-letter {
+  font-family: var(--vcp-font-display);
+  float: left;
+  font-size: 5.4em;
+  line-height: 0.86;
+  margin: 0.05em 0.08em 0 -0.04em;
+  font-weight: var(--vcp-fw-500);
+  color: var(--vcp-teal-deep);
+  font-variation-settings: "opsz" 72;
+}
+
+/* ============================================================
+   Skip link (accessibility)
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip-link:focus {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  background: var(--vcp-ink);
+  color: var(--vcp-surface);
+  padding: 0.5rem 1rem;
+  border-radius: var(--vcp-r-sm);
+  z-index: 1000;
+}
+
+/* ============================================================
+   Manifesto-specific prose (loose line-height, italic h2s)
+   Used on /manifestos/*.
+   ============================================================ */
+.prose-manifesto {
+  max-width: var(--vcp-max-narrow);
+  font-family: var(--vcp-font-display);
+  font-size: 1.3125rem;            /* 21px */
+  line-height: var(--vcp-lh-loose);
+  color: var(--vcp-ink);
+  font-variation-settings: "opsz" 19;
+}
+.prose-manifesto > p { margin: 0 0 1.5em; }
+.prose-manifesto > p:first-of-type::first-letter {
+  font-family: var(--vcp-font-display);
+  float: left;
+  font-size: 6em;
+  line-height: 0.86;
+  margin: 0.04em 0.1em 0 -0.04em;
+  font-weight: var(--vcp-fw-500);
+  color: var(--vcp-teal-deep);
+  font-variation-settings: "opsz" 72;
+}
+.prose-manifesto strong { font-weight: var(--vcp-fw-600); color: var(--vcp-ink); }
+.prose-manifesto em { font-style: italic; color: var(--vcp-ink); }
+.prose-manifesto h2 {
+  font-family: var(--vcp-font-display);
+  font-size: 2.25rem;
+  font-style: italic;
+  font-weight: var(--vcp-fw-400);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--vcp-ink);
+  margin: 2.4em 0 1em;
+  font-variation-settings: "opsz" 40;
+  max-width: 18ch;
+}
+.prose-manifesto h3 {
+  font-family: var(--vcp-font-body);
+  font-size: 1.25rem;
+  font-weight: var(--vcp-fw-600);
+  margin: 1.8em 0 0.6em;
+  color: var(--vcp-ink);
+}
+.prose-manifesto blockquote {
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.35;
+  color: var(--vcp-ink);
+  margin: 2em 0;
+  padding: 0.8em 0;
+  border-top: 1px solid var(--vcp-ink);
+  border-bottom: 1px solid var(--vcp-ink);
+  font-variation-settings: "opsz" 28;
+}
+.prose-manifesto blockquote p { margin: 0; }
+.prose-manifesto a {
+  color: var(--vcp-teal-deep);
+  text-decoration-color: rgba(13, 148, 136, 0.3);
+}
+
+/* ============================================================
+   Reusable site chrome bits
+   ============================================================ */
+
+/* Eyebrow used in heroes */
+.vcp-eyebrow {
+  font-family: var(--vcp-font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--vcp-teal-deep);
+  font-weight: var(--vcp-fw-500);
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+.vcp-eyebrow::after {
+  content: "";
+  height: 1px;
+  background: var(--vcp-ink);
+  width: 88px;
+  max-width: 88px;
+  display: inline-block;
+}
+
+/* Status pill in nav */
+.vcp-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--vcp-font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--vcp-ink-3);
+}
+.vcp-status-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--vcp-teal);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.14);
+}
+
+/* Buttons — calm, editorial */
+.vcp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--vcp-font-body);
+  font-size: 0.9375rem;
+  font-weight: var(--vcp-fw-500);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--vcp-r-md);
+  text-decoration: none;
+  transition: all var(--vcp-t-base);
+  min-height: 2.75rem;       /* 44px tap target */
+}
+.vcp-btn-primary {
+  background: var(--vcp-ink);
+  color: var(--vcp-surface);
+  border: 1px solid var(--vcp-ink);
+}
+.vcp-btn-primary:hover {
+  background: var(--vcp-teal-deep);
+  border-color: var(--vcp-teal-deep);
+  color: var(--vcp-surface);
+}
+.vcp-btn-ghost {
+  background: transparent;
+  color: var(--vcp-ink);
+  border: 1px solid var(--vcp-border-strong);
+}
+.vcp-btn-ghost:hover {
+  border-color: var(--vcp-ink);
+  color: var(--vcp-ink);
+}

@@ -1,0 +1,36 @@
+{
+  "name": "valuecreationprotocol-next",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "valuecreationprotocol.com — Next.js App Router re-platform (React-first, static export). The open protocol home. Built on @vf/site-kit (React shell) + @vf/ui + @vf/brand + @vf/design-engine. Keeps the site's own VCP protocol-identity token preset; the shell is shared, the identity is this node's.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vf/brand": "github:Value-First-Team/vf-brand#8bb888a",
+    "@vf/design-engine": "github:Value-First-Team/vf-design-engine#fe42536",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#ec36752",
+    "@vf/ui": "github:Value-First-Team/vf-ui#246f0a7",
+    "marked": "^14.1.3",
+    "next": "^15.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.3"
+  }
+}

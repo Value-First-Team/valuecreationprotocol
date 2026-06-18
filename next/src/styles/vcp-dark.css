@@ -1,0 +1,55 @@
+/* ============================================================
+   VCP dark-mode bridge.
+
+   The Astro site ran output:'server' with no theme toggle in its own chrome,
+   so it shipped light-only. The shared @vf/site-kit SiteShell, however, carries
+   a ThemeToggle that adds `.dark` to <html>. tokens.css already defines a full
+   dark palette as separate `--vcp-d-*` variables but never wired them into a
+   `.dark` selector. This file is that wiring: under `.dark`, the load-bearing
+   `--vcp-*` tokens are remapped to their dark variants so the VCP editorial
+   body flips coherently with the shell chrome — both themes render styled.
+
+   Values are the canonical `--vcp-d-*` set from vcp-tokens.css; soft-tint and
+   ink-on-tint variants are derived to keep AA contrast on the dark paper.
+   ============================================================ */
+
+.dark {
+  /* Surfaces — warm near-black paper ladder */
+  --vcp-paper: var(--vcp-d-paper);
+  --vcp-surface: var(--vcp-d-surface);
+  --vcp-surface-2: var(--vcp-d-surface-2);
+  --vcp-surface-3: var(--vcp-d-surface-3);
+
+  /* Ink ladder — lifted for dark */
+  --vcp-ink: var(--vcp-d-ink);
+  --vcp-ink-2: var(--vcp-d-ink-2);
+  --vcp-ink-3: var(--vcp-d-ink-3);
+  --vcp-ink-4: #6f6b62;
+  --vcp-ink-5: #4a463e;
+
+  /* Borders */
+  --vcp-border: var(--vcp-d-border);
+  --vcp-border-strong: var(--vcp-d-border-strong);
+  --vcp-border-ink: var(--vcp-d-ink);
+
+  /* Protocol identity — teal lifts on dark; tint becomes a deep wash */
+  --vcp-teal: var(--vcp-d-teal);
+  --vcp-teal-deep: var(--vcp-d-teal-deep);
+  --vcp-teal-soft: var(--vcp-d-teal-soft);
+  --vcp-teal-ink: #7defdf;
+
+  --mcp-orange: var(--vcp-d-mcp);
+  --mcp-orange-deep: #fb923c;
+  --mcp-orange-soft: #3a2a1f;
+  --mcp-orange-ink: #fed7aa;
+
+  --hcp-blue: var(--vcp-d-hcp);
+  --hcp-blue-deep: #60a5fa;
+  --hcp-blue-soft: #1c2a44;
+  --hcp-blue-ink: #bfdbfe;
+
+  /* Semantic */
+  --vcp-link: var(--vcp-d-teal);
+  --vcp-link-hover: #7defdf;
+  --vcp-visited: #b9a3e3;
+}

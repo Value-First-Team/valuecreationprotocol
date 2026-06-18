@@ -1,0 +1,111 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 800 480"
+  role="img"
+  aria-labelledby="protocol-stack-title protocol-stack-desc"
+>
+  <title id="protocol-stack-title">Protocol Stack Diagram — MCP, HCP, and VCP</title>
+  <desc id="protocol-stack-desc">Three peer-level open protocols in the AI context stack: Model Context Protocol (MCP) handles model context, Human Context Protocol (HCP) handles human context, and Value Creation Protocol (VCP) handles value creation context. All three are peer-level; none is subsidiary to another.</desc>
+
+  <!-- Definitions -->
+  <defs>
+    <style>
+      .label-primary { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 12px; fill: #374151; }
+      .label-title   { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 700; }
+      .label-sub     { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 10.5px; fill: #6b7280; }
+      .label-caption { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 9.5px; fill: #9ca3af; }
+      .label-head    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 20px; font-weight: 700; fill: #111827; }
+      .label-deck    { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 12px; fill: #6b7280; }
+      .pill-text     { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 10.5px; font-weight: 600; }
+    </style>
+    <filter id="card-shadow" x="-4%" y="-4%" width="108%" height="116%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00000018"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="480" fill="#f9fafb" rx="0"/>
+
+  <!-- Heading area -->
+  <text x="400" y="44" text-anchor="middle" class="label-head">The Open Protocol Stack</text>
+  <text x="400" y="66" text-anchor="middle" class="label-deck">Three peer-level open protocols — each addresses a distinct context layer for AI systems and human teams.</text>
+
+  <!-- ── Connector spine: each card drops to shared substrate ── -->
+  <line x1="160" y1="262" x2="220" y2="306" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="410" y1="262" x2="400" y2="306" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <line x1="660" y1="262" x2="580" y2="306" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+  <!-- Shared substrate bar -->
+  <rect x="100" y="306" width="600" height="44" rx="8" fill="#f3f4f6" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="400" y="322" text-anchor="middle" class="label-primary" font-weight="600" fill="#374151">AI Infrastructure Layer</text>
+  <text x="400" y="340" text-anchor="middle" class="label-caption">Foundation model services, compute, data pipelines</text>
+
+  <!-- ═════════ MCP Card (left) ═════════ -->
+  <g filter="url(#card-shadow)">
+    <rect x="40" y="114" width="240" height="148" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <!-- Left accent bar -->
+    <rect x="40" y="114" width="6" height="148" rx="3" fill="#2563eb"/>
+    <!-- Pill -->
+    <rect x="58" y="124" width="62" height="20" rx="10" fill="#dbeafe"/>
+    <text x="89" y="138" text-anchor="middle" class="pill-text" fill="#1d4ed8">MCP</text>
+    <!-- External link badge -->
+    <text x="265" y="138" text-anchor="end" class="label-caption">modelcontextprotocol.io ↗</text>
+
+    <text x="58" y="168" class="label-title" fill="#1d4ed8">Model Context Protocol</text>
+    <text x="58" y="190" class="label-sub">Structures context passed to foundation</text>
+    <text x="58" y="204" class="label-sub">models: tools, resources, sampling, prompts.</text>
+    <text x="58" y="226" class="label-sub">Created by Anthropic. Governs model-level</text>
+    <text x="58" y="240" class="label-sub">context exchange between agents and hosts.</text>
+  </g>
+
+  <!-- ═════════ VCP Card (center, elevated) ═════════ -->
+  <g filter="url(#card-shadow)">
+    <rect x="290" y="98" width="240" height="164" rx="12" fill="#ffffff" stroke="#0d9488" stroke-width="2"/>
+    <!-- Top accent bar -->
+    <rect x="290" y="98" width="240" height="6" rx="3" fill="#0d9488"/>
+    <!-- Pill -->
+    <rect x="308" y="116" width="56" height="20" rx="10" fill="#ccfbf1"/>
+    <text x="336" y="130" text-anchor="middle" class="pill-text" fill="#0d9488">VCP</text>
+    <!-- "This protocol" indicator -->
+    <rect x="436" y="116" width="78" height="20" rx="10" fill="#0d9488"/>
+    <text x="475" y="130" text-anchor="middle" class="pill-text" fill="#ffffff">This Protocol</text>
+
+    <text x="308" y="160" class="label-title" fill="#0d9488">Value Creation Protocol</text>
+    <text x="308" y="182" class="label-sub">Structures the context of value creation:</text>
+    <text x="308" y="196" class="label-sub">vocabulary (Lexicon), declarations (VCP-Lang),</text>
+    <text x="308" y="210" class="label-sub">and relational structure (Value Graph).</text>
+    <text x="308" y="232" class="label-sub">Open protocol. Maintained by the Value-First</text>
+    <text x="308" y="246" class="label-sub">Collective. Implements on any CVP.</text>
+  </g>
+
+  <!-- ═════════ HCP Card (right) ═════════ -->
+  <g filter="url(#card-shadow)">
+    <rect x="540" y="114" width="240" height="148" rx="12" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.5"/>
+    <!-- Right accent bar -->
+    <rect x="774" y="114" width="6" height="148" rx="3" fill="#ea580c"/>
+    <!-- Pill -->
+    <rect x="558" y="124" width="62" height="20" rx="10" fill="#ffedd5"/>
+    <text x="589" y="138" text-anchor="middle" class="pill-text" fill="#c2410c">HCP</text>
+    <!-- External link badge -->
+    <text x="763" y="138" text-anchor="end" class="label-caption">humancontextprotocol.com ↗</text>
+
+    <text x="558" y="168" class="label-title" fill="#c2410c">Human Context Protocol</text>
+    <text x="558" y="190" class="label-sub">Structures human context for AI systems:</text>
+    <text x="558" y="204" class="label-sub">values, preferences, relationships, and</text>
+    <text x="558" y="226" class="label-sub">identity signals that AI should honor</text>
+    <text x="558" y="240" class="label-sub">across interactions.</text>
+  </g>
+
+  <!-- ═════════ Bottom legend ═════════ -->
+  <text x="400" y="382" text-anchor="middle" class="label-sub" font-weight="600">All three protocols are peer-level.</text>
+  <text x="400" y="400" text-anchor="middle" class="label-caption">MCP governs model context · HCP governs human context · VCP governs value creation context</text>
+  <text x="400" y="418" text-anchor="middle" class="label-caption">None is subsidiary to another. Each addresses a distinct layer of the AI operating environment.</text>
+
+  <!-- Legend row -->
+  <rect x="196" y="440" width="14" height="14" rx="2" fill="#2563eb" opacity="0.8"/>
+  <text x="216" y="452" class="label-caption" fill="#374151">Model context</text>
+  <rect x="310" y="440" width="14" height="14" rx="2" fill="#0d9488" opacity="0.8"/>
+  <text x="330" y="452" class="label-caption" fill="#374151">Value creation context</text>
+  <rect x="460" y="440" width="14" height="14" rx="2" fill="#ea580c" opacity="0.8"/>
+  <text x="480" y="452" class="label-caption" fill="#374151">Human context</text>
+</svg>

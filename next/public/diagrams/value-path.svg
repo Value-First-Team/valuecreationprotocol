@@ -1,0 +1,226 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 900 520"
+  role="img"
+  aria-labelledby="value-path-title value-path-desc"
+>
+  <title id="value-path-title">Value Path — Eight Stages of Natural Progression</title>
+  <desc id="value-path-desc">The Value Path describes the natural 8-stage journey from stranger to champion. Path TO Value covers stages 1 through 4: Audience (I am learning), Researcher (I am researching), Hand-Raiser (I need help), and Buyer (I am committing). Path OF Value covers stages 5 through 8: Value Creator (I must create value), Adopter (I realize your value), Advocate (I tell others), and Champion (I am a raving fan). Not a pipeline or funnel — a map of human movement toward value.</desc>
+
+  <defs>
+    <style>
+      .f       { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; }
+      .head    { font-size: 20px; font-weight: 700; fill: #111827; }
+      .deck    { font-size: 12px; fill: #6b7280; }
+      .num     { font-size: 11px; font-weight: 700; }
+      .stage   { font-size: 12px; font-weight: 700; }
+      .mindset { font-size: 10px; fill: #6b7280; font-style: italic; }
+      .sect    { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; }
+      .cap     { font-size: 10px; fill: #9ca3af; }
+      .arrow   { font-size: 16px; fill: #d1d5db; }
+    </style>
+    <filter id="node-shadow" x="-8%" y="-8%" width="116%" height="132%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#00000014"/>
+    </filter>
+    <!-- Gradients for section backgrounds -->
+    <linearGradient id="grad-to" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="grad-of" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ccfbf1"/>
+      <stop offset="100%" stop-color="#a7f3d0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="520" fill="#f9fafb"/>
+
+  <!-- Title -->
+  <text x="450" y="40" text-anchor="middle" class="f head">The Value Path</text>
+  <text x="450" y="60" text-anchor="middle" class="f deck">Eight stages of natural progression. Not a pipeline. Not a funnel. A map of human movement toward value.</text>
+
+  <!-- ─── Section banners ─── -->
+  <!-- Path TO Value section -->
+  <rect x="30" y="78" width="410" height="28" rx="6" fill="url(#grad-to)"/>
+  <text x="235" y="97" text-anchor="middle" class="f sect" fill="#1d4ed8">PATH TO VALUE  ·  Stages 1–4</text>
+
+  <!-- Path OF Value section -->
+  <rect x="460" y="78" width="410" height="28" rx="6" fill="url(#grad-of)"/>
+  <text x="665" y="97" text-anchor="middle" class="f sect" fill="#065f46">PATH OF VALUE  ·  Stages 5–8</text>
+
+  <!-- Divider line between halves -->
+  <line x1="446" y1="78" x2="446" y2="416" stroke="#e5e7eb" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="446" y="434" text-anchor="middle" class="f cap" font-size="9">commitment</text>
+
+  <!-- ─── Flow arrow spine ─── -->
+  <line x1="60" y1="290" x2="840" y2="290" stroke="#e5e7eb" stroke-width="1.5"/>
+  <!-- Arrowhead -->
+  <polygon points="840,284 854,290 840,296" fill="#d1d5db"/>
+
+  <!-- ═══════════════ STAGE NODES ═══════════════ -->
+
+  <!-- STAGE 1 — Audience -->
+  <g filter="url(#node-shadow)">
+    <rect x="30" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="30" y="120" width="88" height="5" rx="3" fill="#3b82f6"/>
+    <circle cx="74" cy="140" r="10" fill="#3b82f6"/>
+    <text x="74" y="144" text-anchor="middle" class="f num" fill="#ffffff">1</text>
+    <text x="74" y="168" text-anchor="middle" class="f stage" fill="#1d4ed8">Audience</text>
+    <text x="74" y="188" text-anchor="middle" class="f mindset">"I am</text>
+    <text x="74" y="202" text-anchor="middle" class="f mindset">learning"</text>
+    <line x1="46" y1="220" x2="102" y2="220" stroke="#eff6ff" stroke-width="1"/>
+    <text x="74" y="238" text-anchor="middle" class="f cap">Awareness</text>
+    <text x="74" y="252" text-anchor="middle" class="f cap">Content</text>
+    <text x="74" y="264" text-anchor="middle" class="f cap">Signals</text>
+  </g>
+  <!-- arrow 1→2 -->
+  <text x="127" y="296" text-anchor="middle" class="f arrow">›</text>
+
+  <!-- STAGE 2 — Researcher -->
+  <g filter="url(#node-shadow)">
+    <rect x="136" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="136" y="120" width="88" height="5" rx="3" fill="#3b82f6"/>
+    <circle cx="180" cy="140" r="10" fill="#3b82f6"/>
+    <text x="180" y="144" text-anchor="middle" class="f num" fill="#ffffff">2</text>
+    <text x="180" y="168" text-anchor="middle" class="f stage" fill="#1d4ed8">Researcher</text>
+    <text x="180" y="188" text-anchor="middle" class="f mindset">"I am</text>
+    <text x="180" y="202" text-anchor="middle" class="f mindset">researching"</text>
+    <line x1="152" y1="220" x2="208" y2="220" stroke="#eff6ff" stroke-width="1"/>
+    <text x="180" y="238" text-anchor="middle" class="f cap">Deep engagement</text>
+    <text x="180" y="252" text-anchor="middle" class="f cap">Multiple visits</text>
+    <text x="180" y="264" text-anchor="middle" class="f cap">Questions</text>
+  </g>
+  <!-- arrow 2→3 -->
+  <text x="233" y="296" text-anchor="middle" class="f arrow">›</text>
+
+  <!-- STAGE 3 — Hand-Raiser -->
+  <g filter="url(#node-shadow)">
+    <rect x="242" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="242" y="120" width="88" height="5" rx="3" fill="#2563eb"/>
+    <circle cx="286" cy="140" r="10" fill="#2563eb"/>
+    <text x="286" y="144" text-anchor="middle" class="f num" fill="#ffffff">3</text>
+    <text x="286" y="165" text-anchor="middle" class="f stage" fill="#1d4ed8">Hand-</text>
+    <text x="286" y="181" text-anchor="middle" class="f stage" fill="#1d4ed8">Raiser</text>
+    <text x="286" y="199" text-anchor="middle" class="f mindset">"I need</text>
+    <text x="286" y="213" text-anchor="middle" class="f mindset">help"</text>
+    <line x1="258" y1="228" x2="314" y2="228" stroke="#eff6ff" stroke-width="1"/>
+    <text x="286" y="244" text-anchor="middle" class="f cap">Explicit signal</text>
+    <text x="286" y="258" text-anchor="middle" class="f cap">Direct outreach</text>
+    <text x="286" y="272" text-anchor="middle" class="f cap">Form fill</text>
+  </g>
+  <!-- arrow 3→4 -->
+  <text x="339" y="296" text-anchor="middle" class="f arrow">›</text>
+
+  <!-- STAGE 4 — Buyer -->
+  <g filter="url(#node-shadow)">
+    <rect x="348" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <rect x="348" y="120" width="88" height="5" rx="3" fill="#1d4ed8"/>
+    <circle cx="392" cy="140" r="10" fill="#1d4ed8"/>
+    <text x="392" y="144" text-anchor="middle" class="f num" fill="#ffffff">4</text>
+    <text x="392" y="168" text-anchor="middle" class="f stage" fill="#1d4ed8">Buyer</text>
+    <text x="392" y="188" text-anchor="middle" class="f mindset">"I am</text>
+    <text x="392" y="202" text-anchor="middle" class="f mindset">committing"</text>
+    <line x1="364" y1="220" x2="420" y2="220" stroke="#eff6ff" stroke-width="1"/>
+    <text x="392" y="238" text-anchor="middle" class="f cap">Agreement</text>
+    <text x="392" y="252" text-anchor="middle" class="f cap">Payment</text>
+    <text x="392" y="264" text-anchor="middle" class="f cap">Kickoff</text>
+  </g>
+  <!-- arrow 4→5 (crossing the divider) -->
+  <text x="445" y="296" text-anchor="middle" class="f arrow" font-size="22" fill="#0d9488">›</text>
+
+  <!-- STAGE 5 — Value Creator -->
+  <g filter="url(#node-shadow)">
+    <rect x="460" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="460" y="120" width="88" height="5" rx="3" fill="#10b981"/>
+    <circle cx="504" cy="140" r="10" fill="#10b981"/>
+    <text x="504" y="144" text-anchor="middle" class="f num" fill="#ffffff">5</text>
+    <text x="504" y="165" text-anchor="middle" class="f stage" fill="#065f46">Value</text>
+    <text x="504" y="181" text-anchor="middle" class="f stage" fill="#065f46">Creator</text>
+    <text x="504" y="199" text-anchor="middle" class="f mindset">"I must</text>
+    <text x="504" y="213" text-anchor="middle" class="f mindset">create value"</text>
+    <line x1="476" y1="228" x2="532" y2="228" stroke="#d1fae5" stroke-width="1"/>
+    <text x="504" y="244" text-anchor="middle" class="f cap">Active sessions</text>
+    <text x="504" y="258" text-anchor="middle" class="f cap">Engagement</text>
+    <text x="504" y="272" text-anchor="middle" class="f cap">Work in progress</text>
+  </g>
+  <!-- arrow 5→6 -->
+  <text x="557" y="296" text-anchor="middle" class="f arrow" fill="#6ee7b7">›</text>
+
+  <!-- STAGE 6 — Adopter -->
+  <g filter="url(#node-shadow)">
+    <rect x="566" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="2"/>
+    <rect x="566" y="120" width="88" height="5" rx="3" fill="#059669"/>
+    <!-- Callout: most critical stage -->
+    <rect x="574" y="107" width="74" height="16" rx="8" fill="#f59e0b"/>
+    <text x="611" y="118" text-anchor="middle" class="f cap" fill="#ffffff" font-weight="600">Most critical ↑</text>
+    <circle cx="610" cy="140" r="10" fill="#059669"/>
+    <text x="610" y="144" text-anchor="middle" class="f num" fill="#ffffff">6</text>
+    <text x="610" y="168" text-anchor="middle" class="f stage" fill="#065f46">Adopter</text>
+    <text x="610" y="188" text-anchor="middle" class="f mindset">"I realize</text>
+    <text x="610" y="202" text-anchor="middle" class="f mindset">your value"</text>
+    <line x1="582" y1="220" x2="638" y2="220" stroke="#d1fae5" stroke-width="1"/>
+    <text x="610" y="238" text-anchor="middle" class="f cap">Language shift</text>
+    <text x="610" y="252" text-anchor="middle" class="f cap">Independent use</text>
+    <text x="610" y="264" text-anchor="middle" class="f cap">Renewal signals</text>
+  </g>
+  <!-- arrow 6→7 -->
+  <text x="663" y="296" text-anchor="middle" class="f arrow" fill="#6ee7b7">›</text>
+
+  <!-- STAGE 7 — Advocate -->
+  <g filter="url(#node-shadow)">
+    <rect x="672" y="120" width="88" height="148" rx="10" fill="#ffffff" stroke="#a7f3d0" stroke-width="1.5"/>
+    <rect x="672" y="120" width="88" height="5" rx="3" fill="#0d9488"/>
+    <circle cx="716" cy="140" r="10" fill="#0d9488"/>
+    <text x="716" y="144" text-anchor="middle" class="f num" fill="#ffffff">7</text>
+    <text x="716" y="168" text-anchor="middle" class="f stage" fill="#065f46">Advocate</text>
+    <text x="716" y="188" text-anchor="middle" class="f mindset">"I tell</text>
+    <text x="716" y="202" text-anchor="middle" class="f mindset">others"</text>
+    <line x1="688" y1="220" x2="744" y2="220" stroke="#d1fae5" stroke-width="1"/>
+    <text x="716" y="238" text-anchor="middle" class="f cap">Referrals</text>
+    <text x="716" y="252" text-anchor="middle" class="f cap">Testimonials</text>
+    <text x="716" y="264" text-anchor="middle" class="f cap">Case studies</text>
+  </g>
+  <!-- arrow 7→8 -->
+  <text x="769" y="296" text-anchor="middle" class="f arrow" fill="#6ee7b7">›</text>
+
+  <!-- STAGE 8 — Champion -->
+  <g filter="url(#node-shadow)">
+    <!-- Champion gets teal outline + star badge -->
+    <rect x="778" y="108" width="88" height="160" rx="10" fill="#ffffff" stroke="#0d9488" stroke-width="2.5"/>
+    <rect x="778" y="108" width="88" height="5" rx="3" fill="#0d9488"/>
+    <!-- Crown indicator -->
+    <text x="822" y="128" text-anchor="middle" font-size="14">★</text>
+    <circle cx="822" cy="148" r="10" fill="#0d9488"/>
+    <text x="822" y="152" text-anchor="middle" class="f num" fill="#ffffff">8</text>
+    <text x="822" y="174" text-anchor="middle" class="f stage" fill="#0d9488">Champion</text>
+    <text x="822" y="194" text-anchor="middle" class="f mindset">"I am a</text>
+    <text x="822" y="208" text-anchor="middle" class="f mindset">raving fan"</text>
+    <line x1="794" y1="226" x2="850" y2="226" stroke="#d1fae5" stroke-width="1"/>
+    <text x="822" y="242" text-anchor="middle" class="f cap">Thought leadership</text>
+    <text x="822" y="256" text-anchor="middle" class="f cap">Teaching others</text>
+    <text x="822" y="270" text-anchor="middle" class="f cap">Expansion</text>
+  </g>
+
+  <!-- ─── Footnotes / explanatory line ─── -->
+  <text x="235" y="360" text-anchor="middle" class="f cap">Transition: problem becomes acute enough to investigate, then signal readiness through each stage</text>
+  <text x="665" y="360" text-anchor="middle" class="f cap">Transition: new behaviors become normal → sharing confidence → identity integration</text>
+
+  <!-- Unified View annotation below spine -->
+  <text x="155" y="320" text-anchor="middle" class="f cap" fill="#6b7280">UCV primary</text>
+  <text x="392" y="320" text-anchor="middle" class="f cap" fill="#6b7280">URV primary</text>
+  <text x="610" y="320" text-anchor="middle" class="f cap" fill="#6b7280">UBC primary</text>
+  <text x="755" y="320" text-anchor="middle" class="f cap" fill="#6b7280">UTE + UCV</text>
+
+  <!-- Bottom footnote -->
+  <text x="450" y="390" text-anchor="middle" class="f cap">People move when they are ready. Progression cannot be forced — it can only be observed, supported, and honored.</text>
+  <text x="450" y="408" text-anchor="middle" class="f cap">Stage 6 (Adopter) is the most under-tracked stage. Renewals and expansion opportunities emerge here.</text>
+
+  <!-- Legend -->
+  <rect x="155" y="426" width="14" height="14" rx="2" fill="#3b82f6"/>
+  <text x="175" y="438" class="f cap" fill="#374151">Path TO Value (stages 1–4)</text>
+  <rect x="368" y="426" width="14" height="14" rx="2" fill="#10b981"/>
+  <text x="388" y="438" class="f cap" fill="#374151">Path OF Value (stages 5–8)</text>
+  <rect x="565" y="426" width="14" height="14" rx="2" fill="#f59e0b"/>
+  <text x="585" y="438" class="f cap" fill="#374151">Stage 6 — most critical, most under-tracked</text>
+</svg>

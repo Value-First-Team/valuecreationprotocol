@@ -1,0 +1,7 @@
+# Value Creation Protocol — valuecreationprotocol.com
+# The protocol home is open. All public routes are indexable.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://valuecreationprotocol.com/sitemap-index.xml
