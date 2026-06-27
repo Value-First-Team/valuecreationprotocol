@@ -77,6 +77,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `(function(){try{var s=localStorage.getItem('vf-theme');var d=s?s==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',!!d);}catch(e){}})();`,
           }}
         />
+        {/* HubSpot tracking (portal 40810431 = VF Team). */}
+        <script
+          type="text/javascript"
+          id="hs-script-loader"
+          async
+          defer
+          src="//js.hs-scripts.com/40810431.js"
+        />
       </head>
       <body className="min-h-screen antialiased">
         <SiteShell
