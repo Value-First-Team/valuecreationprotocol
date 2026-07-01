@@ -137,6 +137,62 @@ export const MANIFESTO_PAGES: Array<{ label: string; href: string; summary: stri
 ];
 
 /**
+ * Encoding-stack canon pages — the three-layer machine-parseable substrate
+ * plus its overview. Mirrors the /sitemap ENCODING group. Kept here so the
+ * homepage "Canon pages across archetypes" stat derives from one source.
+ */
+export const ENCODING_PAGES: Array<{ label: string; href: string; summary: string }> = [
+  {
+    label: 'Encoding Stack — Overview',
+    href: '/encoding-stack',
+    summary: 'The three-layer substrate that makes VCP machine-parseable.',
+  },
+  {
+    label: 'Value-First Lexicon',
+    href: '/lexicon',
+    summary: 'Layer A — the lexical substrate.',
+  },
+  {
+    label: 'VCP-Lang',
+    href: '/vcp-lang',
+    summary: 'Layer B — the structural substrate.',
+  },
+  {
+    label: 'Value Graph',
+    href: '/value-graph',
+    summary: 'Layer C — the relational substrate.',
+  },
+];
+
+/**
+ * Canon-page archetypes — the grouped inventory of every canon page this site
+ * publishes. This is the authoritative source for the homepage "Canon pages ·
+ * N across M archetypes" stat: both integers are DERIVED from this structure
+ * (see canonPageStats below), never hardcoded. Add a page to one of these
+ * arrays and the homepage count self-maintains.
+ *
+ * "Canon pages" = the substantive protocol content pages (methodology,
+ * encoding stack, manifestos). It intentionally excludes wayfinding/hub pages
+ * (methodology, manifestos, protocol-stack, engagement, sitemap), the homepage,
+ * and the glossary — those are navigation and reference surfaces, not canon.
+ */
+export const CANON_PAGE_ARCHETYPES: Array<{ id: string; label: string; pages: readonly { href: string }[] }> = [
+  { id: 'methodology', label: 'Methodology canon', pages: METHODOLOGY_PAGES },
+  { id: 'encoding', label: 'Encoding stack', pages: ENCODING_PAGES },
+  { id: 'manifestos', label: 'Manifestos', pages: MANIFESTO_PAGES },
+];
+
+/**
+ * Derived homepage stat: total canon pages and how many archetypes they span.
+ * Computed at module load from CANON_PAGE_ARCHETYPES — the number cannot drift
+ * from the actual page inventory the way a hardcoded literal did.
+ */
+export const canonPageStats = {
+  pageCount: CANON_PAGE_ARCHETYPES.reduce((sum, a) => sum + a.pages.length, 0),
+  archetypeCount: CANON_PAGE_ARCHETYPES.length,
+} as const;
+
+/**
  * Mutual cross-citations — vcp.com canon page → valuefirstteam.com peer.
  *
  * Source of truth for cross-citation routing. Used by both the CrossCitation

@@ -4,7 +4,7 @@
  */
 import type { Metadata } from 'next';
 import { SITE } from '@/lib/site';
-import { CanonArchetype } from '@/components/CanonArchetype';
+import { CanonArchetype, type SpecMetaItem } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { getValuePathStages } from '@/lib/sanity/canon';
 
@@ -71,6 +71,16 @@ export default async function ValuePathPage() {
   const PATH_TO = stages.filter((s) => s.number <= 4);
   const PATH_OF = stages.filter((s) => s.number >= 5);
 
+  // The Stages count is read from canon at build time, not hardcoded — the
+  // "sourced from canon" claim is only rendered when the read genuinely
+  // succeeded. On an empty/failed read we render an honest-absent value
+  // rather than a phantom "0 — sourced from canon" (the false-provenance
+  // defect this page exists to fix, never reintroduced).
+  const stagesMeta: SpecMetaItem =
+    stages.length > 0
+      ? { label: 'Stages', value: `${stages.length} — sourced from canon` }
+      : { label: 'Stages', value: 'unavailable — canon read failed at build' };
+
   const definedTermsLd = {
     '@context': 'https://schema.org',
     '@graph': stages.map((s) => ({
@@ -98,7 +108,7 @@ export default async function ValuePathPage() {
           { label: 'Status', value: 'v1.1 · canonical' },
           { label: 'Verified', value: '12 May 2026' },
           { label: 'Cite', value: 'valuecreationprotocol.com/value-path' },
-          { label: 'Stages', value: '8 — sourced from canon' },
+          stagesMeta,
         ]}
       >
         <figure className="canon-figure">

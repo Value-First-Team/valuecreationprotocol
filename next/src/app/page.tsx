@@ -4,7 +4,7 @@
  * Server Component (SSG). Ported faithfully — no content dropped.
  */
 import type { Metadata } from 'next';
-import { SITE } from '@/lib/site';
+import { SITE, canonPageStats } from '@/lib/site';
 import { JsonLd } from '@/components/JsonLd';
 
 export const metadata: Metadata = {
@@ -18,7 +18,13 @@ export const metadata: Metadata = {
 const AT_A_GLANCE = [
   { label: 'Status', value: 'v0.1 · Draft · in review' },
   { label: 'Verified', value: '12 May 2026' },
-  { label: 'Canon pages', value: '25 across 6 archetypes' },
+  {
+    label: 'Canon pages',
+    // Derived from CANON_PAGE_ARCHETYPES at build time — self-maintains as the
+    // site's canon-page inventory grows, rather than a hardcoded literal that
+    // silently drifts (the defect being fixed).
+    value: `${canonPageStats.pageCount} across ${canonPageStats.archetypeCount} archetypes`,
+  },
   { label: 'Peers', value: 'MCP · HCP' },
 ] as const;
 
