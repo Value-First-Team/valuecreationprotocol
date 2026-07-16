@@ -17,7 +17,7 @@
   "dependencies": {
     "@vf/brand": "github:Value-First-Team/vf-brand#390302b",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#1eef9b7",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#5f16d6c",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#8be59da",
     "@vf/ui": "github:Value-First-Team/vf-ui#b1f3a40",
     "marked": "^14.1.3",
     "next": "^15.3.3",
