@@ -59,6 +59,7 @@ const MANIFESTOS: Route[] = MANIFESTO_PAGES.map((m, i) => ({
 }));
 
 const REFERENCE: Route[] = [
+  { href: '/language-of-value', title: 'The Language of Value', summary: 'The installable firing pack — the reflex, 23 swaps, and 12 traps as a paste-in artifact for any AI agent. Copy or download and drop into your assistant.', meta: 'Installable pack' },
   { href: '/glossary', title: 'Glossary', summary: 'The canonical vocabulary in one place — every defined term used across the protocol home.', meta: 'Defined terms' },
 ];
 
@@ -80,7 +81,7 @@ const GROUPS: Group[] = [
   { id: 'methodology', label: '§ 03 · Methodology canon', title: 'Methodology canon', note: 'Twelve canon pages — the operating principles, frameworks, patterns, programs, and implementation guidance the protocol encodes.', routes: METHODOLOGY },
   { id: 'encoding', label: '§ 04 · Encoding stack', title: 'Encoding stack', note: 'The substrate that makes VCP machine-parseable. Three layers — lexical, structural, relational — plus a short overview.', routes: ENCODING },
   { id: 'manifestos', label: '§ 05 · Manifestos', title: 'Manifestos', note: 'Three long-form arguments for why the protocol exists.', routes: MANIFESTOS },
-  { id: 'reference', label: '§ 06 · Reference', title: 'Reference', note: 'Defined vocabulary, in one place.', routes: REFERENCE },
+  { id: 'reference', label: '§ 06 · Reference', title: 'Reference', note: 'The vocabulary — as an installable pack and as a defined-term glossary.', routes: REFERENCE },
   { id: 'sitemap', label: '§ 07 · This page', title: 'This page', note: 'The wayfinding-of-wayfinding. Machine-readable companion linked below.', routes: SITEMAP_SELF },
 ];
 

@@ -3140,3 +3140,253 @@
     color: var(--vcp-link-hover);
     border-bottom-color: var(--vcp-link-hover);
   }
+
+  /* ============================================================
+     The Language of Value — /language-of-value.
+     The installable firing pack. Token-based only, so both themes
+     flip with the SiteShell. Primary action uses the ink/surface
+     construction (max-contrast in BOTH themes → AA by design);
+     accents reuse --vcp-teal-deep, the same token canon-prose links
+     already prove AA-safe on this surface.
+     ============================================================ */
+
+  /* Kill the canon-prose drop-cap on the non-opening prose blocks. */
+  .lov-flat > p:first-of-type::first-letter {
+    float: none;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+    font-weight: inherit;
+    color: inherit;
+    font-variation-settings: normal;
+  }
+
+  /* Scroll-margin so the #install anchor clears the sticky header. */
+  .lov-anchor { scroll-margin-top: 6rem; }
+
+  /* ---- Install panel (copy + download + paste block) ---- */
+  .lov-install {
+    margin: 2.75rem 0 0;
+    border: 1px solid var(--vcp-border-strong);
+    border-radius: var(--vcp-r-lg);
+    background: var(--vcp-surface-2);
+    overflow: hidden;
+    box-shadow: var(--vcp-shadow-sm);
+  }
+  .lov-install-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-bottom: 1px solid var(--vcp-border);
+  }
+  .lov-install-heading { flex: 1 1 20rem; min-width: 0; }
+  .lov-install-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-teal-deep);
+    font-weight: 500;
+    margin: 0 0 0.4rem;
+  }
+  .lov-install-lede {
+    margin: 0;
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--vcp-ink-2);
+    font-variation-settings: "opsz" 19;
+  }
+  .lov-install-lede code {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.9em;
+    background: var(--vcp-surface-3);
+    padding: 0.08em 0.34em;
+    border-radius: var(--vcp-r-xs);
+    color: var(--vcp-ink);
+  }
+  .lov-install-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  /* ---- Buttons (shared by install + CTA) ---- */
+  .lov-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 0.72rem 1.15rem;
+    border-radius: var(--vcp-r-md);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background var(--vcp-t-fast), color var(--vcp-t-fast),
+      border-color var(--vcp-t-fast);
+    white-space: nowrap;
+  }
+  .lov-btn-primary {
+    background: var(--vcp-ink);
+    color: var(--vcp-surface);
+    border-color: var(--vcp-ink);
+  }
+  .lov-btn-primary:hover { background: var(--vcp-teal-deep); border-color: var(--vcp-teal-deep); color: #fff; }
+  .lov-btn-ghost {
+    background: transparent;
+    color: var(--vcp-ink);
+    border-color: var(--vcp-border-strong);
+  }
+  .lov-btn-ghost:hover { border-color: var(--vcp-ink); }
+  .lov-btn:focus-visible {
+    outline: 2px solid var(--vcp-teal-deep);
+    outline-offset: 2px;
+  }
+
+  /* ---- Paste block ---- */
+  .lov-paste {
+    margin: 0;
+    max-width: 100%;
+    max-height: 22rem;
+    overflow: auto;
+    padding: 1.25rem 1.5rem;
+    background: var(--vcp-surface);
+    color: var(--vcp-ink-2);
+    font-family: var(--vcp-font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lov-paste:focus-visible { outline: 2px solid var(--vcp-teal-deep); outline-offset: -2px; }
+
+  /* ---- Swap table helpers ---- */
+  .lov-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .lov-say { color: var(--vcp-teal-deep); font-weight: 600; }
+  .lov-note {
+    color: var(--vcp-ink-4);
+    font-style: italic;
+    font-size: 0.9em;
+  }
+
+  /* ---- Traps list ---- */
+  .lov-traps { list-style: none; padding-left: 0; }
+  .lov-traps li {
+    padding-left: 1.1em;
+    position: relative;
+  }
+  .lov-traps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--vcp-teal-deep);
+    border-radius: 1px;
+    transform: rotate(45deg);
+  }
+  .lov-watch {
+    display: block;
+    margin-top: 0.15em;
+    font-size: 0.9em;
+    color: var(--vcp-ink-4);
+  }
+
+  /* ---- Related cross-links ---- */
+  .lov-related {
+    margin: 3.5rem 0 0;
+    padding-top: 2.25rem;
+    border-top: 1px solid var(--vcp-border);
+  }
+  .lov-related-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 1.1rem;
+  }
+  .lov-related-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+  @media (min-width: 640px) {
+    .lov-related-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .lov-related-card {
+    position: relative;
+    display: block;
+    padding: 1.15rem 2.4rem 1.15rem 1.25rem;
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-md);
+    background: var(--vcp-surface);
+    text-decoration: none;
+    transition: border-color var(--vcp-t-fast), background var(--vcp-t-fast);
+  }
+  .lov-related-card:hover { border-color: var(--vcp-ink); background: var(--vcp-surface-2); }
+  .lov-related-title {
+    display: block;
+    font-family: var(--vcp-font-body);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--vcp-ink);
+    margin-bottom: 0.3rem;
+  }
+  .lov-related-blurb {
+    display: block;
+    font-family: var(--vcp-font-display);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--vcp-ink-2);
+    font-variation-settings: "opsz" 16;
+  }
+  .lov-related-arrow {
+    position: absolute;
+    right: 1.1rem;
+    top: 1.2rem;
+    color: var(--vcp-teal-deep);
+    font-size: 1.05rem;
+  }
+
+  /* ---- CTA band ---- */
+  .lov-cta {
+    margin: 3.5rem 0 0;
+    padding: 2.5rem 1.75rem;
+    text-align: center;
+    border: 1px solid var(--vcp-border-strong);
+    border-radius: var(--vcp-r-lg);
+    background: var(--vcp-surface-2);
+  }
+  .lov-cta-headline {
+    font-family: var(--vcp-font-display);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--vcp-ink);
+    margin: 0 auto 0.65rem;
+    max-width: 32ch;
+    font-variation-settings: "opsz" 28;
+  }
+  @media (min-width: 768px) {
+    .lov-cta-headline { font-size: 1.75rem; }
+  }
+  .lov-cta-body {
+    margin: 0 auto 1.5rem;
+    max-width: 46ch;
+    font-family: var(--vcp-font-display);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--vcp-ink-2);
+    font-variation-settings: "opsz" 19;
+  }
+  .lov-cta-btn { padding: 0.85rem 1.6rem; font-size: 1rem; }

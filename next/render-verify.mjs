@@ -60,6 +60,7 @@ async function main() {
     { name: 'spec-lexicon', path: '/lexicon' },
     { name: 'manifesto-positioning', path: '/positioning' },
     { name: 'hub-methodology', path: '/methodology' },
+    { name: 'language-of-value', path: '/language-of-value' },
   ];
   const themes = ['light', 'dark'];
   const viewports = [

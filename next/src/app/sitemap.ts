@@ -36,6 +36,7 @@ const ROUTES = [
   '/positioning',
   '/manifestos/beyond-leads',
   '/manifestos/value-led-growth',
+  '/language-of-value',
   '/glossary',
 ];
 

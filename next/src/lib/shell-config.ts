@@ -20,6 +20,7 @@ export const SHELL_CONFIG: SiteShellConfig = {
     { label: 'Encoding Stack', href: '/encoding-stack' },
     { label: 'Methodology', href: '/methodology' },
     { label: 'Manifestos', href: '/manifestos' },
+    { label: 'Language of Value', href: '/language-of-value' },
     { label: 'Glossary', href: '/glossary' },
   ],
 
@@ -70,6 +71,7 @@ export const SHELL_CONFIG: SiteShellConfig = {
       heading: 'Methodology',
       items: [
         { label: 'Methodology canon', href: '/methodology' },
+        { label: 'Language of Value', href: '/language-of-value' },
         { label: 'Manifestos', href: '/manifestos' },
         { label: 'Engagement', href: '/engagement' },
         { label: 'Glossary', href: '/glossary' },
