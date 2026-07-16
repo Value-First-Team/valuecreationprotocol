@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import { SITE } from '@/lib/site';
 import { CanonArchetype } from '@/components/CanonArchetype';
 import { LanguageOfValueInstall } from '@/components/LanguageOfValueInstall';
+import { SharePageLink } from '@/components/SharePageLink';
 import { JsonLd } from '@/components/JsonLd';
 import {
   HERO,
@@ -37,7 +38,11 @@ export const metadata: Metadata = {
     'Your AI assistant speaks fluent funnel. The Language of Value is a paste-in pack that installs the reflex — notice the loaded word, reframe to value, say why — into any agent you run. 23 swaps, 12 traps, one paste.',
   openGraph: {
     url: SITE.url + '/language-of-value',
-    images: ['/og/og-default.jpg'],
+    images: ['/og/og-language-of-value.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/og-language-of-value.jpg'],
   },
   alternates: { canonical: SITE.url + '/language-of-value' },
 };
@@ -76,6 +81,9 @@ export default function LanguageOfValuePage() {
           { label: 'Cite', value: 'valuecreationprotocol.com/language-of-value' },
         ]}
       >
+        {/* Made to be shared — one-tap copy of the canonical link. */}
+        <SharePageLink label="Share this page" />
+
         {/* Premise — the two opening beats. Drop-cap on the first paragraph. */}
         <div className="canon-prose">
           <p>

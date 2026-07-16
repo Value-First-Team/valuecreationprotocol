@@ -3390,3 +3390,38 @@
     font-variation-settings: "opsz" 19;
   }
   .lov-cta-btn { padding: 0.85rem 1.6rem; font-size: 1rem; }
+
+  /* ---- Share affordance (copy-link / native share) ---- */
+  .lov-share {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.1rem;
+    margin: 0 0 2.5rem;
+    padding: 0.9rem 1.15rem;
+    border: 1px solid var(--vcp-border);
+    border-radius: var(--vcp-r-md);
+    background: var(--vcp-surface-2);
+  }
+  .lov-share-label {
+    font-family: var(--vcp-font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--vcp-ink);
+  }
+  .lov-share-url {
+    flex: 1 1 12rem;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: var(--vcp-font-mono);
+    font-size: 0.8125rem;
+    color: var(--vcp-ink-4);
+  }
+  .lov-share-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .lov-share .lov-btn { padding: 0.6rem 1.05rem; font-size: 0.875rem; }
