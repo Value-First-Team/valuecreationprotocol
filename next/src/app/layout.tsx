@@ -20,6 +20,12 @@ import '../styles/vcp-archetypes.css';
 import '../styles/vcp-dark.css';
 import './globals.css';
 import { SiteShell } from '@vf/site-kit';
+// THE FLY-IN LAYER. One mount, and every page of this site has fly-ins
+// available at every side (left/right/top/bottom/center), every stack axis
+// (z depth, x parallel, y nested) and every mode (overlay, push, inset — an
+// inset fly-in IS a docked rail). Any archetype item's `detail` prop, any
+// FlyInTrigger, or useFlyInStack().open() reaches it; no per-page wiring.
+import { SiteOverlayRoot } from '@vf/site-kit/flyin';
 import { SHELL_CONFIG } from '@/lib/shell-config';
 import { SITE } from '@/lib/site';
 import { HEADER_BRAND_MARK, FOOTER_BRAND_MARK } from '@/components/VcpBrandMark';
@@ -85,6 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="min-h-screen antialiased">
         <SiteShell
+          overlayRoot={SiteOverlayRoot}
           config={SHELL_CONFIG}
           logoLabel="Value Creation Protocol"
           logoHref="/"

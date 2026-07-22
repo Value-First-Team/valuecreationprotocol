@@ -14,7 +14,12 @@ const nextConfig: NextConfig = {
     config.resolve = config.resolve ?? {};
     config.resolve.alias = {
       ...(config.resolve.alias as Record<string, string>),
-      '@vf/site-kit': path.resolve(nextNodeModules, '@vf/site-kit'),
+      // EXACT-match alias ('$'). Without the '$' this key also captures every
+      // SUBPATH — webpack would rewrite '@vf/site-kit/flyin' to
+      // <node_modules>/@vf/site-kit/flyin, bypassing the package's own exports
+      // map (which points at dist/flyin.js) and failing to resolve. The pin this
+      // alias exists to force is on the package itself, not its subpaths.
+      '@vf/site-kit$': path.resolve(nextNodeModules, '@vf/site-kit'),
     };
     return config;
   },
