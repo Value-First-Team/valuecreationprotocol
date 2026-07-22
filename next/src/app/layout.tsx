@@ -13,6 +13,7 @@
  *   5. globals.css                   — Tailwind layers + skip-link
  */
 import type { Metadata, Viewport } from 'next';
+import Script from 'next/script';
 import '@vf/design-engine/tokens.css';
 import '../styles/vcp-tokens.css';
 import '../styles/vcp-archetypes.css';
@@ -77,14 +78,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `(function(){try{var s=localStorage.getItem('vf-theme');var d=s?s==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',!!d);}catch(e){}})();`,
           }}
         />
-        {/* HubSpot tracking (portal 40810431 = VF Team). */}
-        <script
-          type="text/javascript"
-          id="hs-script-loader"
-          async
-          defer
-          src="//js.hs-scripts.com/40810431.js"
-        />
+        {/* HubSpot tracking (portal 40810431 = VF Team). next/script afterInteractive
+            executes AFTER hydration, so the loader can't race hydration and prepend
+            div#hs-web-interactives-top-push-anchor to <body> before React reconciles. */}
+        <Script id="hs-script-loader" src="//js.hs-scripts.com/40810431.js" strategy="afterInteractive" />
       </head>
       <body className="min-h-screen antialiased">
         <SiteShell
