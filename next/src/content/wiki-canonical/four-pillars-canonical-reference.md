@@ -6,6 +6,8 @@
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
+> **SUPERSEDED 2026-07-07 — retired in favor of the Four Cornerstones.** Per Chris's ruling in the Value Accounting meeting, the transformation four-part layer (Customer / Company / Context / Community, mapped to the Four Unified Views) is now named the **Four Cornerstones**, not the Four Pillars. This document is retained as historical reference only; the live canonical is the Value Cornerstones layer (renamed from Four Cornerstones on 2026-07-15), and the Value Vocabulary carries the Value Cornerstones. This closes the "Pillars/Cornerstones naming" sub-item of migration handle **M-36**. (Distinct and unaffected: the Woven Rope 3.0 *three pillars* — Relationships / The Work / Value Delivery — are a separate value-flow framework that merely reuses the word "pillar.")
+
 ---
 
 ## Purpose
@@ -49,7 +51,6 @@ Each Pillar follows a consistent structure:
 - Value-First Humans (Leads Trap counter)
 - Value-First Partner (Qualification Trap counter)
 - Value-First Delivery (Managed Services Trap counter)
-- Value-First Scoring
 
 **Transformation Focus:**
 - From lead processing to relationship development
@@ -297,7 +298,7 @@ The Value Path (8 stages) describes how individuals progress through value creat
 - **Community Pillar** multiplies value through collective enablement
 
 ### Pillars and Value Realities
-The 15 Value Realities organize into pillars while maintaining flexibility:
+The 14 Value Realities organize into pillars while maintaining flexibility:
 - Each pillar emphasizes certain realities
 - Some realities serve multiple pillars
 - Pillar selection guides initial reality focus
@@ -338,7 +339,7 @@ The 15 Value Realities organize into pillars while maintaining flexibility:
 ## Related Documents
 
 - Four Unified Views Canonical Reference
-- 15 Value Realities Canonical Reference
+- 14 Value Realities Canonical Reference
 - Five Core Beliefs Canonical Reference
 - 12 Complexity Traps Canonical Reference
 - Value Path Canonical Reference

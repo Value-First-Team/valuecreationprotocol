@@ -96,7 +96,7 @@ export const METHODOLOGY_PAGES: Array<{ label: string; href: string; summary: st
   {
     label: 'Value Realities',
     href: '/realities',
-    summary: 'Fifteen realities and the operational commitments they imply.',
+    summary: 'Fourteen realities and the operational commitments they imply.',
   },
   {
     label: 'Value-Led Growth',

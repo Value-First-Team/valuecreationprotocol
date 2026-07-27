@@ -1,16 +1,28 @@
-# 15 Value Realities Canonical Reference
+# 14 Value Realities Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0  
-**Effective Date:** December 8, 2025  
+**Version:** 1.1  
+**Effective Date:** December 8, 2025 (v1.0) · July 27, 2026 (v1.1)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
 ---
 
+## RETIREMENT NOTICE — the set is 14, not 15
+
+**Reality 13, Value-First Scoring, was retired by Chris Carolan on 2026-07-27.** It prescribed the exact mechanism that two Complexity Traps define themselves *by*: the Leads Trap's alternative is *"recognize readiness signals rather than **score** arbitrary behaviors"* and the Qualification Trap is *"complex **scoring systems** to filter relationships,"* countered by *"invest in understanding, **not scoring**."* A Reality cannot prescribe the trap's own mechanism as the remedy.
+
+- **The count is now 14.** Any artifact saying "15 Value Realities" is stale. Cite the count from this document; do not carry it from memory.
+- **The number 13 is retired, not reissued.** Realities 14 (Company) and 15 (Community) **keep their numbers**. A renumber would make every existing "Reality 14" citation silently resolve to a *different* Reality — wrong in a way that reads as correct. A retired identifier fails loudly; a reissued one fails plausibly.
+- **The retired Reality is tombstoned in place** at its original position, below, with the ruling and its reason. It is not deleted. (Same convention as `raw/retired-agents.md` and `raw/retired-commands.md`.)
+
+Full record: `quality/cars/2026-07-27-corrective-value-reality-13-scoring-retired.md`.
+
+---
+
 ## Purpose
 
-This document establishes the **official, canonical definitions** for the 15 Value Realities—the natural patterns that work WITH value flow rather than against it. Each Reality represents the Value-First alternative to industrial-age thinking, providing practical guidance for transformation.
+This document establishes the **official, canonical definitions** for the 14 Value Realities—the natural patterns that work WITH value flow rather than against it. Each Reality represents the Value-First alternative to industrial-age thinking, providing practical guidance for transformation.
 
 **When in doubt, check this document.**
 
@@ -27,13 +39,13 @@ The Value Realities are natural patterns that align with how value actually want
 - **Manifesto-backed** — Each reality has a published manifesto with detailed guidance
 
 **Relationship to Traps:**
-- 12 of the 15 realities directly counter specific Complexity Traps
-- 3 realities (Scoring, Company, Community) address broader organizational needs without specific trap pairings
+- 12 of the 14 realities directly counter specific Complexity Traps
+- 2 realities (Company, Community) address broader organizational needs without specific trap pairings
 - Realities compound—each one makes others more effective
 
 ---
 
-## The 15 Value Realities: Complete Reference
+## The 14 Value Realities: Complete Reference
 
 ### 1. Value-First AI
 **Counters:** AI Replacement Trap  
@@ -251,21 +263,29 @@ The Value Realities are natural patterns that align with how value actually want
 
 ---
 
-### 13. Value-First Scoring
-**No Trap Pairing**  
-**Manifesto:** None (integrated into broader methodology)
+### 13. Value-First Scoring — RETIRED 2026-07-27
 
-**Core Principle:** Score relationships for mutual value potential, not just likelihood to purchase.
+**Status:** RETIRED. Not a Value Reality. Do not teach it, cite it, or build to it.
+**Retired by:** Chris Carolan, 2026-07-27
+**Number:** retired, not reissued — Realities 14 and 15 keep their numbers
+**Superseded by:** **Value-First Humans** (Reality 2) and **Value-First Partner** (Reality 5), which already carry everything this Reality was reaching for, without the mechanism
 
-**The Shift:**
-- FROM: Lead scoring (how likely to buy from us?)
-- TO: Value scoring (how much value can we create together?)
+**Why it was retired.** It prescribed scoring — the precise mechanism two Complexity Traps are *defined by*:
 
-**Key Practices:**
-- Score for fit, not just intent
-- Recognize readiness, not just activity
-- Include value delivered, not just value extracted
-- Support natural progression, not forced advancement
+- **Leads Trap** — the trap is treating humans as objects "to be captured, **scored**, and converted"; its alternative is *"Recognize readiness signals rather than **score** arbitrary behaviors"* (`12-complexity-traps-canonical-reference.md:124,133`).
+- **Qualification Trap** — the trap is *"complex **scoring systems** to filter relationships"*; its alternative is *"Invest in understanding, **not scoring**"* (`12-complexity-traps-canonical-reference.md:169,178`).
+
+Both traps and this Reality used the identical word — **readiness** — one to name the thing you recognize *instead of* scoring, the other the thing you score *for*. That is not a nuance a reader can be expected to hold. The word does the thinking, and the thinking it does is funnel-shaped.
+
+**How the collision surfaced.** Sage halted the 2026-07-27 Foundation All-Hands recognition pass on it: a value a legitimate seat could not hold. At least thirteen Customer Org seats carry an explicit no-scoring refusal in their own definitions, and one Finance seat holds the same line — they were refusing, correctly, the thing a canonical Reality told them to do. The steelman ("it scores a *relationship*, not a person") was examined and rejected: in the substrate a relationship resolves to a contact or company record, so the score lands on someone regardless.
+
+**What is NOT retired.** The legitimate need this Reality pointed at is real and is already met:
+
+- **Recognizing readiness** — a *signal* you observe, never a number you assign. Value-First Humans (Reality 2), and the Leads Trap alternative it counters.
+- **Mutual fit** — discovered together, not computed about someone. Value-First Partner (Reality 5), countering the Qualification Trap.
+- **Value delivered, not just extracted** — Value-First Measurement (Reality 8), via Key Value Indicators.
+
+**If you are here because something cited "Reality 13" or "Value-First Scoring":** that artifact is stale. Correct it to the surviving Reality above, and note that the count of Realities is **14**.
 
 ---
 
@@ -327,7 +347,7 @@ Value-First Community enables AI-powered capability multiplication without enter
 | Value-First Leadership | Authority | Control → Enablement |
 | Value-First Customer | B2B | Process → Human |
 | Value-First Context | SaaS | Fragmentation → Unification |
-| Value-First Scoring | — | Extraction → Mutual Value |
+| ~~Value-First Scoring~~ | **RETIRED 2026-07-27** | **Not a Reality — see the tombstone at 13** |
 | Value-First Company | — | Hierarchy → Flow |
 | Value-First Community | — | Extraction → Multiplication |
 
@@ -335,12 +355,12 @@ Value-First Community enables AI-powered capability multiplication without enter
 
 ## Organizing Realities: The Four Pillars
 
-The 15 Value Realities organize naturally into Four Pillars, which align with the Four Unified Views:
+The 14 Value Realities organize naturally into Four Pillars, which align with the Four Unified Views:
 
 ### Customer Pillar (Unified Customer View)
 *360-degree visibility across all customer interactions and relationships*
 
-**Realities:** Customer, Humans, Partner, Delivery, Scoring
+**Realities:** Customer, Humans, Partner, Delivery
 
 ### Company Pillar (Unified Revenue View)
 *Complete financial visibility from pipeline through collection*
@@ -389,14 +409,14 @@ Platform + Context + Measurement + Company
 AI + Culture + Leadership + Community
 
 **Content & Marketing Focus:**
-Content + Communication + Humans + Scoring
+Content + Communication + Humans
 
 ---
 
 ## Common Errors to Avoid
 
 ### Implementation Errors
-- ❌ Trying to implement all 15 realities simultaneously
+- ❌ Trying to implement all 14 realities simultaneously
 - ❌ Implementing realities without addressing underlying traps
 - ❌ Treating realities as rigid processes rather than flexible principles
 - ❌ Measuring reality adoption with industrial-age metrics
@@ -432,6 +452,7 @@ Content + Communication + Humans + Scoring
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 8, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | July 27, 2026 | **Reality 13, Value-First Scoring, RETIRED** (Chris ruling) — it prescribed the mechanism the Leads Trap and Qualification Trap are each defined by. Tombstoned in place; number retired, not reissued; set count 15 → 14. Surfaced by Sage's halt of the Foundation All-Hands recognition pass. CAR: `quality/cars/2026-07-27-corrective-value-reality-13-scoring-retired.md` | Chris Carolan / Q (Quality System) |
 
 ---
 

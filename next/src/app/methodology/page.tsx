@@ -51,7 +51,7 @@ const GROUPS: Group[] = [
     title: 'Patterns',
     note: 'The operating loops and values that turn the frameworks into daily practice.',
     slugs: ['/value-loop', '/teach', '/realities'],
-    meta: { '/value-loop': '4 stages', '/teach': '5 values', '/realities': '15 realities' },
+    meta: { '/value-loop': '4 stages', '/teach': '5 values', '/realities': '14 realities' },
   },
   {
     label: '§ 04 · Programs',

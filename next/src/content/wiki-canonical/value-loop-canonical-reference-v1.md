@@ -1,8 +1,8 @@
 # Value Loop Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0  
-**Effective Date:** December 7, 2025  
+**Version:** 1.1  
+**Effective Date:** December 7, 2025 (v1.1 amendment 2026-07-15)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -28,7 +28,7 @@ It replaces linear funnel thinking with recognition of value creation as a conti
 
 **The Two Dimensional Views:**
 
-- **The Four Stages**: EXPRESS → TAILOR → AMPLIFY → EVOLVE (HOW you engage)
+- **The Four Stages**: EXPRESS VALUE → TAILOR VALUE → AMPLIFY VALUE → EVOLVE VALUE (HOW you engage)
 - **The Five Layers**: The continuous flow of Internal Conversations, Internal Signals, Relationships, External Signals, External Conversations (WHAT flows through engagement)
 
 **Integration with Value Path:**
@@ -48,10 +48,10 @@ Value emerges from conversations → signals → relationships. Not from campaig
 
 | Stage | Partner | Guiding Question | Description |
 |-------|---------|------------------|-------------|
-| **Express** | With Ourselves | "Will this help them get clearer about their situation and possibilities?" | Internal clarity before external action. Strategy sessions, team alignment, identity definition. Market testing positioning and value proposition. |
-| **Tailor** | With Others | "Will this help them build confidence in their next step?" | Genuine one-to-one relationship building with specific humans. Direct dialogue, account strategy, contextual relevance. Trust development through understanding their unique situation. |
-| **Amplify** | With Market | "What patterns are emerging across our relationships?" | Pattern recognition across relationships revealing community. Broader market conversations. Discovering what's working and sharing it appropriately. |
-| **Evolve** | With Data | "What are we learning and how does this improve what we do?" | Collaborative learning from outcomes. AI pattern recognition combined with human strategic interpretation. Continuous improvement of all stages. |
+| **Express Value** | With Ourselves | "Will this help them get clearer about their situation and possibilities?" | Internal clarity before external action. Strategy sessions, team alignment, identity definition. Market testing positioning and value proposition. |
+| **Tailor Value** | With Others | "Will this help them build confidence in their next step?" | Genuine one-to-one relationship building with specific humans. Direct dialogue, account strategy, contextual relevance. Trust development through understanding their unique situation. |
+| **Amplify Value** | With Market | "What patterns are emerging across our relationships?" | Pattern recognition across relationships revealing community. Broader market conversations. Discovering what's working and sharing it appropriately. |
+| **Evolve Value** | With Data | "What are we learning and how does this improve what we do?" | Collaborative learning from outcomes. AI pattern recognition combined with human strategic interpretation. Continuous improvement of all stages. |
 
 ### The Five Layers
 
@@ -69,10 +69,10 @@ Value emerges from conversations → signals → relationships. Not from campaig
 
 ```
 THE FOUR STAGES (Flow Order)
-├── Express   → With Ourselves (internal clarity)
-├── Tailor    → With Others (specific relationships)
-├── Amplify   → With Market (pattern recognition)
-└── Evolve    → With Data (collaborative learning)
+├── Express Value  → With Ourselves (internal clarity)
+├── Tailor Value   → With Others (specific relationships)
+├── Amplify Value  → With Market (pattern recognition)
+└── Evolve Value   → With Data (collaborative learning)
 
 THE FIVE LAYERS (Like a 5-lane road)
 ├─ Internal Conversations  (outer left lane)
@@ -97,15 +97,15 @@ Signals + Conversations + Relationships = Value
 
 ### Stage Names
 
-1. **Single word each** — "Express" not "Expression" or "Expressing"
-2. **All caps when emphasizing** — EXPRESS, TAILOR, AMPLIFY, EVOLVE
-3. **Title case in prose** — "the Express stage" or "Express mode"
+1. **Verb + "Value"** — each stage is the canonical verb with "Value" appended: "Express Value," "Tailor Value," "Amplify Value," "Evolve Value." The verb stays the single canonical word (never "Expression Value" or "Expressing"); "Value" is always present.
+2. **All caps when emphasizing** — EXPRESS VALUE, TAILOR VALUE, AMPLIFY VALUE, EVOLVE VALUE
+3. **Title case in prose** — "the Express Value stage" or "Express Value mode"
 4. **No abbreviations** — Never use E, T, A, E for stages
 
 ### Flow Order
 
-1. **Always Express → Tailor → Amplify → Evolve** — This is the continuous flow, not a hierarchy
-2. **The loop is continuous** — Evolve feeds back into Express; there is no "end"
+1. **Always Express Value → Tailor Value → Amplify Value → Evolve Value** — This is the continuous flow, not a hierarchy
+2. **The loop is continuous** — Evolve Value feeds back into Express Value; there is no "end"
 3. **All stages happen simultaneously** — Organizations operate in all stages with different relationships
 
 ### Layer Names
@@ -128,19 +128,19 @@ Signals + Conversations + Relationships = Value
 
 | Stage | ❌ Wrong | ✅ Correct |
 |-------|----------|------------|
-| Express | "Expression" / "Expressing" / "Express Stage 1" | "Express" |
-| Tailor | "Tailoring" / "Personalization" / "Customize" | "Tailor" |
-| Amplify | "Amplification" / "Scale" / "Broadcast" | "Amplify" |
-| Evolve | "Evolution" / "Optimize" / "Learn" | "Evolve" |
+| Express Value | "Express" (missing Value) / "Expression Value" / "Expressing" | "Express Value" |
+| Tailor Value | "Tailor" (missing Value) / "Tailoring" / "Personalization" | "Tailor Value" |
+| Amplify Value | "Amplify" (missing Value) / "Amplification" / "Scale" | "Amplify Value" |
+| Evolve Value | "Evolve" (missing Value) / "Evolution" / "Optimize" | "Evolve Value" |
 
 ### Guiding Question Variations (Do NOT Use)
 
 | Stage | ❌ Wrong | ✅ Correct |
 |-------|----------|------------|
-| Express | "Are we clear?" / "Is our messaging right?" | "Will this help them get clearer about their situation and possibilities?" |
-| Tailor | "Is this personalized?" / "Are we relevant?" | "Will this help them build confidence in their next step?" |
-| Amplify | "Are we scaling?" / "Is this reaching people?" | "What patterns are emerging across our relationships?" |
-| Evolve | "Are we improving?" / "What's the data say?" | "What are we learning and how does this improve what we do?" |
+| Express Value | "Are we clear?" / "Is our messaging right?" | "Will this help them get clearer about their situation and possibilities?" |
+| Tailor Value | "Is this personalized?" / "Are we relevant?" | "Will this help them build confidence in their next step?" |
+| Amplify Value | "Are we scaling?" / "Is this reaching people?" | "What patterns are emerging across our relationships?" |
+| Evolve Value | "Are we improving?" / "What's the data say?" | "What are we learning and how does this improve what we do?" |
 
 ### Structural Errors (Do NOT Use)
 
@@ -164,7 +164,7 @@ This creates a **32-cell matrix** where each Value Path stage has appropriate ex
 
 ### Stage-Appropriate Loop Expression Examples
 
-| Value Path Stage | Express Mode | Tailor Mode |
+| Value Path Stage | Express Value Mode | Tailor Value Mode |
 |------------------|--------------|-------------|
 | Audience | Discoverable content without pressure | Respect boundaries, no premature personalization |
 | Researcher | Educational depth reflecting authentic expertise | Enable discovery without pressure |
@@ -184,10 +184,10 @@ This creates a **32-cell matrix** where each Value Path stage has appropriate ex
 The Value Loop is visualized as an **infinity symbol (∞)** with five parallel lanes flowing continuously through four quadrants:
 
 **Quadrant Positions:**
-- Express (top-left) — With Ourselves
-- Tailor (bottom-right) — With Others
-- Amplify (top-right) — With Market
-- Evolve (bottom-left) — With Data
+- Express Value (top-left) — With Ourselves
+- Tailor Value (bottom-right) — With Others
+- Amplify Value (top-right) — With Market
+- Evolve Value (bottom-left) — With Data
 
 **Lane Configuration (like a 5-lane road):**
 - Relationships runs continuously through the center (the two-way turn lane)
@@ -232,6 +232,7 @@ Represented as intertwining strands (like a DNA helix) wrapping around the entir
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 7, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | July 15, 2026 | Stage names value-suffixed: Express → Express Value, Tailor → Tailor Value, Amplify → Amplify Value, Evolve → Evolve Value. "Single word each" rule amended to "verb + Value." Ratified by Chris Carolan via the Language of Value coining decision. | Chris Carolan / Oracle |
 
 ---
 
@@ -241,7 +242,6 @@ This canonical reference should be used when creating or reviewing:
 
 - Value Loop website page (/what-we-solve/value-loop)
 - Path × Loop Matrix documentation
-- Value-First Scoring framework (Loop Marketing integration sections)
 - HubSpot Native Architecture (Loop implementation)
 - Any client-facing materials referencing the Value Loop
 - Any media content discussing Loop stages

@@ -318,7 +318,9 @@ export async function getValueLedGrowth(): Promise<ValueLedGrowth | null> {
 }
 
 /**
- * Get all 15 valueReality records with their commitments.
+ * Get all valueReality records with their commitments. Canon is 14 since 2026-07-27
+ * (Reality 13, Value-First Scoring, retired) — Sanity may still hold a 15th record;
+ * Sanity writes route through Canon (the gateway), not from here.
  *
  * Each Reality carries:
  *   - `name` — the Reality name (e.g. "Value-First Communication")
