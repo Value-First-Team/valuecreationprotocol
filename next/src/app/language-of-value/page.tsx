@@ -78,7 +78,10 @@ export default function LanguageOfValuePage() {
         path="/language-of-value"
         specMeta={[
           { label: 'Reads as', value: 'Paste-in agent rules' },
-          { label: 'In the pack', value: '23 swaps · 12 traps · 1 reflex' },
+          // Derived, never hardcoded — this line read "23 swaps · 12 traps" for the
+          // hours after the pack gained two swaps and a trap, advertising a count the
+          // artifact below it had already outgrown.
+          { label: 'In the pack', value: `${SWAPS.length} swaps · ${TRAPS.length} traps · 1 reflex` },
           { label: 'Cite', value: 'valuecreationprotocol.com/language-of-value' },
         ]}
       >

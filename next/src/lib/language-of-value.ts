@@ -112,6 +112,8 @@ export const SWAPS: Swap[] = [
   { instead: 'tribal knowledge / know-how trapped in heads', say: 'Human Domain Expertise (HDE)', because: 'expertise you own and make legible, not folklore' },
   { instead: 'central gatekeeper / bottleneck / command-and-control admin', say: 'The Orchestrator', because: 'coordinates flow, never a chokepoint' },
   { instead: 'sparring / pushback', say: 'Sharpen the Value / Refine the Value', because: "you sharpen and refine the value together; you don't spar against a person" },
+  { instead: 'tokenmaxxing', insteadNote: 'volume of AI consumed as proof', say: 'Valuemaxxing', because: 'solve for the value AI creates, not the volume it consumes — did real value reach a human?' },
+  { instead: 'efficiency value / hours saved', insteadNote: 'as the whole story', say: 'Capability Value', because: 'hours saved measures the work you already did; capability value measures the work you can now do at all' },
 ];
 
 /** The 12 traps — dead frames to reexamine. */
@@ -128,6 +130,7 @@ export const TRAPS: Trap[] = [
   { name: 'The AI Replacement Trap', body: "believing AI's job is to replace humans, not multiply them.", watchFor: '"automate the headcount away."' },
   { name: 'The Authority Trap', body: 'centralizing control so it blocks the distributed intelligence it needs.', watchFor: 'sign-off as the only path forward.' },
   { name: 'The Conformity Trap', body: 'standardization that suppresses the human judgment that creates value.', watchFor: '"one right way," "just follow the process."' },
+  { name: 'Tokenmaxxing (the Trend Trap)', body: 'the AI-era face of the Measurement Trap: counting the volume of AI consumed (tokens, prompts, seats) as if usage were the proof of value.', watchFor: 'token spend as a flex, closed-ticket-maxxing, saved-hours-maxxing — all volume dressed as value.' },
 ];
 
 /** The worked example — prompt in, reframed response out. */
