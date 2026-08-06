@@ -16,6 +16,11 @@
  * count is quoted here for the same reason — the artifact states its own, and a
  * number duplicated across three repos is a drift surface with no owner.
  *
+ * THE LABEL IS DELIBERATELY LONG. This site has its OWN /glossary in the nav (the
+ * protocol's terms), so a bare "Open the glossary" points at two different files
+ * depending on who reads it. The label names which glossary; the URL beside it
+ * confirms the domain.
+ *
  * Server component: a heading and a link, no interactivity, no client boundary.
  *
  * Styling: .lov-companion-* in vcp-archetypes.css, --vcp-* tokens only, matching
@@ -57,7 +62,7 @@ export function GlossaryCompanion() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Open the glossary
+          Open the Language of Value glossary
         </a>
         <code className="lov-companion-url">valuefirstteam.com/skill/language-of-value/glossary.md</code>
       </div>

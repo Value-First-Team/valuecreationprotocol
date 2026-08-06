@@ -3434,8 +3434,7 @@
     margin: 1.25rem 0 0;
     padding: 1.6rem 1.5rem;
     border: 1px solid var(--vcp-border);
-    border-top: none;
-    border-radius: 0 0 var(--vcp-r-lg) var(--vcp-r-lg);
+    border-radius: var(--vcp-r-lg);
     background: var(--vcp-surface-2);
   }
   .lov-companion-eyebrow {
