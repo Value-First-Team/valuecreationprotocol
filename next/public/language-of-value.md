@@ -43,6 +43,8 @@ Two disciplines so this teaches instead of nags: speak in the Value-First words 
 | tribal knowledge / know-how trapped in heads | **Human Domain Expertise (HDE)** | expertise you own and make legible, not folklore |
 | central gatekeeper / bottleneck / command-and-control admin | **The Orchestrator** | coordinates flow, never a chokepoint |
 | sparring / pushback | **Sharpen the Value** / **Refine the Value** | you sharpen and refine the value together; you don't spar against a person |
+| tokenmaxxing *(volume of AI consumed as proof)* | **Valuemaxxing** | solve for the value AI creates, not the volume it consumes — did real value reach a human? |
+| efficiency value / hours saved *(as the whole story)* | **Capability Value** | hours saved measures the work you already did; capability value measures the work you can now do at all |
 
 ## The traps — dead frames to reexamine
 
@@ -53,6 +55,7 @@ These are named patterns, not just words. When the work starts reaching for one,
 - **The Lead Magnet Trap** — gating real help as bait for contact information.
 - **The Advertising Trap** — fighting for attention through interruption instead of earning it with value.
 - **The Measurement Trap** — optimizing activity metrics that feel productive but prove nothing changed for a human. (Watch for: vanity metrics, a dashboard treated as proof.)
+- **Tokenmaxxing (the Trend Trap)** — the AI-era face of the Measurement Trap: counting the volume of AI consumed (tokens, prompts, seats) as if usage were the proof of value. (Watch for: token spend as a flex, closed-ticket-maxxing, saved-hours-maxxing — all volume dressed as value.)
 - **The Managed Services Trap** — building on client dependency instead of client capability. (Watch for: "we'll just run it for you" as the whole model.)
 - **The ERP Trap** — forcing the business to conform to rigid software instead of the reverse. (Watch for: "one system to rule them all," "rip and replace.")
 - **The SaaS Trap** — every new tool solves one thing and adds three coordination problems. (Watch for: "there's a tool for that" as the reflex.)
@@ -68,6 +71,14 @@ These are named patterns, not just words. When the work starts reaching for one,
 > **Your agent, with these rules:** "Quick reframe before I draft: 'leads in the funnel' and 'MQLs' both carry the **Leads Trap** — treating people as objects to capture and score. I'd rather write to *people showing genuine Interest* through a **Value Door** — an email that gives them something useful whether or not they book. Here's a draft that opens with value… (want me to keep 'demo,' or reframe that to what they'd actually get from it?)"
 
 That is the difference between an agent that has a glossary and an agent that has the reflex. The first knows the words. The second changes the conversation — and teaches the person a little, every time.
+
+## Give it the full vocabulary too
+
+The rules above are the reflex. They run on a much larger language — the Five Core Beliefs, the Value Path, the Twelve Complexity Traps, the Value Cornerstones, and the everyday words of value — and your agent works better when it can look a term up instead of inferring it.
+
+The complete glossary is one file: **[valuefirstteam.com/skill/language-of-value/glossary.md](https://valuefirstteam.com/skill/language-of-value/glossary.md)**. Give it to your agent as knowledge — a Project's knowledge base, a Space's sources, a Gem's files, or alongside this file in a skills folder — and tell it to read the entry there whenever one of these comes up.
+
+The reflex without the glossary still works. With it, the reframes get specific.
 
 ---
 
