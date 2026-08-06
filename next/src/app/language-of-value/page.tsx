@@ -17,6 +17,7 @@ import { join } from 'node:path';
 import { SITE } from '@/lib/site';
 import { CanonArchetype } from '@/components/CanonArchetype';
 import { LanguageOfValueInstall } from '@/components/LanguageOfValueInstall';
+import { GlossaryCompanion } from '@/components/GlossaryCompanion';
 import { SharePageLink } from '@/components/SharePageLink';
 import { JsonLd } from '@/components/JsonLd';
 import {
@@ -102,6 +103,9 @@ export default function LanguageOfValuePage() {
         {/* The installable pack — copy + download, single source of truth. */}
         <div id="install" className="lov-anchor">
           <LanguageOfValueInstall pasteText={pasteText} downloadHref={ARTIFACT_HREF} />
+          {/* The pack's other half. The paste block routes an agent to the glossary;
+              this routes the person reading the page. */}
+          <GlossaryCompanion />
         </div>
 
         {/* The readable breakdown — same content, human-scannable. No drop-cap. */}

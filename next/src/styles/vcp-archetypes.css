@@ -3425,3 +3425,58 @@
     flex-wrap: wrap;
   }
   .lov-share .lov-btn { padding: 0.6rem 1.05rem; font-size: 0.875rem; }
+
+  /* ===== Language of Value — the second file (GlossaryCompanion) =====
+     Sits directly beneath the install panel and is styled as its sibling, so the
+     glossary reads as the rest of the pack rather than a related link. Tokens are
+     --vcp-* only (VCP's own protocol identity), matching .lov-install above. */
+  .lov-companion {
+    margin: 1.25rem 0 0;
+    padding: 1.6rem 1.5rem;
+    border: 1px solid var(--vcp-border);
+    border-top: none;
+    border-radius: 0 0 var(--vcp-r-lg) var(--vcp-r-lg);
+    background: var(--vcp-surface-2);
+  }
+  .lov-companion-eyebrow {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--vcp-ink-4);
+    margin: 0 0 0.5rem;
+  }
+  .lov-companion-heading {
+    font-family: var(--vcp-font-display);
+    font-size: 1.35rem;
+    line-height: 1.25;
+    color: var(--vcp-ink);
+    margin: 0 0 0.85rem;
+  }
+  .lov-companion-body p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--vcp-ink-2);
+    margin: 0 0 0.75rem;
+    max-width: 62ch;
+  }
+  .lov-companion-close {
+    color: var(--vcp-ink) !important;
+  }
+  .lov-companion-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    margin-top: 1.15rem;
+  }
+  .lov-companion-url {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.78rem;
+    color: var(--vcp-ink-4);
+    word-break: break-all;
+  }
+  @media (max-width: 640px) {
+    .lov-companion { padding: 1.35rem 1.1rem; }
+    .lov-companion-heading { font-size: 1.2rem; }
+  }
