@@ -10,6 +10,7 @@
  */
 import type { Metadata } from 'next';
 import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES } from '@/lib/site';
+import { PACK_COUNTS } from '@/lib/language-of-value';
 import { HubArchetype } from '@/components/HubArchetype';
 import { JsonLd } from '@/components/JsonLd';
 
@@ -59,7 +60,7 @@ const MANIFESTOS: Route[] = MANIFESTO_PAGES.map((m, i) => ({
 }));
 
 const REFERENCE: Route[] = [
-  { href: '/language-of-value', title: 'The Language of Value', summary: 'The installable firing pack — the reflex, 23 swaps, and 12 traps as a paste-in artifact for any AI agent. Copy or download and drop into your assistant.', meta: 'Installable pack' },
+  { href: '/language-of-value', title: 'The Language of Value', summary: `The installable firing pack — the reflex, ${PACK_COUNTS.swaps} swaps, and ${PACK_COUNTS.traps} traps as a paste-in artifact for any AI agent. Copy or download and drop into your assistant.`, meta: 'Installable pack' },
   { href: '/glossary', title: 'Glossary', summary: 'The canonical vocabulary in one place — every defined term used across the protocol home.', meta: 'Defined terms' },
 ];
 

@@ -87,7 +87,7 @@ export const REFLEX_STEPS: ReflexStep[] = [
 export const REFLEX_DISCIPLINE =
   'Two disciplines so this teaches instead of nags: speak in the Value-First words by default in your own writing, and surface the reframe once, when the word is actually load-bearing to the decision — not on every incidental mention.';
 
-/** The 23 swaps — say this, not that. */
+/** The swaps — say this, not that. Count is derived; never state it in prose. */
 export const SWAPS: Swap[] = [
   { instead: 'problem', say: 'Value Gap', because: 'names the space between current and possible value — no blame, no fault' },
   { instead: 'pain point', say: 'Felt Value Gap', because: 'the gap as the person actually feels it, without pathologizing them' },
@@ -116,7 +116,7 @@ export const SWAPS: Swap[] = [
   { instead: 'efficiency value / hours saved', insteadNote: 'as the whole story', say: 'Capability Value', because: 'hours saved measures the work you already did; capability value measures the work you can now do at all' },
 ];
 
-/** The 12 traps — dead frames to reexamine. */
+/** The traps — dead frames to reexamine. Count is derived; never state it in prose. */
 export const TRAPS: Trap[] = [
   { name: 'The Leads Trap', body: 'treating humans as objects to be captured, scored, and processed.', watchFor: '"MQL," "lead scoring," "capture the lead."' },
   { name: 'The Qualification Trap', body: "artificial gates and scoring to filter people before you've served them.", watchFor: '"BANT," "SQL," "disqualify."' },
@@ -157,3 +157,18 @@ export const CTA = {
 
 /** Public path to the canonical paste-in artifact (download + build-time read). */
 export const ARTIFACT_HREF = '/language-of-value.md';
+
+/**
+ * The pack's shape, DERIVED — the single source every surface that quotes a count
+ * must read. Four representations of this vocabulary have now gone stale one at a
+ * time (the readable table, the header, the meta description, the sitemap summary),
+ * each because a number was typed beside the thing it counted instead of taken from
+ * it. Anything that wants to say how big the pack is imports this.
+ */
+export const PACK_COUNTS = { swaps: SWAPS.length, traps: TRAPS.length } as const;
+
+/** "N swaps · N traps · 1 reflex" — the spec-row form. */
+export const PACK_SUMMARY = `${PACK_COUNTS.swaps} swaps · ${PACK_COUNTS.traps} traps · 1 reflex`;
+
+/** "N swaps, N traps, one paste" — the prose form for metadata and summaries. */
+export const PACK_SUMMARY_PROSE = `${PACK_COUNTS.swaps} swaps, ${PACK_COUNTS.traps} traps, one paste`;

@@ -27,6 +27,8 @@ import {
   REFLEX_DISCIPLINE,
   SWAPS,
   TRAPS,
+  PACK_SUMMARY,
+  PACK_SUMMARY_PROSE,
   EXAMPLE,
   RELATED,
   CTA,
@@ -35,8 +37,11 @@ import {
 
 export const metadata: Metadata = {
   title: 'The Language of Value',
-  description:
-    'Your AI assistant speaks fluent funnel. The Language of Value is a paste-in pack that installs the reflex — notice the loaded word, reframe to value, say why — into any agent you run. 23 swaps, 12 traps, one paste.',
+  // Derived. This string is indexed by search engines and rendered in every link
+  // preview, so it travels to people who never open the page and persists in caches
+  // after the page itself is corrected — the copy of a count with the longest reach
+  // and the least chance of anyone noticing it went stale.
+  description: `Your AI assistant speaks fluent funnel. The Language of Value is a paste-in pack that installs the reflex — notice the loaded word, reframe to value, say why — into any agent you run. ${PACK_SUMMARY_PROSE}.`,
   openGraph: {
     url: SITE.url + '/language-of-value',
     images: ['/og/og-language-of-value.jpg'],
@@ -78,10 +83,7 @@ export default function LanguageOfValuePage() {
         path="/language-of-value"
         specMeta={[
           { label: 'Reads as', value: 'Paste-in agent rules' },
-          // Derived, never hardcoded — this line read "23 swaps · 12 traps" for the
-          // hours after the pack gained two swaps and a trap, advertising a count the
-          // artifact below it had already outgrown.
-          { label: 'In the pack', value: `${SWAPS.length} swaps · ${TRAPS.length} traps · 1 reflex` },
+          { label: 'In the pack', value: PACK_SUMMARY },
           { label: 'Cite', value: 'valuecreationprotocol.com/language-of-value' },
         ]}
       >
