@@ -30,12 +30,28 @@
  * genuinely this property's, so the shell stays and the tables are adopted. The
  * plate bytes and the OG cards stay too, for the reason the kit states: a library
  * cannot portably import a host's PNG, and it cannot ship a property's social card.
+ *
+ * ==========================================================================
+ * AND WHAT MOVED ANYWAY (2026-09-07) — THE STAGE
+ * ==========================================================================
+ *
+ * The paragraph above held on 2026-09-05 and it drew the wrong boundary once: when
+ * the framework STAGE landed in the kit on 2026-09-06, only valuefirstteam.com got
+ * it, because only that property renders `FrameworkPage`. Chris's 2026-09-01 line
+ * says nothing is elevated on only one site, and Motif ruled the distinction: the
+ * stage is the FRAMEWORK's opening, not the property's frame. The frame is still
+ * this property's and still here, unchanged; the opening is the constellation's and
+ * arrives from `@vf/site-kit/framework` — `FrameworkStageFor` + `FrameworkLede`, the
+ * same two components the other property renders, so one framework cannot be
+ * published under two titles.
  */
 import type { Metadata } from 'next';
-import { FrameworkModule, frameworkClaim, type FrameworkKey } from '@vf/brand';
+import { FrameworkModule, frameworkClaim, hasFrameworkOverview, type FrameworkKey } from '@vf/brand';
 import {
   FRAMEWORK_PATHS,
   COMPASS_SERVICES,
+  FrameworkStageFor,
+  FrameworkLede,
   frameworkPageMetadata,
   frameworkJsonLd,
 } from '@vf/site-kit/framework';
@@ -102,6 +118,29 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   const path = FRAMEWORK_PATHS[framework];
   const media = await frameworkMedia(framework);
 
+  // ==========================================================================
+  // DOES THIS FRAMEWORK OPEN ON THE STAGE?
+  // ==========================================================================
+  //
+  // Chris ruled 2026-09-06 that the canonical framework pages get the elevation
+  // the decks got, and on 2026-09-07 which canon word lands in which slot. The
+  // 2026-09-01 line binds too: nothing is elevated on only one site. So the stage
+  // reaches this property — and the thing this file was right about in September
+  // stays right: a PAGE FRAME is genuinely this property's. The stage is the
+  // FRAMEWORK's opening, not the frame, so it goes in the archetype's own hero
+  // slot and everything around it — the spec strip, the peer cross-citation, the
+  // implementer band, this site's ground and chrome — is untouched.
+  //
+  // The composition is @vf/site-kit's, not a second copy of it. `FrameworkStageFor`
+  // and `FrameworkLede` are the SAME two components valuefirstteam.com's
+  // `FrameworkPage` renders, so the two properties cannot publish one framework
+  // under two titles. Not one framework sentence is written here, still.
+  //
+  // The answer comes from @vf/brand, which owns it: one framework has a liftable
+  // overview visual today and the other six draw theirs inside their glances. Those
+  // six render exactly what they rendered before this branch existed.
+  const staged = hasFrameworkOverview(framework);
+
   return (
     <>
       <JsonLd
@@ -111,9 +150,24 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         })}
       />
       <CanonArchetype
-        eyebrow={claim.eyebrow}
-        title={claim.headline}
-        lead={claim.lines[0] ?? ''}
+        {...(staged
+          ? {
+              // The stage carries the page's ONE h1 (the framework's name), so the
+              // archetype must not also emit its canon-display — hence the slot
+              // rather than a second header. The reading opens directly under it,
+              // on this page's own tokens, above the spec strip.
+              opening: (
+                <>
+                  <FrameworkStageFor framework={framework} />
+                  <FrameworkLede framework={framework} className="mt-8 md:mt-10" />
+                </>
+              ),
+            }
+          : {
+              eyebrow: claim.eyebrow,
+              title: claim.headline,
+              lead: claim.lines[0] ?? '',
+            })}
         path={path}
         specMeta={[
           { label: 'Status', value: 'canonical' },
@@ -125,6 +179,11 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
           framework={framework}
           media={media}
           showClaim={false}
+          /* The stage above already carries this framework's overview visual, so
+             the glance stands down and starts at its set. The same accepted figure
+             twice on one page is a fork wearing a duplicate, and nothing would
+             tell you. Unstaged frameworks keep `inline`, the default. */
+          overview={staged ? 'hosted' : 'inline'}
           hrefs={{
             trap: (slug) => `${FRAMEWORK_PATHS['complexity-traps']}#trap-${slug}`,
             // The other direction, added 2026-09-04: the Realities page has always

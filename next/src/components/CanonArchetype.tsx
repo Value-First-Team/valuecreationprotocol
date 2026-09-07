@@ -4,8 +4,9 @@
  * React port of CanonArchetype.astro. Emits the exact same class names; all
  * visual treatment lives in vcp-archetypes.css (ported verbatim). Server-safe.
  *
- * Anatomy: hero (eyebrow + display + lead + optional spec-meta) → body slot →
- * peer cross-citation (auto-suppresses when peerSlug is null) → implementer band.
+ * Anatomy: hero (eyebrow + display + lead, OR a page's own `opening`, plus the
+ * optional spec-meta) → body slot → peer cross-citation (auto-suppresses when
+ * peerSlug is null) → implementer band.
  */
 import type { ReactNode } from 'react';
 import { SITE, getCrossCitation, peerIsLive } from '@/lib/site';
@@ -16,12 +17,32 @@ export interface SpecMetaItem {
 }
 
 export interface CanonArchetypeProps {
-  /** Concept name in mono caps, e.g. "THE VALUE PATH". */
-  eyebrow: string;
-  /** Display heading — the concept's name. May contain HTML. */
-  title: string;
-  /** Lead paragraph below the title. */
-  lead: string;
+  /** Concept name in mono caps, e.g. "THE VALUE PATH". Omit when `opening` is given. */
+  eyebrow?: string;
+  /** Display heading — the concept's name. May contain HTML. Omit when `opening` is given. */
+  title?: string;
+  /** Lead paragraph below the title. Omit when `opening` is given. */
+  lead?: string;
+  /**
+   * THE PAGE'S OWN OPENING, IN PLACE OF THIS ARCHETYPE'S THREE-PART HERO.
+   *
+   * A canonical framework page opens on the constellation's shared framework
+   * STAGE (Chris, 2026-09-06, and the word mapping on 2026-09-07) — the pinned
+   * near-black ground a deck opens on, carrying the framework's name as the
+   * page's one h1, canon's definition sentence under it, and the framework's own
+   * accepted visual. That stage is the FRAMEWORK's opening, not this property's
+   * frame, and it is the same on every property that hosts the framework;
+   * everything around it here — the spec-meta strip, the peer cross-citation, the
+   * implementer band, this site's ground and chrome — is genuinely this
+   * property's and stays exactly as it is.
+   *
+   * So the hero takes a slot rather than the route taking a second frame. When
+   * `opening` is given this header renders it INSTEAD of the eyebrow/title/lead
+   * trio and keeps the spec strip beneath it. The page's one h1 then comes from
+   * whatever is in the slot — which is why the trio is not also rendered: two h1s
+   * is a page whose title is decoration, and it is invisible to every other check.
+   */
+  opening?: ReactNode;
   /** Path on vcp.com (e.g. "/value-path") — drives the cross-citation lookup. */
   path: string;
   /** Optional spec-meta strip rows. */
@@ -33,6 +54,7 @@ export async function CanonArchetype({
   eyebrow,
   title,
   lead,
+  opening,
   path,
   specMeta = [],
   children,
@@ -49,12 +71,16 @@ export async function CanonArchetype({
     <article className="canon">
       <header className="canon-hero">
         <div className="canon-hero-inner">
-          <p className="canon-eyebrow">
-            <span>{eyebrow}</span>
-            <span className="canon-eyebrow-rule" aria-hidden="true" />
-          </p>
-          <h1 className="canon-display" dangerouslySetInnerHTML={{ __html: title }} />
-          <p className="canon-lead">{lead}</p>
+          {opening ?? (
+            <>
+              <p className="canon-eyebrow">
+                <span>{eyebrow}</span>
+                <span className="canon-eyebrow-rule" aria-hidden="true" />
+              </p>
+              <h1 className="canon-display" dangerouslySetInnerHTML={{ __html: title ?? '' }} />
+              <p className="canon-lead">{lead}</p>
+            </>
+          )}
           {specMeta.length > 0 && (
             <dl className="canon-spec">
               {specMeta.map((row) => (
