@@ -52,6 +52,7 @@ import {
   COMPASS_SERVICES,
   FrameworkStageFor,
   FrameworkLede,
+  FrameworkRowPreviews,
   frameworkPageMetadata,
   frameworkJsonLd,
 } from '@vf/site-kit/framework';
@@ -175,6 +176,14 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
           { label: 'Source', value: 'Generated from the canonical reference and checked against it on every build' },
         ]}
       >
+        {/* The hover/focus preview on every "what exists" row. It is a CLIENT wrapper
+            over a server-rendered module — it attaches by delegation over the row
+            facts the module publishes as data attributes, because this route is a
+            server component and a function prop cannot cross that boundary. This
+            property gets it for the same reason valuefirstteam.com does: the 2026-09-01
+            line binds, nothing is elevated on only one site. Wrapping something with
+            no such rows yields exactly what was wrapped and no listener fires. */}
+        <FrameworkRowPreviews>
         <FrameworkModule
           framework={framework}
           media={media}
@@ -197,6 +206,7 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
           translateEndpoint={COMPASS_SERVICES.translate}
           plates={plates}
         />
+        </FrameworkRowPreviews>
       </CanonArchetype>
     </>
   );
