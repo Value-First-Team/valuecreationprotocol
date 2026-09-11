@@ -15,10 +15,10 @@
     "check": "tsc --noEmit"
   },
   "dependencies": {
-    "@vf/brand": "github:Value-First-Team/vf-brand#273a184d8b36f56a5ea96cc208c6a7b3f26a2074",
-    "@vf/design-engine": "github:Value-First-Team/vf-design-engine#77b3820e25db5c36f97deb85efaefba4e311a72f",
-    "@vf/recipes": "github:Value-First-Team/vf-recipes#59383ac2a66a6bdd7df8953547e59311df2aa2c7",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#c06458101e1aaa4bfbf0587c826bd73f94f4030b",
+    "@vf/brand": "github:Value-First-Team/vf-brand#ad145310328998f5607488996b267d3a5c5bcb1c",
+    "@vf/design-engine": "github:Value-First-Team/vf-design-engine#58b3fa1f4e5d63914ee8bb54d608315f3df6aefa",
+    "@vf/recipes": "github:Value-First-Team/vf-recipes#03f18d3ee12fd58bfdca3169cc2bf67fb587a95d",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#313db68f758fd457f6068475a353b69a696ab911",
     "@vf/ui": "github:Value-First-Team/vf-ui#bb3c72fd304cd9fd14ba2bad7c542f93c9cfd4c2",
     "marked": "^14.1.3",
     "next": "^15.3.3",
@@ -35,8 +35,8 @@
     "typescript": "^5.6.3"
   },
   "overrides": {
-    "@vf/design-engine": "github:Value-First-Team/vf-design-engine#77b3820e25db5c36f97deb85efaefba4e311a72f",
+    "@vf/design-engine": "github:Value-First-Team/vf-design-engine#58b3fa1f4e5d63914ee8bb54d608315f3df6aefa",
     "@vf/ui": "github:Value-First-Team/vf-ui#bb3c72fd304cd9fd14ba2bad7c542f93c9cfd4c2",
-    "@vf/brand": "github:Value-First-Team/vf-brand#273a184d8b36f56a5ea96cc208c6a7b3f26a2074"
+    "@vf/brand": "github:Value-First-Team/vf-brand#ad145310328998f5607488996b267d3a5c5bcb1c"
   }
 }
