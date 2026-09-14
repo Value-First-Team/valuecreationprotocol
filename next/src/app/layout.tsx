@@ -65,11 +65,13 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: SITE.name,
     locale: 'en_US',
-    images: ['/og/og-default.jpg'],
+    // Motif full-static plate. SoR @vf/brand assets/value-creation-protocol/vcp-og-home.png (public/og copy; regen on brand bump).
+    images: ['/og/vcp-og-home.png'],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/og/og-default.jpg'],
+    // Motif full-static plate (same as openGraph; custom-share, not PAGE keyArt).
+    images: ['/og/vcp-og-home.png'],
   },
 };
 

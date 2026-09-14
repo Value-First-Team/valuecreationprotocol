@@ -16,7 +16,15 @@ export const metadata: Metadata = {
   title: 'Open Protocol Home',
   description:
     'The Value Creation Protocol (VCP) is an open framework for designing systems where value flows naturally between people, organizations, and AI. A peer to MCP and HCP in the AI-native protocol stack.',
-  openGraph: { url: SITE.url + '/', images: ['/og/og-home.jpg'] },
+  openGraph: {
+    url: SITE.url + '/',
+    // Motif full-static plate. SoR @vf/brand assets/value-creation-protocol/vcp-og-home.png (public/og copy; regen on brand bump).
+    images: ['/og/vcp-og-home.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og/vcp-og-home.png'],
+  },
   alternates: { canonical: SITE.url + '/' },
 };
 

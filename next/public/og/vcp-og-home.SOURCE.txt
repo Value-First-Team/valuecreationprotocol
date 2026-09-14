@@ -1,0 +1,4 @@
+SoR: @vf/brand/assets/value-creation-protocol/vcp-og-home.png
+Pin: github:Value-First-Team/vf-brand#825effee64e8e45c395293465a80cb81811f2703
+Use: home og:image + twitter:image (Motif full-static custom-share plate). 1x only for OG shares. Accent #0D9488 (Motif art only).
+Regen: on @vf/brand bump, re-copy this file from the package assets path.
