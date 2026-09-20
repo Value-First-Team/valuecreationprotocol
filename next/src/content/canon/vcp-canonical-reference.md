@@ -1,8 +1,8 @@
 # Value Creation Protocol (VCP) Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0
-**Effective Date:** May 6, 2026
+**Version:** 1.1
+**Effective Date:** May 6, 2026 (rev. June 12, 2026 — Claim 3 broadened, Chris ruling)
 **Owner:** Chris Carolan, Founder
 **Governance:** All Value-First content referencing VCP must align with this reference
 
@@ -54,7 +54,7 @@ Context is not an input to operations — it is the substrate on which operation
 
 ### 3. Configuration Over Customization
 
-VCP favors configuring native platform capability over customizing bespoke architecture. Custom architecture creates consultant dependency and brittle integrations; configuration leverages platform investment and improves with the platform. This claim is platform-agnostic — it applies to any system serving as the operational substrate.
+VCP favors configuring native platform capability over customizing bespoke architecture. Custom architecture creates brittle integrations and, more fundamentally, dependency on capability you don't have — whether that's outside consultants, external resources, or AI you can't direct yourself. Configuration leverages platform investment and improves with the platform. This claim is platform-agnostic — it applies to any system serving as the operational substrate.
 
 ### 4. Relationships Over Transactions
 

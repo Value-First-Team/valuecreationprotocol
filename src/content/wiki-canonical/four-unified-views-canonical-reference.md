@@ -1,8 +1,8 @@
 # Four Unified Views Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0  
-**Effective Date:** December 7, 2025  
+**Version:** 1.1  
+**Effective Date:** December 7, 2025 (v1.1 amendment 2026-07-15)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -52,7 +52,7 @@ Every person in your organization who interacts with customers sees complete rel
 - FROM: Hunting across systems for customer context
 - TO: Complete visibility where work happens
 
-**Framework Cornerstone:** Customer
+**Framework Cornerstone:** Value for the Customer
 
 ---
 
@@ -75,7 +75,7 @@ Revenue operations integrated end-to-end—forecasting based on relationship pat
 - FROM: Revenue operations as disconnected functions
 - TO: Commercial intelligence as competitive advantage
 
-**Framework Cornerstone:** Company
+**Framework Cornerstone:** Value for the Company
 
 ---
 
@@ -98,7 +98,7 @@ Intelligence available at decision moments through AI agents that understand com
 - FROM: Intelligence trapped in analysts and data warehouses
 - TO: Contextual intelligence where decisions happen
 
-**Framework Cornerstone:** Context
+**Framework Cornerstone:** Value in Context
 
 ---
 
@@ -121,7 +121,7 @@ Teams amplified by AI partnership, not replaced by automation. Technology enable
 - FROM: Linear scaling requiring proportional hiring
 - TO: Capability multiplication through human-AI partnership
 
-**Framework Cornerstone:** Community
+**Framework Cornerstone:** Value for the Community
 
 ---
 
@@ -187,18 +187,18 @@ Each Unified View follows a three-milestone progression:
 3. **Full names in formal content** — Avoid abbreviations (UCV, URV) in client-facing materials
 4. **Number references** — When numbering, use 1-4 in sequence: "the four unified views" or "all four views"
 
-### The Four Cornerstones
+### The Value Cornerstones
 
-When connecting Unified Views to Framework Cornerstones:
+When connecting Unified Views to the Value Cornerstones:
 
-| Unified View | Framework Cornerstone |
+| Unified View | Value Cornerstone |
 |--------------|----------------------|
-| Unified Customer View | Customer |
-| Unified Revenue View | Company |
-| Unified Business Context | Context |
-| Unified Team Enablement | Community |
+| Unified Customer View | Value for the Customer |
+| Unified Revenue View | Value for the Company |
+| Unified Business Context | Value in Context |
+| Unified Team Enablement | Value for the Community |
 
-The Four C's (Customer, Company, Context, Community) map directly to the Four Unified Views.
+The four anchor nouns still spell the Four C's — Customer, Company, Context, Community — and map directly to the Four Unified Views.
 
 ### Describing the Views
 
@@ -234,7 +234,7 @@ The Four C's (Customer, Company, Context, Community) map directly to the Four Un
 - ❌ Describing views as HubSpot features rather than business outcomes
 - ❌ Omitting the Foundation → Capability → Multiplication progression
 - ❌ Promising specific timelines rather than trust-based milestones
-- ❌ Separating views from their Framework Cornerstones
+- ❌ Separating views from their Value Cornerstones
 
 ### Alternative Names That May Appear in Legacy Content
 
@@ -284,7 +284,7 @@ The Four Unified Views directly address specific traps:
 1. **Check this reference** before writing any Four Unified Views content
 2. **Use exact names** rather than paraphrasing
 3. **Maintain build sequence** — always present views in order 1-2-3-4
-4. **Connect to Cornerstones** when appropriate (Customer, Company, Context, Community)
+4. **Connect to the Value Cornerstones** when appropriate (Value for the Customer, Value for the Company, Value in Context, Value for the Community)
 
 ### When Reviewing Existing Content
 
@@ -312,6 +312,7 @@ The Four Unified Views directly address specific traps:
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 7, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | July 15, 2026 | Cornerstone mapping labels value-forwarded: Customer → Value for the Customer, Company → Value for the Company, Context → Value in Context, Community → Value for the Community; framework renamed Four Cornerstones → Value Cornerstones. Unified View definitions unchanged. Ratified by Chris Carolan via the Language of Value coining decision. | Chris Carolan / Oracle |
 
 ---
 

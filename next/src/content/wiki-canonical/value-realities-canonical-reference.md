@@ -1,8 +1,8 @@
 # 14 Value Realities Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.1  
-**Effective Date:** December 8, 2025 (v1.0) · July 27, 2026 (v1.1)  
+**Version:** 1.2  
+**Effective Date:** December 8, 2025 (v1.0) · July 27, 2026 (v1.1) · September 6, 2026 (v1.2)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -249,17 +249,30 @@ The Value Realities are natural patterns that align with how value actually want
 **Counters:** SaaS Trap  
 **Manifesto:** "Breaking Free from the SaaS Trap"
 
-**Core Principle:** Unified context enables better decisions than fragmented point solutions.
+**Core Principle:** Unified context enables better decisions than fragmented point solutions — and unifying context is much more than integrating tools. Context is not an input to operations; it is the substrate on which operations run.
 
 **The Shift:**
-- FROM: Tool proliferation (best-of-breed for each function)
-- TO: Context unification (integrated intelligence for decisions)
+- FROM: Tool proliferation (best-of-breed for each function), with context locked in data warehouses, siloed in departmental tools, and trapped in tribal knowledge
+- TO: Context unification (integrated intelligence for decisions) — relationship history, preference signals, prior commitments and current state, flowing naturally to the people who need it, when they need it, in the format they can actually use
 
 **Key Practices:**
 - Prioritize integration over feature optimization
 - Create unified views across fragmented data
 - Enable context-aware decisions
 - Reduce cognitive load from tool-switching
+- Preserve and multiply the contextual intelligence frontline teams have already developed
+- Treat context as the operating layer every decision references, not an input to a process
+
+**Canonical note — AMENDED 2026-09-06 (Chris ruling).** This section was narrower than the rest of canon on its own idea, and had been since it was written. Chris ruled it on 2026-09-06 through a structured ask, choosing the option named **"Ratify card and canon amendment"**, after saying in his own words: *"Also, Value-First Context feels a little weak with the tools-focused line as well. Unified Context requires much more than tool integration."*
+
+**Nothing was deleted.** Every word of the December 8, 2025 section survives above; four clauses were added, three lifted verbatim from canon that already existed and one of them his:
+
+- **Core Principle** — *"Context is not an input to operations; it is the substrate on which operations run"* is Context as Substrate, `vcp-canonical-reference.md`. *"Unifying context is much more than integrating tools"* is **Chris's own sentence, 2026-09-06**, carried in as his and never presented as a canon quote — it is the reason this amendment exists.
+- **The Shift, FROM** — the trapped condition named in Unified Business Context, `four-unified-views-canonical-reference.md`: *"locked in data warehouses requiring analyst requests… siloed in departmental tools… trapped in tribal knowledge."*
+- **The Shift, TO** — *"relationship history, preference signals, prior commitments, current state"* (`vcp-canonical-reference.md`) and *"flowing naturally to the people who need it, when they need it, in the format they can actually use"* (`four-unified-views-canonical-reference.md`).
+- **Two Key Practices** — the first is the SaaS Trap's own Alternative, `12-complexity-traps-canonical-reference.md` (*"Stop managing individual tools and start preserving and multiplying the contextual intelligence your frontline teams have already developed"*), the trap this Reality counters; the second states Context as Substrate as a practice rather than a claim.
+
+**The derived copy now disagrees with canon on this Reality until Motif updates it.** `@vf/brand` `src/data/methodology.ts` carries this Reality's `corePrinciple`, `shiftFrom`, `shiftTo` and `keyPractices` verbatim; `methodology-canon-lint.mjs` (CN1) reports exactly those four, and that disagreement is the gate working, not a defect. Rework record: `L4-orchestration/output/2026-09-06-term-cards-rework.md`. **Reality 7, Value-First Platform, was held in the same pass and needed no amendment** — canon already carried Architecture and Infrastructure (its manifesto is *"Building Infrastructure That Empowers"*, and `hubspot-cvp-canonical-reference.md` already draws the line under its own label, *"Why 'Platform' Instead of 'Tool'"*); only its term card was rewritten, from the wider canon that was already there.
 
 ---
 
@@ -453,6 +466,7 @@ Content + Communication + Humans
 |---------|------|--------|--------|
 | 1.0 | December 8, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
 | 1.1 | July 27, 2026 | **Reality 13, Value-First Scoring, RETIRED** (Chris ruling) — it prescribed the mechanism the Leads Trap and Qualification Trap are each defined by. Tombstoned in place; number retired, not reissued; set count 15 → 14. Surfaced by Sage's halt of the Foundation All-Hands recognition pass. CAR: `quality/cars/2026-07-27-corrective-value-reality-13-scoring-retired.md` | Chris Carolan / Q (Quality System) |
+| 1.2 | September 6, 2026 | **Reality 12, Value-First Context, WIDENED** (Chris ruling) — the section's Core Principle, Shift and Key Practices were tool-scoped while the same idea already read wider in three other canon references, so it was out of step with canon that already existed. **Additions only; nothing deleted.** Core Principle gains Context as Substrate plus Chris's own sentence (*"unifying context is much more than integrating tools"*); the Shift's FROM gains the trapped condition from Unified Business Context and its TO gains what unified context actually holds and where it has to reach; two Key Practices are added, one of them the SaaS Trap's own Alternative. Sources: `vcp-canonical-reference.md` (Context as Substrate), `four-unified-views-canonical-reference.md` (Unified Business Context), `12-complexity-traps-canonical-reference.md` (SaaS Trap Alternative). Ratified with the `value-first-context` term card in one pass, so the card never states something its reference does not. **Reality 7, Value-First Platform, was held in the same pass and is unchanged here** — canon already carried Architecture and Infrastructure; only its card was rewritten. **The derived copy in `@vf/brand` `src/data/methodology.ts` now disagrees on this Reality's four compared fields until Motif's next brand bump; CN1 reporting them is the gate working.** Rework record: `L4-orchestration/output/2026-09-06-term-cards-rework.md`. | Chris Carolan / Oracle |
 
 ---
 

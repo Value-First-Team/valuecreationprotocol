@@ -12,7 +12,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "check": "tsc --noEmit"
+    "canon:drift": "node scripts/canon-drift-gate.mjs",
+    "canon:refresh": "node scripts/canon-drift-gate.mjs --fix",
+    "check": "node scripts/canon-drift-gate.mjs && tsc --noEmit"
   },
   "dependencies": {
     "@vf/brand": "github:Value-First-Team/vf-brand#bff3a041b93ec92fbb40fc0a57ac6cc360c4fe26",

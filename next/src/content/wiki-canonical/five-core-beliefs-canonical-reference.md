@@ -169,12 +169,107 @@ Pattern: [Value-First Approach] over [Industrial-Age Default]
 
 ### Naming Errors
 
-| ❌ Wrong | ✅ Correct |
-|----------|------------|
-| "Value Flow vs Control" | "Natural Value Flow over Artificial Control" |
-| "Partnership not Replacement" | "AI-Human Partnership over Replacement" |
-| "Growth over Stagnation" | "Emergence over Predictability" |
-| "Empowerment vs Helplessness" | "Empowerment over Learned Helplessness" |
+**The rule decides; the table only illustrates.** *(Ruled 2026-08-17, Oracle.)*
+
+A list of known-wrong spellings can only catch a variant somebody already met. It caught none of the
+three that reached production, because each was new. Decide with the rule below, then use the table
+as worked examples of it.
+
+**THE RULE — the Y-term is ratified, not descriptive.** Each belief's name is the exact "X over Y"
+pair in *Official Definitions* above. Everything else on the belief's page — **The Shift**, **What
+This Means**, **Industrial-Age Default**, **Value-First Approach** — *explains* the belief in
+ordinary words. Those words are genuinely canon's, which is exactly why lifting one into the name
+slot is undetectable: the result reads correct to the person writing it and to everyone who checks
+it.
+
+**So the test is a provenance test, not a plausibility test:** *is this Y-term the ratified Y-term,
+or is it a word I met while reading about the belief?* If the second, it is an explanation wearing
+the name's clothes. A rendering that fails this is wrong **even when it is a fair summary** — being
+a fair summary is what makes it survive review.
+
+Worked examples. The first four are the historical table; the last three are the renderings that
+actually reached production and are recorded here because each was new when it arrived:
+
+| Wrong | Correct | Why it survived review |
+|---|---|---|
+| "Value Flow vs Control" | Natural Value Flow over Artificial Control | "vs" for "over"; shortened both sides |
+| "Partnership not Replacement" | AI-Human Partnership over Replacement | "not" for "over" |
+| "Growth over Stagnation" | Emergence over Predictability | plausible-sounding pair, neither term ratified |
+| "Empowerment vs Helplessness" | Empowerment over Learned Helplessness | "vs" for "over"; dropped "Learned" |
+| **"Empowerment over Dependency"** | Empowerment over Learned Helplessness | **"dependency" is lifted from this belief's own Shift** — *"From creating dependency to building capability."* The word is canon's, so it reads as a citation |
+| **"Empowerment over Dependence"** | Empowerment over Learned Helplessness | a **superseded ratified name** (see *Superseded belief set* below), not a paraphrase — it was genuinely correct before 2025-12-08, which is why it still reads as canon to a long-serving reader or file |
+| **"Evolution over Optimization"** | Emergence over Predictability | **not a synonym slip — a different claim.** Evolution-vs-optimization is about *improving*; emergence-vs-predictability is about *building for adaptation rather than permanence* |
+
+### Cite a belief by NAME, never by number
+
+**The numbering above orders the list; it does not identify a belief.** *(Ruled 2026-08-17, Oracle.)*
+This is the rule the Value Decrees already carry — *"cite one by NAME — they are deliberately
+unnumbered, because a number silently retargets when the list moves"* (`CLAUDE.md § The Foundation`)
+— and the Core Beliefs are the case that proves the decree was right. **This list has moved**, and
+every ordinal pointed at it silently retargeted: "Core Belief 3" currently resolves to *Empowerment*
+in some files (its position in the superseded set), *Wholeness* in others (its position here), and
+*Configuration over Customization* in at least one. All three readings are sincere and only one can
+be right.
+
+Write **"Empowerment over Learned Helplessness"**, not "Core Belief 2" and not "CB3". If an ordinal
+is genuinely needed (an ordered table, a schema field), write the name beside it.
+
+### Alias-projections: when an alternate rendering is legitimate
+
+**A ratified name may carry a display alias. It may not carry an undeclared one.** *(Ruled
+2026-08-17, Oracle.)* Canon already does this correctly and has since 2026-07-12 — `vfos-value-path`
+projects the eight Value Path stages into the VFOS register and states its own boundary: **"An
+alias-projection, never a rename."** That precedent generalizes to every ratified term, including
+these five.
+
+An alias-projection is legitimate when **all four** hold:
+
+1. **Declared.** The alias exists as a term file, or is listed on the ratified term's own page. An
+   alias invented at the moment of writing is not an alias — it is a variant.
+2. **Verified one-to-one against this reference** — the projection maps to exactly one ratified
+   belief, and says which.
+3. **Scoped, and the scope is written down.** `vfos-value-path` says "cockpit/internal-only." An
+   alias with no stated scope has no boundary and will reach a surface it was never cleared for.
+4. **Resolvable at the point of use.** In a wikilink, the target is the ratified page:
+   `[[empowerment-over-learned-helplessness|…]]`. In prose that cannot link, the ratified name
+   appears in the same passage.
+
+**Clause 4 is the one that was missing, and it is where the failure entered.** A wikilink alias is
+safe only while the link survives. Any rendering that strips link targets — a flattened glossary, a
+plain-text export, an embedded prompt — turns a correct alias into a bare wrong name with nothing
+left pointing home. **Canon owes name-correctness to its own flattened renderings**, because a
+reader of the flattened copy has no way to recover what the link would have told them.
+
+**Never alias a Core Belief with a word from its own explanatory prose.** For these five the alias
+and the misnaming are built from the same material, so an alias like "empowerment over dependency"
+is indistinguishable from the error it resembles — by a reader, and by any checker. Say the ratified
+name.
+
+### Superseded belief set — the five beliefs before 2025-12-08
+
+**Recorded 2026-08-17 (Oracle) as a verified historical fact, so the names stop reading as canon.**
+
+A different five-belief set preceded this one and was never given a retirement notice, so it did not
+stop circulating when this reference was ratified. It survives in agent definitions, skill packs,
+client documents and at least one legal artifact:
+
+> 1. Value over Volume · 2. Relationships over Transactions · 3. **Empowerment over Dependence** ·
+> 4. Configuration over Customization · 5. Trust-Based Milestones
+
+**This set is not canon and has not been since 2025-12-08**, when the reference above established
+the current five. Three of its members do survive canon as approved terms in their own right —
+`relationships-over-transactions`, `configuration-over-customization` (VCP claim 3), and
+`value-first` — but **as principles, never as Core Beliefs**, and citing them as "Core Belief N" is
+the ordinal error above.
+
+**This is the dominant source of "Empowerment over Dependence."** It is not a paraphrase and not a
+typo — it is a name that was genuinely ratified, cited in good faith by everyone who learned it, and
+never told it had been replaced. Superseding a name without retiring it is what produced the drift;
+the entry above is the retirement.
+
+<!-- TODO: confirm with Chris — the supersession itself is ratified (v1.0 established these five as
+official). What is NOT recorded anywhere is the date the prior set was retired or whether it was
+ever formally retired at all. Chris's to state; the fact of two sets is verified from the files. -->
 
 ### Conceptual Errors
 
@@ -201,7 +296,7 @@ Pattern: [Value-First Approach] over [Industrial-Age Default]
 - **Empowerment** drives capability building at each stage
 - **Wholeness** supports continuous relationship (no handoffs)
 - **AI-Human Partnership** enables Value Steward model
-- **Evolution/Learning** allows non-linear progression
+- **Emergence** allows non-linear progression
 
 ### Beliefs → Three-Org Model
 
@@ -209,7 +304,7 @@ Pattern: [Value-First Approach] over [Industrial-Age Default]
 - **Empowerment** shapes Customer Org authority
 - **Wholeness** reduces from 12 departments to 3 orgs
 - **AI-Human Partnership** defines Operations Org structure
-- **Evolution/Learning** enables continuous adaptation
+- **Emergence** enables continuous adaptation
 
 ### Beliefs → Four Unified Views
 
@@ -217,7 +312,7 @@ Pattern: [Value-First Approach] over [Industrial-Age Default]
 - **Empowerment** ensures views enable action
 - **Wholeness** requires integration across functions
 - **AI-Human Partnership** powers intelligence capabilities
-- **Evolution/Learning** builds compound value over time
+- **Emergence** builds compound value over time
 
 ### Beliefs → 12 Complexity Traps
 
@@ -225,7 +320,7 @@ Each trap represents violation of one or more core beliefs:
 - **Leads Trap** violates Wholeness (fragments humans into data points)
 - **AI Replacement Trap** violates AI-Human Partnership
 - **Managed Services Trap** violates Empowerment
-- **ERP Trap** violates Evolution/Learning
+- **ERP Trap** violates Emergence
 - **Measurement Trap** violates Natural Value Flow
 
 ---
@@ -258,6 +353,7 @@ Each trap represents violation of one or more core beliefs:
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 8, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | August 17, 2026 | **Naming governance, no change to any belief.** Naming Errors redesigned from a blocklist of known-wrong spellings into a provenance rule (the Y-term is ratified, not descriptive) with the table demoted to worked examples — a blocklist caught none of the three variants that reached production. Added: cite-by-name-never-by-number; the alias-projection rule (four clauses, generalizing the ratified `vfos-value-path` pattern); and the superseded pre-2025-12-08 belief set, recorded so "Empowerment over Dependence" stops reading as canon. Occasioned by a fine-tune corpus that taught a Core Belief under a name canon does not carry, in 105 of 177 answers. | Oracle |
 
 ---
 

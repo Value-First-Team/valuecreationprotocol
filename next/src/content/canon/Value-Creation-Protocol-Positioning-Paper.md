@@ -92,7 +92,7 @@ Customer, Revenue, Business Context, Team Enablement. The semantic layer that tu
 
 ### The Five Core Beliefs
 
-Natural Value Flow. Empowerment over Dependency. Wholeness over Fragmentation. AI-Human Partnership over Replacement. Evolution over Optimization. VCP encodes these as the design constraints that prevent drift back into industrial-age defaults.
+Natural Value Flow over Artificial Control. Empowerment over Learned Helplessness. Wholeness over Fragmentation. AI-Human Partnership over Replacement. Emergence over Predictability. VCP encodes these as the design constraints that prevent drift back into industrial-age defaults.
 
 ### The TEACH Values
 

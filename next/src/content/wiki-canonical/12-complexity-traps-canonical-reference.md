@@ -1,8 +1,8 @@
 # 12 Complexity Traps Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0  
-**Effective Date:** December 7, 2025  
+**Version:** 1.5  
+**Effective Date:** September 8, 2026 (v1.5)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -25,7 +25,7 @@ These two traps represent the systemic conditions that make all other traps poss
 | Trap | One-Line Definition | Value-First Alternative |
 |------|---------------------|------------------------|
 | **B2B Trap** | Treating humans as database objects to be processed through stages rather than relationships to be understood | Value-First Customer |
-| **SaaS Trap** | Software fragmentation creating operational chaos where each rational tool purchase compounds organizational complexity | Value-First Context |
+| **SaaS Trap** | Fragmenting the context your people rely on — where each rational tool purchase silos the intelligence needed to serve customers | Value-First Context |
 
 ### Core Framework Traps
 
@@ -34,7 +34,7 @@ These ten traps represent specific manifestations of industrial-age thinking tha
 | Trap | One-Line Definition | Value-First Alternative |
 |------|---------------------|------------------------|
 | **AI Replacement Trap** | Believing AI's primary purpose is to replace human workers rather than enhance their capabilities | Value-First AI |
-| **Leads Trap** | Treating humans as objects to be captured, scored, and converted rather than signals to be recognized and relationships to be developed | Value-First Humans |
+| **Leads Trap** | Treating humans as objects to be captured, scored, and converted rather than relationships to be developed | Value-First Humans |
 | **Advertising Trap** | Fighting for attention through interruption rather than earning it through value delivery | Value-First Communication |
 | **Lead Magnet Trap** | Gating knowledge as bait for contact information rather than freely sharing expertise to build trust | Value-First Content |
 | **Qualification Trap** | Using artificial gates and scoring to filter relationships rather than enabling mutual discovery | Value-First Partner |
@@ -89,7 +89,7 @@ CORE FRAMEWORK TRAPS (Specific Manifestations)
 
 #### The SaaS Trap → Value-First Context
 
-**The Trap:** The SaaS revolution promised specialized tools that integrate seamlessly. Instead, each rational purchase fragments the common sense intelligence teams need to serve customers effectively. You're hiring Context Engineers at $200K+ to solve AI context problems while your customer service team manually switches between five systems just to understand who they're talking to.
+**The Trap:** The SaaS revolution promised specialized tools that integrate seamlessly. Instead, each rational purchase fragments the common sense intelligence teams need to serve customers effectively. By 2025 the martech landscape alone holds 15,384 tools — nearly as many as there are islands in the Indonesian archipelago — and most organizations have quietly rebuilt that same archipelago inside their own operations. Digital transformation promised to connect the islands; mostly it just automated the fragmentation — faster APIs moving data between islands that still can't see the customer the person on the next one is trying to serve. You're hiring Context Engineers at $200K+ to solve AI context problems while your customer service team manually switches between five systems just to understand who they're talking to.
 
 **Key Symptoms:**
 - Integration costs exceed software costs
@@ -121,7 +121,7 @@ CORE FRAMEWORK TRAPS (Specific Manifestations)
 
 #### The Leads Trap → Value-First Humans
 
-**The Trap:** Treating humans as objects to be captured, scored, and converted. The Demand Waterfall created artificial stages—MQL, SQL, SAL—fighting natural buying behavior. Organizations optimize for internal process rather than customer value.
+**The Trap:** Treating humans as objects to be captured, scored, and converted rather than relationships to be developed. The Demand Waterfall created artificial stages—MQL, SQL, SAL—fighting natural buying behavior. Organizations optimize for internal process rather than customer value.
 
 **Key Symptoms:**
 - Declining MQL-to-SQL conversion rates
@@ -269,6 +269,48 @@ CORE FRAMEWORK TRAPS (Specific Manifestations)
 
 ---
 
+## The Trap → Five-Layer Map
+
+**Ratified 2026-07-13 (Chris Carolan).** Each trap is located on the Five-Layer Model with a two-part reading: where it **hides** (the legitimate layer-act it disguises itself as) and where it **hurts** (the layer it actually corrupts), plus — where relevant — the further layers it **reaches**. The distinction is load-bearing: a trap's disguise and its wound are frequently *different* layers, and conflating them is what let downstream tools drift. Separating them lets one map serve the methodology, the assessment/diagnostic (the AI-Native Shift "Mirror"), and the Value Path Game without contradiction.
+
+The two **Foundational** traps do not pin to a single layer — they are **woven** through all five. They are the two cross-cutting axes the Five-Layer figure itself contrasts.
+
+**The Five-Layer Model referenced here:**
+
+- **L1 — Data, Identity, Context** — sources of truth, memory
+- **L2 — Customer Value Model** — what the data means
+- **L3 — Intelligence** — who has context + capability
+- **L4 — Orchestration** — how the work moves
+- **L5 — Interface** — every surface where humans meet you
+
+*(The Five-Layer Model does not yet have its own canonical reference; authoring one is an open follow-up. Until then, this legend is authoritative for this map.)*
+
+### Foundational — woven (no single layer)
+
+| Trap | Cross-cutting axis |
+|------|--------------------|
+| **B2B Trap** | Tribal Knowledge → Human Domain Expertise |
+| **SaaS Trap** | Fragmented context → Composed context |
+
+### Core Framework — hurts / hides / reaches
+
+| Trap | Hurts | Hides | Reaches |
+|------|-------|-------|---------|
+| **AI Replacement Trap** | L3 | L4, L5 | — |
+| **Leads Trap** | L2 | L2 | — |
+| **Advertising Trap** | L5 | L2 | — |
+| **Lead Magnet Trap** | L2 | L2 | — |
+| **Qualification Trap** | L2 | L2 | — |
+| **Managed Services Trap** | L3 | L4, L5 | — |
+| **ERP Trap** | L1, L4, L5 | L4 | — |
+| **Measurement Trap** | L3 | L4 | L1, L5 |
+| **Conformity Trap** | L3 | L4 | L5 |
+| **Authority Trap** | L4 | L4 | L3 |
+
+**Reading examples.** The **AI Replacement Trap** *hides* as automation and bot-touchpoints (L4/L5) but *hurts* the human-AI intelligence junction (L3) — it deletes the human half of the layer the whole shift is built on. **Managed Services** is the inverse of **Authority**: Managed Services starves capability (L3) *through* governance and systems (L4/L5); Authority jams the decision-flow (L4) and *thereby* prevents the distributed intelligence (L3). **ERP** is the monolith counterpart to SaaS's woven fragmentation: governance forces it from L4, it manifests as the L1 "system of record," and it forces the bad L5 experience.
+
+---
+
 ## Usage Rules
 
 ### Naming
@@ -368,6 +410,62 @@ When building or referencing trap assessments:
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 7, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | May 29, 2026 | Added "Candidate Traps — Future Expansion" appendix (non-canon). Canon remains exactly 12. | Chris Carolan / V (Operations Lead) |
+| 1.2 | July 13, 2026 | Added the ratified **Trap → Five-Layer Map** (two-field: where a trap *hides* vs where it *hurts*, plus *reaches*; B2B & SaaS are woven/foundational, not pinned). Refined the **Leads Trap** definition (removed "signals to be recognized" — still susceptible to dehumanization). Sharpened the **SaaS Trap** definition (names the context it fragments). | Chris Carolan / Sage |
+| 1.4 | August 17, 2026 | **Naming governance only — the canonical set remains exactly 12 and no definition changed.** Added to the non-canon appendix: the `complexity-trap` vs `value-trap` suffix rule (derived from all 31 files, settling a class rather than one name), and a declined-names table recording Dashboard Trap, Customization Trap, Funnel Trap and Value Ladder Trap with reasons, so the next generation pass does not re-propose them. | Oracle |
+| 1.5 | September 8, 2026 | **Legend agreement only — no trap definition, category, name or map entry changed.** The Trap → Five-Layer Map's L4 legend line dropped its parenthetical, from "how the work moves (the AI-Native OS / shared substrate)" to "how the work moves", because `five-layer-model-canonical-reference.md` v1.5 moved that claim off Layer 4 and onto the model (Chris ruling, 2026-09-08: *"I've always thought of this being the five layers of an AI-Native Operating System"*). The five-layer reference carries a standing instruction under its legend — the two documents must agree on the five names and one-line descriptions, and if one changes, change both in the same pass — so this row IS that pass. The header also moved 1.3 → 1.5: it had been left at 1.3 while the changelog already carried a 1.4 (August 17, 2026), and a version header behind its own changelog is a reader trusting the wrong number. | Chris Carolan / Motif |
+| 1.3 | July 14, 2026 | Folded two recognition images into the **SaaS Trap** extended definition — the martech-archipelago hook (15,384 tools ≈ the Indonesian archipelago, rebuilt inside the org) and the islands-that-can't-see-the-customer image — both pulled to frontline/human altitude. Sourced from the "Value-First Context" fork doc; its C-suite framing (strategic blindness / moats / competitive advantage) deliberately left out. Definition and category unchanged. | Chris Carolan / Sage |
+
+---
+
+## Candidate Traps — Future Expansion (NOT canon)
+
+> The canonical set is **exactly 12** (above). This section is a holding place for trap concepts that recur across content, HubSpot properties, and client work and are **candidates for future canonization** — none are canon until Chris rules. The "exactly 12" governance rule above stays in force until such a ruling. Recorded 2026-05-29.
+
+**Lean-into candidates (Chris, 2026-05-29) — "for sure":** Process, Integration, Budget, Time, Vendor, ROI.
+**Also worth considering:** Data, Adoption, Onboarding.
+
+**Why these surfaced — divergent trap vocabularies already live in the system (drift to be aware of):**
+- **HubSpot `appointment_trap_focus`** (Appointment, `0-421`) carries a different, operations-flavored 12: Integration, SaaS, Measurement, Capacity, Authority, Data, Adoption, Customization, Migration, Vendor, Process, Scale. Only SaaS / Measurement / Authority overlap canon.
+- **HubSpot severity properties** exist for non-canon traps — `vf_time_trap_severity` and `vf_money_trap_severity` (Budget) — alongside the canonical `vf_primary_trap_focus` (which carries the canonical 12 in order).
+- **"Industrial Trap Madness"** content series expanded to 16 (canon 12 + Budget, Time, Integration, Process) and references an unlocated "pack of six."
+- **`primary_trap`** client-config values include non-canon entries (`process`, `integration`, `bypass_trap`).
+- Generated artifacts (the episode-enrichment spec; the Perplexity-built VCP Claude skill) each invented their own divergent 12.
+
+**Expansion principle:** Add a trap to canon only by explicit Chris ruling, with a full definition following the canonical pattern (Pattern · Symptoms · Value-First Alternative · Core Belief violated). Until then, these remain candidates and the canonical set is 12.
+
+### Who may wear the word "Trap" *(Ruled 2026-08-17, Oracle — settles a class, not one name)*
+
+Two clusters in the value vocabulary hold refused things, and only one of them takes the suffix as
+part of a name. Derived from the files, not asserted:
+
+| Cluster | Count | The suffix |
+|---|---|---|
+| `complexity-trap` | 12 | **Part of the name.** Every one of the Twelve is named "X Trap" — Measurement Trap, Leads Trap, SaaS Trap. |
+| `value-trap` | 19 | **Not part of the name.** Zero carry a bare "X Trap" `term:` field. Canon names them for the thing itself — "Value Ladder (Ascending-Offer Funnel)", "Conversion / Convert / Funnel / TOFU-MOFU-BOFU", "Utilization-Maximization". The nearest exception proves it: `tokenmaxxing` writes the word as a parenthetical gloss, "Tokenmaxxing (the Trend Trap)", not as the name. |
+
+**So a `value-trap` cluster does not confer the suffix.** Write the term as canon's `term:` field
+spells it. Appending "Trap" to a `value-trap` name asserts membership in a closed set of twelve, and
+that is the whole reason the suffix is load-bearing rather than decorative.
+
+### Declined names — recorded so they are not proposed again
+
+*(Adjudicated 2026-08-17, Oracle. Surfaced by the Phase D screens of the Training Ground programme;
+all four were machine-authored inside training answers, presented in canon's own bold-term register.)*
+**A name considered and declined is worth more than one that silently vanished** — the next
+generation pass will otherwise propose it again, and the screen that catches it will spend the same
+effort a second time.
+
+| Declined name | Where it came from | Why declined |
+|---|---|---|
+| **Dashboard Trap** | 1 taught answer, beside the real Measurement Trap | The concept is **already the Measurement Trap**, which the same sentence cites correctly. Canon handles "dashboard" through `value-view`'s `say_instead_of`. A duplicate, not a gap. |
+| **Customization Trap** | 1 taught answer, beside the real Measurement Trap | **Not a fresh coinage — a re-surfacing of drift this appendix already documents.** HubSpot's `appointment_trap_focus` carries "Customization" in its divergent operations-flavored 12 (see the drift list above). Canon's nearest concept is *Configuration Over Customization*, VCP claim 3 — **a principle, not a trap.** |
+| **Funnel Trap** | 9 examples in the already-taught corpus | Canon holds this ground twice already — `conversion-funnel` (`value-trap`) names the refused thing, and `value-doors` is the replacement ("It replaces 'funnel'"). Not one of the Twelve. |
+| **Value Ladder Trap** | 1 taught answer | The answer's *gloss* reproduces canon's definition faithfully, so the concept was cited correctly and only the **name** was constructed. Declined under the suffix rule above: `value-ladder` is `cluster: value-trap`. Correct rendering: **the Value Ladder**. |
+
+**The pattern across all four:** each names a concept canon already holds, under a name canon does
+not use. None was a gap. **A model reaching for a trap name is evidence the concept landed and the
+vocabulary did not** — which is a corpus-coverage finding, not an expansion request.
 
 ---
 

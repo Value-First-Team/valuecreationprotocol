@@ -1,7 +1,7 @@
 # TEACH Values Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.0
+**Version:** 1.1
 **Effective Date:** May 6, 2026
 **Owner:** Chris Carolan, Founder
 **Governance:** All Value-First content referencing TEACH Values must align with this reference
@@ -79,22 +79,24 @@ Understanding client constraints before prescribing solutions. Building client c
 
 ### 3. Agile ↔ Adaptable
 
-> **⚠ PROPOSED — PENDING CHRIS APPROVAL**
-> *Content below is drafted by V based on the conceptual framing established in the 2026-04-19 conversation. The live website has not yet been updated for this pair. Chris should review and edit before this canon doc moves to v1.0 finalized status.*
+> **RATIFIED** — Chris confirmed this pair is ratified (2026-07-07); it replaced the deprecated Accessible ↔ Authority (finalized 2026-04-19).
+> **Content authored by Chris, 2026-07-25.** Supersedes V's interim draft, which read *"Moving quickly while reshaping form"* and inverted the pair's meaning — it licensed reshaping the frame itself, where the frame is precisely what holds. Resolved in session: the ambiguity lived in the word **shape**, which was carrying two referents at once — *the thing being built* (adapts) and *who we are* (holds). The word is retired from this pair; the definition now names both referents explicitly. **What holds = the values AND the methodology frame** (Three-Org, the Value Path, the unified view) — Chris's ruling, 2026-07-25.
 
-**Theme:** Moving quickly while reshaping form
+**Theme:** Adapting with intention while the frame holds
 
 **How We Live This:**
-Building and shipping based on what we know now, then reshaping the form as patterns reveal what good actually looks like. We move quickly, but we don't lock in what we're moving toward — speed without willingness to reshape just sprints us through the wrong shape faster.
+Agility is the speed to respond — ship the change, run the experiment, answer the question this week. Adaptability is knowing what is allowed to change and what is not. The work adapts: the plan, the roadmap, the roster, the surface. What holds is the frame — the Three-Org Model, the Value Path, the unified view — and the values we work by. We rebuild the agent roster as the work demands; the methodology does not drift to match our convenience.
 
 **In Service Delivery:**
-Engagements that ship working capability quickly rather than perfect plans slowly. When evidence shows the form was wrong, we reshape it openly — the rework is the work, not a deviation from it. Methodology evolves with practice, not with quarterly ritual.
+Strategy adapts as the client's reality changes. Cadence flexes. Scope moves when the evidence says it should. But the architecture we are building toward — the unified customer view, the open methodology, the team that owns its own capability — does not bend session to session. We move; the frame holds.
 
 **What This Creates:**
-- Faster value delivery through quick action that adapts as it moves
-- Methodology that evolves with evidence rather than locking in past assumptions
-- The freedom to reshape without abandoning momentum
-- Reduced risk of optimizing the wrong shape at speed
+- Speed that compounds rather than churns
+- Change that is chosen, not absorbed
+- A methodology that evolves on evidence, never on pressure
+- Adaptation that costs no one their transparency, empathy, or humility
+
+**The guard this pair uniquely carries.** Adaptation without intention is drift, and adaptation that costs the other values is not agility — it is just speed. Agile ↔ Adaptable is the one pair that can consume the other four: "we had to move fast" is the standing alibi for lost transparency, lost empathy, and lost humility. The guard is written into the pair because the pair is where it is needed.
 
 ---
 
@@ -141,7 +143,7 @@ THE TEACH VALUES
 
 T - Transparent ↔ Trust         — Foundation for genuine collaboration
 E - Empathetic ↔ Empowered      — Understanding deeply, acting confidently
-A - Agile ↔ Adaptable           — Moving quickly while reshaping form
+A - Agile ↔ Adaptable           — Adapting with intention while the frame holds
 C - Confidence ↔ Conviction     — Clarity that creates action
 H - Humble ↔ Hungry             — Learning continuously while driving forward
 
@@ -230,7 +232,7 @@ Service design reflecting interdependent values throughout every offering. Relat
 The following pairs were used in earlier versions of the framework and **should never appear in current content**:
 
 - **Character ↔ Competence** — replaced by **Confidence ↔ Conviction** (live on website)
-- **Accessible ↔ Authority** — replaced by **Agile ↔ Adaptable** (finalized 2026-04-19; live website update pending)
+- **Accessible ↔ Authority** — replaced by **Agile ↔ Adaptable** (finalized 2026-04-19; content authored by Chris 2026-07-25). NOTE 2026-07-25: the prior "live website update pending" claim was stale — the V1 `/about` TEACH section was lost in the monorepo migration and no current constellation page serves it. Serving + storage is an open question, not a pending deploy.
 
 When reviewing existing content, replace deprecated pairs with their current equivalents.
 
@@ -272,7 +274,8 @@ When reviewing existing content, replace deprecated pairs with their current equ
 
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
-| 1.0 | May 6, 2026 | Initial canonical reference established. Captures the finalized TEACH framework. Confidence ↔ Conviction (replacing Character ↔ Competence) is live on website. Agile ↔ Adaptable (replacing Accessible ↔ Authority) was finalized 2026-04-19; canonical content for this pair is **proposed pending Chris approval** and live website update is pending. | Chris Carolan / Claude (Operations Lead) |
+| 1.0 | May 6, 2026 | Initial canonical reference established. Captures the finalized TEACH framework. Confidence ↔ Conviction (replacing Character ↔ Competence) is live on website. Agile ↔ Adaptable (replacing Accessible ↔ Authority) was finalized 2026-04-19; canonical content for this pair was **proposed pending Chris approval** at the time of this entry. **Superseded by v1.1 below — do not read this row as current status.** | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | July 25, 2026 | **Agile ↔ Adaptable authored by Chris**, clearing the interim-draft flag this pair had carried since v1.0. Root cause of the divergence named and resolved: the word **shape** was carrying two referents at once — *the thing being built* (adapts) and *who we are* (holds) — which is how two opposite definitions came to exist, V's canon draft (*"Moving quickly while reshaping form"*) against the V1 `/about` page (*"without losing your shape"*). The word is retired from the pair; both referents are now named explicitly. **Chris ruled what holds = the values AND the methodology frame** (Three-Org, the Value Path, the unified view). Added the guard the pair uniquely carries — it is the only pair that can consume the other four. Also retired the stale "live website update pending" claim: the V1 `/about` TEACH section was **lost in the monorepo migration**, not awaiting deployment, and no current constellation page serves it; serving and storage is an open question. | Chris Carolan |
 
 ### Notes on Pending Updates (as of v1.0)
 

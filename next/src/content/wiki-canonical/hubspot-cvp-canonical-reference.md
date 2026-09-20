@@ -1,10 +1,16 @@
 # HubSpot as Customer Value Platform
 ## Canonical Reference
 
-**Version:** 1.0  
-**Effective Date:** December 7, 2025  
+**Version:** 1.1  
+**Effective Date:** December 7, 2025 (v1.0) · **Updated:** June 20, 2026 (v1.1)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
+
+> **Currency note (v1.1):** This document is the stable *philosophy* master. Dated feature
+> specifics — Breeze's agent family, Marketing Studio status, pricing, the Campaigns object's
+> current shape — live in the companion `tech-stack/_vft-own/hubspot-2026-worldview-and-currency.md`,
+> which is grain-of-salt-tested against the current platform. When a feature claim here and a
+> claim there disagree, the dated companion wins on facts; this document wins on positioning.
 
 ---
 
@@ -69,6 +75,16 @@ HubSpot's platform evolution (culminating in INBOUND 2025 announcements) changed
 **What This Means:**
 
 For the first time, mid-market organizations can achieve unified business operations without enterprise complexity or enterprise cost. The platform that was "too simple" for serious business now offers serious capability without serious complexity.
+
+### The 2026 Evolution — the Agentic Customer Platform (and why we still say CVP)
+
+In 2026 HubSpot repositioned itself, in its own words, as an **Agentic Customer Platform** (CEO Yamini Rangan, February 2026): an AI architecture — context, coordination, action — layered on the Smart CRM foundation, with Breeze agents acting on unified data. The Spring 2026 Spotlight (April 14) shipped the rebuilt Prospecting Agent, a Customer Agent handling email, AEO, and outcome-based pricing.
+
+**This is convergence, not disruption of our thesis.** The platform is now publicly arguing what the CVP framing has argued since v1.0: this is not a CRM. We hold our own name. **CVP is the Value-First frame; "Agentic Customer Platform" is HubSpot's. They run parallel, and we keep CVP** (decision, Chris Carolan, 2026-06-20) — it predates their label, it is sharper, and it centers *value* rather than *agents*. We recognize the convergence; we do not adopt their vocabulary.
+
+**What changed our posture is trust, not features.** Breeze crossed a usable-trust threshold in ~May 2026, and the reason was structural: *"I asked it to go look at a customer data model... one of its reasoning paragraphs was like, I can see this is not just a sales and CRM data model. This is a full platform... I was like, yes, like finally, I can trust you."* The moment the AI could *see* the platform-shaped data model instead of forcing it into a sales-CRM mold, it became trustworthy. Breeze Assistant is now the preferred tool for accessing HubSpot data in-platform.
+
+**Which reaffirms the original sequence: the data model is the prerequisite.** *"AI will fail miserably if you try to put all of your context, non-human and human, onto a record that looks like neither."* Get the data model right at all costs, get people into the system, and the agentic layer becomes leverage instead of liability. The enemy is unchanged and now matters more — the AI training-data default that "HubSpot = marketing/sales CRM." The agentic era rewards the platform whose data model, and whose language, already refused that default.
 
 ---
 
@@ -364,6 +380,7 @@ HubSpot CVP: $800-2,000/month = $9,600-24,000/year with unified data, unified tr
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 7, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | June 20, 2026 | Added "The 2026 Evolution" — HubSpot's Agentic Customer Platform repositioning, the ~May-2026 Breeze trust threshold, and the ruling to keep CVP as the distinct frame. Added the currency note pointing to the dated companion doc. | Chris Carolan / Claude (via hubspot-worldview-sweep) |
 
 ---
 
