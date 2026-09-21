@@ -3479,3 +3479,46 @@
     .lov-companion { padding: 1.35rem 1.1rem; }
     .lov-companion-heading { font-size: 1.2rem; }
   }
+
+/* ============================================================
+   A WIDE CANON TABLE SCROLLS INSIDE ITS OWN BOX, NEVER SIDEWAYS
+   OFF THE PHONE.
+   ============================================================
+   Found by the live render gate on 2026-09-21 at 390px: /hubspot-cvp
+   overflowed the document by 65px, /value-loop by 73px, /teach by 11px.
+   In every case the offender is a table inside `.canon-prose` — the
+   revision-history grid every canon reference ends with, and the Value
+   Loop's four-column stage table. These come from canon markdown, so a
+   column count is not this site's to change and the next canon document
+   with five columns would reintroduce it anyway.
+
+   `overflow-x: auto` on the table itself is the fix that survives new
+   content, and it is already the pattern this file uses twice — on
+   `.canon-prose pre` (a long code line) and on `.lov-table-wrap`. This
+   simply reaches the tables that never got a wrapper because they arrive
+   as raw HTML from the markdown pipeline and nothing can wrap them there.
+
+   `display: block` is what makes `overflow-x` apply to a table at all,
+   and it is scoped to narrow viewports so the normal table layout — and
+   the `width: 100%` stretch above — is untouched on anything wider.
+
+   CALIBRATION, because "it was already broken" is the easy thing to say:
+   this was NOT established against the previous deployment, whose URL
+   redirects to Vercel's SSO page rather than the site. What IS evidence:
+   the same gate over 25 routes on valuefirstseason.com and 10 on
+   ainativehumans.org at the same widths and the same package pins found
+   zero overflow, and the three offenders here are exactly the three
+   canon documents that carry a wide table. The shape is content, not
+   tokens.
+*/
+@media (max-width: 720px) {
+  .canon-prose table,
+  .spec-prose table,
+  .manifesto-prose table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
