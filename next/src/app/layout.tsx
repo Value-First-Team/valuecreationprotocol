@@ -19,7 +19,7 @@ import '../styles/vcp-tokens.css';
 import '../styles/vcp-archetypes.css';
 import '../styles/vcp-dark.css';
 import './globals.css';
-import { SiteShell } from '@vf/site-kit';
+import { SiteShell, THEME_BOOT_SCRIPT } from '@vf/site-kit';
 // THE FLY-IN LAYER. One mount, and every page of this site has fly-ins
 // available at every side (left/right/top/bottom/center), every stack axis
 // (z depth, x parallel, y nested) and every mode (overlay, push, inset — an
@@ -92,15 +92,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         {/*
-         * FOUC-free theme init — runs before paint. The protocol home is an
-         * editorial/light-first surface, so default LIGHT here (the Astro site
-         * shipped light-only); still honor a saved pref or OS dark preference.
+         * FOUC-free theme init — runs before paint, from the SHARED constant.
+         * A saved `vf-theme` wins, then the OS decides; with neither readable
+         * the kit lands dark. The protocol home is an editorial/light-first
+         * surface, and an OS-light reader with no saved preference still
+         * arrives light — which is every reader arriving from a light OS, the
+         * case this comment used to describe as "default LIGHT".
+         *
+         * WHAT ACTUALLY CHANGES: both poles are asserted. The local copy this
+         * replaces toggled only `.dark`, so a light document carried no class,
+         * and both @vf/brand's LogoLockup and @vf/design-engine 0.51.0's token
+         * graph ask an undeclared document to say it is light
+         * (`:root:not(.light):not([data-theme="light"]):not(.theme-light)`).
+         * On this light-first surface that is exactly the arrival that broke:
+         * an OS-dark reader got the light ground and a white wordmark on it.
+         * One constant, every node (@vf/site-kit THEME_BOOT_SCRIPT).
+         *
+         * ONE ARRIVAL DOES CHANGE, and it is named here rather than left to be
+         * discovered: where `window.matchMedia` is missing entirely, the local
+         * copy landed LIGHT (`!!undefined`) and the kit lands DARK
+         * (`undefined !== false`). That is the kit's deliberate rule — a
+         * document that cannot read a preference gets the dark pole — and it
+         * reaches only a reader whose browser exposes no colour-scheme query
+         * at all, never an ordinary OS-light visitor, who still arrives light.
          */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('vf-theme');var d=s?s==='dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('dark',!!d);}catch(e){}})();`,
-          }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         {/* HubSpot tracking (portal 40810431 = VF Team). next/script afterInteractive
             executes AFTER hydration, so the loader can't race hydration and prepend
             div#hs-web-interactives-top-push-anchor to <body> before React reconciles. */}
