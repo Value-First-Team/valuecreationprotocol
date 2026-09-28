@@ -50,3 +50,11 @@ On a phone, a canon page with a wide table no longer slides sideways. The live c
 **Owner:** showcase (`log.md` 2026-09-21T21:57Z)
 
 A pin move with no change a visitor would notice: `@vf/site-kit` 0.60.0 to 0.63.0 and `@vf/recipes` 0.88.0 to 0.88.1. What those releases changed (the WhichDoor heading, the offer cards, the TrapsGrid footer link, the share-image module) is not drawn on this site, which uses the kit's shell and only the sitemap module from recipes. The live check after the deploy passed 186 of 186, and the phone table fix above still held.
+
+## 2026-09-28 — deploy e5136ea
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `e5136ea`
+**Owner:** showcase (lane C of the repo changelog rollout, dispatched by V b622d80f)
+
+No change a visitor would notice. The site's own `npm run check` now passes on a fresh clone. It failed on every fresh clone before this, because `next/next-env.d.ts` is gitignored and only `next dev` or `next build` wrote it, so the typecheck read the eight plate images `FrameworkRoute.tsx` imports from `@vf/brand` as missing modules and a red check told nobody anything. `check` now runs `next typegen`, which writes that file and the route types without a build, before the typecheck.
