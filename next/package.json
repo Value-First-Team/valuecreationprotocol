@@ -14,7 +14,7 @@
     "lint": "next lint",
     "canon:drift": "node scripts/canon-drift-gate.mjs",
     "canon:refresh": "node scripts/canon-drift-gate.mjs --fix",
-    "check": "npm run assert:changelog && node scripts/canon-drift-gate.mjs && tsc --noEmit",
+    "check": "npm run assert:changelog && node scripts/canon-drift-gate.mjs && next typegen && tsc --noEmit",
     "assert:changelog": "node ../repo-changelog-lint-run.mjs --repo .. --since 72ead37f9a80f9d5838590d0d220783020f2949c --behavior-paths next/src,next/public,next/next.config.ts,next/vercel.json,next/tailwind.config.ts,next/postcss.config.cjs,next/package-lock.json"
   },
   "dependencies": {
