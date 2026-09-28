@@ -17,13 +17,23 @@
  *
  * WHAT IT HONESTLY CANNOT CHECK. The masters live in the brain repo, which is
  * not present in the Vercel build container. With no canon root the gate SKIPS
- * and exits 0 — it says so loudly rather than passing silently. So this is a
- * local/authoring gate: run it where the brain is, before you push. A
- * generator-fed pipeline that removes the hand copy altogether is the UNBOUND
- * alignment plan's work, not this gate's.
+ * and exits 0, and says so the way the changelog launcher beside it does: on
+ * stderr, naming every place it looked, ending "NOTHING WAS CHECKED -- this is
+ * not a pass." (Until 2026-09-28 it skipped on stdout and ignored MAINBRAIN_ROOT,
+ * so a check run from a clone outside the brain, with MAINBRAIN_ROOT set as the
+ * CHANGELOG asks, ran the changelog check for real and skipped this one in a line
+ * that read like a note.) So this is a local/authoring gate: run it where the
+ * brain is, or point it at one, before you push. A generator-fed pipeline that
+ * removes the hand copy altogether is the UNBOUND alignment plan's work, not
+ * this gate's.
+ *
+ * WHERE IT LOOKS, in order: $VCP_CANON_ROOT (a canon/canonical folder), the
+ * brain this repo sits inside (walking up from the repo), then $MAINBRAIN_ROOT
+ * (a MainBrain checkout — the same variable the changelog launcher reads).
  *
  * USAGE   node scripts/canon-drift-gate.mjs [--fix]
  *         VCP_CANON_ROOT=/path/to/canon/canonical node scripts/canon-drift-gate.mjs
+ *         MAINBRAIN_ROOT=/path/to/MainBrain node scripts/canon-drift-gate.mjs
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
@@ -69,24 +79,37 @@ const EXEMPT = {
   'canon/VCP-Newsletter-Part3.md': 'Newsletter issue, authored for this site. No master under canon/canonical/.',
 };
 
-/** Find canon/canonical/ by walking up from the repo. */
+/** Every place findCanonRoot looked, for the skip message. */
+const tried = [];
+
+/** Find canon/canonical/: $VCP_CANON_ROOT, then walking up from the repo, then $MAINBRAIN_ROOT. */
 function findCanonRoot() {
   if (process.env.VCP_CANON_ROOT) {
-    return existsSync(process.env.VCP_CANON_ROOT) ? process.env.VCP_CANON_ROOT : null;
+    const c = process.env.VCP_CANON_ROOT;
+    if (existsSync(c)) return c;
+    tried.push(`${c} (via $VCP_CANON_ROOT -- does not exist, ignored)`);
   }
   let dir = REPO;
   for (let i = 0; i < 6; i++) {
     const c = join(dir, 'L2-customer-value-model', 'canon', 'canonical');
     if (existsSync(c)) return c;
+    tried.push(c);
     const parent = dirname(dir);
     if (parent === dir) break;
     dir = parent;
+  }
+  if (process.env.MAINBRAIN_ROOT) {
+    const c = join(process.env.MAINBRAIN_ROOT, 'L2-customer-value-model', 'canon', 'canonical');
+    if (existsSync(c)) return c;
+    tried.push(`${c} (via $MAINBRAIN_ROOT -- not found, ignored)`);
   }
   return null;
 }
 
 const norm = (s) => s.replace(/\r\n/g, '\n');
-const toCRLF = (s) => s.replace(/\r\n/g, '\n').replace(/\n/g, '\r\n');
+/** Canon, in the line endings the copy already has, so a refresh diffs as the words that moved.
+ *  (Until 2026-09-28 --fix always wrote CRLF, over LF copies, and every refresh rewrote the whole file.) */
+const withEolOf = (existing, s) => (existing.includes('\r\n') ? norm(s).replace(/\n/g, '\r\n') : norm(s));
 
 function firstDiffLine(a, b) {
   const x = norm(a).split('\n');
@@ -101,10 +124,11 @@ function firstDiffLine(a, b) {
 
 const canonRoot = findCanonRoot();
 if (!canonRoot) {
-  console.log('canon-drift-gate: SKIPPED — no canon masters reachable from this checkout.');
-  console.log('  The masters live in the brain repo (L2-customer-value-model/canon/canonical/),');
-  console.log('  which is absent in a CI/Vercel container. Nothing was verified. Run this');
-  console.log('  locally, where the brain is, before you push content changes.');
+  console.error(
+    `canon-drift-gate: SKIPPED -- canon masters not reachable from this checkout (tried: ${tried.join(', ')}). ` +
+    'Set VCP_CANON_ROOT to a canon/canonical folder or MAINBRAIN_ROOT to a real MainBrain checkout, or run inside one. ' +
+    'NOTHING WAS CHECKED -- this is not a pass.',
+  );
   process.exit(0);
 }
 
@@ -134,7 +158,7 @@ for (const rootRel of CONTENT_ROOTS) {
     const canon = readFileSync(masterPath, 'utf8');
     if (norm(site) === norm(canon)) continue;
     if (FIX) {
-      writeFileSync(dest, toCRLF(canon));
+      writeFileSync(dest, withEolOf(site, canon));
       console.log(`  FIXED   ${rootRel}/${rel}`);
       fixed++;
       continue;
