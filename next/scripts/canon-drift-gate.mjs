@@ -2,7 +2,7 @@
 /**
  * canon-drift-gate — the protocol site serves canon by hand-copied markdown.
  *
- * WHY THIS EXISTS. `src/content/canon/` and `src/content/wiki-canonical/` are
+ * WHY THIS EXISTS. `next/src/content/canon/` and `next/src/content/wiki-canonical/` are
  * copies. Nothing regenerated them and nothing compared them, so on 2026-09-20
  * /teach was serving the TEACH v1.0 interim draft — "Moving quickly while
  * reshaping form", under a visible PENDING CHRIS APPROVAL banner — five weeks
@@ -43,9 +43,10 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, '..', '..'); // .sites/valuecreationprotocol
 const FIX = process.argv.includes('--fix');
 
-/** Content trees that carry hand-copied canon. `src/content` is the retired
- *  Astro tree; it is covered so a dead tree cannot re-ship superseded canon. */
-const CONTENT_ROOTS = ['next/src/content', 'src/content'];
+/** Content trees that carry hand-copied canon. The retired Astro tree's
+ *  `src/content` was covered here too until 2026-09-28, when that tree was
+ *  deleted from the repo root. */
+const CONTENT_ROOTS = ['next/src/content'];
 
 /** site-relative path  ->  master filename under canon/canonical/ */
 const PAIRED = {
