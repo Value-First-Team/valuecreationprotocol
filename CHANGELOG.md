@@ -74,3 +74,11 @@ The 12 Complexity Traps canonical reference bundled with this site moves from ca
 **Owner:** Showcase
 
 Nothing a visitor sees changed: no build input under `next/` moved. The retired Astro build that still sat at the repo root was deleted: `astro.config.mjs`, `src/` (66 files), `public/` (50 files), `package.json`, `pnpm-lock.yaml` and `pnpm-workspace.yaml`, `tailwind.config.mjs`, `tsconfig.json`, the root `vercel.json` (framework Astro) and `.env.example`, which documented only a Sanity token `next/` never reads. None of it was read: the Vercel project builds `next/` only and its production build ran `npm install` inside `next/`; nothing tracked under `next/` reaches a root path except the launcher, `--repo ..` and the canon drift gate's repo-root constant; no MainBrain script and no shared package reads one. The canon drift gate had listed the root `src/content` so the dead tree could not re-ship superseded canon; it skips a missing folder, so nothing broke, and the entry went with the tree. Kept: this file, the launcher, `.claude/` and `.gitignore`. Entered so the one tree left is on the record; the check does not require it.
+
+## 2026-09-29 — deploy 3e662bc
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `3e662bc`
+**Owner:** Showcase
+
+Every framework card's "Go deeper" now opens the term's page on valuefirstteam.com instead of a page this site does not serve (@vf/brand 0.67.1). The shared packages move to the constellation's current versions together; on a phone the empty band above the footer is gone.
