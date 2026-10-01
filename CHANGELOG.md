@@ -82,3 +82,11 @@ Nothing a visitor sees changed: no build input under `next/` moved. The retired 
 **Owner:** Showcase
 
 Every framework card's "Go deeper" now opens the term's page on valuefirstteam.com instead of a page this site does not serve (@vf/brand 0.67.1). The shared packages move to the constellation's current versions together; on a phone the empty band above the footer is gone.
+
+## 2026-10-01 — deploy b46dd9c
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `b46dd9c`
+**Owner:** showcase (`log.md` 2026-10-01, @showcase/d29d9801)
+
+Search engines can now find this site's sitemap. robots.txt sent them to `/sitemap-index.xml`, an address left over from the retired Astro build that answers 404, so a crawler following robots.txt found none, while the real `/sitemap.xml` (30 pages) sat unused. robots.txt now names `/sitemap.xml`. Every page now carries a canonical link naming its own address; `/what-is-value-first` had none. The shared `@vf/recipes` package moves from 0.112.0 to 0.116.0; this site uses only its sitemap, which now leaves out `/admin` and noindex pages (this site has none). Nothing a visitor reads changed. The standing revert is `git revert b46dd9c`; production before it was `9d9dbb6`.
