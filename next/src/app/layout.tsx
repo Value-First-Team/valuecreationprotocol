@@ -52,6 +52,9 @@ export const metadata: Metadata = {
     default: 'Value Creation Protocol — Open Protocol Home',
   },
   description: SITE.description,
+  // SELF-REFERENCING CANONICAL, per page: './' resolves against each route, so
+  // every page names its own address (a page that sets its own canonical wins).
+  alternates: { canonical: './' },
   icons: {
     icon: [
       { url: '/favicon/favicon.svg', type: 'image/svg+xml' },

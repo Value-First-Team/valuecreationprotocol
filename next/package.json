@@ -20,7 +20,7 @@
   "dependencies": {
     "@vf/brand": "github:Value-First-Team/vf-brand#f3378459ef1728f8f3ac036d4e0aa059bc8b100f",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#25f20f34529184f2bffffe3ef7fd6604a62f04f0",
-    "@vf/recipes": "github:Value-First-Team/vf-recipes#047c561385628628110d617db40d96f23d4d2b2e",
+    "@vf/recipes": "github:Value-First-Team/vf-recipes#400900e129ee76007a37ea1f4357148a179a5914",
     "@vf/site-kit": "github:Value-First-Team/vf-site-kit#0564c01762f816b5b353d22b473853cfb58bf412",
     "@vf/ui": "github:Value-First-Team/vf-ui#541aebadb7abbcb2869cd6d9e0c8f2e1919b88a3",
     "marked": "^14.1.3",
