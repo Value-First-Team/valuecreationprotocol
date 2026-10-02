@@ -90,3 +90,11 @@ Every framework card's "Go deeper" now opens the term's page on valuefirstteam.c
 **Owner:** showcase (`log.md` 2026-10-01, @showcase/d29d9801)
 
 Search engines can now find this site's sitemap. robots.txt sent them to `/sitemap-index.xml`, an address left over from the retired Astro build that answers 404, so a crawler following robots.txt found none, while the real `/sitemap.xml` (30 pages) sat unused. robots.txt now names `/sitemap.xml`. Every page now carries a canonical link naming its own address; `/what-is-value-first` had none. The shared `@vf/recipes` package moves from 0.112.0 to 0.116.0; this site uses only its sitemap, which now leaves out `/admin` and noindex pages (this site has none). Nothing a visitor reads changed. The standing revert is `git revert b46dd9c`; production before it was `9d9dbb6`.
+
+## 2026-10-01 — deploy 7e478e2
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `7e478e2`
+**Owner:** showcase (`log.md` 2026-10-01, @showcase/d29d9801)
+
+The sitemap stops telling search engines that every page changed on every deploy: the shared `@vf/recipes` package moves from 0.116.0 to 0.116.1, which no longer stamps static pages with the build time. This site's pages have no real date, so its entries carry none. Nothing a visitor sees changed. The standing revert is `git revert 7e478e2`; production before it was `fe14dfa`.
