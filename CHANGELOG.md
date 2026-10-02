@@ -98,3 +98,11 @@ Search engines can now find this site's sitemap. robots.txt sent them to `/sitem
 **Owner:** showcase (`log.md` 2026-10-01, @showcase/d29d9801)
 
 The sitemap stops telling search engines that every page changed on every deploy: the shared `@vf/recipes` package moves from 0.116.0 to 0.116.1, which no longer stamps static pages with the build time. This site's pages have no real date, so its entries carry none. Nothing a visitor sees changed. The standing revert is `git revert 7e478e2`; production before it was `fe14dfa`.
+
+## 2026-10-02 — deploy a262ed0
+**Breaking:** No
+**Consumer action:** None. Keep `next/public/googlec8c9f1e5c6ee9199.html`: removing it takes the site out of Google Search Console.
+**Commit:** `a262ed0`
+**Owner:** showcase (`log.md` 2026-10-02, @showcase/d29d9801)
+
+Google can confirm the Value-First Team owns this site. The site serves one small file Google asked for, which makes it a Google Search Console property and lets each production deploy hand Google the sitemap without anyone submitting it by hand. Nothing a visitor sees changed. Revert: `git revert a262ed0` (it removes the site from Search Console).
