@@ -106,3 +106,11 @@ The sitemap stops telling search engines that every page changed on every deploy
 **Owner:** showcase (`log.md` 2026-10-02, @showcase/d29d9801)
 
 Google can confirm the Value-First Team owns this site. The site serves one small file Google asked for, which makes it a Google Search Console property and lets each production deploy hand Google the sitemap without anyone submitting it by hand. Nothing a visitor sees changed. Revert: `git revert a262ed0` (it removes the site from Search Console).
+
+## 2026-10-12 — deploy 40b0049
+**Breaking:** No
+**Consumer action:** None. The site-kit pin moves 0.99.1 to 0.99.2 (`0d1ff65`, branch showcase/panel-contrast-0.99.x, tag v0.99.2, 0.99.1 plus main's 0.135.1 panel change and nothing else).
+**Commit:** `40b0049`
+**Owner:** showcase (convened by Marquee, session 2637b31c)
+
+The search panel's highlighted result can be read in both themes. When a visitor moves through the results with the keyboard or the pointer, the highlighted row used to take the site's accent colour under text chosen for a plain background, and every row's second line (which site the result lives on, and what it is) was the faintest text colour, under the readable floor on the highlight. The highlighted row is now a light wash of the site's own brand colour with a brand-coloured edge on the left and the title in body ink, and the second line is the muted text colour on every row.  Revert target: `valuecreationprotocol-ffumguc71 (56c1689)`, the production deploy serving this site before this push.
