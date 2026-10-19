@@ -114,3 +114,11 @@ Google can confirm the Value-First Team owns this site. The site serves one smal
 **Owner:** showcase (convened by Marquee, session 2637b31c)
 
 The search panel's highlighted result can be read in both themes. When a visitor moves through the results with the keyboard or the pointer, the highlighted row used to take the site's accent colour under text chosen for a plain background, and every row's second line (which site the result lives on, and what it is) was the faintest text colour, under the readable floor on the highlight. The highlighted row is now a light wash of the site's own brand colour with a brand-coloured edge on the left and the title in body ink, and the second line is the muted text colour on every row.  Revert target: `valuecreationprotocol-ffumguc71 (56c1689)`, the production deploy serving this site before this push.
+
+## 2026-10-19 — deploy aac9ec0
+**Breaking:** No
+**Consumer action:** None. Pin moves: `@vf/brand` 0.67.1 to 0.99.0 (`c26347a`) and `@vf/ui` 0.16.0 to 0.21.0 (`b1d9a11`), in dependencies and overrides; `@vf/design-engine`, `@vf/site-kit` and `@vf/recipes` unchanged.
+**Commit:** `aac9ec0`
+**Owner:** showcase (Mission 64093001137, @showcase/985d18ad)
+
+The Five-Layer page names Layer 4 **Trust**, as canon does (Five-Layer reference v1.8 and v1.9, Chris 2026-10-04). Its card used to read "Orchestration · How the work moves" with the coordination-layer description; it now reads "Trust · Why the work can be trusted", with the trust-layer description (Governance, Safety, Quality, Observability; humans and agents), and its "Go deeper" link goes to `/language-of-value/trust`. The glossary data on the page names the term Trust too. Two of the four AI-Native Shift plates under the layers (the five-layer stack and "attack from the wrong end") print the old name in the image itself, so this site stops showing them until redrawn plates ship in `@vf/brand`; the other two stay. The page's share image moves from `og-five-layers.png`, which also prints the old name, to the site's default card. The 12 Complexity Traps and language translation guide copies are refreshed from canon (no route renders either). Revert target: `dpl_8t7TRyt8MpH6vyvxBfcpciBLAL9C` (`9fd9511`), the production deploy serving this site before this push.
