@@ -63,26 +63,24 @@ import { frameworkMedia } from '@/lib/framework-media';
 
 // The AI-Native Shift plates this property serves. Static imports straight out of
 // @vf/brand's "./assets/*" export, so the bytes are the package's and this repo
-// stores no copy of them; Next fingerprints and serves each one. All eight files
-// are imported because PlateStrip chooses the dark or the light variant in the
-// browser, from the theme the reader is actually in.
-import plateFiveLayersDark from '@vf/brand/assets/ai-native-shift/ans-five-layers-dark.png';
-import plateFiveLayersLight from '@vf/brand/assets/ai-native-shift/ans-five-layers-light.png';
+// stores no copy of them; Next fingerprints and serves each one. Both variants of
+// each plate are imported because PlateStrip chooses the dark or the light
+// variant in the browser, from the theme the reader is actually in.
+//
+// This property serves only the plates whose words agree with canon. The
+// five-layers and attack-wrong-end plates are not served: each prints Layer 4 as
+// "Orchestration", and canon names it Trust (Five-Layer reference v1.8, Chris
+// 2026-10-04). The resolver returns no URL for an unserved file, so PlateStrip
+// leaves them out. Serve them again once @vf/brand ships redrawn plates.
 import plateTodayVsDoneDark from '@vf/brand/assets/ai-native-shift/ans-today-vs-done-dark.png';
 import plateTodayVsDoneLight from '@vf/brand/assets/ai-native-shift/ans-today-vs-done-light.png';
-import plateAttackWrongEndDark from '@vf/brand/assets/ai-native-shift/ans-attack-wrong-end-dark.png';
-import plateAttackWrongEndLight from '@vf/brand/assets/ai-native-shift/ans-attack-wrong-end-light.png';
 import plateTensionHeldDark from '@vf/brand/assets/ai-native-shift/ans-tension-held-dark.png';
 import plateTensionHeldLight from '@vf/brand/assets/ai-native-shift/ans-tension-held-light.png';
 
 /** A plate filename → the URL this property serves it from. Unknown file → no image. */
 const PLATE_URLS: Record<string, { src: string }> = {
-  'ans-five-layers-dark.png': plateFiveLayersDark,
-  'ans-five-layers-light.png': plateFiveLayersLight,
   'ans-today-vs-done-dark.png': plateTodayVsDoneDark,
   'ans-today-vs-done-light.png': plateTodayVsDoneLight,
-  'ans-attack-wrong-end-dark.png': plateAttackWrongEndDark,
-  'ans-attack-wrong-end-light.png': plateAttackWrongEndLight,
   'ans-tension-held-dark.png': plateTensionHeldDark,
   'ans-tension-held-light.png': plateTensionHeldLight,
 };
@@ -101,7 +99,9 @@ const OG: Record<FrameworkKey, string> = {
   'value-path': '/og/og-value-path.jpg',
   'unified-views': '/og/og-unified-views.jpg',
   'value-realities': '/og/og-realities.jpg',
-  'five-layer-model': '/og/og-five-layers.png',
+  // og-five-layers.png prints Layer 4 as "Orchestrate"; canon names it Trust.
+  // The site's default card stands in until a redrawn card ships.
+  'five-layer-model': '/og/og-default.jpg',
   'three-org-model': '/og/og-three-orgs.jpg',
 };
 

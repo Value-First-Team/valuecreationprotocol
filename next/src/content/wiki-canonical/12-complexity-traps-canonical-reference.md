@@ -1,8 +1,8 @@
 # 12 Complexity Traps Canonical Reference
 ## Single Source of Truth
 
-**Version:** 1.6  
-**Effective Date:** September 27, 2026 (v1.6)  
+**Version:** 1.7  
+**Effective Date:** October 4, 2026 (v1.7)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -282,10 +282,10 @@ The two **Foundational** traps do not pin to a single layer — they are **woven
 - **L1 — Data, Identity, Context** — sources of truth, memory
 - **L2 — Customer Value Model** — what the data means
 - **L3 — Intelligence** — who has context + capability
-- **L4 — Orchestration** — how the work moves
+- **L4 — Trust** — why the work can be trusted
 - **L5 — Interface** — every surface where humans meet you
 
-*(The Five-Layer Model does not yet have its own canonical reference; authoring one is an open follow-up. Until then, this legend is authoritative for this map.)*
+*(The Five-Layer Model's own canonical reference is `five-layer-model-canonical-reference.md`; this legend must agree with its legend.)*
 
 ### Foundational — woven (no single layer)
 
@@ -418,6 +418,7 @@ When building or referencing trap assessments:
 | 1.5 | September 8, 2026 | **Legend agreement only — no trap definition, category, name or map entry changed.** The Trap → Five-Layer Map's L4 legend line dropped its parenthetical, from "how the work moves (the AI-Native OS / shared substrate)" to "how the work moves", because `five-layer-model-canonical-reference.md` v1.5 moved that claim off Layer 4 and onto the model (Chris ruling, 2026-09-08: *"I've always thought of this being the five layers of an AI-Native Operating System"*). The five-layer reference carries a standing instruction under its legend — the two documents must agree on the five names and one-line descriptions, and if one changes, change both in the same pass — so this row IS that pass. The header also moved 1.3 → 1.5: it had been left at 1.3 while the changelog already carried a 1.4 (August 17, 2026), and a version header behind its own changelog is a reader trusting the wrong number. | Chris Carolan / Motif |
 | 1.3 | July 14, 2026 | Folded two recognition images into the **SaaS Trap** extended definition — the martech-archipelago hook (15,384 tools ≈ the Indonesian archipelago, rebuilt inside the org) and the islands-that-can't-see-the-customer image — both pulled to frontline/human altitude. Sourced from the "Value-First Context" fork doc; its C-suite framing (strategic blindness / moats / competitive advantage) deliberately left out. Definition and category unchanged. | Chris Carolan / Sage |
 | 1.6 | September 27, 2026 | **One sentence added to the Trap → Five-Layer Map; no row of the map changed, and no trap definition, name, category or pairing changed.** Ratified by Chris Carolan on 2026-09-27, walking Oracle's canon check of the Trapped vs Transformed island, where he picked the option labelled **"Every floor, wound heaviest"**, which read: *"Every floor shows the trap's mark, and the floor it truly wounds reads heaviest, so you can trace it down to its cause. Canon gets one sentence added to the trap map in your words. No row of the map changes. Oracle has the exact text ready."* The sentence, placed after the map's ratification paragraph, carries his words verbatim from the same day's walk: *"we could/should see the impact of each Trap/Reality on every floor. So if we believe the floor is actively experiencing the Leads Trap, we should expect to see the impact of that on every layer."* **What it settles:** hurts / hides / reaches record where a trap lives most, not the only layers it touches, so a rendering may show a trap's mark on every layer, provided the layer it hurts reads heaviest; that layer stays the first place to look, which keeps the diagnostic (*"which layer is producing the problem?"*, `five-layer-model-canonical-reference.md` § How Leaders Use It) intact. **What it does not change:** the hurts / hides / reaches cells, so the map data `.products/vf-value-path-core/src/traps.ts` carries, and the Mirror and the Value Path Game that read it, are unchanged. `canon-data.ts` in the same package is a pinned snapshot of this directory (last taken 2026-09-22), so `snapshot-canon.mjs --check` reports this file as moved until that package's next pin bump; that report is the gate working. Walk record: `L4-orchestration/roadmap/value-first-universe-5p-plan.md` § "Oracle's four canon questions, walked"; the check it answers: `L4-orchestration/output/2026-09-27-trapped-transformed-island/oracle/canon-check.md`. | Chris Carolan / Oracle |
+| 1.7 | October 4, 2026 | **Legend agreement only — no trap definition, category, name or map row changed.** Layer 4 is renamed **Trust** in `five-layer-model-canonical-reference.md` v1.8 (Chris, 2026-10-04, reversing the 2026-09-08 "Orchestration holds"), so this legend follows: "L4 — Trust — why the work can be trusted". The note under the legend saying the model had no canonical reference of its own had been stale since 2026-07-13; it now points at that reference. The six map rows that touch L4 (AI Replacement, Managed Services, ERP, Measurement, Conformity, Authority) were read against the new meaning, and none moves. | Chris Carolan / Oracle |
 
 ---
 

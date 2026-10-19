@@ -1,8 +1,8 @@
 # Value-First Language Translation Guide
 ## Canonical Reference
 
-**Version:** 1.0  
-**Effective Date:** December 7, 2025  
+**Version:** 1.1  
+**Effective Date:** December 7, 2025 (revised October 6, 2026; see Changelog)  
 **Owner:** Chris Carolan, Founder  
 **Governance:** All Value-First content must align with this reference
 
@@ -40,6 +40,14 @@ When we use collaborative language, we:
 **Value-First Thinking:** They prospect for solutions; we are the prospects they seek to discover
 
 This inversion changes everything. When we recognize THEY are prospecting and WE are the prospects, we focus on being genuinely valuable, easily discoverable, and immediately helpful—rather than hunting, qualifying, and converting.
+
+**When the signal is strong, we may go to them (ruled 2026-10-06).** The inversion holds: they are the prospectors. In Chris Carolan's words:
+
+> "The premise is that we are just making it easier for our prospectors to find gold. We do not have to wait for them to come to us if we have a great signal and context set telling us exactly what they are looking for."
+
+Going to them on that evidence is distribution, not hunting: we bring what they are looking for, and the next step is theirs. <!-- TODO: confirm with Chris -->
+
+**A person must show up too (ruled the same day).** A company-level signal never opens outreach on its own. It takes person-level evidence too, such as their own visit, a raised hand, a question answered or a show watched. Company signals, including the custom signals we define ourselves, are context. Third-party research intent counts as context only, never as the trigger. The conditions in full, with their sources, are in `prospector-and-practitioner-canonical-reference.md` § Ruled 2026-10-06.
 
 ---
 
@@ -282,6 +290,7 @@ Read aloud. Does it sound like something a person would say to a friend, or some
 | Version | Date | Change | Author |
 |---------|------|--------|--------|
 | 1.0 | December 7, 2025 | Initial canonical reference established | Chris Carolan / Claude (Operations Lead) |
+| 1.1 | October 6, 2026 | The Prospector Inversion: when the signal is strong, we may go to them; a person must show up too; third-party intent is context only (`L1-data-identity-context/wiki/decisions/2026-10-06-prospector-inversion-signal-led-outreach.md`) | Chris Carolan (ruling) / Trellis |
 
 ---
 
