@@ -1,10 +1,10 @@
 # Value Creation Protocol — CLAUDE.md
 
 > **Project:** valuecreationprotocol.com
-> **Repo:** github.com/chris-carolan/valuecreationprotocol
-> **Vercel:** Chris Carolan personal account (chriscarolan-4469)
+> **Repo:** github.com/Value-First-Team/valuecreationprotocol
+> **Vercel:** team `value-first-team`, project `valuecreationprotocol`, root directory `next/`
 > **Domain:** valuecreationprotocol.com
-> **Stack:** Astro 5 + React + Tailwind + TypeScript + Sanity client
+> **Stack:** Next.js 15 (App Router, static export) + React + Tailwind + TypeScript + Sanity client, all in `next/`. No Astro: the Astro root was retired 2026-09-28 (`dc26030`)
 > **Sanity:** Shared project `0efm0pow` / dataset `production` (read-only from this site; writes through Canon)
 
 This is a **standalone repo** — not part of the Value-First Operations monorepo. It imports
