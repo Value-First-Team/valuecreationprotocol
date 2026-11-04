@@ -122,3 +122,17 @@ The search panel's highlighted result can be read in both themes. When a visitor
 **Owner:** showcase (Mission 64093001137, @showcase/985d18ad)
 
 The Five-Layer page names Layer 4 **Trust**, as canon does (Five-Layer reference v1.8 and v1.9, Chris 2026-10-04). Its card used to read "Orchestration · How the work moves" with the coordination-layer description; it now reads "Trust · Why the work can be trusted", with the trust-layer description (Governance, Safety, Quality, Observability; humans and agents), and its "Go deeper" link goes to `/language-of-value/trust`. The glossary data on the page names the term Trust too. Two of the four AI-Native Shift plates under the layers (the five-layer stack and "attack from the wrong end") print the old name in the image itself, so this site stops showing them until redrawn plates ship in `@vf/brand`; the other two stay. The page's share image moves from `og-five-layers.png`, which also prints the old name, to the site's default card. The 12 Complexity Traps and language translation guide copies are refreshed from canon (no route renders either). Revert target: `dpl_8t7TRyt8MpH6vyvxBfcpciBLAL9C` (`9fd9511`), the production deploy serving this site before this push.
+
+## 2026-11-04 — deploy f77c638: the Four Unified Views at canon v2.0; canon reads the pinned snapshot
+**Breaking:** No. Every id, slug and page address is unchanged.
+**Consumer action:** None. Revert target: the production deployment serving `96e8cfd` (`dpl_9KxTNjoxDgcp1bA3pLt5gdBmAYwe`).
+**Commit:** `f77c638`
+**Owner:** showcase
+
+The Four Unified Views now read as canon v2.0 does on this site (Lattice's contract ruling, step D2 and J9). `/unified-views` draws them from `@vf/brand` 0.152.0: Unified Strategy View and Unified Operations View, canon's definitions and milestones. `/glossary` picks up the names and descriptions Canon set in Sanity on step C1. `/positioning` now reads "Customer, Revenue, Strategy, Operations". `/hubspot-cvp`'s two headings take the new names; that document has no master and the rest of it is as it was.
+
+**Canon stops being a hand copy here.** The 14 bundled files that have a master under canon/canonical/ are gone; `/teach`, `/positioning` and `/value-loop`, the three pages that served one, read `@vf/value-path-core` v0.21.2's snapshot (`4991986`, a new direct dependency), so canon reaches this site by a pin bump. Eight of the 14 had drifted from their masters. `/teach` and `/value-loop` are byte-identical to what they served. `canon-drift-gate` keeps refusing a new unaudited copy; nothing is paired any more.
+
+**The Sanity read:** `getUnifiedGoals` reads `stewardedBy` in place of `primaryOrg`, and its `relatedTraps` is now the reverse read of each trap's `viewStartingPoints`. No page renders either field today.
+
+**Pins:** `@vf/brand` 0.99.0 to 0.152.0 (`4772190`) and `@vf/design-engine` 0.82.0 to 0.170.1 (`995b841`, which brand's shared components need), each as dependency and override. `@vf/site-kit`, `@vf/recipes` and `@vf/ui` stay: this site renders no term page and no wizard.
