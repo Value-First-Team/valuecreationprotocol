@@ -135,4 +135,12 @@ The Four Unified Views now read as canon v2.0 does on this site (Lattice's contr
 
 **The Sanity read:** `getUnifiedGoals` reads `stewardedBy` in place of `primaryOrg`, and its `relatedTraps` is now the reverse read of each trap's `viewStartingPoints`. No page renders either field today.
 
-**Pins:** `@vf/brand` 0.99.0 to 0.152.0 (`4772190`) and `@vf/design-engine` 0.82.0 to 0.170.1 (`995b841`, which brand's shared components need), each as dependency and override. `@vf/site-kit`, `@vf/recipes` and `@vf/ui` stay: this site renders no term page and no wizard.
+**Pins:** `@vf/brand` 0.99.0 to 0.152.0 (`4772190`) and `@vf/design-engine` 0.82.0 to 0.170.1 (`995b841`, which brand's shared components need), each as dependency and override. This commit's build did not go live; `7b99ad5` below carries the `@vf/ui` move it needed. `@vf/site-kit` and `@vf/recipes` stay: this site renders no term page and no wizard.
+
+## 2026-11-04 — deploy 7b99ad5: @vf/ui 0.32.1
+**Breaking:** No.
+**Consumer action:** None. Revert target: the production deployment serving `96e8cfd` (`dpl_9KxTNjoxDgcp1bA3pLt5gdBmAYwe`), which also undoes the Unified Views move above.
+**Commit:** `7b99ad5`
+**Owner:** showcase
+
+The deploy above failed its Vercel build and never went live (`dpl_HWNaUBHJrEqkfnAwnrhNiurmEmwU`), because `@vf/brand` 0.152.0's figures import `CardLink`, which `@vf/ui` 0.21.0 does not have. `@vf/ui` moves to 0.32.1 (`46d92cf`), the commit brand 0.152.0 itself declares, as dependency and override.
