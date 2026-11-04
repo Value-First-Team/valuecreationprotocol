@@ -144,3 +144,11 @@ The Four Unified Views now read as canon v2.0 does on this site (Lattice's contr
 **Owner:** showcase
 
 The deploy above failed its Vercel build and never went live (`dpl_HWNaUBHJrEqkfnAwnrhNiurmEmwU`), because `@vf/brand` 0.152.0's figures import `CardLink`, which `@vf/ui` 0.21.0 does not have. `@vf/ui` moves to 0.32.1 (`46d92cf`), the commit brand 0.152.0 itself declares, as dependency and override.
+
+## 2026-11-04 — deploy 9a058a4: the view lines reach the site; Canon's Value-Led Growth paragraph goes live (finish the words)
+**Breaking:** No.
+**Consumer action:** None. Revert target: `dpl_NTM2AxfKYqqK5r5jXhVu9NZ27Qv9` (`af5b14b`). The standing revert to `dpl_9KxTNjoxDgcp1bA3pLt5gdBmAYwe` (`96e8cfd`) still undoes the whole Unified Views move and now carries this too.
+**Commit:** `9a058a4`
+**Owner:** showcase
+
+Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@vf/value-path-core` moves to 0.21.3 (`280b75a`). The rebuild reads Canon's corrected `valueLedGrowth` paragraph, so /value-led-growth stops printing the two retired names and "360-degree", and the film titles on /unified-views read the new names. `@vf/site-kit` stays on 0.99.2; its brand comes through the `overrides` entry, moved with this. No id, slug or address moved.
