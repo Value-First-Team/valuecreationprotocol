@@ -2,7 +2,12 @@
 /**
  * canon-drift-gate — the protocol site serves canon by hand-copied markdown.
  *
- * WHY THIS EXISTS. `next/src/content/canon/` and `next/src/content/wiki-canonical/` are
+ * 2026-11-04: THE PAIRED COPIES ARE GONE. Canon with a master now reads the pinned
+ * snapshot in @vf/value-path-core/canon-data (Lattice's contract ruling J9), so PAIRED is
+ * empty and what this gate still does is refuse a new copy that arrives unaudited. A
+ * master's words reach this site by a pin bump. The history below is why.
+ *
+ * WHY THIS EXISTS. `next/src/content/canon/` and `next/src/content/wiki-canonical/` were
  * copies. Nothing regenerated them and nothing compared them, so on 2026-09-20
  * /teach was serving the TEACH v1.0 interim draft — "Moving quickly while
  * reshaping form", under a visible PENDING CHRIS APPROVAL banner — five weeks
@@ -49,22 +54,7 @@ const FIX = process.argv.includes('--fix');
 const CONTENT_ROOTS = ['next/src/content'];
 
 /** site-relative path  ->  master filename under canon/canonical/ */
-const PAIRED = {
-  'canon/teach-values-canonical-reference.md': 'teach-values-canonical-reference.md',
-  'canon/Value-Creation-Protocol-Positioning-Paper.md': 'value-creation-protocol-positioning-paper.md',
-  'canon/vcp-canonical-reference.md': 'vcp-canonical-reference.md',
-  'wiki-canonical/five-core-beliefs-canonical-reference.md': 'five-core-beliefs-canonical-reference.md',
-  'wiki-canonical/12-complexity-traps-canonical-reference.md': '12-complexity-traps-canonical-reference.md',
-  'wiki-canonical/four-unified-views-canonical-reference.md': 'four-unified-views-canonical-reference.md',
-  'wiki-canonical/hubspot-cvp-canonical-reference.md': 'hubspot-cvp-canonical-reference.md',
-  'wiki-canonical/value-realities-canonical-reference.md': 'value-realities-canonical-reference.md',
-  'wiki-canonical/four-pillars-canonical-reference.md': 'four-pillars-canonical-reference.md',
-  'wiki-canonical/three-org-model-canonical-reference.md': 'three-org-model-canonical-reference.md',
-  'wiki-canonical/value-first-language-translation-guide.md': 'value-first-language-translation-guide.md',
-  'wiki-canonical/value-led-growth-canonical-reference.md': 'value-led-growth-canonical-reference.md',
-  'wiki-canonical/value-loop-canonical-reference-v1.md': 'value-loop-canonical-reference-v1.md',
-  'wiki-canonical/value-path-canonical-reference-v1.1.md': 'value-path-canonical-reference-v1.1.md',
-};
+const PAIRED = {};
 
 /** Unpaired on purpose. Each reason is a claim someone can check and overturn. */
 const EXEMPT = {
@@ -203,4 +193,4 @@ if (drift || unaudited) {
   console.error('  Canon is the authority. Never edit the copy to match the page.');
   process.exit(1);
 }
-console.log('canon-drift-gate: PASS — every copied file matches canon.');
+console.log('canon-drift-gate: PASS — every content file is accounted for.');

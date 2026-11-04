@@ -179,7 +179,7 @@ Every team sees the same customer reality, eliminating the "different versions o
 **The Transformation:**
 Revenue operations stop being archaeology and start being intelligence.
 
-### View 3: Unified Business Context
+### View 3: Unified Strategy View
 
 **How HubSpot Delivers It:**
 
@@ -191,7 +191,7 @@ Revenue operations stop being archaeology and start being intelligence.
 **The Transformation:**
 Decision-makers operate from synthesized reality, not departmental fragments.
 
-### View 4: Unified Team Enablement
+### View 4: Unified Operations View
 
 **How HubSpot Delivers It:**
 

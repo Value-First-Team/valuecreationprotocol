@@ -1,6 +1,6 @@
 /**
  * /value-loop — Value Loop canonical reference v1. React port of
- * src/pages/value-loop.astro. Body source: wiki-canonical markdown, build-time.
+ * src/pages/value-loop.astro. Body source: the pinned canon snapshot, build-time.
  */
 import type { Metadata } from 'next';
 import { SITE } from '@/lib/site';

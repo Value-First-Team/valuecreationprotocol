@@ -158,9 +158,11 @@ export async function getValuePathStages() {
  * Get all 4 Unified Views (UCV, URV, UBC, UTE).
  *
  * Each view has a `tagline` (the one-line elevator), a long `description`,
- * `primaryOrg` (customer-org / finance-org / operations-org), `howItTransforms`
- * (the before→after operating shift), `keyQuestions[]` the view answers, and
- * `relatedTraps[]` references — the traps each view counters by existing.
+ * `stewardedBy` (who looks after the view; not an access rule, every team reads and
+ * adds to every view), `howItTransforms` (the before→after operating shift),
+ * `keyQuestions[]` the view answers, and `relatedTraps[]` — the traps that name this
+ * view as a helpful starting point, read back from each trap's `viewStartingPoints`
+ * (canon v2.0; Lattice's contract ruling 2.3).
  */
 export async function getUnifiedGoals() {
   const result = await sanityQuery<
@@ -169,7 +171,7 @@ export async function getUnifiedGoals() {
       name: string;
       tagline?: string;
       description: string;
-      primaryOrg?: string;
+      stewardedBy?: string;
       howItTransforms?: string;
       keyQuestions?: string[];
       color?: { hex: string };
@@ -177,8 +179,8 @@ export async function getUnifiedGoals() {
     }>
   >(
     `*[_type == "unifiedGoal"]{
-      _id, name, tagline, description, primaryOrg, howItTransforms, keyQuestions, color,
-      "relatedTraps": relatedTraps[]->{_id, name, slug}
+      _id, name, tagline, description, stewardedBy, howItTransforms, keyQuestions, color,
+      "relatedTraps": *[_type == "trap" && ^._id in viewStartingPoints[].view._ref]{_id, name, slug}
     }`
   );
   return result ?? [];
