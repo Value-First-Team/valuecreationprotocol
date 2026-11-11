@@ -10,8 +10,7 @@
  *   2. vcp-tokens.css                — VCP's own protocol-identity preset (base + utils)
  *   3. vcp-archetypes.css            — ported archetype + page scoped CSS
  *   4. vcp-dark.css                  — dark-mode bridge for the vcp-* tokens
- *   5. vcp-stage.css                 — the VCP identity on the shared scroll stage (/teach)
- *   6. globals.css                   — Tailwind layers + skip-link
+ *   5. globals.css                   — Tailwind layers + skip-link
  */
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
@@ -19,12 +18,8 @@ import '@vf/design-engine/tokens.css';
 import '../styles/vcp-tokens.css';
 import '../styles/vcp-archetypes.css';
 import '../styles/vcp-dark.css';
-import '../styles/vcp-stage.css';
 import './globals.css';
 import { SiteShell, THEME_BOOT_SCRIPT } from '@vf/site-kit';
-// The scroll stage's boot: a page with a stage (/teach) holds its stage layout from first paint when WebGL 2 is
-// there. It only marks <html>; nothing on a page without a stage reads the mark.
-import { SCROLL_STAGE_BOOT_SCRIPT } from '@vf/site-kit/scroll-stage';
 // THE FLY-IN LAYER. One mount, and every page of this site has fly-ins
 // available at every side (left/right/top/bottom/center), every stack axis
 // (z depth, x parallel, y nested) and every mode (overlay, push, inset — an
@@ -125,7 +120,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
          * at all, never an ordinary OS-light visitor, who still arrives light.
          */}
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
-        <script dangerouslySetInnerHTML={{ __html: SCROLL_STAGE_BOOT_SCRIPT }} />
         {/* HubSpot tracking (portal 40810431 = VF Team). next/script afterInteractive
             executes AFTER hydration, so the loader can't race hydration and prepend
             div#hs-web-interactives-top-push-anchor to <body> before React reconciles. */}

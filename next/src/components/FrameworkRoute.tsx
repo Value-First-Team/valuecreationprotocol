@@ -51,14 +51,14 @@
  *
  * Chris ruled that TEACH joins the shared framework page as family eight ("Yes, build
  * it (Recommended)"), so /teach is a thin route over this file like the other seven.
- * Three things differ, and each is answered by a package, not here: TEACH opens on
- * its arches, a scroll stage that runs the page's full width (@vf/site-kit 0.232.0,
- * `frameworkOpeningIsFullWidth`), so it goes in the archetype's `stage` slot, wrapped
- * in `.vcp-stage` where this site's identity reaches the stage, and the lede opens
- * the hero; its pairs draw the card-beside-film ROW at every layout (@vf/brand
- * `FRAMEWORK_ROW_ONLY`), so the module gets their cards; and it has no Compass tool,
- * so no endpoint is passed. The canonical reference the hand-built page carried in
- * full now has its own address, /teach/reference, linked from the spec strip.
+ * Two things differ, and each is answered by a package, not here: its pairs draw the
+ * card-beside-film ROW at every layout (@vf/brand `FRAMEWORK_ROW_ONLY`), so the module
+ * gets their cards; and it has no Compass tool, so no endpoint is passed. Its opening is
+ * canon's Quick Reference Card (@vf/site-kit 0.234.0; Chris, "I think we should start the
+ * page here"), drawn by `FrameworkStageFor` in the hero's opening slot like any staged
+ * framework; the 3D arches it opened on before are retired ("The 3D is not doing it for me
+ * right now"). The canonical reference the hand-built page carried in full has its own
+ * address, /teach/reference, linked from the spec strip.
  */
 import type { Metadata } from 'next';
 import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
@@ -70,7 +70,6 @@ import {
   FrameworkRowPreviews,
   frameworkItemCards,
   frameworkOpensOnStage,
-  frameworkOpeningIsFullWidth,
   frameworkPageMetadata,
   frameworkJsonLd,
 } from '@vf/site-kit/framework';
@@ -168,10 +167,10 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // under two titles. Not one framework sentence is written here, still.
   //
   // The answer comes from the kit, which asks @vf/brand: a framework opens on a stage
-  // when it has a liftable overview visual or a space of its own (the TEACH arches).
-  // The rest render exactly what they rendered before this branch existed.
+  // when it has a liftable overview visual or an opening of its own (TEACH's Quick
+  // Reference Card, drawn in the same slot). The rest render exactly what they rendered
+  // before this branch existed.
   const staged = frameworkOpensOnStage(framework);
-  const fullWidth = frameworkOpeningIsFullWidth(framework);
   const reference = REFERENCE[framework];
   // TEACH draws its ROW at every layout and throws without its cards, so a row-only
   // framework is handed them; the other seven keep their stacked column cards.
@@ -186,20 +185,7 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         })}
       />
       <CanonArchetype
-        {...(staged && fullWidth
-          ? {
-              // A space that runs the page's full width (the TEACH arches) goes in the
-              // archetype's `stage` slot, before the hero, inside `.vcp-stage` so this
-              // site's identity reaches its palette (styles/vcp-stage.css). Its first
-              // stop carries the page's ONE h1, so the hero opens on the reading.
-              stage: (
-                <div className="vcp-stage">
-                  <FrameworkStageFor framework={framework} />
-                </div>
-              ),
-              opening: <FrameworkLede framework={framework} />,
-            }
-          : staged
+        {...(staged
           ? {
               // The stage carries the page's ONE h1 (the framework's name), so the
               // archetype must not also emit its canon-display — hence the slot

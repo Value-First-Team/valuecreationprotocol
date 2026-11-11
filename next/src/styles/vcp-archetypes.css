@@ -121,6 +121,32 @@
   }
   .dark .canon-spec-value .canon-spec-link { color: var(--vcp-d-teal); }
 
+  /* TEACH's opening, canon's Quick Reference Card (@vf/site-kit 0.234.0), in this site's type: the
+     mono eyebrow, the display heading and pair names, the ink of the reading. Its colour is the
+     TEACH family's (--vf-teach, set by the kit on the eyebrow and the pair links), not this site's. */
+  .canon-hero [data-vf-teach-opening] .vf-teach-opening-eyebrow {
+    font-family: var(--vcp-font-mono);
+    letter-spacing: var(--vcp-ls-eyebrow);
+  }
+  .canon-hero [data-vf-teach-opening] .vf-teach-opening-title {
+    font-family: var(--vcp-font-display);
+    font-weight: var(--vcp-fw-500);
+    letter-spacing: var(--vcp-ls-display);
+    color: var(--vcp-ink);
+    font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+    line-height: 1.06;
+    text-wrap: balance;
+  }
+  .canon-hero [data-vf-teach-opening] .vf-teach-opening-pairs li {
+    font-size: var(--vcp-fs-body);
+    line-height: 1.5;
+    color: var(--vcp-ink-2);
+  }
+  .canon-hero [data-vf-teach-opening] .vf-teach-opening-pair-name {
+    font-family: var(--vcp-font-display);
+    font-size: 1.25rem;
+  }
+
   /* ============= Body ============= */
   .canon-body {
     background: var(--vcp-surface);

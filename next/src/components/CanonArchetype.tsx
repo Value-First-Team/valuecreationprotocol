@@ -6,13 +6,12 @@
  *
  * Anatomy: hero (eyebrow + display + lead, OR a page's own `opening`, plus the
  * optional spec-meta) → body slot → peer cross-citation (auto-suppresses when
- * peerSlug is null) → implementer band. A page walked as one 3D space puts its
- * `stage` first; the hero then names the reference below it.
+ * peerSlug is null) → implementer band.
  */
 // hand-roll-exempt: this is the site's own canon-page anatomy (the canon-* classes styled once in vcp-archetypes.css,
-// rendered by every canonical route); its links are plain prose anchors and it has no control. The 2026-11-11 change
-// added the `stage` slot and the hero's id, and added no element. A spec row that is a way somewhere (2026-11-11, the
-// TEACH reference) is @vf/ui's TextLink, standalone, so it holds the 44 px floor.
+// rendered by every canonical route); its links are plain prose anchors and it has no control. A spec row that is a way
+// somewhere (2026-11-11, the TEACH reference) is @vf/ui's TextLink, standalone, so it holds the 44 px floor. The `stage`
+// slot the 3D TEACH arches used (11e9e1f) left with them on 2026-11-11.
 import type { ReactNode } from 'react';
 import { TextLink } from '@vf/ui';
 import { SITE, getCrossCitation, peerIsLive } from '@/lib/site';
@@ -51,17 +50,6 @@ export interface CanonArchetypeProps {
    * is a page whose title is decoration, and it is invisible to every other check.
    */
   opening?: ReactNode;
-  /**
-   * THE PAGE AS ONE SPACE, BEFORE ITS REFERENCE (the shared scroll stage, full
-   * width, from the top of the page). The stage's opening stop carries the
-   * page's one h1, so with a `stage` the hero below it names the reference it
-   * introduces at h2 (its `title`, its spec strip, no `lead`) and takes
-   * `headerId` as the address the stage's last stop links down to. Everything
-   * after the hero (body, peer cross-citation, implementer band) is unchanged.
-   */
-  stage?: ReactNode;
-  /** The hero's id: its address on the page. */
-  headerId?: string;
   /** Path on vcp.com (e.g. "/value-path") — drives the cross-citation lookup. */
   path: string;
   /** Optional spec-meta strip rows. */
@@ -74,8 +62,6 @@ export async function CanonArchetype({
   title,
   lead,
   opening,
-  stage,
-  headerId,
   path,
   specMeta = [],
   children,
@@ -88,13 +74,9 @@ export async function CanonArchetype({
   // static export never ships a dead "See also".
   const peerUrl = peerCandidate && (await peerIsLive(peerCandidate)) ? peerCandidate : null;
 
-  // with a stage, its opening stop holds the page's one h1, so the hero names the reference at h2
-  const Title = stage ? 'h2' : 'h1';
-
   return (
     <article className="canon">
-      {stage}
-      <header className="canon-hero" id={headerId}>
+      <header className="canon-hero">
         <div className="canon-hero-inner">
           {opening ?? (
             <>
@@ -102,7 +84,7 @@ export async function CanonArchetype({
                 <span>{eyebrow}</span>
                 <span className="canon-eyebrow-rule" aria-hidden="true" />
               </p>
-              <Title className="canon-display" dangerouslySetInnerHTML={{ __html: title ?? '' }} />
+              <h1 className="canon-display" dangerouslySetInnerHTML={{ __html: title ?? '' }} />
               {lead ? <p className="canon-lead">{lead}</p> : null}
             </>
           )}
