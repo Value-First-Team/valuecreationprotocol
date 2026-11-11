@@ -18,7 +18,10 @@
    2026-11-11 they are @vf/site-kit's (0.232.0, `FrameworkStageFor
    framework="teach-values"`), drawn on every property that hosts TEACH;
    FrameworkRoute wraps them in .vcp-stage, so this bridge still carries
-   this site's identity onto them.
+   this site's ground, ink and controls onto them. The arches, their ring,
+   the eyebrows and the close's links wear the TEACH family's own colour,
+   --vf-teach (site-kit 0.232.2), which is not bridged: one family is one
+   colour on every property.
    ============================================================ */
 
 :root {
@@ -57,12 +60,11 @@
    ============================================================ */
 
 .vcp-stage [data-vf-teach-stage] .vf-teach-stage-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+/* the eyebrow's colour is the family's (the kit sets --vf-teach on it); this site sets only its type */
 .vcp-stage [data-vf-teach-stage] .vf-teach-stage-eyebrow {
   font-family: var(--vcp-font-mono);
   letter-spacing: var(--vcp-ls-eyebrow);
-  color: var(--vcp-teal-deep);
 }
-.dark .vcp-stage [data-vf-teach-stage] .vf-teach-stage-eyebrow { color: var(--vcp-teal); }
 
 .vcp-stage [data-vf-teach-stage] .vf-teach-stage-title,
 .vcp-stage [data-vf-teach-stage] .vf-teach-stage-pair {

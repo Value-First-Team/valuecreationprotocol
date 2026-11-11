@@ -10,7 +10,7 @@
   ],
   "aspectAll": "16:9",
   "family": {
-    "status": "awaiting-gateways",
+    "status": "published",
     "sanityClipId": "clip-bid-2026-07-29-instill-the-values",
     "slug": "bid-2026-07-29-instill-the-values",
     "muxPlaybackId": "FhR2wNnFqVOOmr00MVWa35jMfeppxOTkeZ02GIliHCKIQ",
@@ -20,7 +20,7 @@
     "aspect": "16:9", "orientation": "landscape", "width": 1920, "height": 1080,
     "durationSeconds": 27.53, "duration": "0:28",
     "speaker": "Chris Carolan", "kitHost": "contributor-chris-carolan",
-    "title": null, "titleOwner": "fold",
+    "title": "Maybe I just need to instill the values", "titleOwner": "fold",
     "episode": { "id": "episode-vf-platform-ai-data-readiness-2026-07-29", "title": "Your Agents Are Only as Free as Your Rules — Part 3: Empowerment over Learned Helplessness", "show": "The AI-Native Shift - Beyond Industrial Defaults", "sanityStatus": "published" },
     "source": { "master": "Mux e2IuilL94UmnCnKHfcQqBXDyeggLCE4dbb2vX7NHU5c high.mp4", "in": 1752.715, "out": 1780.222 },
     "words": "What I started on was, all right, if I'm telling everybody else, and I'm feeling confidence is a major factor in my success, because it started with those values, the TEACH values. C stands for confidence. And instead of making a bunch of rules, I'm like, all right, maybe I just need to instill the values. And then that brought me to, all right, empowered.",
@@ -66,7 +66,7 @@
     "flags": [ "names co-host Trisha in a light aside" ]
   },
   "agile-adaptable": {
-    "status": "awaiting-gateways",
+    "status": "published",
     "sanityClipId": "clip-vfd-2026-03-18-we-picked-an-outcome",
     "slug": "vfd-2026-03-18-we-picked-an-outcome",
     "muxPlaybackId": "WUJiUkYGH9JnPTuhRRfjqnyNmBtWL4SdvNdQsWcucZc",
@@ -76,7 +76,7 @@
     "aspect": "16:9", "orientation": "landscape", "width": 1920, "height": 1080,
     "durationSeconds": 86.33, "duration": "1:26",
     "speaker": "Chris Carolan", "kitHost": "contributor-chris-carolan",
-    "title": null, "titleOwner": "fold",
+    "title": "Because we picked an outcome", "titleOwner": "fold",
     "episode": { "id": "episode-value-first-delivery-2026-03-18", "title": "Value-First Delivery: Integrate Learning, Don't Separate It (Commitment 5 of 7) w/ Erin Wiggers", "sanityStatus": "scheduled" },
     "source": { "master": "Mux 6znK8fjLQn2Q1zt0000UAb5pLPOZTAx4KR5Uo9cKGdxvc high.mp4", "in": 1852.464, "out": 1938.775 },
     "words": "The magic of being able to pick an outcome, and this is why it clashes with traditional scoping and traditional managed services, is clients are willing, if everybody's agreed on this end point … again, expectation management. If they understand it's in their best interest to have this agile footing and be ready to change, because that's what the world around them is happening, they just want to feel safe in doing that and making progress every day … creating that space for everybody to be okay with, well, this new thing came out, and everything we did last week, we've got to bin it. It doesn't make any sense to use that anymore. Agent in the middle of the record does that for a lot of stuff. But as we're talking to clients, because we picked an outcome of the unified customer view, as long as that is the plan, whatever comes in, whatever product updates happen, whatever AI updates happen, we're ready to leverage it immediately. And when you can do that, people start throwing original plans and expectations out the window, because there's so much value being delivered so quickly.",
@@ -85,7 +85,7 @@
     "flags": [ "episode record is 'scheduled', not published", "ends on 'so quickly' (the trailing tag 'right?' is left out)" ]
   },
   "confidence-conviction": {
-    "status": "awaiting-gateways",
+    "status": "published",
     "sanityClipId": "clip-r2u-2026-05-26-chris-showing-up-on-calls",
     "slug": "r2u-2026-05-26-chris-showing-up-on-calls",
     "muxPlaybackId": "mM00KSkgd4s5E01LbcGBYEpHn6oPEizloIwIad4ukcYDs",
@@ -95,7 +95,7 @@
     "aspect": "16:9", "orientation": "landscape", "width": 1920, "height": 1080,
     "durationSeconds": 40.27, "duration": "0:40",
     "speaker": "Chris Carolan", "kitHost": "contributor-chris-carolan",
-    "title": null, "titleOwner": "fold",
+    "title": "I don't ever have to prove myself", "titleOwner": "fold",
     "episode": { "id": "episode-the-road-to-unbound-2026-05-26", "title": "The Road to UNBOUND — Jay Schwedelson: \"The Next Five Years Won't Reward the Smartest People\"", "sanityStatus": "draft" },
     "source": { "master": "HubSpot file listing_recording_url road-to-unbound-jay-schwedelson.mp4", "in": 1434.608, "out": 1474.86 },
     "words": "The thing that's changed for me this year, after doing all of the content, where, single-digit views on LinkedIn and YouTube, and everybody asking why: the knowledge gained. I'm showing up on calls just with confidence and conviction, and knowing, as people suggested to me, I don't ever have to prove myself at any point, or I never feel the need to do that. So … move and try things. As long as you're confident and have some conviction with that, that can be anybody, especially [with] AI right now.",
@@ -104,7 +104,7 @@
     "flags": [ "the episode's Sanity record is a DRAFT; the clip is made anyway, per the coordinator", "guest Jay Schwedelson on screen, silent in the window", "an untranscribed filler before 'The thing' is left out" ]
   },
   "humble-hungry": {
-    "status": "awaiting-gateways",
+    "status": "published",
     "sanityClipId": "clip-r2u-2026-07-29-george-so-far-behind-landscape",
     "slug": "r2u-2026-07-29-george-so-far-behind-landscape",
     "muxPlaybackId": "vVbQq4kWtzScibLHEYDrEahcqqPjvMhDpiLukpFqgFg",
@@ -114,7 +114,7 @@
     "aspect": "16:9", "orientation": "landscape", "width": 1920, "height": 1080,
     "durationSeconds": 52.96, "duration": "0:53",
     "speaker": "George B. Thomas", "kitHost": "contributor-george-b-thomas",
-    "title": null, "titleOwner": "fold", "portraitSibling": { "sanityClipId": "clip-r2u-0729-im-so-far-behind", "title": "The Teacher's Next Thought: I'm So Far Behind" },
+    "title": "My immediate next thought is, I'm so far behind", "titleOwner": "fold", "portraitSibling": { "sanityClipId": "clip-r2u-0729-im-so-far-behind", "title": "The Teacher's Next Thought: I'm So Far Behind" },
     "episode": { "id": "episode-the-road-to-unbound-2026-07-29", "title": "The Road to UNBOUND - Seven Weeks Out: Show Us Your AI Build, and Why the Real One Is Invisible", "sanityStatus": "published" },
     "source": { "master": "HubSpot file listing_recording_url riverside_magic_episode 01_road_to unbound (3).mp4 (landscape)", "in": 1434.206, "out": 1487.126 },
     "words": "So, Rob, I'll give you a dirty little secret, because you mentioned the AI content system that I taught, the boot camp workshop thing, which is fun, by the way. I love doing it. And as you know, people are like, oh, this is mind-blowing. This is valuable. This is incredible. And I say all of that humbly. But just know, Rob, when I hang up from those calls, my immediate next thought is, I'm so far behind. I've got to go learn more stuff. I've got to teach more things. And so you're not alone, brother. And this is, by the way, we're using AI as an example, but HubSpot, same thing. Just because you're teaching it doesn't mean that you don't still feel the same pains of, I'm behind everybody. And maybe you're not, maybe you are, but that's just a psychological thing that is happening in our ecosystem, in our world right now.",
