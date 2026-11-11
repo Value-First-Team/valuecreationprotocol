@@ -109,6 +109,17 @@
     margin: 0;
     word-break: break-word;
   }
+  /* A spec value that leads somewhere (the TEACH reference): the strip's own mono type, the
+     link teal and an underline at rest; @vf/ui's TextLink keeps the 44 px floor. */
+  .canon-spec-value .canon-spec-link {
+    font-family: var(--vcp-font-mono);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--vcp-teal-deep);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .dark .canon-spec-value .canon-spec-link { color: var(--vcp-d-teal); }
 
   /* ============= Body ============= */
   .canon-body {

@@ -11,13 +11,17 @@
  */
 // hand-roll-exempt: this is the site's own canon-page anatomy (the canon-* classes styled once in vcp-archetypes.css,
 // rendered by every canonical route); its links are plain prose anchors and it has no control. The 2026-11-11 change
-// added the `stage` slot and the hero's id, and added no element.
+// added the `stage` slot and the hero's id, and added no element. A spec row that is a way somewhere (2026-11-11, the
+// TEACH reference) is @vf/ui's TextLink, standalone, so it holds the 44 px floor.
 import type { ReactNode } from 'react';
+import { TextLink } from '@vf/ui';
 import { SITE, getCrossCitation, peerIsLive } from '@/lib/site';
 
 export interface SpecMetaItem {
   label: string;
   value: string;
+  /** Where the value leads, when it is a way to another page (the TEACH reference, say). */
+  href?: string;
 }
 
 export interface CanonArchetypeProps {
@@ -107,7 +111,15 @@ export async function CanonArchetype({
               {specMeta.map((row) => (
                 <div className="canon-spec-row" key={row.label + row.value}>
                   <dt className="canon-spec-label">{row.label}</dt>
-                  <dd className="canon-spec-value">{row.value}</dd>
+                  <dd className="canon-spec-value">
+                    {row.href ? (
+                      <TextLink href={row.href} arrow={false} standalone className="canon-spec-link">
+                        {row.value}
+                      </TextLink>
+                    ) : (
+                      row.value
+                    )}
+                  </dd>
                 </div>
               ))}
             </dl>

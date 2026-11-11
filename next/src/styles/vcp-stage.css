@@ -13,6 +13,12 @@
    chosen. scripts/assert-stage-bridge.mjs (in `npm run check`) reads both
    files and fails if any pair stops matching, so changing a --vcp-* colour
    without its triplet cannot ship.
+
+   The stage on this site is the TEACH arches, /teach's opening. Since
+   2026-11-11 they are @vf/site-kit's (0.232.0, `FrameworkStageFor
+   framework="teach-values"`), drawn on every property that hosts TEACH;
+   FrameworkRoute wraps them in .vcp-stage, so this bridge still carries
+   this site's identity onto them.
    ============================================================ */
 
 :root {
@@ -44,20 +50,22 @@
 
 /* ============================================================
    The words on a stop, in this site's own type.
-   The pair and its theme are the largest words on the screen at
-   every width; the sections read at the canon body size.
+   The kit draws them on its `vf-teach-stage-*` classes with a
+   default type; inside .vcp-stage they take this site's, as they
+   did when the stage was this site's own. The pair and its theme
+   are the largest words on the screen at every width.
    ============================================================ */
 
-.vcp-stage .vcp-stage-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
-.vcp-stage .vcp-stage-eyebrow {
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-head { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-eyebrow {
   font-family: var(--vcp-font-mono);
   letter-spacing: var(--vcp-ls-eyebrow);
   color: var(--vcp-teal-deep);
 }
-.dark .vcp-stage .vcp-stage-eyebrow { color: var(--vcp-teal); }
+.dark .vcp-stage [data-vf-teach-stage] .vf-teach-stage-eyebrow { color: var(--vcp-teal); }
 
-.vcp-stage .vcp-stage-title,
-.vcp-stage .vcp-stage-pair {
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-title,
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-pair {
   font-family: var(--vcp-font-display);
   font-weight: var(--vcp-fw-500);
   letter-spacing: var(--vcp-ls-display);
@@ -65,12 +73,12 @@
   margin: 0;
   text-wrap: balance;
 }
-.vcp-stage .vcp-stage-title { font-size: clamp(2.25rem, 4.4vw, 3.75rem); line-height: 1.06; }
-.vcp-stage .vcp-stage-pair { font-size: clamp(2.375rem, 5vw, 4.25rem); line-height: 1.04; }
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-title { font-size: clamp(2.25rem, 4.4vw, 3.75rem); line-height: 1.06; }
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-pair { font-size: clamp(2.375rem, 5vw, 4.25rem); line-height: 1.04; }
 /* the second half never leaves the ↔ that holds it */
-.vcp-stage .vcp-stage-held { white-space: nowrap; }
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-held { white-space: nowrap; }
 
-.vcp-stage .vcp-stage-theme {
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-theme {
   font-family: var(--vcp-font-display);
   font-size: clamp(1.375rem, 2.3vw, 1.875rem);
   font-weight: var(--vcp-fw-400);
@@ -80,7 +88,7 @@
   text-wrap: balance;
 }
 
-.vcp-stage .vcp-stage-lead {
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-subtitle {
   font-family: var(--vcp-font-display);
   font-size: var(--vcp-fs-lead);
   line-height: 1.45;
@@ -88,32 +96,8 @@
   margin: 0;
 }
 
-.vcp-stage .vcp-stage-label {
-  font-family: var(--vcp-font-mono);
-  font-size: var(--vcp-fs-micro);
-  font-weight: var(--vcp-fw-600);
-  letter-spacing: var(--vcp-ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--vcp-teal-deep);
-  margin: 0 0 0.5rem;
-}
-.dark .vcp-stage .vcp-stage-label { color: var(--vcp-teal); }
-
-.vcp-stage .vcp-stage-body {
-  font-size: var(--vcp-fs-body);
-  line-height: var(--vcp-lh-body);
-  color: var(--vcp-ink-2);
-}
-.vcp-stage .vcp-stage-body > * + * { margin-top: 0.75rem; }
-.vcp-stage .vcp-stage-body p { margin: 0; max-width: 62ch; }
-.vcp-stage .vcp-stage-body strong { color: var(--vcp-ink); font-weight: var(--vcp-fw-600); }
-.vcp-stage .vcp-stage-body ul { margin: 0; padding-left: 1.15rem; list-style: disc; }
-.vcp-stage .vcp-stage-body li + li { margin-top: 0.35rem; }
-.vcp-stage .vcp-stage-body li::marker { color: var(--vcp-teal); }
-
-.vcp-stage .vcp-stage-beat-words { display: flex; flex-direction: column; gap: 0.25rem; }
-
-/* The opening's list of the pairs: each one a way to its own stop, its theme beside it */
-.vcp-stage .vcp-stage-pairs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.vcp-stage .vcp-stage-pairs li { font-size: var(--vcp-fs-body); line-height: 1.5; color: var(--vcp-ink-2); }
-.vcp-stage .vcp-stage-pairs .vcp-stage-pairs-name { font-family: var(--vcp-font-display); font-size: 1.25rem; }
+/* The close's list of the pairs: each one a way to its row, its theme beside it */
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-pairs { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-pairs li { font-size: var(--vcp-fs-body); line-height: 1.5; color: var(--vcp-ink-2); }
+/* a link inside its line keeps an underline at rest (the inline-target rule: reach, not the 44 px box) */
+.vcp-stage [data-vf-teach-stage] .vf-teach-stage-pairs .vf-teach-stage-pairs-name { font-family: var(--vcp-font-display); font-size: 1.25rem; text-decoration: underline; text-underline-offset: 3px; }

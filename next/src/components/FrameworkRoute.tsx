@@ -44,15 +44,33 @@
  * arrives from `@vf/site-kit/framework` — `FrameworkStageFor` + `FrameworkLede`, the
  * same two components the other property renders, so one framework cannot be
  * published under two titles.
+ *
+ * ==========================================================================
+ * AND THE EIGHTH (2026-11-11) — THE TEACH VALUES
+ * ==========================================================================
+ *
+ * Chris ruled that TEACH joins the shared framework page as family eight ("Yes, build
+ * it (Recommended)"), so /teach is a thin route over this file like the other seven.
+ * Three things differ, and each is answered by a package, not here: TEACH opens on
+ * its arches, a scroll stage that runs the page's full width (@vf/site-kit 0.232.0,
+ * `frameworkOpeningIsFullWidth`), so it goes in the archetype's `stage` slot, wrapped
+ * in `.vcp-stage` where this site's identity reaches the stage, and the lede opens
+ * the hero; its pairs draw the card-beside-film ROW at every layout (@vf/brand
+ * `FRAMEWORK_ROW_ONLY`), so the module gets their cards; and it has no Compass tool,
+ * so no endpoint is passed. The canonical reference the hand-built page carried in
+ * full now has its own address, /teach/reference, linked from the spec strip.
  */
 import type { Metadata } from 'next';
-import { FrameworkModule, frameworkClaim, hasFrameworkOverview, type FrameworkKey } from '@vf/brand';
+import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
 import {
   FRAMEWORK_PATHS,
   COMPASS_SERVICES,
   FrameworkStageFor,
   FrameworkLede,
   FrameworkRowPreviews,
+  frameworkItemCards,
+  frameworkOpensOnStage,
+  frameworkOpeningIsFullWidth,
   frameworkPageMetadata,
   frameworkJsonLd,
 } from '@vf/site-kit/framework';
@@ -60,6 +78,7 @@ import { SITE } from '@/lib/site';
 import { CanonArchetype } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { frameworkMedia } from '@/lib/framework-media';
+import { teachReferenceTitle } from '@/lib/teach-reference';
 
 // The AI-Native Shift plates this property serves. Static imports straight out of
 // @vf/brand's "./assets/*" export, so the bytes are the package's and this repo
@@ -103,6 +122,17 @@ const OG: Record<FrameworkKey, string> = {
   // The site's default card stands in until a redrawn card ships.
   'five-layer-model': '/og/og-default.jpg',
   'three-org-model': '/og/og-three-orgs.jpg',
+  'teach-values': '/og/og-teach.jpg',
+};
+
+/**
+ * Where a framework's full canonical reference lives on this property, when it has an
+ * address of its own. TEACH's did: the hand-built /teach rendered the whole reference
+ * below its stage, and that reading moved to /teach/reference when /teach became a
+ * thin route. Its link text is the reference's own title, read by that page.
+ */
+const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => string }>> = {
+  'teach-values': { href: '/teach/reference', title: () => teachReferenceTitle() },
 };
 
 /**
@@ -137,10 +167,15 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // `FrameworkPage` renders, so the two properties cannot publish one framework
   // under two titles. Not one framework sentence is written here, still.
   //
-  // The answer comes from @vf/brand, which owns it: one framework has a liftable
-  // overview visual today and the other six draw theirs inside their glances. Those
-  // six render exactly what they rendered before this branch existed.
-  const staged = hasFrameworkOverview(framework);
+  // The answer comes from the kit, which asks @vf/brand: a framework opens on a stage
+  // when it has a liftable overview visual or a space of its own (the TEACH arches).
+  // The rest render exactly what they rendered before this branch existed.
+  const staged = frameworkOpensOnStage(framework);
+  const fullWidth = frameworkOpeningIsFullWidth(framework);
+  const reference = REFERENCE[framework];
+  // TEACH draws its ROW at every layout and throws without its cards, so a row-only
+  // framework is handed them; the other seven keep their stacked column cards.
+  const rowOnly = FRAMEWORK_ROW_ONLY.includes(framework);
 
   return (
     <>
@@ -151,7 +186,20 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         })}
       />
       <CanonArchetype
-        {...(staged
+        {...(staged && fullWidth
+          ? {
+              // A space that runs the page's full width (the TEACH arches) goes in the
+              // archetype's `stage` slot, before the hero, inside `.vcp-stage` so this
+              // site's identity reaches its palette (styles/vcp-stage.css). Its first
+              // stop carries the page's ONE h1, so the hero opens on the reading.
+              stage: (
+                <div className="vcp-stage">
+                  <FrameworkStageFor framework={framework} />
+                </div>
+              ),
+              opening: <FrameworkLede framework={framework} />,
+            }
+          : staged
           ? {
               // The stage carries the page's ONE h1 (the framework's name), so the
               // archetype must not also emit its canon-display — hence the slot
@@ -174,6 +222,7 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
           { label: 'Status', value: 'canonical' },
           { label: 'Cite', value: `valuecreationprotocol.com${path}` },
           { label: 'Source', value: 'Generated from the canonical reference and checked against it on every build' },
+          ...(reference ? [{ label: 'Reference', value: reference.title(), href: reference.href }] : []),
         ]}
       >
         {/* The hover/focus preview on every "what exists" row. It is a CLIENT wrapper
@@ -201,9 +250,15 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
             // already carries `id="reality-<slug>"`, so the landing point exists.
             reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
           }}
-          decideEndpoint={COMPASS_SERVICES.decide}
-          recognizeEndpoint={COMPASS_SERVICES.recognize}
-          translateEndpoint={COMPASS_SERVICES.translate}
+          /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
+             and the module reads none. */
+          {...(rowOnly
+            ? { itemCards: frameworkItemCards(framework) }
+            : {
+                decideEndpoint: COMPASS_SERVICES.decide,
+                recognizeEndpoint: COMPASS_SERVICES.recognize,
+                translateEndpoint: COMPASS_SERVICES.translate,
+              })}
           plates={plates}
         />
         </FrameworkRowPreviews>

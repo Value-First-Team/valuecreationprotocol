@@ -18,6 +18,12 @@ import {
   type FrameworkMediaRows,
 } from '@vf/brand';
 import { sanityQuery } from './sanity/client';
+// THE TEACH FILMS (2026-11-11): Reel's film map, copied here byte for byte from
+// MainBrain L4-orchestration/output/2026-11-11-vcp-teach-elevated/teach-film-map.json and passed
+// to the resolver unchanged, as @vf/brand 0.173.2 asks. No record links a film to a pair yet, so
+// the map is the join until Lattice rules a per-pair film reference; a new or re-cut film is a new
+// copy of the map, never a code change. The resolver reads it for TEACH and ignores it otherwise.
+import teachFilms from '@/data/teach-film-map.json';
 
 let rowsPromise: Promise<FrameworkMediaRows | null> | null = null;
 
@@ -28,5 +34,5 @@ function rows(): Promise<FrameworkMediaRows | null> {
 }
 
 export async function frameworkMedia(framework: FrameworkKey): Promise<FrameworkMedia> {
-  return resolveFrameworkMedia(framework, await rows());
+  return resolveFrameworkMedia(framework, await rows(), { teachFilms });
 }
