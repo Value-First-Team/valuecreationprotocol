@@ -4,6 +4,17 @@
  * The protocol home. A peer to modelcontextprotocol.io and humancontextprotocol.com.
  * Reads as calm, technical, direct. Not a sales surface.
  */
+import {
+  CORE_BELIEFS_CLAIM,
+  COMPLEXITY_TRAPS_CLAIM,
+  VALUE_PATH_CLAIM,
+  THREE_ORG_CLAIM,
+  UNIFIED_VIEWS_CLAIM,
+  FIVE_LAYER_MODEL_CLAIM,
+  TEACH_VALUES_CLAIM,
+  VALUE_REALITIES_CLAIM,
+} from '@vf/brand/methodology';
+import { canonLine } from '@/lib/canon-line';
 
 export const SITE = {
   name: 'Value Creation Protocol',
@@ -50,74 +61,119 @@ export const NAV: Array<{ label: string; href: string }> = [
 ];
 
 /**
- * Methodology sub-pages — listed on the /methodology hub.
+ * Methodology sub-pages — listed on the /methodology hub and in the /sitemap
+ * Methodology group, each with a one-line summary.
+ *
+ * EVERY SUMMARY IS CANON'S OWN WORDS, and none is written here.
+ *
+ * - A framework @vf/brand carries is summarised by its claim there: the definition
+ *   sentence canon opens that framework with, which @vf/brand holds verbatim and its
+ *   framework page reads too. The hub and the page read one copy, so they move together
+ *   on a pin bump. (`frameworkClaim(key).headline` is the same sentence for five of the
+ *   eight; for the beliefs, the traps and the Realities it is a headline @vf/brand
+ *   composes, so the hub reads the canon claim beneath it.) The traps reference opens
+ *   with no definition of the twelve as a whole, so their card carries the one sentence
+ *   it writes about them together, also held by @vf/brand.
+ * - A page @vf/brand does not carry quotes one line of its canon reference, verbatim,
+ *   through `canonLine(file, line, text)`, which stops the build when the pinned
+ *   snapshot no longer carries that line there (lib/canon-line.ts).
  */
 export const METHODOLOGY_PAGES: Array<{ label: string; href: string; summary: string }> = [
   {
     label: 'Five Core Beliefs',
     href: '/beliefs',
-    summary: 'The philosophical foundations — five "X over Y" statements.',
+    // five-core-beliefs-canonical-reference.md, "What Are the Five Core Beliefs?"
+    summary: CORE_BELIEFS_CLAIM.definition,
   },
   {
     label: 'Twelve Complexity Traps',
     href: '/twelve-traps',
-    summary: 'Anti-patterns that derail value-creation work.',
+    // 12-complexity-traps-canonical-reference.md, "Trap Interconnections".
+    summary: COMPLEXITY_TRAPS_CLAIM.interconnection,
   },
   {
     label: 'Value Path',
     href: '/value-path',
-    summary: 'Eight stages from first signal through champion.',
+    // value-path-canonical-reference-v1.1.md, "What is The Value Path?"
+    summary: VALUE_PATH_CLAIM.definition,
   },
   {
     label: 'Three-Org Model',
     href: '/three-orgs',
-    summary: 'Customer, Operations, Finance — every concern maps to one.',
+    // three-org-model-canonical-reference.md, "What is the Three-Org Model?"
+    summary: THREE_ORG_CLAIM.definition,
   },
   {
     label: 'Four Unified Views',
     href: '/unified-views',
-    summary: 'UCV, URV, UBC, UTE — the visibility framework.',
+    // four-unified-views-canonical-reference.md (v2.0), "What are the Four Unified Views?"
+    summary: UNIFIED_VIEWS_CLAIM.definition,
   },
   {
     label: 'Five-Layer Model',
     href: '/five-layers',
-    // Canon's own words for the model, not a summary written here.
-    summary: 'Any organization as five layers, stacked bottom-up — each layer earns the weight of the one above it.',
+    // five-layer-model-canonical-reference.md, "What the Five-Layer Model Is"
+    summary: FIVE_LAYER_MODEL_CLAIM.definition,
   },
   {
     label: 'Value Loop',
     href: '/value-loop',
-    summary: 'The continuous Discover → Codify → Deliver → Learn loop.',
+    summary: canonLine(
+      'value-loop-canonical-reference-v1.md',
+      21,
+      'The Value Loop is a 4-stage framework describing how value actually emerges through continuous engagement with different conversation partners—ourselves, specific others, the market, and data.',
+    ),
   },
   {
     label: 'TEACH',
     href: '/teach',
-    summary: 'Five values for teaching, leading, and operating.',
+    // teach-values-canonical-reference.md, "What is the TEACH Values Framework?", first sentence.
+    summary: TEACH_VALUES_CLAIM.definition[0],
   },
   {
     label: 'AI-Native Shift',
     href: '/ai-native-shift',
-    summary: 'The organizational transformation pattern.',
+    // The AI-Native Shift has no canonical reference of its own; this is the line the
+    // VCP positioning paper writes about it, under "Where VCP Already Lives".
+    summary: canonLine(
+      'value-creation-protocol-positioning-paper.md',
+      115,
+      'Inside the AI-Native Shift program — a four-rung progression from Office Hours through the Value-First OS deployment. Each rung is VCP being adopted at a different depth.',
+    ),
   },
   {
     label: 'Value Realities',
     href: '/realities',
-    summary: 'Fourteen realities and the operational commitments they imply.',
+    // value-realities-canonical-reference.md, "What Are the Value Realities?"
+    summary: VALUE_REALITIES_CLAIM.definition,
   },
   {
     label: 'Value-Led Growth',
     href: '/value-led-growth',
-    summary: 'The growth framework that replaces lead generation.',
+    summary: canonLine(
+      'value-led-growth-canonical-reference.md',
+      21,
+      'Value-Led Growth is an organizational philosophy that answers a fundamentally different question than traditional growth models.',
+    ),
   },
   {
     label: 'HubSpot as CVP',
     href: '/hubspot-cvp',
-    summary: 'The canonical implementing substrate.',
+    summary: canonLine(
+      'hubspot-cvp-canonical-reference.md',
+      27,
+      'A Customer Value Platform (CVP) is a unified business system that enables organizations to recognize, create, deliver, and multiply customer value across all functions—replacing fragmented tool stacks with coherent operational capability.',
+    ),
   },
   {
     label: 'CVP vs VCP',
     href: '/cvp-vs-vcp',
-    summary: 'Disambiguation — the platform category vs the protocol.',
+    // vcp-canonical-reference.md, "Disambiguation: VCP vs. CVP", its closing line.
+    summary: canonLine(
+      'vcp-canonical-reference.md',
+      133,
+      'VCP is what is declared. CVP is what it runs on. They are not synonyms, alternates, or competing names.',
+    ),
   },
 ];
 

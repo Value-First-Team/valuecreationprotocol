@@ -155,7 +155,7 @@ export async function getValuePathStages() {
 }
 
 /**
- * Get all 4 Unified Views (UCV, URV, UBC, UTE).
+ * Get all 4 Unified Views (Customer, Revenue, Strategy, Operations — canon v2.0).
  *
  * Each view has a `tagline` (the one-line elevator), a long `description`,
  * `stewardedBy` (who looks after the view; not an access rule, every team reads and
