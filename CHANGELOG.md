@@ -196,3 +196,11 @@ Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@
 **Owner:** showcase (Motif's release)
 
 **On every framework page, the links the framework module draws change how they look and feel, not what they say.** `@vf/brand` 0.173.2 to 0.173.4 (`f8ee7de`; 0.173.3 is `2d769f7`), in dependencies and overrides: every link that stands alone on its line is at least 44px tall, a link that reads as words (a film's title, "Go deeper", "One next step", a reading's title) is underlined at rest, and every one draws the house focus ring, which no longer clips under a film. Links that only render on this site take it too: "The deck", "One next step", a Reality's "Answers the …", the Value Path's places, the traps' and Realities' marked-set links and the Open/Close button. Found on /teach, where a film's title stood alone with no underline and no 44px floor (Showcase's finding, Motif's fix). No other pin moves; lockfile and installed tree read back.
+
+## 2026-11-12 — deploy b59f5e5: the methodology summaries are canon's own words
+**Breaking:** No.
+**Consumer action:** None. Revert target: `dpl_HDyAGBMsq87UDSbvhC1zPdTBYryK` (`a8a2466`), the production deployment serving before this push.
+**Commit:** `b59f5e5`
+**Owner:** showcase (Motif's finding)
+
+**On /methodology and in the Methodology group of /sitemap, the one-line summary under each page is now canon's sentence, not one written for the site.** The Four Unified Views card no longer names two retired views (UBC and UTE; canon v2.0 calls them the Unified Strategy View and the Unified Operations View) and reads canon's definition of the views; the TEACH card reads canon's definition (five interdependent value pairs) in place of "five values for teaching". Every other summary changed too, because none of them were canon's words. The eight frameworks `@vf/brand` carries read its canon claim, the same words their framework pages read; Value Loop, AI-Native Shift, Value-Led Growth, HubSpot as CVP and CVP vs VCP each quote one line of their canon reference verbatim, and the build stops if the pinned canon snapshot no longer carries that line where it is cited (`next/src/lib/canon-line.ts`). Two diagrams no page rendered, which printed UBC and UTE, are removed (`/diagrams/three-org.svg`, `/diagrams/value-path.svg` now 404). No pin moves.
