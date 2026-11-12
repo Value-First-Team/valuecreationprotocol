@@ -80,10 +80,16 @@
  * card-beside-film row (L4-orchestration/output/2026-11-11-vcp-teach-elevated/vcp-elevation-plan.md,
  * build 1). The row is the module's own layout field and the placement chooses it (@vf/brand
  * `itemLayout`, card ruling 1), so this file names the frameworks it places in the row, as
- * `ROW_PLACED` below, and the module draws the rest. The row is `"row"`, not `"responsive"`: each
- * item's two-sided game card beside its film and "What exists", the card first on a phone, as
- * TEACH draws it. The Core Beliefs come first. The Twelve Traps follow when @vf/brand draws their
- * row: asking FrameworkModule for it today throws, because their glance takes no layout.
+ * `ROW_PLACED` below, and the module draws the rest.
+ *
+ * A ROW PLACEMENT IS `"responsive"` (`ROW_PLACEMENT_LAYOUT`). Chris, 2026-10-02, on /beliefs (log
+ * 6401f469b): "I think rows make sense on desktop. column card (without game cards) (with playable
+ * videos) make sense on mobile". It binds the shared module on every host, so from 900px each item
+ * is its two-sided game card beside its film and "What exists", and below that it is the column
+ * card, opened so its film plays, with no game card: what valuefirstteam.com/beliefs draws. Every
+ * family this site places in the row takes it. The Core Beliefs come first; the Twelve Traps follow
+ * when @vf/brand draws their row (asking FrameworkModule for it today throws). TEACH draws its own
+ * row at every width (`FRAMEWORK_ROW_ONLY`) until @vf/brand gives it a column form.
  */
 import type { Metadata } from 'next';
 import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
@@ -169,6 +175,12 @@ const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => strin
 const ROW_PLACED: readonly FrameworkKey[] = ['core-beliefs'];
 
 /**
+ * The layout every ROW_PLACED framework is asked for: the row from 900px, the column card below it
+ * (Chris's 2026-10-02 ruling, see the header). One value for every family, never a per-family switch.
+ */
+const ROW_PLACEMENT_LAYOUT = 'responsive' as const;
+
+/**
  * Page metadata composed from the module's own claim — the title tag cannot drift
  * from the page, because both read the same canon. The composition is the kit's;
  * what this property adds is its own OG card.
@@ -234,9 +246,10 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         // already carries `id="reality-<slug>"`, so the landing point exists.
         reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
       }}
-      /* A row placement asks for the row by the module's layout field; a row-only
-         framework draws its row whatever is asked, so it is not asked. */
-      {...(rowPlaced ? { itemLayout: 'row' as const } : {})}
+      /* A row placement asks for its layout by the module's layout field (the row from
+         900px, the column card below it); a row-only framework draws its row whatever is
+         asked, so it is not asked. */
+      {...(rowPlaced ? { itemLayout: ROW_PLACEMENT_LAYOUT } : {})}
       {...(itemCards ? { itemCards } : {})}
       /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
          and the module reads none. Every other framework keeps its tool, in the row too. */
