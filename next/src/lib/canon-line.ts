@@ -22,17 +22,37 @@ function plain(line: string): string {
   return line.replace(/^\s*[-*]\s+/, '').replace(/\*\*/g, '').trim();
 }
 
-export function canonLine(file: string, line: number, text: string): string {
+function canonLines(file: string): string[] {
   const source = CANONICAL_FILES.find((f) => f.name === file)?.text;
   if (source === undefined) {
     throw new Error(`[canon-line] ${file} is not in the pinned canon snapshot.`);
   }
-  const lines = source.split(/\r?\n/).map(plain);
+  return source.split(/\r?\n/).map(plain);
+}
+
+export function canonLine(file: string, line: number, text: string): string {
+  const lines = canonLines(file);
   if (lines[line - 1] === text) return text;
   const at = lines.indexOf(text);
   throw new Error(
     at === -1
       ? `[canon-line] ${file} no longer carries this line anywhere: "${text}". Quote the line canon carries now.`
       : `[canon-line] ${file} carries this line at ${at + 1}, not ${line}: "${text}". Update the citation.`,
+  );
+}
+
+/**
+ * canonPhrase — words that stand inside one canon line rather than filling it: a stage sequence, a table cell.
+ * Checked the same way: the line must still carry this text, verbatim, at that place, or the build stops and
+ * says where it went.
+ */
+export function canonPhrase(file: string, line: number, text: string): string {
+  const lines = canonLines(file);
+  if (lines[line - 1]?.includes(text)) return text;
+  const at = lines.findIndex((l) => l.includes(text));
+  throw new Error(
+    at === -1
+      ? `[canon-line] ${file} no longer carries these words anywhere: "${text}". Quote the words canon carries now.`
+      : `[canon-line] ${file} carries these words at line ${at + 1}, not ${line}: "${text}". Update the citation.`,
   );
 }

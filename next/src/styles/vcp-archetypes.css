@@ -561,6 +561,12 @@
     text-decoration-color: rgba(13, 148, 136, 0.32);
     text-underline-offset: 3px;
   }
+  /* A callout link that is @vf/ui's TextLink: it sits inside a sentence, so it takes the sentence's own type and
+     an underline at rest; TextLink brings the house focus ring. */
+  .canon-callout-body .canon-callout-link {
+    font: inherit;
+    text-decoration-line: underline;
+  }
 
   /* Embedded diagram wrapper — generous breathing room, hairline frame. */
   .canon-figure {
