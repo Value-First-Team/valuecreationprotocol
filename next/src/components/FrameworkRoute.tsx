@@ -59,9 +59,22 @@
  * framework; the 3D arches it opened on before are retired ("The 3D is not doing it for me
  * right now"). The canonical reference the hand-built page carried in full has its own
  * address, /teach/reference, linked from the spec strip.
+ *
+ * ==========================================================================
+ * AND THROUGH THE CARD ENGINE (2026-11-12) — THE CARDS THIS ROUTE HANDS THE MODULE
+ * ==========================================================================
+ *
+ * This property is a declared build consumer in @vf/brand (`consumer:valuecreationprotocol/
+ * framework-cards`, VCP step 0). The game cards this route hands the module draw their pictures
+ * from the card-art table the build resolved (lib/card-art-table.ts), through @vf/recipes'
+ * `CardArtTableProvider`, and nowhere else: each picture carries its exact registry version
+ * (`data-card-art-version`), and the build's receipts are served at /card-asset-receipts.jsonl.
+ * Only a route that hands the module cards gets the table, so the seven frameworks that draw
+ * their own column cards render exactly what they rendered before.
  */
 import type { Metadata } from 'next';
 import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
+import { CardArtTableProvider } from '@vf/recipes/game-cards';
 import {
   FRAMEWORK_PATHS,
   COMPASS_SERVICES,
@@ -78,6 +91,7 @@ import { CanonArchetype } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { frameworkMedia } from '@/lib/framework-media';
 import { teachReferenceTitle } from '@/lib/teach-reference';
+import { cardArtTable } from '@/lib/card-art-table';
 
 // The AI-Native Shift plates this property serves. Static imports straight out of
 // @vf/brand's "./assets/*" export, so the bytes are the package's and this repo
@@ -175,6 +189,40 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // TEACH draws its ROW at every layout and throws without its cards, so a row-only
   // framework is handed them; the other seven keep their stacked column cards.
   const rowOnly = FRAMEWORK_ROW_ONLY.includes(framework);
+  // The cards this route hands the module, and the table they draw from (read at build).
+  const itemCards = rowOnly ? frameworkItemCards(framework) : undefined;
+  const cardArt = itemCards ? cardArtTable() : null;
+
+  const frameworkModule = (
+    <FrameworkModule
+      framework={framework}
+      media={media}
+      showClaim={false}
+      /* The stage above already carries this framework's overview visual, so
+         the glance stands down and starts at its set. The same accepted figure
+         twice on one page is a fork wearing a duplicate, and nothing would
+         tell you. Unstaged frameworks keep `inline`, the default. */
+      overview={staged ? 'hosted' : 'inline'}
+      hrefs={{
+        trap: (slug) => `${FRAMEWORK_PATHS['complexity-traps']}#trap-${slug}`,
+        // The other direction, added 2026-09-04: the Realities page has always
+        // linked to every trap by name, and a reader who recognized themselves on
+        // the traps page was left with the room and nothing else. Each Reality card
+        // already carries `id="reality-<slug>"`, so the landing point exists.
+        reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
+      }}
+      /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
+         and the module reads none. */
+      {...(rowOnly
+        ? { itemCards }
+        : {
+            decideEndpoint: COMPASS_SERVICES.decide,
+            recognizeEndpoint: COMPASS_SERVICES.recognize,
+            translateEndpoint: COMPASS_SERVICES.translate,
+          })}
+      plates={plates}
+    />
+  );
 
   return (
     <>
@@ -219,34 +267,11 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
             line binds, nothing is elevated on only one site. Wrapping something with
             no such rows yields exactly what was wrapped and no listener fires. */}
         <FrameworkRowPreviews>
-        <FrameworkModule
-          framework={framework}
-          media={media}
-          showClaim={false}
-          /* The stage above already carries this framework's overview visual, so
-             the glance stands down and starts at its set. The same accepted figure
-             twice on one page is a fork wearing a duplicate, and nothing would
-             tell you. Unstaged frameworks keep `inline`, the default. */
-          overview={staged ? 'hosted' : 'inline'}
-          hrefs={{
-            trap: (slug) => `${FRAMEWORK_PATHS['complexity-traps']}#trap-${slug}`,
-            // The other direction, added 2026-09-04: the Realities page has always
-            // linked to every trap by name, and a reader who recognized themselves on
-            // the traps page was left with the room and nothing else. Each Reality card
-            // already carries `id="reality-<slug>"`, so the landing point exists.
-            reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
-          }}
-          /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
-             and the module reads none. */
-          {...(rowOnly
-            ? { itemCards: frameworkItemCards(framework) }
-            : {
-                decideEndpoint: COMPASS_SERVICES.decide,
-                recognizeEndpoint: COMPASS_SERVICES.recognize,
-                translateEndpoint: COMPASS_SERVICES.translate,
-              })}
-          plates={plates}
-        />
+          {cardArt ? (
+            <CardArtTableProvider table={cardArt}>{frameworkModule}</CardArtTableProvider>
+          ) : (
+            frameworkModule
+          )}
         </FrameworkRowPreviews>
       </CanonArchetype>
     </>

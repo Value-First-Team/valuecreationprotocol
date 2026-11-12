@@ -31,3 +31,8 @@ next-env.d.ts
 
 # render-verify artifacts
 /render-shots
+
+# The Card Engine table and this build's receipts, written by vf-card-art-build (npm run card-art,
+# the prebuild and predev step). Each build's own answers, never a stored copy.
+/src/data/card-art-table.json
+/public/card-asset-receipts.jsonl
