@@ -71,6 +71,19 @@
  * (`data-card-art-version`), and the build's receipts are served at /card-asset-receipts.jsonl.
  * Only a route that hands the module cards gets the table, so the seven frameworks that draw
  * their own column cards render exactly what they rendered before.
+ *
+ * ==========================================================================
+ * THE ROW, CHOSEN BY THIS HOST (2026-11-12) — BUILD 1 OF THE ELEVATION PLAN
+ * ==========================================================================
+ *
+ * Chris picked "Seven framework pages (Recommended)": the framework pages take TEACH's
+ * card-beside-film row (L4-orchestration/output/2026-11-11-vcp-teach-elevated/vcp-elevation-plan.md,
+ * build 1). The row is the module's own layout field and the placement chooses it (@vf/brand
+ * `itemLayout`, card ruling 1), so this file names the frameworks it places in the row, as
+ * `ROW_PLACED` below, and the module draws the rest. The row is `"row"`, not `"responsive"`: each
+ * item's two-sided game card beside its film and "What exists", the card first on a phone, as
+ * TEACH draws it. The Core Beliefs come first. The Twelve Traps follow when @vf/brand draws their
+ * row: asking FrameworkModule for it today throws, because their glance takes no layout.
  */
 import type { Metadata } from 'next';
 import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
@@ -149,6 +162,13 @@ const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => strin
 };
 
 /**
+ * The frameworks this property places in the module's ROW (build 1, see the header). A framework
+ * the module does not draw in the row yet throws at build, naming itself, so a key added here
+ * before @vf/brand draws its row stops the build rather than drawing a column nobody asked for.
+ */
+const ROW_PLACED: readonly FrameworkKey[] = ['core-beliefs'];
+
+/**
  * Page metadata composed from the module's own claim — the title tag cannot drift
  * from the page, because both read the same canon. The composition is the kit's;
  * what this property adds is its own OG card.
@@ -187,10 +207,13 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   const staged = frameworkOpensOnStage(framework);
   const reference = REFERENCE[framework];
   // TEACH draws its ROW at every layout and throws without its cards, so a row-only
-  // framework is handed them; the other seven keep their stacked column cards.
+  // framework is handed them. A framework this property places in the row (ROW_PLACED) asks
+  // for it by the layout field and is handed its cards too; the rest keep their stacked
+  // column cards.
   const rowOnly = FRAMEWORK_ROW_ONLY.includes(framework);
+  const rowPlaced = ROW_PLACED.includes(framework);
   // The cards this route hands the module, and the table they draw from (read at build).
-  const itemCards = rowOnly ? frameworkItemCards(framework) : undefined;
+  const itemCards = rowOnly || rowPlaced ? frameworkItemCards(framework) : undefined;
   const cardArt = itemCards ? cardArtTable() : null;
 
   const frameworkModule = (
@@ -211,10 +234,14 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         // already carries `id="reality-<slug>"`, so the landing point exists.
         reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
       }}
+      /* A row placement asks for the row by the module's layout field; a row-only
+         framework draws its row whatever is asked, so it is not asked. */
+      {...(rowPlaced ? { itemLayout: 'row' as const } : {})}
+      {...(itemCards ? { itemCards } : {})}
       /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
-         and the module reads none. */
+         and the module reads none. Every other framework keeps its tool, in the row too. */
       {...(rowOnly
-        ? { itemCards }
+        ? {}
         : {
             decideEndpoint: COMPASS_SERVICES.decide,
             recognizeEndpoint: COMPASS_SERVICES.recognize,
