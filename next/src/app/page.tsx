@@ -1,16 +1,34 @@
 /**
- * / — Homepage. The protocol overview. React port of src/pages/index.astro.
- * Hand-crafted layout; all visual rhythm in vcp-archetypes.css (Homepage block).
- * Server Component (SSG). Ported faithfully — no content dropped.
+ * / — Homepage. The protocol overview.
+ *
+ * BUILD 4 OF THE ELEVATION (plan vcp-elevation-plan.md, ruled by Chris 2026-11-12: the home page "opens on the approved
+ * 'What is Value-First' film module, then shows the framework families as a row of cards, in place of the text headline
+ * and the At-a-glance box"; Motif's proposal, build4-home/proposal.md, on @vf/brand 0.179.0). In order:
+ *   1. the opening: the version eyebrow and the page's one h1, at heading size, on the film band's ground;
+ *   2. the film: @vf/site-kit's PageVideoSpot with the approved 80% film and Chris's approved words, as
+ *      valuefirstteam.com's home places it; it publishes one VideoObject naming this page;
+ *   3. the eight framework families as painted cards (@vf/brand CanonPagesModule): from 900px a grid of build 2's
+ *      CanonPageGameCards, below it the column cards with their films; each card is the hub's one copy of the page;
+ *   4. § 01 onward, word for word, with § 02's counts derived from the lists they count.
+ * ONE LEFT EDGE. The title, the film, the families' heading and § 01 share VCP's 1120px measure (.vcp-opening-film in
+ * vcp-archetypes.css holds the kit's film column to it through the module's className, without a fork).
  */
 // hand-roll-exempt: the protocol home's editorial front page. Its visual rhythm is
-// the Homepage block of vcp-archetypes.css (.vcp-hero / .vcp-glance / .vcp-section /
-// .vcp-peers), which is where this site's per-node design language is authored; the
-// page emits the semantic markup that stylesheet dresses. The global shell around it
-// (SiteShell, header, footer, overlay root) is @vf/site-kit, applied in app/layout.tsx.
+// the Homepage block of vcp-archetypes.css (.vcp-opening / .vcp-section / .vcp-peers),
+// which is where this site's per-node design language is authored; the page emits the
+// semantic markup that stylesheet dresses. The film is @vf/site-kit's PageVideoSpot, the
+// cards are @vf/brand's CanonPagesModule with @vf/recipes' CanonPageGameCard, and the
+// global shell around it (SiteShell, header, footer, overlay root) is @vf/site-kit.
 import type { Metadata } from 'next';
-import { SITE, canonPageStats } from '@/lib/site';
+import { TextLink } from '@vf/ui';
+import { CanonPagesModule, canonPageFilm, type CanonPageFilm } from '@vf/brand';
+import { CANON_PAGE_FAMILIES, countWord, countWordCapital, type MethodologyFrameworkKey } from '@vf/brand/methodology';
+import { CanonPageGameCard, CardArtTableProvider } from '@vf/recipes/game-cards';
+import { PageVideoSpot, WHAT_IS_VALUE_FIRST_WORDS, whatIsValueFirst80Percent } from '@vf/site-kit/video';
+import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES, ENCODING_PAGES, CANON_PAGE_ARCHETYPES } from '@/lib/site';
 import { JsonLd } from '@/components/JsonLd';
+import { cardArtTable } from '@/lib/card-art-table';
+import { frameworkMedia } from '@/lib/framework-media';
 
 export const metadata: Metadata = {
   title: 'Open Protocol Home',
@@ -27,29 +45,6 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: SITE.url + '/' },
 };
-
-// Reader-facing provenance. Every row here must be a claim this site can stand
-// behind about the PROTOCOL — a reader reads the whole box as one.
-//
-// There is deliberately no "Verified" row. It read "Verified · 12 May 2026" and
-// was taken from the date the cross-citation peer slugs were link-checked
-// (see CROSS_CITATIONS in lib/site.ts). That is an internal link check, but on
-// the front door of a spec it reads as "this protocol was reviewed on that
-// date" — a provenance claim no process here produces. It also sat frozen while
-// the canon moved. `Status` already carries the true provenance, honestly: the
-// protocol is v0.1 and in draft. If a real revision date is wanted back, derive
-// it (the canon docs carry `effectiveDate` in Sanity) rather than typing one.
-const AT_A_GLANCE = [
-  { label: 'Status', value: 'v0.1 · Draft · in review' },
-  {
-    label: 'Canon pages',
-    // Derived from CANON_PAGE_ARCHETYPES at build time — self-maintains as the
-    // site's canon-page inventory grows, rather than a hardcoded literal that
-    // silently drifts (the defect being fixed).
-    value: `${canonPageStats.pageCount} across ${canonPageStats.archetypeCount} archetypes`,
-  },
-  { label: 'Peers', value: 'MCP · HCP' },
-] as const;
 
 const PEER_PROTOCOLS = [
   {
@@ -81,21 +76,25 @@ const PEER_PROTOCOLS = [
   },
 ];
 
+// § 02's counts are derived from the lists they count (build 2's finding: the methodology door read 12 where the hub
+// has 13). The encoding door counts the spec pages beside the stack's overview.
+const ENCODING_SPECS = ENCODING_PAGES.filter((p) => p.href !== '/encoding-stack').length;
+
 const ENTRY_CARDS = [
   {
     num: '§ 02.1',
     eyebrow: 'Encoding stack',
     title: 'Lexicon · VCP-Lang · Value Graph',
     body: 'The technical specification: three layers that compile a value statement into an addressable graph the protocol can operate on.',
-    meta: '3 SPECS · v0.1',
+    meta: `${ENCODING_SPECS} SPECS · v0.1`,
     href: '/encoding-stack',
   },
   {
     num: '§ 02.2',
     eyebrow: 'Methodology canon',
     title: 'The Value Path, twelve traps, three orgs',
-    body: 'Twelve long-form chapters covering the operating model AI-native organizations adopt to create value across customer, operations, and finance.',
-    meta: '12 CHAPTERS',
+    body: `${countWordCapital(METHODOLOGY_PAGES.length)} long-form chapters covering the operating model AI-native organizations adopt to create value across customer, operations, and finance.`,
+    meta: `${METHODOLOGY_PAGES.length} CHAPTERS`,
     href: '/methodology',
   },
   {
@@ -103,7 +102,7 @@ const ENTRY_CARDS = [
     eyebrow: 'Manifestos',
     title: 'Beyond leads. Beyond funnels.',
     body: 'Position pieces on why the industrial-age vocabulary of growth, sales, and operations can not carry an AI-native organization.',
-    meta: '3 ESSAYS',
+    meta: `${MANIFESTO_PAGES.length} ESSAYS`,
     href: '/manifestos',
   },
 ];
@@ -118,6 +117,15 @@ const IMPLEMENTATIONS = [
     status: 'Canonical',
   },
 ];
+
+// The eight framework families, read from the hub's own list, so each card's name, line, painting, count, group and
+// address are /methodology's one copy.
+const FAMILY_KEYS: readonly string[] = CANON_PAGE_FAMILIES;
+const FAMILIES = METHODOLOGY_PAGES.filter((p) => FAMILY_KEYS.includes(p.key));
+const CANON_LABEL = CANON_PAGE_ARCHETYPES.find((x) => x.id === 'methodology')?.label ?? '';
+if (FAMILIES.length !== CANON_PAGE_FAMILIES.length || !CANON_LABEL) {
+  throw new Error(`/: the home draws ${FAMILIES.length} of the ${CANON_PAGE_FAMILIES.length} framework families from METHODOLOGY_PAGES, or the methodology archetype has no label`);
+}
 
 const homeLd = {
   '@context': 'https://schema.org',
@@ -135,53 +143,56 @@ const homeLd = {
   isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url, inLanguage: 'en' },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const table = cardArtTable();
+  const films: Record<string, CanonPageFilm | null> = Object.fromEntries(
+    await Promise.all(FAMILIES.map(async (p) => [p.key, canonPageFilm(await frameworkMedia(p.key as MethodologyFrameworkKey))] as const)),
+  );
+
   return (
     <>
       <JsonLd data={homeLd} />
 
-      {/* HERO */}
-      <section className="vcp-hero">
-        <div className="vcp-hero-inner">
-          <div className="vcp-hero-grid">
-            <div className="vcp-hero-text">
-              <p className="t-eyebrow vcp-hero-eyebrow">An open protocol · v0.1</p>
-              <h1 className="t-display vcp-hero-h1">
-                Value, drawn open and <em className="vcp-hero-accent">operable.</em>
-              </h1>
-              <p className="t-lead vcp-hero-lead vcp-hero-lead-cap">
-                The Value Creation Protocol is a peer-level open protocol for value creation in
-                AI-native organizations &mdash; authored, refined, and operated by Value-First
-                Team. Read, cite, and run it on your own work.
-              </p>
-              <div className="vcp-hero-ctas">
-                <a href="/encoding-stack" className="vcp-btn vcp-btn-primary">
-                  Read the spec
-                  <span aria-hidden="true" className="vcp-arrow">
-                    &rarr;
-                  </span>
-                </a>
-                <a href="/protocol-stack" className="vcp-btn vcp-btn-ghost">
-                  See the protocol stack
-                  <span aria-hidden="true" className="vcp-arrow">
-                    &rarr;
-                  </span>
-                </a>
-              </div>
-            </div>
+      {/* THE OPENING: the version and the page's one h1, then the film, on one ground and one left edge. */}
+      <div className="vcp-opening bg-vf-surface">
+        <div className="vcp-opening-inner">
+          <p className="t-eyebrow vcp-hero-eyebrow">An open protocol · v0.1</p>
+          <h1 className="t-h1 vcp-opening-h1">
+            Value, drawn open and <em className="vcp-hero-accent">operable.</em>
+          </h1>
+        </div>
+        <PageVideoSpot
+          className="vcp-opening-film"
+          placement={whatIsValueFirst80Percent(SITE.url + '/')}
+          tone="surface"
+          eyebrow="Watch"
+          words={WHAT_IS_VALUE_FIRST_WORDS}
+        />
+      </div>
 
-            <aside className="vcp-glance">
-              <h2 className="vcp-glance-head">At a glance</h2>
-              <dl className="vcp-glance-list">
-                {AT_A_GLANCE.map((row) => (
-                  <div className="vcp-glance-row" key={row.label}>
-                    <dt className="vcp-glance-label">{row.label}</dt>
-                    <dd className="vcp-glance-value">{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </aside>
+      {/* THE FRAMEWORK FAMILIES as painted cards: the grid from 900px, the column cards with their films below. */}
+      <section className="vcp-section vcp-section-families" aria-labelledby="vcp-families-heading">
+        <div className="vcp-section-inner">
+          <p className="t-eyebrow vcp-section-eyebrow">{CANON_LABEL}</p>
+          <h2 className="t-h2 vcp-section-h2" id="vcp-families-heading">
+            {countWordCapital(FAMILIES.length)} frameworks the protocol encodes.
+          </h2>
+          <div className="vcp-families">
+            <CardArtTableProvider table={table}>
+              <CanonPagesModule
+                sources={FAMILIES}
+                layout="responsive"
+                cards={Object.fromEntries(FAMILIES.map((p) => [p.key, <CanonPageGameCard source={p} />]))}
+                art={table}
+                films={films}
+              />
+            </CardArtTableProvider>
           </div>
+          <p className="vcp-families-all">
+            <TextLink href="/methodology" standalone>
+              All {countWord(METHODOLOGY_PAGES.length)} canon pages
+            </TextLink>
+          </p>
         </div>
       </section>
 

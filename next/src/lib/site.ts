@@ -182,7 +182,7 @@ export const MANIFESTO_PAGES: Array<{ label: string; href: string; summary: stri
 /**
  * Encoding-stack canon pages — the three-layer machine-parseable substrate
  * plus its overview. Mirrors the /sitemap ENCODING group. Kept here so the
- * homepage "Canon pages across archetypes" stat derives from one source.
+ * homepage's encoding door counts its spec pages from one source.
  */
 export const ENCODING_PAGES: Array<{ label: string; href: string; summary: string }> = [
   {
@@ -209,10 +209,9 @@ export const ENCODING_PAGES: Array<{ label: string; href: string; summary: strin
 
 /**
  * Canon-page archetypes — the grouped inventory of every canon page this site
- * publishes. This is the authoritative source for the homepage "Canon pages ·
- * N across M archetypes" stat: both integers are DERIVED from this structure
- * (see canonPageStats below), never hardcoded. Add a page to one of these
- * arrays and the homepage count self-maintains.
+ * publishes, each with its archetype's own label (the homepage's families band
+ * reads "Methodology canon" from here). The homepage's "N across M archetypes"
+ * stat that this structure once fed left with the At a glance box (build 4).
  *
  * "Canon pages" = the substantive protocol content pages (methodology,
  * encoding stack, manifestos). It intentionally excludes wayfinding/hub pages
@@ -224,16 +223,6 @@ export const CANON_PAGE_ARCHETYPES: Array<{ id: string; label: string; pages: re
   { id: 'encoding', label: 'Encoding stack', pages: ENCODING_PAGES },
   { id: 'manifestos', label: 'Manifestos', pages: MANIFESTO_PAGES },
 ];
-
-/**
- * Derived homepage stat: total canon pages and how many archetypes they span.
- * Computed at module load from CANON_PAGE_ARCHETYPES — the number cannot drift
- * from the actual page inventory the way a hardcoded literal did.
- */
-export const canonPageStats = {
-  pageCount: CANON_PAGE_ARCHETYPES.reduce((sum, a) => sum + a.pages.length, 0),
-  archetypeCount: CANON_PAGE_ARCHETYPES.length,
-} as const;
 
 /**
  * Mutual cross-citations — vcp.com canon page → valuefirstteam.com peer.
