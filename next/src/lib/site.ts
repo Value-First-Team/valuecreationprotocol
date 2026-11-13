@@ -90,6 +90,8 @@ export const METHODOLOGY_PAGES: readonly MethodologyPage[] = [
   // Five-Layer Model, and the Value Loop's host entry becomes a family (its line is the same canon line 21, now from
   // @vf/brand, and its count the brand's own four stages).
   family('interest-pipeline', '/interest-pipeline', 'Frameworks'),
+  // Family eleven (build 7; @vf/brand 0.181.0): Value Accounting joins the Frameworks after the Interest Pipeline.
+  family('value-accounting', '/value-accounting', 'Frameworks'),
   family('value-loop', '/value-loop', 'Patterns'),
   family('teach-values', '/teach', 'Patterns'),
   {

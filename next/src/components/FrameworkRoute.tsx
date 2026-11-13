@@ -165,6 +165,8 @@ const OG: Record<FrameworkKey, string> = {
   // default card until one does.
   'value-loop': '/og/og-value-loop.jpg',
   'interest-pipeline': '/og/og-default.jpg',
+  // Family eleven (@vf/brand 0.181.0): the site's default card until one ships.
+  'value-accounting': '/og/og-default.jpg',
 };
 
 /**
@@ -195,6 +197,8 @@ const ROW_PLACED: readonly FrameworkKey[] = [
   // Families nine and ten (@vf/brand 0.180.0): the row from 900px, the column card below, as every family takes.
   'value-loop',
   'interest-pipeline',
+  // Family eleven (@vf/brand 0.181.0): the row from 900px, the column card below.
+  'value-accounting',
 ];
 
 /**
