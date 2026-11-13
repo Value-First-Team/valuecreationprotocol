@@ -11,6 +11,7 @@
 import type { Metadata } from 'next';
 import { SITE, METHODOLOGY_PAGES, MANIFESTO_PAGES } from '@/lib/site';
 import { PACK_COUNTS } from '@/lib/language-of-value';
+import { countWord, countWordCapital } from '@vf/brand/methodology';
 import { HubArchetype } from '@/components/HubArchetype';
 import { JsonLd } from '@/components/JsonLd';
 
@@ -32,7 +33,7 @@ const HOMEPAGE: Route[] = [
 ];
 
 const HUBS: Route[] = [
-  { href: '/methodology', title: 'Methodology Canon', summary: 'Index of the twelve canon pages — operating principles, frameworks, patterns, programs, implementation.', meta: '12 canon pages' },
+  { href: '/methodology', title: 'Methodology Canon', summary: `Index of the ${countWord(METHODOLOGY_PAGES.length)} canon pages — operating principles, frameworks, patterns, programs, implementation.`, meta: `${METHODOLOGY_PAGES.length} canon pages` },
   { href: '/manifestos', title: 'Manifestos', summary: 'Three long-form artifacts arguing the case the protocol formalizes — Beyond Leads, Value-Led Growth, Positioning.', meta: '3 manifestos' },
   { href: '/protocol-stack', title: 'The Protocol Stack', summary: 'How VCP sits beside MCP (capability) and HCP (human context) in the AI-native protocol substrate.', meta: 'MCP · HCP · VCP' },
   { href: '/engagement', title: 'Engagement Pathways', summary: 'Four pathways through the protocol home — Read, Implement, Contribute, Reach the implementer.', meta: '4 pathways' },
@@ -40,8 +41,8 @@ const HUBS: Route[] = [
 
 const METHODOLOGY: Route[] = METHODOLOGY_PAGES.map((p, i) => ({
   href: p.href,
-  title: p.label,
-  summary: p.summary,
+  title: p.name,
+  summary: p.line,
   meta: `Chapter ${String(i + 1).padStart(2, '0')}`,
 }));
 
@@ -79,7 +80,7 @@ interface Group {
 const GROUPS: Group[] = [
   { id: 'home', label: '§ 01 · Homepage', title: 'Homepage', note: 'The protocol home. One page — declarative, calm, no pitch.', routes: HOMEPAGE },
   { id: 'hubs', label: '§ 02 · Hubs', title: 'Hubs', note: 'Four wayfinding surfaces that index the canon. Pick the one that matches what you are trying to do.', routes: HUBS },
-  { id: 'methodology', label: '§ 03 · Methodology canon', title: 'Methodology canon', note: 'Twelve canon pages — the operating principles, frameworks, patterns, programs, and implementation guidance the protocol encodes.', routes: METHODOLOGY },
+  { id: 'methodology', label: '§ 03 · Methodology canon', title: 'Methodology canon', note: `${countWordCapital(METHODOLOGY_PAGES.length)} canon pages — the operating principles, frameworks, patterns, programs, and implementation guidance the protocol encodes.`, routes: METHODOLOGY },
   { id: 'encoding', label: '§ 04 · Encoding stack', title: 'Encoding stack', note: 'The substrate that makes VCP machine-parseable. Three layers — lexical, structural, relational — plus a short overview.', routes: ENCODING },
   { id: 'manifestos', label: '§ 05 · Manifestos', title: 'Manifestos', note: 'Three long-form arguments for why the protocol exists.', routes: MANIFESTOS },
   { id: 'reference', label: '§ 06 · Reference', title: 'Reference', note: 'The vocabulary — as an installable pack and as a defined-term glossary.', routes: REFERENCE },

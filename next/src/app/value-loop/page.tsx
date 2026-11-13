@@ -6,6 +6,7 @@
  * lead and the page description, the four stages in canon's flow order (line 107) as the eyebrow, and canon's
  * four stages with canon's descriptions (the Four Stages table, lines 51-54) as the DefinedTerms. Each is checked
  * against the pinned snapshot at build time (lib/canon-line.ts), so the opening cannot say what the body does not.
+ * The stage list lives in lib/value-loop-stages.ts, so the /methodology hub counts the same four.
  */
 import type { Metadata } from 'next';
 import { TextLink } from '@vf/ui';
@@ -14,6 +15,7 @@ import { CanonArchetype } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { canonLine, canonPhrase } from '@/lib/canon-line';
 import { renderWikiCanonical, stripFirstH1, WIKI_CANONICAL } from '@/lib/markdown';
+import { VALUE_LOOP_STAGES } from '@/lib/value-loop-stages';
 
 const CANON = WIKI_CANONICAL.valueLoop;
 
@@ -27,16 +29,9 @@ export const metadata: Metadata = {
   alternates: { canonical: SITE.url + '/value-loop' },
 };
 
-const STAGES = [
-  [51, 'Express Value', 'Internal clarity before external action. Strategy sessions, team alignment, identity definition. Market testing positioning and value proposition.'],
-  [52, 'Tailor Value', 'Genuine one-to-one relationship building with specific humans. Direct dialogue, account strategy, contextual relevance. Trust development through understanding their unique situation.'],
-  [53, 'Amplify Value', "Pattern recognition across relationships revealing community. Broader market conversations. Discovering what's working and sharing it appropriately."],
-  [54, 'Evolve Value', 'Collaborative learning from outcomes. AI pattern recognition combined with human strategic interpretation. Continuous improvement of all stages.'],
-] as const;
-
 const definedTermsLd = {
   '@context': 'https://schema.org',
-  '@graph': STAGES.map(([line, name, description]) => ({
+  '@graph': VALUE_LOOP_STAGES.map(([line, name, description]) => ({
     '@type': 'DefinedTerm',
     name: canonPhrase(CANON, line, name),
     description: canonPhrase(CANON, line, description),

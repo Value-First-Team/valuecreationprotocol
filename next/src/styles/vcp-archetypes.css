@@ -781,8 +781,22 @@
     .hub-grid-pathways { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
+  /* One page per line, used by /methodology's painted cards. Each item is a CanonPageModule (@vf/brand) that
+     lays itself out (its row from 900px, its column card below), so this list is always one column. */
+  .hub-rows {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 900px) {
+    .hub-rows { gap: 3rem; }
+  }
+
   /* ============= Group =============
-     Used by /methodology to split 12 canon cards into thematic sets.
+     Used by /methodology to split its canon pages into thematic sets.
      Each group has a hairline-marked label + optional note + its own grid. */
   .hub-group {
     margin: 0;
