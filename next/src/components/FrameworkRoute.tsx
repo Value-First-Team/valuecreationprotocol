@@ -87,8 +87,13 @@
  * videos) make sense on mobile". It binds the shared module on every host, so from 900px each item
  * is its two-sided game card beside its film and "What exists", and below that it is the column
  * card, opened so its film plays, with no game card: what valuefirstteam.com/beliefs draws. Every
- * family this site places in the row takes it: the Core Beliefs, the Twelve Traps and the TEACH
- * Values (@vf/brand 0.176.0 draws the traps' row and gives TEACH its column card).
+ * family this site places in the row takes it: the Core Beliefs, the Twelve Traps, the TEACH Values,
+ * the Value Path, the Unified Views, the Value Realities and the Five-Layer Model.
+ *
+ * THE THREE-ORG MODEL STANDS ACROSS (`ACROSS_PLACED`). Chris, 2026-10-04, on /three-orgs (log
+ * 9b041c096): "Side by side (Recommended)". The three orgs are peers, so on a computer their game
+ * cards stand in one row at equal size, each turning in place; below the set's width, the column
+ * cards. That is the module's `"across"` layout, and what valuefirstteam.com/three-orgs draws.
  */
 import type { Metadata } from 'next';
 import { FrameworkModule, frameworkClaim, type FrameworkKey } from '@vf/brand';
@@ -171,13 +176,28 @@ const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => strin
  * the module does not draw in the row yet throws at build, naming itself, so a key added here
  * before @vf/brand draws its row stops the build rather than drawing a column nobody asked for.
  */
-const ROW_PLACED: readonly FrameworkKey[] = ['core-beliefs', 'complexity-traps', 'teach-values'];
+const ROW_PLACED: readonly FrameworkKey[] = [
+  'core-beliefs',
+  'complexity-traps',
+  'teach-values',
+  'value-path',
+  'unified-views',
+  'value-realities',
+  'five-layer-model',
+];
 
 /**
  * The layout every ROW_PLACED framework is asked for: the row from 900px, the column card below it
  * (Chris's 2026-10-02 ruling, see the header). One value for every family, never a per-family switch.
  */
 const ROW_PLACEMENT_LAYOUT = 'responsive' as const;
+
+/**
+ * The frameworks this property stands ACROSS: a set of peers, their game cards side by side at equal
+ * size (Chris's 2026-10-04 ruling on /three-orgs, see the header). @vf/brand draws `"across"` only for
+ * the frameworks it lists in `FRAMEWORK_ACROSS_LAYOUT_READY`, and refuses the rest at build.
+ */
+const ACROSS_PLACED: readonly FrameworkKey[] = ['three-org-model'];
 
 /**
  * Page metadata composed from the module's own claim — the title tag cannot drift
@@ -217,11 +237,16 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // before this branch existed.
   const staged = frameworkOpensOnStage(framework);
   const reference = REFERENCE[framework];
-  // A framework this property places in the row (ROW_PLACED) asks for it by the layout field
-  // and is handed its game cards; the rest keep their stacked column cards.
-  const rowPlaced = ROW_PLACED.includes(framework);
+  // A framework this property places in the row (ROW_PLACED) or across (ACROSS_PLACED) asks for
+  // that layout by the module's layout field and is handed its game cards; any other keeps its
+  // stacked column cards.
+  const placement = ROW_PLACED.includes(framework)
+    ? ROW_PLACEMENT_LAYOUT
+    : ACROSS_PLACED.includes(framework)
+      ? ('across' as const)
+      : undefined;
   // The cards this route hands the module, and the table they draw from (read at build).
-  const itemCards = rowPlaced ? frameworkItemCards(framework) : undefined;
+  const itemCards = placement ? frameworkItemCards(framework) : undefined;
   const cardArt = itemCards ? cardArtTable() : null;
 
   const frameworkModule = (
@@ -242,9 +267,9 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         // already carries `id="reality-<slug>"`, so the landing point exists.
         reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
       }}
-      /* A row placement asks for its layout by the module's layout field: the row from
-         900px, the column card below it. */
-      {...(rowPlaced ? { itemLayout: ROW_PLACEMENT_LAYOUT } : {})}
+      /* A placement asks for its layout by the module's layout field: the row from 900px and
+         the column card below it, or, for peers, the cards side by side across. */
+      {...(placement ? { itemLayout: placement } : {})}
       {...(itemCards ? { itemCards } : {})}
       /* Each framework's Compass tool, in either layout. TEACH has none, and its module
          reads none of these. */
