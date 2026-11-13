@@ -10,8 +10,8 @@
  *   3. the eight framework families as painted cards (@vf/brand CanonPagesModule): from 900px a grid of build 2's
  *      CanonPageGameCards, below it the column cards with their films; each card is the hub's one copy of the page;
  *   4. § 01 onward, word for word, with § 02's counts derived from the lists they count.
- * ONE LEFT EDGE. The title, the film, the families' heading and § 01 share VCP's 1120px measure (.vcp-opening-film in
- * vcp-archetypes.css holds the kit's film column to it through the module's className, without a fork).
+ * ONE LEFT EDGE. The title, the film, the families' heading and § 01 share VCP's 1120px measure: the film's inner
+ * column takes this page's own measure class through PageVideoSpot's containerClassName (@vf/site-kit 0.238.0).
  */
 // hand-roll-exempt: the protocol home's editorial front page. Its visual rhythm is
 // the Homepage block of vcp-archetypes.css (.vcp-opening / .vcp-section / .vcp-peers),
@@ -162,7 +162,7 @@ export default async function HomePage() {
           </h1>
         </div>
         <PageVideoSpot
-          className="vcp-opening-film"
+          containerClassName="vcp-opening-measure"
           placement={whatIsValueFirst80Percent(SITE.url + '/')}
           tone="surface"
           eyebrow="Watch"
