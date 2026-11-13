@@ -6,7 +6,6 @@
  */
 import { canonPageSource, type CanonPageSource, type MethodologyFrameworkKey } from '@vf/brand/methodology';
 import { canonLine } from '@/lib/canon-line';
-import { VALUE_LOOP_STAGES } from '@/lib/value-loop-stages';
 
 export const SITE = {
   name: 'Value Creation Protocol',
@@ -70,8 +69,8 @@ export const NAV: Array<{ label: string; href: string }> = [
  *   The hub, the family's own page and every later reader take one copy, so they move together on a pin bump.
  * - A page @vf/brand does not carry builds the same shape here: its name, one line of its canon reference quoted
  *   verbatim through `canonLine(file, line, text)`, which stops the build when the pinned snapshot no longer
- *   carries that line there (lib/canon-line.ts), and the term whose vocabulary file names its subject. Only the
- *   Value Loop has a set, and it counts the stage list its own page renders (lib/value-loop-stages.ts).
+ *   carries that line there (lib/canon-line.ts), and the term whose vocabulary file names its subject. None of them
+ *   carries a set (the Value Loop became a family in builds 5 and 6, @vf/brand 0.180.0).
  */
 export type MethodologyPage = CanonPageSource & { readonly group: string };
 
@@ -87,19 +86,11 @@ export const METHODOLOGY_PAGES: readonly MethodologyPage[] = [
   family('three-org-model', '/three-orgs', 'Frameworks'),
   family('unified-views', '/unified-views', 'Frameworks'),
   family('five-layer-model', '/five-layers', 'Frameworks'),
-  {
-    key: 'value-loop',
-    name: 'Value Loop',
-    href: '/value-loop',
-    group: 'Patterns',
-    term: 'value-loop',
-    count: { n: VALUE_LOOP_STAGES.length, noun: 'stages' },
-    line: canonLine(
-      'value-loop-canonical-reference-v1.md',
-      21,
-      'The Value Loop is a 4-stage framework describing how value actually emerges through continuous engagement with different conversation partners—ourselves, specific others, the market, and data.',
-    ),
-  },
+  // Families nine and ten (builds 5 and 6; @vf/brand 0.180.0): the Interest Pipeline joins the Frameworks after the
+  // Five-Layer Model, and the Value Loop's host entry becomes a family (its line is the same canon line 21, now from
+  // @vf/brand, and its count the brand's own four stages).
+  family('interest-pipeline', '/interest-pipeline', 'Frameworks'),
+  family('value-loop', '/value-loop', 'Patterns'),
   family('teach-values', '/teach', 'Patterns'),
   {
     key: 'ai-native-shift',

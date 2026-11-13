@@ -31,6 +31,12 @@ export interface CanonArchetypeProps {
   /** Lead paragraph below the title. Omit when `opening` is given. */
   lead?: string;
   /**
+   * The title's size (builds 5 and 6). `display` (the default): as every canon page has always set it. `heading`: a
+   * title that is a canon paragraph rather than a name, set at heading size so it holds to a few lines. A framework
+   * route asks @vf/site-kit's `frameworkClaimScale`, the one rule for a long claim on every host; words unchanged.
+   */
+  titleScale?: 'display' | 'heading';
+  /**
    * THE PAGE'S OWN OPENING, IN PLACE OF THIS ARCHETYPE'S THREE-PART HERO.
    *
    * A canonical framework page opens on the constellation's shared framework
@@ -61,6 +67,7 @@ export async function CanonArchetype({
   eyebrow,
   title,
   lead,
+  titleScale = 'display',
   opening,
   path,
   specMeta = [],
@@ -84,7 +91,10 @@ export async function CanonArchetype({
                 <span>{eyebrow}</span>
                 <span className="canon-eyebrow-rule" aria-hidden="true" />
               </p>
-              <h1 className="canon-display" dangerouslySetInnerHTML={{ __html: title ?? '' }} />
+              <h1
+                className={titleScale === 'heading' ? 'canon-display canon-display-heading' : 'canon-display'}
+                dangerouslySetInnerHTML={{ __html: title ?? '' }}
+              />
               {lead ? <p className="canon-lead">{lead}</p> : null}
             </>
           )}

@@ -58,6 +58,16 @@
     font-variation-settings: "opsz" 60;
   }
 
+  /* A canon title that is a paragraph, not a name (builds 5 and 6): a framework claim over @vf/site-kit's
+     FRAMEWORK_CLAIM_DISPLAY_MAX characters. Heading size, on the hero's whole measure, so the Value Loop's
+     192-character claim holds to four lines at 1440 where the display size ran it to ten. Words unchanged. */
+  .canon-display.canon-display-heading {
+    font-size: clamp(1.625rem, 2.6vw, 2.375rem);
+    line-height: 1.22;
+    max-width: 44ch;
+    font-variation-settings: "opsz" 36;
+  }
+
   .canon-lead {
     font-family: var(--vcp-font-display);
     font-size: 1.25rem;

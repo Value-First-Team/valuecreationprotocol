@@ -106,6 +106,7 @@ import {
   FrameworkRowPreviews,
   frameworkItemCards,
   frameworkOpensOnStage,
+  frameworkClaimScale,
   frameworkPageMetadata,
   frameworkJsonLd,
 } from '@vf/site-kit/framework';
@@ -114,6 +115,7 @@ import { CanonArchetype } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { frameworkMedia } from '@/lib/framework-media';
 import { teachReferenceTitle } from '@/lib/teach-reference';
+import { valueLoopReferenceTitle } from '@/lib/value-loop-reference';
 import { cardArtTable } from '@/lib/card-art-table';
 
 // The AI-Native Shift plates this property serves. Static imports straight out of
@@ -159,6 +161,10 @@ const OG: Record<FrameworkKey, string> = {
   'five-layer-model': '/og/og-default.jpg',
   'three-org-model': '/og/og-three-orgs.jpg',
   'teach-values': '/og/og-teach.jpg',
+  // Families nine and ten (@vf/brand 0.180.0): the Value Loop's card ships; the Interest Pipeline takes the site's
+  // default card until one does.
+  'value-loop': '/og/og-value-loop.jpg',
+  'interest-pipeline': '/og/og-default.jpg',
 };
 
 /**
@@ -169,6 +175,8 @@ const OG: Record<FrameworkKey, string> = {
  */
 const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => string }>> = {
   'teach-values': { href: '/teach/reference', title: () => teachReferenceTitle() },
+  // The Value Loop's reference moved the same way when /value-loop became a thin route (builds 5 and 6).
+  'value-loop': { href: '/value-loop/reference', title: () => valueLoopReferenceTitle() },
 };
 
 /**
@@ -184,6 +192,9 @@ const ROW_PLACED: readonly FrameworkKey[] = [
   'unified-views',
   'value-realities',
   'five-layer-model',
+  // Families nine and ten (@vf/brand 0.180.0): the row from 900px, the column card below, as every family takes.
+  'value-loop',
+  'interest-pipeline',
 ];
 
 /**
@@ -305,6 +316,8 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
           : {
               eyebrow: claim.eyebrow,
               title: claim.headline,
+              // A claim over the kit's FRAMEWORK_CLAIM_DISPLAY_MAX sets at heading size (@vf/site-kit 0.239.0).
+              titleScale: frameworkClaimScale(framework),
               lead: claim.lines[0] ?? '',
             })}
         path={path}
