@@ -284,3 +284,11 @@ Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@
 **Owner:** showcase (build 4's two exceptions, fixed forward in @vf/site-kit 0.238.0)
 
 **The link under Chris's words beside the home page's film ("Empowerment over Learned Helplessness") is now a full 44px tap target at every width, and nothing on the page moved.** The film still starts on the same left edge as the title, the framework families and § 01, now through a setting the shared film module offers (`containerClassName`, @vf/site-kit 0.238.0) instead of a rule this site wrote against the module's insides. Pin, in dependencies and overrides: `@vf/site-kit` 0.237.0 to 0.238.0 (`bb210bc`); brand and recipes unchanged. Forced install; lockfile, installed tree and file bytes read back, one copy of each. The receipts file still carries 100 lines.
+
+## 2026-11-13 — deploy ea58453: the canon, hub, spec and manifesto pages get their styles back
+**Breaking:** No. This restores what every page drew before build 4.
+**Consumer action:** None. Revert target: `dpl_C4vF2GKbGBNYAZERMsyhq5kCM1hJ` (`fc2fbbf`), the production deployment serving before this push; it is the one that lost the styles, so reverting to it is never the fix: the last deployment with every style is `dpl_JAfNXza3m1es4Tyifd11wzQLSUvC` (`a9120e2`), which predates the home page's rebuild.
+**Commit:** `ea58453`
+**Owner:** showcase
+
+**Every canon page, the hubs, the spec pages and the manifestos draw their own styles again.** Build 4's change to the site's stylesheet (`d5468ff`) meant to replace the home page's old hero styles and instead deleted 2,269 lines: everything from the canon pages' hero styles to the home page's, which is where the canon, hub, spec and manifesto pages are dressed. Those pages were live without them from deployment `dpl_4vTyVNyb39JpqeaaAnb2QjPjFiey` (09:02Z) until this one. The file is rebuilt from the copy build 3 shipped, with only the home page's intended change. The home page itself is unchanged by this.
