@@ -7,14 +7,28 @@
  *
  * Built on the shared CanonArchetype shell (hero + body + implementer band) and
  * the token-based .canon-prose system, so both light and dark themes flip with
- * the SiteShell. All vocabulary content lives in @/lib/language-of-value as pure
- * data — presentation is separable, so the whole pack can later be promoted into
- * @vf/site-kit as the one shared component the satellite sites embed.
+ * the SiteShell. The page's own content lives in @/lib/language-of-value as pure
+ * data; the swaps and the traps are canon's pack, verbatim, from @vf/brand
+ * (LOV_PACK_SWAPS, LOV_PACK_TRAPS).
+ *
+ * THE SWAPS AND THE TRAPS AS CARDS (build 3 of the elevation; Motif's proposal, MainBrain 7dc9928cf,
+ * build3-lov/proposal.md, on @vf/brand 0.178.0 and @vf/recipes 0.199.0). Each swap is a two-sided
+ * SwapGameCard in canon's swap grammar (CARD-FACE-BINDING.md, Chris 2026-07-13: "front = the dead word →
+ * back = the Value term + the one-line why"); each trap is the trap card Chris approved (2026-09-28), and
+ * Tokenmaxxing its own painted term card. From 900px the cards stand in a grid; below it each is a column
+ * card. Both are in the server HTML and CSS shows one. Every picture is drawn from the card-art table this
+ * build resolved (CardArtTableProvider), at its exact registry version; no address is written here. The
+ * pack text the install block shows is untouched: it still carries every trap's line and its "Watch for:".
  */
 import type { Metadata } from 'next';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { LovSwapsModule, LovTrapsModule, lovSwapFrameworkJoins } from '@vf/brand';
+import { LOV_PACK_COUNTS, LOV_PACK_SWAPS, LOV_PACK_TRAPS, countWordCapital } from '@vf/brand/methodology';
+import { CardArtTableProvider, SwapGameCard, TermGameCard, TrapGameCard } from '@vf/recipes/game-cards';
 import { SITE } from '@/lib/site';
+import { cardArtTable } from '@/lib/card-art-table';
+import { frameworkMedia } from '@/lib/framework-media';
 import { CanonArchetype } from '@/components/CanonArchetype';
 import { LanguageOfValueInstall } from '@/components/LanguageOfValueInstall';
 import { GlossaryCompanion } from '@/components/GlossaryCompanion';
@@ -25,8 +39,6 @@ import {
   PREMISE,
   REFLEX_STEPS,
   REFLEX_DISCIPLINE,
-  SWAPS,
-  TRAPS,
   PACK_SUMMARY,
   PACK_SUMMARY_PROSE,
   EXAMPLE,
@@ -67,11 +79,24 @@ const howToLd = {
   })),
 };
 
-export default function LanguageOfValuePage() {
+export default async function LanguageOfValuePage() {
   // Single source of truth for the paste block AND the download: read the
   // canonical artifact at build time so the visible text, the copied text, and
   // the downloaded file are byte-identical and can never drift.
   const pasteText = readFileSync(join(process.cwd(), 'public', 'language-of-value.md'), 'utf8');
+
+  // The cards. The table is the one this build resolved; the joins send the two framework words to their
+  // place on this site's framework pages, with Natural Value Flow's episode, from the media join the
+  // framework pages already read.
+  const table = cardArtTable();
+  const joins = lovSwapFrameworkJoins({
+    media: { 'core-beliefs': await frameworkMedia('core-beliefs'), 'value-realities': await frameworkMedia('value-realities') },
+    routes: { 'core-beliefs': '/beliefs', 'value-realities': '/realities' },
+  });
+  const cards = Object.fromEntries(LOV_PACK_SWAPS.map((s) => [s.key, <SwapGameCard swap={s} pageHref={joins.hrefs[s.key]} />]));
+  const trapCards = Object.fromEntries(
+    LOV_PACK_TRAPS.map((t) => [t.key, t.kind === 'complexity-trap' ? <TrapGameCard slug={t.slug} /> : <TermGameCard slug={t.slug} />]),
+  );
 
   return (
     <>
@@ -113,78 +138,63 @@ export default function LanguageOfValuePage() {
           <GlossaryCompanion />
         </div>
 
-        {/* The readable breakdown — same content, human-scannable. No drop-cap. */}
-        <div className="canon-prose lov-flat">
-          <h2>The reflex</h2>
-          <p>
-            When you draft, reply, or plan — and a loaded word below shows up, from you or the person
-            you&apos;re helping — do this, in order:
-          </p>
-          <ol>
-            {REFLEX_STEPS.map((step) => (
-              <li key={step.lead}>
-                <strong>{step.lead}</strong> {step.rest}
-              </li>
-            ))}
-          </ol>
-          <p>{REFLEX_DISCIPLINE}</p>
+        {/* The readable breakdown — no drop-cap. The two card modules sit at the body's full width, outside
+            the prose measure (68ch holds one card across), so the prose closes before each and reopens after. */}
+        <CardArtTableProvider table={table}>
+          <div className="canon-prose lov-flat">
+            <h2>The reflex</h2>
+            <p>
+              When you draft, reply, or plan — and a loaded word below shows up, from you or the person
+              you&apos;re helping — do this, in order:
+            </p>
+            <ol>
+              {REFLEX_STEPS.map((step) => (
+                <li key={step.lead}>
+                  <strong>{step.lead}</strong> {step.rest}
+                </li>
+              ))}
+            </ol>
+            <p>{REFLEX_DISCIPLINE}</p>
 
-          <h2>The swaps — say this, not that</h2>
-          <p>
-            Twenty-three loaded words, each with the Value-First word that replaces it and the one
-            line that says why. You don&apos;t redefine the old word — you change it.
-          </p>
-          <div className="lov-table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th scope="col">Instead of…</th>
-                  <th scope="col">Say</th>
-                  <th scope="col">Because</th>
-                </tr>
-              </thead>
-              <tbody>
-                {SWAPS.map((swap) => (
-                  <tr key={swap.say + swap.instead}>
-                    <td>
-                      {swap.instead}
-                      {swap.insteadNote && <span className="lov-note"> ({swap.insteadNote})</span>}
-                    </td>
-                    <td>
-                      <strong className="lov-say">{swap.say}</strong>
-                    </td>
-                    <td>{swap.because}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <h2>The swaps — say this, not that</h2>
+            <p>
+              {countWordCapital(LOV_PACK_COUNTS.swaps)} loaded words, each with the Value-First word that replaces it
+              and the one line that says why. You don&apos;t redefine the old word — you change it.
+            </p>
+          </div>
+          <div className="lov-cards">
+            <LovSwapsModule layout="responsive" cards={cards} art={table} films={joins.films} hrefs={joins.hrefs} />
           </div>
 
-          <h2>The traps — dead frames to reexamine</h2>
-          <p>
-            These are named patterns, not just words. When the work starts reaching for one, name it
-            and reexamine — don&apos;t optimize the trap, leave it.
-          </p>
-          <ul className="lov-traps">
-            {TRAPS.map((trap) => (
-              <li key={trap.name}>
-                <strong>{trap.name}</strong> — {trap.body}
-                {trap.watchFor && <span className="lov-watch"> Watch for: {trap.watchFor}</span>}
-              </li>
-            ))}
-          </ul>
+          <div className="canon-prose lov-flat">
+            <h2>The traps — dead frames to reexamine</h2>
+            <p>
+              These are named patterns, not just words. When the work starts reaching for one, name it
+              and reexamine — don&apos;t optimize the trap, leave it.
+            </p>
+          </div>
+          <div className="lov-cards">
+            <LovTrapsModule
+              layout="responsive"
+              cards={trapCards}
+              art={table}
+              routes={{ 'complexity-traps': '/twelve-traps', 'value-realities': '/realities' }}
+            />
+          </div>
 
-          <h2>What it looks like</h2>
-          <blockquote>
-            <p>
-              <strong>Someone writes:</strong> &ldquo;{EXAMPLE.prompt}&rdquo;
-            </p>
-            <p>
-              <strong>Your agent, with these rules:</strong> &ldquo;{EXAMPLE.response}&rdquo;
-            </p>
-          </blockquote>
-          <p>{EXAMPLE.closing}</p>
-        </div>
+          <div className="canon-prose lov-flat">
+            <h2>What it looks like</h2>
+            <blockquote>
+              <p>
+                <strong>Someone writes:</strong> &ldquo;{EXAMPLE.prompt}&rdquo;
+              </p>
+              <p>
+                <strong>Your agent, with these rules:</strong> &ldquo;{EXAMPLE.response}&rdquo;
+              </p>
+            </blockquote>
+            <p>{EXAMPLE.closing}</p>
+          </div>
+        </CardArtTableProvider>
 
         {/* Cross-links — promote-don't-fork. This pack points at the encoded
             spec and the reference list; it does not re-implement them. */}

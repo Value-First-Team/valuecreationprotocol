@@ -1,7 +1,7 @@
 /**
  * The Language of Value — content model.
  *
- * The vocabulary content (reflex, swaps, traps, worked example) as pure DATA,
+ * The vocabulary content (reflex, worked example, related links) as pure DATA,
  * deliberately separate from presentation so the whole pack can later be lifted
  * into @vf/site-kit as the single shared component the satellite constellation
  * sites embed. Nothing here imports React or a style — a second surface can
@@ -15,32 +15,14 @@
  * block, the download, and this data can never drift apart.
  */
 
+import { LOV_PACK_COUNTS } from '@vf/brand/methodology';
+
 /** One step of the firing reflex — a bold lead-in plus its clause. */
 export interface ReflexStep {
   /** The imperative lead word(s), rendered bold. */
   lead: string;
   /** The rest of the sentence. */
   rest: string;
-}
-
-/** One vocabulary swap — the loaded word, the Value-First word, and why. */
-export interface Swap {
-  /** The inherited/loaded term to stop reaching for. May carry a qualifier. */
-  instead: string;
-  /** Optional disambiguating qualifier shown quietly beside `instead`. */
-  insteadNote?: string;
-  /** The Value-First term to say instead. */
-  say: string;
-  /** One plain line — the distinction the reframe teaches. */
-  because: string;
-}
-
-/** One named trap — a dead frame to reexamine rather than optimize. */
-export interface Trap {
-  name: string;
-  body: string;
-  /** Optional "Watch for:" tells that signal the trap is being reached for. */
-  watchFor?: string;
 }
 
 /** A cross-link to a related surface already published on this site. */
@@ -87,51 +69,12 @@ export const REFLEX_STEPS: ReflexStep[] = [
 export const REFLEX_DISCIPLINE =
   'Two disciplines so this teaches instead of nags: speak in the Value-First words by default in your own writing, and surface the reframe once, when the word is actually load-bearing to the decision — not on every incidental mention.';
 
-/** The swaps — say this, not that. Count is derived; never state it in prose. */
-export const SWAPS: Swap[] = [
-  { instead: 'problem', say: 'Value Gap', because: 'names the space between current and possible value — no blame, no fault' },
-  { instead: 'pain point', say: 'Felt Value Gap', because: 'the gap as the person actually feels it, without pathologizing them' },
-  { instead: 'lead', insteadNote: 'the person/record', say: 'Interest', because: 'a human showing interest, not an object to capture' },
-  { instead: 'lead', insteadNote: 'the signal', say: 'Value Signal', because: 'the indicator that value is landing, not a unit to harvest' },
-  { instead: 'funnel / top-of-funnel / lead generation', say: 'Value Doors', because: 'ways in that give value first, not a chute you push people down' },
-  { instead: 'sales funnel', insteadNote: 'campaign → conversion → revenue', say: 'Value Loop', because: "value compounds in a loop; it isn't spent on the way down a funnel" },
-  { instead: 'lead magnet / gated content', say: 'Value-First Content', because: 'content that helps whether or not they ever "convert"' },
-  { instead: 'go-to-market / GTM', say: 'Value Delivery', because: "you deliver value, you don't march on a market" },
-  { instead: 'create value / add value', say: 'Value Move', because: 'a specific act that moves value toward someone' },
-  { instead: 'value-added', say: 'Value Enablement', because: 'value you make possible for them, not a bolt-on extra' },
-  { instead: 'capture value', say: 'Value Realized', because: 'value is realized when a person confirms it, not captured from them' },
-  { instead: 'capturing value', insteadNote: 'as a mindset', say: 'Natural Value Flow', because: 'value flows when you stop trying to trap it' },
-  { instead: 'value proposition', insteadNote: 'the understanding', say: 'Value Clarity', because: 'shared clarity on the value, not a pitch' },
-  { instead: 'value proposition', insteadNote: 'the proof', say: 'Value Story (Proof, Not Pitch)', because: 'earned proof, not a claim' },
-  { instead: 'ROI', insteadNote: 'as the number that counts', say: 'Value Wake', because: 'the trailing, realized value in every kind — money is one, not the only' },
-  { instead: 'a single summed value total', say: 'Value in Kind', because: 'value kept in its own kind, never falsely summed across kinds' },
-  { instead: 'dashboard', say: 'Value View', because: 'a view that reads value, not activity' },
-  { instead: 'market valuation / price-as-value', say: 'Value Assignment', because: 'value assigned by the beholder, not the market price' },
-  { instead: 'Gantt chart / project timeline', say: 'Value Gantt', because: 'sequences by value delivered, not tasks completed' },
-  { instead: 'value ladder / ascending offers / rungs', say: 'The Value Ascent', because: 'a climb in value, not a ladder of ever-bigger offers' },
-  { instead: 'tribal knowledge / know-how trapped in heads', say: 'Human Domain Expertise (HDE)', because: 'expertise you own and make legible, not folklore' },
-  { instead: 'central gatekeeper / bottleneck / command-and-control admin', say: 'The Orchestrator', because: 'coordinates flow, never a chokepoint' },
-  { instead: 'sparring / pushback', say: 'Sharpen the Value / Refine the Value', because: "you sharpen and refine the value together; you don't spar against a person" },
-  { instead: 'tokenmaxxing', insteadNote: 'volume of AI consumed as proof', say: 'Valuemaxxing', because: 'solve for the value AI creates, not the volume it consumes — did real value reach a human?' },
-  { instead: 'efficiency value / hours saved', insteadNote: 'as the whole story', say: 'Capability Value', because: 'hours saved measures the work you already did; capability value measures the work you can now do at all' },
-];
-
-/** The traps — dead frames to reexamine. Count is derived; never state it in prose. */
-export const TRAPS: Trap[] = [
-  { name: 'The Leads Trap', body: 'treating humans as objects to be captured, scored, and processed.', watchFor: '"MQL," "lead scoring," "capture the lead."' },
-  { name: 'The Qualification Trap', body: "artificial gates and scoring to filter people before you've served them.", watchFor: '"BANT," "SQL," "disqualify."' },
-  { name: 'The Lead Magnet Trap', body: 'gating real help as bait for contact information.' },
-  { name: 'The Advertising Trap', body: 'fighting for attention through interruption instead of earning it with value.' },
-  { name: 'The Measurement Trap', body: 'optimizing activity metrics that feel productive but prove nothing changed for a human.', watchFor: 'vanity metrics, a dashboard treated as proof.' },
-  { name: 'The Managed Services Trap', body: 'building on client dependency instead of client capability.', watchFor: '"we\'ll just run it for you" as the whole model.' },
-  { name: 'The ERP Trap', body: 'forcing the business to conform to rigid software instead of the reverse.', watchFor: '"one system to rule them all," "rip and replace."' },
-  { name: 'The SaaS Trap', body: 'every new tool solves one thing and adds three coordination problems.', watchFor: '"there\'s a tool for that" as the reflex.' },
-  { name: 'The B2B Trap', body: 'treating people as records to move through stages.', watchFor: 'humans described as accounts/objects.' },
-  { name: 'The AI Replacement Trap', body: "believing AI's job is to replace humans, not multiply them.", watchFor: '"automate the headcount away."' },
-  { name: 'The Authority Trap', body: 'centralizing control so it blocks the distributed intelligence it needs.', watchFor: 'sign-off as the only path forward.' },
-  { name: 'The Conformity Trap', body: 'standardization that suppresses the human judgment that creates value.', watchFor: '"one right way," "just follow the process."' },
-  { name: 'Tokenmaxxing (the Trend Trap)', body: 'the AI-era face of the Measurement Trap: counting the volume of AI consumed (tokens, prompts, seats) as if usage were the proof of value.', watchFor: 'token spend as a flex, closed-ticket-maxxing, saved-hours-maxxing — all volume dressed as value.' },
-];
+/**
+ * The swaps and the traps are not held here. They are canon's pack, verbatim, as `LOV_PACK_SWAPS` and
+ * `LOV_PACK_TRAPS` in @vf/brand (`@vf/brand/methodology`), generated from
+ * canon/value-vocabulary/language-of-value-pack.md and held to it by that package's gate on every build, so
+ * this page's reader is no longer a second author of them (build 3 of the elevation, @vf/brand 0.178.0).
+ */
 
 /** The worked example — prompt in, reframed response out. */
 export const EXAMPLE = {
@@ -163,9 +106,10 @@ export const ARTIFACT_HREF = '/language-of-value.md';
  * must read. Four representations of this vocabulary have now gone stale one at a
  * time (the readable table, the header, the meta description, the sitemap summary),
  * each because a number was typed beside the thing it counted instead of taken from
- * it. Anything that wants to say how big the pack is imports this.
+ * it. Anything that wants to say how big the pack is imports this. It reads canon's pack in @vf/brand
+ * (`LOV_PACK_COUNTS`), the same rows the page draws as cards.
  */
-export const PACK_COUNTS = { swaps: SWAPS.length, traps: TRAPS.length } as const;
+export const PACK_COUNTS = LOV_PACK_COUNTS;
 
 /** "N swaps · N traps · 1 reflex" — the spec-row form. */
 export const PACK_SUMMARY = `${PACK_COUNTS.swaps} swaps · ${PACK_COUNTS.traps} traps · 1 reflex`;

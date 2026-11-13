@@ -3324,38 +3324,10 @@
   }
   .lov-paste:focus-visible { outline: 2px solid var(--vcp-teal-deep); outline-offset: -2px; }
 
-  /* ---- Swap table helpers ---- */
-  .lov-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .lov-say { color: var(--vcp-teal-deep); font-weight: 600; }
-  .lov-note {
-    color: var(--vcp-ink-4);
-    font-style: italic;
-    font-size: 0.9em;
-  }
-
-  /* ---- Traps list ---- */
-  .lov-traps { list-style: none; padding-left: 0; }
-  .lov-traps li {
-    padding-left: 1.1em;
-    position: relative;
-  }
-  .lov-traps li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.62em;
-    width: 0.4rem;
-    height: 0.4rem;
-    background: var(--vcp-teal-deep);
-    border-radius: 1px;
-    transform: rotate(45deg);
-  }
-  .lov-watch {
-    display: block;
-    margin-top: 0.15em;
-    font-size: 0.9em;
-    color: var(--vcp-ink-4);
-  }
+  /* ---- The swaps' and the traps' card modules ----
+     LovSwapsModule and LovTrapsModule (@vf/brand) lay out their own grid and column cards; this only
+     spaces each module from the prose around it. */
+  .lov-cards { margin: 2rem 0 0; }
 
   /* ---- Related cross-links ---- */
   .lov-related {
@@ -3551,7 +3523,8 @@
 
    `overflow-x: auto` on the table itself is the fix that survives new
    content, and it is already the pattern this file uses twice — on
-   `.canon-prose pre` (a long code line) and on `.lov-table-wrap`. This
+   `.canon-prose pre` (a long code line) and on the Language of Value's
+   swaps table wrapper until build 3 replaced that table with cards. This
    simply reaches the tables that never got a wrapper because they arrive
    as raw HTML from the markdown pipeline and nothing can wrap them there.
 
