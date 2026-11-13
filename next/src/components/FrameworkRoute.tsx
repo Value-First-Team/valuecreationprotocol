@@ -51,9 +51,9 @@
  *
  * Chris ruled that TEACH joins the shared framework page as family eight ("Yes, build
  * it (Recommended)"), so /teach is a thin route over this file like the other seven.
- * Two things differ, and each is answered by a package, not here: its pairs draw the
- * card-beside-film ROW at every layout (@vf/brand `FRAMEWORK_ROW_ONLY`), so the module
- * gets their cards; and it has no Compass tool, so no endpoint is passed. Its opening is
+ * It has no Compass tool, so its module reads no endpoint; and since @vf/brand 0.176.0 it
+ * takes the layout field like every family (a column card for each pair, and the row), so
+ * it is placed in the row below like the others. Its opening is
  * canon's Quick Reference Card (@vf/site-kit 0.234.0; Chris, "I think we should start the
  * page here"), drawn by `FrameworkStageFor` in the hero's opening slot like any staged
  * framework; the 3D arches it opened on before are retired ("The 3D is not doing it for me
@@ -69,8 +69,8 @@
  * from the card-art table the build resolved (lib/card-art-table.ts), through @vf/recipes'
  * `CardArtTableProvider`, and nowhere else: each picture carries its exact registry version
  * (`data-card-art-version`), and the build's receipts are served at /card-asset-receipts.jsonl.
- * Only a route that hands the module cards gets the table, so the seven frameworks that draw
- * their own column cards render exactly what they rendered before.
+ * Only a route that hands the module cards gets the table, so a framework that draws only its
+ * column cards renders exactly what it rendered before.
  *
  * ==========================================================================
  * THE ROW, CHOSEN BY THIS HOST (2026-11-12) — BUILD 1 OF THE ELEVATION PLAN
@@ -87,12 +87,11 @@
  * videos) make sense on mobile". It binds the shared module on every host, so from 900px each item
  * is its two-sided game card beside its film and "What exists", and below that it is the column
  * card, opened so its film plays, with no game card: what valuefirstteam.com/beliefs draws. Every
- * family this site places in the row takes it. The Core Beliefs come first; the Twelve Traps follow
- * when @vf/brand draws their row (asking FrameworkModule for it today throws). TEACH draws its own
- * row at every width (`FRAMEWORK_ROW_ONLY`) until @vf/brand gives it a column form.
+ * family this site places in the row takes it: the Core Beliefs, the Twelve Traps and the TEACH
+ * Values (@vf/brand 0.176.0 draws the traps' row and gives TEACH its column card).
  */
 import type { Metadata } from 'next';
-import { FrameworkModule, FRAMEWORK_ROW_ONLY, frameworkClaim, type FrameworkKey } from '@vf/brand';
+import { FrameworkModule, frameworkClaim, type FrameworkKey } from '@vf/brand';
 import { CardArtTableProvider } from '@vf/recipes/game-cards';
 import {
   FRAMEWORK_PATHS,
@@ -172,7 +171,7 @@ const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => strin
  * the module does not draw in the row yet throws at build, naming itself, so a key added here
  * before @vf/brand draws its row stops the build rather than drawing a column nobody asked for.
  */
-const ROW_PLACED: readonly FrameworkKey[] = ['core-beliefs'];
+const ROW_PLACED: readonly FrameworkKey[] = ['core-beliefs', 'complexity-traps', 'teach-values'];
 
 /**
  * The layout every ROW_PLACED framework is asked for: the row from 900px, the column card below it
@@ -218,14 +217,11 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // before this branch existed.
   const staged = frameworkOpensOnStage(framework);
   const reference = REFERENCE[framework];
-  // TEACH draws its ROW at every layout and throws without its cards, so a row-only
-  // framework is handed them. A framework this property places in the row (ROW_PLACED) asks
-  // for it by the layout field and is handed its cards too; the rest keep their stacked
-  // column cards.
-  const rowOnly = FRAMEWORK_ROW_ONLY.includes(framework);
+  // A framework this property places in the row (ROW_PLACED) asks for it by the layout field
+  // and is handed its game cards; the rest keep their stacked column cards.
   const rowPlaced = ROW_PLACED.includes(framework);
   // The cards this route hands the module, and the table they draw from (read at build).
-  const itemCards = rowOnly || rowPlaced ? frameworkItemCards(framework) : undefined;
+  const itemCards = rowPlaced ? frameworkItemCards(framework) : undefined;
   const cardArt = itemCards ? cardArtTable() : null;
 
   const frameworkModule = (
@@ -246,20 +242,15 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
         // already carries `id="reality-<slug>"`, so the landing point exists.
         reality: (slug) => `${FRAMEWORK_PATHS['value-realities']}#reality-${slug}`,
       }}
-      /* A row placement asks for its layout by the module's layout field (the row from
-         900px, the column card below it); a row-only framework draws its row whatever is
-         asked, so it is not asked. */
+      /* A row placement asks for its layout by the module's layout field: the row from
+         900px, the column card below it. */
       {...(rowPlaced ? { itemLayout: ROW_PLACEMENT_LAYOUT } : {})}
       {...(itemCards ? { itemCards } : {})}
-      /* No Compass endpoint for a framework with no tool (TEACH): none exists for it,
-         and the module reads none. Every other framework keeps its tool, in the row too. */
-      {...(rowOnly
-        ? {}
-        : {
-            decideEndpoint: COMPASS_SERVICES.decide,
-            recognizeEndpoint: COMPASS_SERVICES.recognize,
-            translateEndpoint: COMPASS_SERVICES.translate,
-          })}
+      /* Each framework's Compass tool, in either layout. TEACH has none, and its module
+         reads none of these. */
+      decideEndpoint={COMPASS_SERVICES.decide}
+      recognizeEndpoint={COMPASS_SERVICES.recognize}
+      translateEndpoint={COMPASS_SERVICES.translate}
       plates={plates}
     />
   );
