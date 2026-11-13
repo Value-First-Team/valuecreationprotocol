@@ -94,6 +94,8 @@ export const METHODOLOGY_PAGES: readonly MethodologyPage[] = [
   family('value-accounting', '/value-accounting', 'Frameworks'),
   family('value-loop', '/value-loop', 'Patterns'),
   family('teach-values', '/teach', 'Patterns'),
+  // Family twelve (build 8; @vf/brand 0.182.0): canon calls CARE "a practice", so it joins the Patterns.
+  family('care', '/care', 'Patterns'),
   {
     key: 'ai-native-shift',
     name: 'AI-Native Shift',

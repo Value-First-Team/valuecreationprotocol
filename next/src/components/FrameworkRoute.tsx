@@ -167,6 +167,8 @@ const OG: Record<FrameworkKey, string> = {
   'interest-pipeline': '/og/og-default.jpg',
   // Family eleven (@vf/brand 0.181.0): the site's default card until one ships.
   'value-accounting': '/og/og-default.jpg',
+  // Family twelve (@vf/brand 0.182.0): the site's default card until one ships.
+  care: '/og/og-default.jpg',
 };
 
 /**
@@ -212,7 +214,10 @@ const ROW_PLACEMENT_LAYOUT = 'responsive' as const;
  * size (Chris's 2026-10-04 ruling on /three-orgs, see the header). @vf/brand draws `"across"` only for
  * the frameworks it lists in `FRAMEWORK_ACROSS_LAYOUT_READY`, and refuses the rest at build.
  */
-const ACROSS_PLACED: readonly FrameworkKey[] = ['three-org-model'];
+// CARE (family twelve, @vf/brand 0.182.0) stands across too, NOT in ROW_PLACED: its four anchors are peers with "no set
+// order", so the module refuses rows (which read top to bottom as a sequence) and stands them as a 2 x 2 square from
+// 676px, the column cards below that.
+const ACROSS_PLACED: readonly FrameworkKey[] = ['three-org-model', 'care'];
 
 /**
  * Page metadata composed from the module's own claim — the title tag cannot drift

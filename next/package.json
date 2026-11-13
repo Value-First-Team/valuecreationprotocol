@@ -21,10 +21,10 @@
     "assert:changelog": "node ../repo-changelog-lint-run.mjs --repo .. --since 72ead37f9a80f9d5838590d0d220783020f2949c --behavior-paths next/src,next/public,next/next.config.ts,next/vercel.json,next/tailwind.config.ts,next/postcss.config.cjs,next/package-lock.json"
   },
   "dependencies": {
-    "@vf/brand": "github:Value-First-Team/vf-brand#3fa6d6db0d8d1df9ade1bc8f15caa70586993994",
+    "@vf/brand": "github:Value-First-Team/vf-brand#9eeb942b34297a2ad3b84ab914abd211814fe5ad",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#ec10b9487a874a6dc320cf821fcd4283263dba53",
-    "@vf/recipes": "github:Value-First-Team/vf-recipes#4f85cd0646ce0fc672b43a8c758ae396a4fd58da",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#e90262aaecb0bbee8c2f79e2c11170cd1a4de2fc",
+    "@vf/recipes": "github:Value-First-Team/vf-recipes#288ddda800fe891797cb4bf7b1036beaa67c7c0b",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#9c4a0b5d0e83e1f23344046dd9c92cca9c1976db",
     "@vf/ui": "github:Value-First-Team/vf-ui#8306694ead819a374a21226eb5f851736e91539f",
     "@vf/value-path-core": "github:Value-First-Team/vf-value-path-core#280b75a7d1f0d4fccdd2942ece1ec612871f803c",
     "marked": "^14.1.3",
@@ -44,8 +44,8 @@
   "overrides": {
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#ec10b9487a874a6dc320cf821fcd4283263dba53",
     "@vf/ui": "github:Value-First-Team/vf-ui#8306694ead819a374a21226eb5f851736e91539f",
-    "@vf/brand": "github:Value-First-Team/vf-brand#3fa6d6db0d8d1df9ade1bc8f15caa70586993994",
-    "@vf/recipes": "github:Value-First-Team/vf-recipes#4f85cd0646ce0fc672b43a8c758ae396a4fd58da",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#e90262aaecb0bbee8c2f79e2c11170cd1a4de2fc"
+    "@vf/brand": "github:Value-First-Team/vf-brand#9eeb942b34297a2ad3b84ab914abd211814fe5ad",
+    "@vf/recipes": "github:Value-First-Team/vf-recipes#288ddda800fe891797cb4bf7b1036beaa67c7c0b",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#9c4a0b5d0e83e1f23344046dd9c92cca9c1976db"
   }
 }
