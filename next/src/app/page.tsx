@@ -4,13 +4,13 @@
  * BUILD 4 OF THE ELEVATION (plan vcp-elevation-plan.md, ruled by Chris 2026-11-12: the home page "opens on the approved
  * 'What is Value-First' film module, then shows the framework families as a row of cards, in place of the text headline
  * and the At-a-glance box"; Motif's proposal, build4-home/proposal.md, on @vf/brand 0.179.0). In order:
- *   1. the opening: the version eyebrow and the page's one h1, at heading size, on the film band's ground;
- *   2. the film: @vf/site-kit's PageVideoSpot with the approved 80% film and Chris's approved words, as
- *      valuefirstteam.com's home places it; it publishes one VideoObject naming this page;
- *   3. the eight framework families as painted cards (@vf/brand CanonPagesModule): from 900px a grid of build 2's
+ *   1. the opening is the film (Chris, 2026-11-13: no visible eyebrow or title above it): @vf/site-kit's
+ *      PageVideoSpot with the approved 80% film and Chris's approved words, as valuefirstteam.com's home
+ *      places it; it publishes one VideoObject naming this page. The page's one h1 stays, visually hidden;
+ *   2. the framework families as painted cards (@vf/brand CanonPagesModule): from 900px a grid of build 2's
  *      CanonPageGameCards, below it the column cards with their films; each card is the hub's one copy of the page;
- *   4. § 01 onward, word for word, with § 02's counts derived from the lists they count.
- * ONE LEFT EDGE. The title, the film, the families' heading and § 01 share VCP's 1120px measure: the film's inner
+ *   3. § 01 onward, word for word, with § 02's counts derived from the lists they count.
+ * ONE LEFT EDGE. The film, the families' heading and § 01 share VCP's 1120px measure: the film's inner
  * column takes this page's own measure class through PageVideoSpot's containerClassName (@vf/site-kit 0.238.0).
  */
 // hand-roll-exempt: the protocol home's editorial front page. Its visual rhythm is
@@ -153,14 +153,10 @@ export default async function HomePage() {
     <>
       <JsonLd data={homeLd} />
 
-      {/* THE OPENING: the version and the page's one h1, then the film, on one ground and one left edge. */}
+      {/* THE OPENING: the film, first (Chris, 2026-11-13). The page's one h1 stays in the document, visually
+          hidden, for a reader that moves by headings and for search; nothing visible stands above the film. */}
       <div className="vcp-opening bg-vf-surface">
-        <div className="vcp-opening-inner">
-          <p className="t-eyebrow vcp-hero-eyebrow">An open protocol · v0.1</p>
-          <h1 className="t-h1 vcp-opening-h1">
-            Value, drawn open and <em className="vcp-hero-accent">operable.</em>
-          </h1>
-        </div>
+        <h1 className="sr-only">Value, drawn open and operable.</h1>
         <PageVideoSpot
           containerClassName="vcp-opening-measure"
           placement={whatIsValueFirst80Percent(SITE.url + '/')}
@@ -175,7 +171,7 @@ export default async function HomePage() {
         <div className="vcp-section-inner">
           <p className="t-eyebrow vcp-section-eyebrow">{CANON_LABEL}</p>
           <h2 className="t-h2 vcp-section-h2" id="vcp-families-heading">
-            {countWordCapital(FAMILIES.length)} frameworks the protocol encodes.
+            {countWordCapital(FAMILIES.length)} open ideas.
           </h2>
           <div className="vcp-families">
             <CardArtTableProvider table={table}>

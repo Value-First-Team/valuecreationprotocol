@@ -2221,43 +2221,24 @@
      Reads from tokens.css variables. No Tailwind arbitrary values.
      ============================================================ */
 
-  /* ============= The opening (build 4) =============
-     The version eyebrow and the page's one h1, at heading size, then the
-     film (@vf/site-kit PageVideoSpot), on the film band's own ground. The
-     title, the film, the families' heading and § 01 share one left edge:
-     VCP's measure (--vcp-max-content, 1.5rem gutters), the same as
+  /* ============= The opening (build 4; the film first since 2026-11-13) =============
+     The film (@vf/site-kit PageVideoSpot) on the film band's own ground, with
+     nothing visible above it (Chris, 2026-11-13); the page's one h1 is in the
+     document, visually hidden (Tailwind's sr-only, as @vf/ui's primitives use
+     it). The film, the families' heading and § 01 share one left edge: VCP's
+     measure (--vcp-max-content, 1.5rem gutters), the same as
      .vcp-section-inner. */
   .vcp-opening {
     border-bottom: 1px solid var(--vcp-border);
   }
-  .vcp-opening-inner {
-    max-width: var(--vcp-max-content);
-    margin: 0 auto;
-    padding: 4rem 1.5rem 0;
-  }
-  .vcp-hero-eyebrow {
-    margin: 0 0 1.5rem;
-  }
-  .vcp-opening-h1 {
-    margin: 0;
-    max-width: 24ch;
-  }
-  .vcp-hero-accent {
-    font-style: italic;
-    font-weight: 400;
-    color: var(--vcp-teal-deep);
-  }
   /* The film's inner column, on VCP's measure. PageVideoSpot takes it as
      containerClassName (@vf/site-kit 0.238.0) in place of the kit's
-     .container-max, so the film starts on the title's edge. */
+     .container-max, so the film starts on the families' edge. */
   .vcp-opening-measure {
     width: 100%;
     max-width: var(--vcp-max-content);
     margin-inline: auto;
     padding-inline: 1.5rem;
-  }
-  @media (min-width: 1024px) {
-    .vcp-opening-inner { padding-top: 5rem; }
   }
 
   /* The 404 page's two links reuse the hero's button row. */
