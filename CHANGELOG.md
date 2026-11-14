@@ -332,3 +332,13 @@ Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@
 **Owner:** showcase (Motif's releases and finding, build 8's fix-forward)
 
 **CARE wears its own colour and each anchor its own figure, and on every framework page the "One next step" box stands a section apart from the family.** Motif's live read of /care (log 46324201c) found CARE's teal chrome on stones that glow magenta, and on a phone all four anchors in one generic figure; the engine now carries CARE's own tone, `--vf-care` (305 deg, AA on both themes and the dark stage), and four anchor figures, each echoing its own stone, which the brand and the cards wear. The same read found each family's closing line 32px from its own set and 32px from the next-step box, so on /care "The anchors are peers, never steps." read straight into "ONE NEXT STEP"; the box now stands the page's section gap (64px) below the family. Pins, in dependencies and overrides: `@vf/design-engine` 0.182.0 to 0.183.0 (`5d76302`), `@vf/brand` 0.182.0 to 0.182.1 (`2748982`), `@vf/recipes` 0.202.0 to 0.202.1 (`e3f9f14`), `@vf/site-kit` 0.241.0 to 0.242.0 (`145f32a`). No code in this repository changes. The receipts file still carries 121 lines. Lockfile, installed tree and file bytes read back, one copy of each.
+
+## 2026-11-13 — deploy c69ed21: the next step a section apart, on this site (@vf/site-kit 0.243.0)
+**Breaking:** No for a reader: every page says what it said; one gap moves on every framework page.
+**Consumer action:** None. Revert target: `dpl_DeiTSejgFKmGTBgLoVMCyJMJySCF` (`b6c6d49`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `c69ed21`
+**Owner:** showcase
+
+**On every framework page the "One next step" box now stands the page's section gap (64px) below the family, so a family's closing line stays with its module.** `FrameworkRoute` places `@vf/site-kit` 0.243.0's `FrameworkNextStepGap` beside the module, the one rule `FrameworkPage` places on the kit's own framework page. Pin, in dependencies and overrides: `@vf/site-kit` 0.242.0 to 0.243.0 (`12a5860`).
+
+**CORRECTION to the entry for `b6c290f`.** It says the box "now stands the page's section gap (64px) below the family". On this site it did not: 0.242.0 set the gap inside `FrameworkPage`, and this site composes its framework pages in its own `FrameworkRoute`, so that deployment kept the 32px gap. CARE's colour and figures in that entry did ship. This deploy is the one that moves the gap here.
