@@ -342,3 +342,17 @@ Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@
 **On every framework page the "One next step" box now stands the page's section gap (64px) below the family, so a family's closing line stays with its module.** `FrameworkRoute` places `@vf/site-kit` 0.243.0's `FrameworkNextStepGap` beside the module, the one rule `FrameworkPage` places on the kit's own framework page. Pin, in dependencies and overrides: `@vf/site-kit` 0.242.0 to 0.243.0 (`12a5860`).
 
 **CORRECTION to the entry for `b6c290f`.** It says the box "now stands the page's section gap (64px) below the family". On this site it did not: 0.242.0 set the gap inside `FrameworkPage`, and this site composes its framework pages in its own `FrameworkRoute`, so that deployment kept the 32px gap. CARE's colour and figures in that entry did ship. This deploy is the one that moves the gap here.
+
+## 2026-11-14 — deploy 7287a71: Chris's calls on the home, CARE and the Language of Value (@vf/brand 0.183.0)
+**Breaking:** No for a reader: every word on every page is unchanged except the home's, as described.
+**Consumer action:** None. Revert target: `dpl_8sLsttrvBXed9cLufenyfZxogbYo` (`1c96c2e`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `7287a71`
+**Owner:** showcase (Motif's release and patch, build 9 of the elevation)
+
+**Four of Chris's calls (2026-11-13, "Go for it!").**
+- **The home page opens on the film.** The eyebrow "An open protocol · v0.1" and the visible title go. The page's one h1 stays in the document for a reader that moves by headings and for search, visually hidden: "Value, drawn open and operable." The four classes only that block used leave `vcp-archetypes.css`.
+- **The framework band's heading is Sage's** (`home-labels.md`, e3402f68a): "Twelve open ideas.", its count still read from the list. Its eyebrow and its link to the canon pages are as they were.
+- **CARE's square stands centred** in its column on /care.
+- **On the Language of Value page**, a phone card's picture stands beside its name, a 96px square, instead of across the top, and every word, film and door stays in view. The traps stand in number order, 1 to 12, with Tokenmaxxing after them.
+
+Motif's consumer action (0207348b0, log fc9f00289) and `home-build9.patch`. Pin, in dependencies and overrides: `@vf/brand` 0.182.1 to 0.183.0 (`58f17d2`), past 0.182.2, which changes nothing a page draws. Engine, recipes and site-kit unchanged. The receipts file still carries 121 lines. Lockfile, installed tree and file bytes read back; the site's linked graph holds one copy of each package.
