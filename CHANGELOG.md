@@ -356,3 +356,11 @@ Sage's view lines reach the site through `@vf/brand` 0.152.1 (`1c8ece3`), and `@
 - **On the Language of Value page**, a phone card's picture stands beside its name, a 96px square, instead of across the top, and every word, film and door stays in view. The traps stand in number order, 1 to 12, with Tokenmaxxing after them.
 
 Motif's consumer action (0207348b0, log fc9f00289) and `home-build9.patch`. Pin, in dependencies and overrides: `@vf/brand` 0.182.1 to 0.183.0 (`58f17d2`), past 0.182.2, which changes nothing a page draws. Engine, recipes and site-kit unchanged. The receipts file still carries 121 lines. Lockfile, installed tree and file bytes read back; the site's linked graph holds one copy of each package.
+
+## 2026-11-14 — deploy 587a52a: the twelve old-word paintings on the Language of Value swap fronts (@vf/brand 0.197.0, @vf/recipes 0.207.0)
+**Breaking:** No for a reader: every page says what it said; twelve swap card fronts change picture.
+**Consumer action:** None. Revert target: `dpl_3R6xaxeyfSuzLheVkiTS9MwDJNeL` (`b8cef97`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `587a52a`
+**Owner:** showcase (Motif's release, build 9 part two)
+
+**On the Language of Value page, twelve swap cards wear their old word's own painting on the front, where they wore the trap sigil** (Chris, 2026-11-14: "Approve all 12 (Recommended)", card use only). They are problem, pain point, go-to-market, ROI as a target, a single summed value total, dashboard, price as value, Gantt chart, tribal knowledge, central gatekeeper, sparring and efficiency value. Each turns to the back it had. The other thirteen fronts are unchanged, and on a phone nothing changes, because the column cards wear the back's picture. The receipts file carries 133 lines: the 121 it carried and the twelve paintings. Pins, both together, in dependencies and overrides: `@vf/brand` 0.183.0 to 0.197.0 (`be805bb`), `@vf/recipes` 0.202.1 to 0.207.0 (`16617c6`). The releases in between ask nothing of this site; since recipes 0.203.0 a card picture cross-fades in once it has loaded. Engine and site-kit unchanged. Lockfile, installed tree and file bytes read back; the site's linked graph holds one copy of each package.
