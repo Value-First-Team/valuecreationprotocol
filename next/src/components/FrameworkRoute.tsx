@@ -104,6 +104,7 @@ import {
   FrameworkStageFor,
   FrameworkLede,
   FrameworkRowPreviews,
+  FrameworkNextStepGap,
   frameworkItemCards,
   frameworkOpensOnStage,
   frameworkClaimScale,
@@ -344,6 +345,9 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
             property gets it for the same reason valuefirstteam.com does: the 2026-09-01
             line binds, nothing is elevated on only one site. Wrapping something with
             no such rows yields exactly what was wrapped and no listener fires. */}
+        {/* The "One next step" box a section apart from the family (@vf/site-kit 0.243.0; Motif's finding cdbf22b77):
+            the kit's one rule, as FrameworkPage places it, so a family's closing line stays with its module. */}
+        <FrameworkNextStepGap />
         <FrameworkRowPreviews>
           {cardArt ? (
             <CardArtTableProvider table={cardArt}>{frameworkModule}</CardArtTableProvider>
