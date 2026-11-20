@@ -422,3 +422,15 @@ Pins: `@vf/brand` 0.218.0 (`7dfeca1`) to 0.218.1 (`1d3aeee`), in dependencies an
 - **/value-accounting** is unchanged by this deploy: Expected's line ("one person or one team") and its "Has it run? Yes." went live with `c2ce61e` and `13a3c5a`.
 
 Pins, in dependencies and overrides: `@vf/brand` 0.218.1 (`1d3aeee`) to 0.218.2 (`26e5a0c`); `@vf/value-path-core` 0.33.5 (`3a662d4`) to 0.33.6 (`d63cfcd`). Engine, recipes, ui and site-kit unchanged. Lockfile and installed tree read back; all eight canon citations in `src` still find their line.
+
+## 2026-11-20 — deploy 4a19dd8: "Has it run?" comes off the protocol site (@vf/brand 0.219.0, @vf/recipes 0.213.0)
+**Breaking:** No for a reader. No URL is removed; /value-accounting stops saying which stages have run.
+**Consumer action:** None. Revert target: `dpl_25VJAT3oRY4VHoRgCKWxaQm8A224` (`7cc28db`), the production deployment serving before this push.
+**Commit:** `4a19dd8`
+**Owner:** showcase (V's dispatch, session d9b9bebf; Motif's 0.219.0 and 0.213.0)
+
+**Which stages have run is no longer on this site** (Chris, 2026-11-20, "Take it off the public site"; brain `L1-data-identity-context/wiki/decisions/2026-11-20-has-it-run-comes-off-the-protocol-site.md`, canon's Value Accounting reference 1.7, `b0a47b6ef`). On /value-accounting, "Has it run?" and its answers ("Yes." and "No. Designed, not yet run.") leave all fifteen places they were drawn: each of the five stages' column card, row, and card back. Expected keeps "No expectation counts as value." beside its row. A stage card's front is now the family, the stage's name and its painting; turned over, it reads "What it is" over the stage's line, and Expected's back adds "What canon still holds on Expected: No expectation counts as value." Before the move, read live across the 35 sitemap pages and /llms.txt, "Has it run?" appeared 15 times, all on /value-accounting, and never in /llms.txt.
+
+**One more change rides with the recipes move.** `@vf/recipes` 0.209.0 (Motif's ruling of 2026-11-14): a card face with no foot words draws no foot strip, and its picture takes the strip's height inside the same 5:7 frame. Read on the live pages before the move, 67 card faces drew an empty strip: 51 on /language-of-value, 5 on /value-accounting, 4 on /care, 4 on /methodology and 3 on /three-orgs. The other releases carried (0.208.0, 0.210.0, 0.211.0 and 0.212.0) change parts this site does not draw.
+
+Pins, in dependencies and overrides: `@vf/brand` 0.218.2 (`26e5a0c`) to 0.219.0 (`d5399de`); `@vf/recipes` 0.207.0 (`16617c6`) to 0.213.0 (`c873093`). Engine, ui, site-kit and value-path-core unchanged; the engine stays at 0.183.0 under the override. Lockfile and installed tree read back, one entry each; recipes and site-kit resolve brand 0.219.0.
