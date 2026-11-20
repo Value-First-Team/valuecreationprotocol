@@ -410,3 +410,15 @@ Pin, in dependencies and overrides: `@vf/brand` 0.217.1 (`de56316`) to 0.218.0 (
 **The stored canon copy moves, and no page's words do.** `@vf/value-path-core` 0.33.5 carries Expected's new line and the Emergence over Predictability v2.0 pass. Read record by record against 0.33.4, seven records move: four in `canon-data` (`architecture-walkthrough-guide.md`, `golden-path-qa-five-core-beliefs.md`, `golden-path-qa-value-first-framework-overview.md`, `value-accounting-canonical-reference.md`) and three in `vocab-data` (`expected-value.md`, `propose-vs-settle.md`, `value-doctrine.md`). This site prints 14 records from `canon-data` (`src/lib/markdown.ts`, `STAGED_MASTERS` and `WIKI_CANONICAL`), none of them moved; it does not read `vocab-data`; and no `canonLine`/`canonPhrase` citation names a moved record.
 
 Pins: `@vf/brand` 0.218.0 (`7dfeca1`) to 0.218.1 (`1d3aeee`), in dependencies and overrides; `@vf/value-path-core` 0.33.4 (`ad82877`) to 0.33.5 (`3a662d4`), in dependencies. Engine, recipes, ui and site-kit unchanged. Lockfile read back with one entry each; the linked tree resolves `@vf/brand` 0.218.1 for the site, site-kit and recipes.
+
+## 2026-11-20 — deploy b1009de: the TEACH Values 1.2 (@vf/brand 0.218.2, @vf/value-path-core 0.33.6)
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_GWZnL62GrKvJhrUPoAag8dWXRaXA` (`11cd5e1`), the production deployment serving before this push.
+**Commit:** `b1009de`
+**Owner:** showcase (V's dispatch, session mainbrain-67; Chris's walk of the TEACH Values, canon `b4efef15a`)
+
+- **/teach:** Humble ↔ Hungry's "How We Live This" carries Chris's two sentences after its existing text: "We never pretend we have it figured out — the most honest thing I can say to a leader is, "I don't know yet, but I know how to find out with you." And we're hungry enough to keep showing up every day to prove it." They appear in the pair's card and row reading and in the TEACH glance.
+- **/teach/reference** reads the reference as version 1.2, effective November 20, 2026. It opens on what to know first and the Quick Reference Card; its usage rules become "Naming the pairs".
+- **/value-accounting** is unchanged by this deploy: Expected's line ("one person or one team") and its "Has it run? Yes." went live with `c2ce61e` and `13a3c5a`.
+
+Pins, in dependencies and overrides: `@vf/brand` 0.218.1 (`1d3aeee`) to 0.218.2 (`26e5a0c`); `@vf/value-path-core` 0.33.5 (`3a662d4`) to 0.33.6 (`d63cfcd`). Engine, recipes, ui and site-kit unchanged. Lockfile and installed tree read back; all eight canon citations in `src` still find their line.
