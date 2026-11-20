@@ -147,7 +147,7 @@ export const METHODOLOGY_PAGES: readonly MethodologyPage[] = [
     // vcp-canonical-reference.md, "Disambiguation: VCP vs. CVP", its closing line.
     line: canonLine(
       'vcp-canonical-reference.md',
-      133,
+      137,
       'VCP is what is declared. CVP is what it runs on. They are not synonyms, alternates, or competing names.',
     ),
   },
