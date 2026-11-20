@@ -114,7 +114,7 @@
  *     "Status" and "Cite" are off the framework pages, and "Reference" stays only on TEACH and the Value Loop.
  */
 import type { Metadata } from 'next';
-import { FrameworkModule, frameworkClaim, hasFrameworkPage, frameworkPageFriendSlugs, ROW_CARD_FLOOR_PX, type FrameworkKey } from '@vf/brand';
+import { FrameworkModule, frameworkClaim, hasFrameworkPage, frameworkPageFriendSlugs, type FrameworkKey } from '@vf/brand';
 import { friends as readFriends } from '@vf/site-kit/friend';
 import { CardArtTableProvider } from '@vf/recipes/game-cards';
 import {
@@ -286,15 +286,13 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   const friendsBySlug = Object.fromEntries(
     friendSlugs.flatMap((slug, i) => (friendsRead[i] ? [[slug, friendsRead[i]] as const] : [])),
   );
-  // The sibling's canon page card is "sized by its host" (@vf/recipes CanonPageGameCard). Handed over bare, the close
-  // stretched it to the reading column: about 740 x 1090px at 1440, taller than the screen (live gate, 2026-11-20).
-  // It is handed over at the card floor the module's own rows and CARE's square use (ROW_CARD_FLOOR_PX), the size
-  // the methodology hub's column gives the same card.
+  // The sibling's canon page card is sized by the package's close (@vf/brand 0.222.0, at the card floor), which took
+  // over the box this route put round it on 2026-11-20 (0c6760f), so it is handed over bare.
   const siblingCard = paged ? frameworkSiblingCard(framework) : undefined;
   const pageProps = paged
     ? {
         ...(Object.keys(friendsBySlug).length ? { friends: friendsBySlug } : {}),
-        ...(siblingCard ? { siblingCard: <div style={{ maxWidth: ROW_CARD_FLOOR_PX }}>{siblingCard}</div> } : {}),
+        ...(siblingCard ? { siblingCard } : {}),
         sheetHref: `${path}/sheet`,
         ...(framework === 'value-accounting' ? { sheetFileHref: '/value-accounting/first-entry.csv' } : {}),
       }

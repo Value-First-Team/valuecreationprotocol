@@ -154,7 +154,12 @@
 /* ============================================================
    Base elements — warm paper, editorial typography
    ============================================================ */
-html { scroll-behavior: smooth; background-color: var(--vcp-surface); }
+html { background-color: var(--vcp-surface); }
+/* Smooth in-page scrolling only for a reader who has not asked for reduced motion (Mirror's finding 12,
+   2026-11-20): under prefers-reduced-motion the root's scroll-behavior stays auto, so a jump lands at once. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
 body {
   margin: 0;
   background: var(--vcp-surface);
