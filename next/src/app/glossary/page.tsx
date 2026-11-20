@@ -1,13 +1,17 @@
 /**
  * /glossary — Full canonical vocabulary. React port of src/pages/glossary.astro.
  * Sources: inline protocol/encoding terms + Sanity methodology records (build-time).
+ * The Five Core Beliefs come from @vf/site-kit's frameworkDefinedTerms, the shared reader of
+ * @vf/brand's one derived copy of canon (gated by main-brain-lint CN1): each belief by its full
+ * "X over Y" name and canon's statement, linked to its own anchor on /beliefs.
  * .glossary-* styling lives in vcp-archetypes.css.
  */
 import type { Metadata } from 'next';
 import { SITE } from '@/lib/site';
 import { HubArchetype } from '@/components/HubArchetype';
 import { JsonLd } from '@/components/JsonLd';
-import { getCoreBeliefs, getTraps, getValuePathStages, getUnifiedGoals } from '@/lib/sanity/canon';
+import { frameworkDefinedTerms } from '@vf/site-kit/framework';
+import { getTraps, getValuePathStages, getUnifiedGoals } from '@/lib/sanity/canon';
 
 export const metadata: Metadata = {
   title: 'Glossary',
@@ -101,8 +105,7 @@ type GlossarySection = {
 };
 
 export default async function GlossaryPage() {
-  const [beliefs, traps, stages, unifiedGoals] = await Promise.all([
-    getCoreBeliefs(),
+  const [traps, stages, unifiedGoals] = await Promise.all([
     getTraps(),
     getValuePathStages(),
     getUnifiedGoals(),
@@ -113,10 +116,10 @@ export default async function GlossaryPage() {
     {
       id: 'beliefs',
       title: 'Five Core Beliefs',
-      entries: beliefs.map((b) => ({
+      entries: frameworkDefinedTerms('core-beliefs').map((b) => ({
         term: b.name,
-        def: b.tagline ?? b.shortLabel ?? 'See Core Beliefs canon page.',
-        link: '/beliefs',
+        def: b.description,
+        link: `/beliefs#${b.code}`,
       })),
     },
     {

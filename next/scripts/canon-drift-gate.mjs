@@ -60,8 +60,6 @@ const PAIRED = {};
 const EXEMPT = {
   'canon/hubspot-cvp-canonical-reference-v1_1.md':
     'SERVED at /hubspot-cvp. Diverges STRUCTURALLY from the master, not by staleness: it carries two VCP-site sections the master has no equivalent for ("Disambiguation: CVP vs. VCP", "CVP and VCP-Aligned Operations") and lacks the master\'s "Native Objects as Value Architecture" and "The 2026 Evolution". Both documents call themselves v1.1 and they are different documents. Reconciling them is methodology authorship — Oracle\'s, then Canon\'s — not a copy. Do not exempt this any longer than it takes them to rule.',
-  'canon/emergence-over-predictability-canonical-reference.md':
-    'No master under canon/canonical/. A per-belief reference that canon does not carry as its own file; the belief itself is canonical in five-core-beliefs-canonical-reference.md, which IS paired above.',
   'canon/vft-lexicon-canon-v0_1.md': 'VCP-own canon (v0.1). No master under canon/canonical/.',
   'canon/vcp-lang-canon-v0_1.md': 'VCP-own canon (v0.1). No master under canon/canonical/.',
   'canon/value-graph-canon-v0_1.md': 'VCP-own canon (v0.1). No master under canon/canonical/.',

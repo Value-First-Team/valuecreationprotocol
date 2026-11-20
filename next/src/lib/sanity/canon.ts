@@ -63,33 +63,6 @@ export async function getCanonDocs(ids: string[]): Promise<CanonDocMeta[]> {
 }
 
 /**
- * Get all 6 core belief records, ordered by position (Belief #5 = Emergence over Predictability).
- * Legacy coreBelief-evolution (position null) appears at the end.
- *
- * `principle` carries the canonical "X over Y" form (e.g. "Natural Value Flow over Artificial Control");
- * `name` carries the short X (e.g. "Natural Value Flow"). Both are populated; tagline/shortLabel are not.
- */
-export async function getCoreBeliefs() {
-  const result = await sanityQuery<
-    Array<{
-      _id: string;
-      name: string;
-      principle?: string;
-      position: number | null;
-      slug?: { current: string };
-      shortLabel?: string;
-      tagline?: string;
-      body?: unknown;
-    }>
-  >(
-    `*[_type == "coreBelief"] | order(coalesce(position, 99) asc){
-      _id, name, principle, position, slug, shortLabel, tagline, body
-    }`
-  );
-  return result ?? [];
-}
-
-/**
  * Get all 12 Twelve Traps records, ordered alphabetically by name.
  *
  * Sanity carries rich structured fields per trap — `tagline` is the one-line

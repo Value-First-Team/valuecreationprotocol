@@ -84,7 +84,6 @@ export const STAGED_FILES = {
   lexicon: 'vft-lexicon-canon-v0_1.md',
   vcpLang: 'vcp-lang-canon-v0_1.md',
   valueGraph: 'value-graph-canon-v0_1.md',
-  emergence: 'emergence-over-predictability-canonical-reference.md',
   teach: 'teach-values-canonical-reference.md',
   hubspotCvp: 'hubspot-cvp-canonical-reference-v1_1.md',
   beyondLeads: 'beyond_leads_manifesto_v2.md',
