@@ -478,3 +478,11 @@ Correction to the `0c6760f` entry above: phones did change slightly. On a 390-pi
 **Reduced motion.** A reader whose device asks for reduced motion now jumps straight to an in-page link instead of scrolling smoothly.
 
 On every other page, each card's "Turn over" control is now announced with the card's name; nothing visible changes. Pins, in dependencies and overrides: `@vf/brand` 0.221.0 (`e06ba9a`) to 0.222.0 (`4bcae34`); `@vf/recipes` 0.214.0 (`08e5a4f`) to 0.215.0 (`5e9ac9a`); `@vf/site-kit` 0.256.0 (`7c1d412`) to 0.257.0 (`df06f5d`). The engine stays at 0.183.0 under the override. Lockfile and installed tree read back, one entry each.
+
+## 2026-11-20 — deploy d189792: a printed sheet's title prints dark
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_GjaFsVywK7iMzUJn6TG2fnxASevj` (`dd4a2e6`), the production deployment serving before this push.
+**Commit:** `d189792`
+**Owner:** showcase (live gate, session d9b9bebf)
+
+Printed from a dark page, the two sheets' titles ("Start your own CARE record", "Start your own book of value") came out near-white on white paper while the rest of the sheet printed dark. They now print dark like the rest. Nothing changes on screen and no words change.
