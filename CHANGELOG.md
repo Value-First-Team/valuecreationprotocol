@@ -378,3 +378,11 @@ Motif's consumer action (0207348b0, log fc9f00289) and `home-build9.patch`. Pin,
 - **Chris's May 2026 draft**, `src/content/canon/emergence-over-predictability-canonical-reference.md`, is deleted. No route rendered it, so no URL served it. Its `STAGED_FILES` key and its canon-drift-gate exemption go with it. The canon-drift gate reads 0 paired files and 7 exempt, PASS.
 
 Pins, in dependencies and overrides: `@vf/brand` 0.197.0 (`be805bb`) to 0.217.1 (`de56316`); `@vf/value-path-core` 0.21.3 (`280b75a`) to 0.33.4 (`ad82877`). The brand releases between are additive or words-only for this site. Engine, recipes, ui and site-kit unchanged. Lockfile and installed tree read back.
+
+## 2026-11-20 — deploy 893a8e7: the CVP vs VCP card's canon citation follows the snapshot (carries 13a8da1)
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_4LZUD9xaNmYhXYbVjuG8pGHUybD5` (`407b995`), still the production deployment: the build of `ae1f58b` (`dpl_4sK111aZPd8cWHymDc3SArBQcL7w`) failed, so 13a8da1's entry above reaches readers with this deploy.
+**Commit:** `893a8e7`
+**Owner:** showcase (V's dispatch, session mainbrain-67)
+
+The canon snapshot moved with `@vf/value-path-core` 0.33.4, and `vcp-canonical-reference.md` now carries "VCP is what is declared. CVP is what it runs on. They are not synonyms, alternates, or competing names." at line 137, four lines lower than the CVP vs VCP card cited. `canonLine` stopped the build while collecting /llms.txt, which is the gate working. The citation now reads 137, and the words are unchanged. All eight `canonLine`/`canonPhrase` citations in `src` were read against the snapshot, and each finds its line.
