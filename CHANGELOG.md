@@ -466,3 +466,15 @@ On /care and /value-accounting, the card that steps across to the other framewor
 /care draws a figure at the foot of "What you hoped for, and what came back": two equal cards, "CARE record" over "Intention" and "Value Entry" over "Value", joined by a line, with one arc in CARE's magenta back to the CARE record named "Return on Intention". /value-accounting draws one at the foot of "Whose word counts, and where money sits", headed "Two lanes, never added": Outside and Inside either side of one wall, and Money apart. Each is at most 480 pixels wide, follows the site's own light and dark switch, and carries a text alternative. Pin: `@vf/brand` 0.220.0 (`32cbac1`) to 0.221.0 (`e06ba9a`), in dependencies and overrides; nothing else moves.
 
 Correction to the `0c6760f` entry above: phones did change slightly. On a 390-pixel screen the sibling card is now 326 pixels wide, where it had filled the 342-pixel column.
+
+## 2026-11-20 — deploy 86a5b09: the fix pass (@vf/brand 0.222.0, @vf/recipes 0.215.0, @vf/site-kit 0.257.0)
+**Breaking:** No for a reader. No URL is removed.
+**Consumer action:** None. Revert target: `dpl_BfSiWhucmzCnwV6HS1anLFtMQKFw` (`ae54652`), the production deployment serving before this push.
+**Commit:** `86a5b09`
+**Owner:** showcase (V's dispatch, session d9b9bebf; Motif's phase 4 releases; Mirror's findings)
+
+**/care and /value-accounting read canon CARE 1.5 and Value Accounting 2.3.** /care opens on a short film of Chris, and three more clips play inside its sections and on /value-accounting. Terms are explained the first time they appear, and lines that repeated now print once. On /value-accounting the five stages are five equal tiles with nothing to turn over, and the real entry shows its four parts: the moment, who received it, who did the work, and her own words with a link to her post. The corrected article is linked under its own title. The two reference pages link the terms that have a page and print no raw link markup. The printable sheets carry a title, where they come from, the full honesty notes, and a button to print or save them. The card that steps across to the other framework keeps its size.
+
+**Reduced motion.** A reader whose device asks for reduced motion now jumps straight to an in-page link instead of scrolling smoothly.
+
+On every other page, each card's "Turn over" control is now announced with the card's name; nothing visible changes. Pins, in dependencies and overrides: `@vf/brand` 0.221.0 (`e06ba9a`) to 0.222.0 (`4bcae34`); `@vf/recipes` 0.214.0 (`08e5a4f`) to 0.215.0 (`5e9ac9a`); `@vf/site-kit` 0.256.0 (`7c1d412`) to 0.257.0 (`df06f5d`). The engine stays at 0.183.0 under the override. Lockfile and installed tree read back, one entry each.
