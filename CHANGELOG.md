@@ -386,3 +386,15 @@ Pins, in dependencies and overrides: `@vf/brand` 0.197.0 (`be805bb`) to 0.217.1 
 **Owner:** showcase (V's dispatch, session mainbrain-67)
 
 The canon snapshot moved with `@vf/value-path-core` 0.33.4, and `vcp-canonical-reference.md` now carries "VCP is what is declared. CVP is what it runs on. They are not synonyms, alternates, or competing names." at line 137, four lines lower than the CVP vs VCP card cited. `canonLine` stopped the build while collecting /llms.txt, which is the gate working. The citation now reads 137, and the words are unchanged. All eight `canonLine`/`canonPhrase` citations in `src` were read against the snapshot, and each finds its line.
+
+## 2026-11-20 — deploy c2ce61e: Expected names one person or one team (@vf/brand 0.218.0)
+**Breaking:** No for a reader. One line on /value-accounting changes its words; no URL is removed.
+**Consumer action:** None. Revert target: `dpl_7QFA6jzFdKWLxjWB2WKhD9axnZVX` (`85d18d5`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `c2ce61e`
+**Owner:** showcase (V's dispatch, session 4ac21cd1; Motif's finding, brain log 2026-11-20T14:20Z)
+
+**Value Accounting's Expected stage reads as Chris ruled it** (2026-11-20; brain `ec4e7e941`): "Someone wrote down what one person or one team is expected to receive, before it happens." It read "what one person is expected to receive". On /value-accounting that is the stage's picture caption, its lede, its one-line in the list, and the page's description of the term Expected for search engines. Before the move, read live across the 35 sitemap pages and /llms.txt, the old line appeared 6 times, all on /value-accounting, and the new line nowhere.
+
+0.218.0 also gives each Core Belief a one-line gloss (`CoreBeliefAtom.gloss`, `beliefGlossText()`, canon v2.0). Nothing this site draws reads it, so no other page's words change: no file in `src` reads it, and no installed `@vf` package at this site's pins does.
+
+Pin, in dependencies and overrides: `@vf/brand` 0.217.1 (`de56316`) to 0.218.0 (`7dfeca1`). Engine, recipes, ui, site-kit and value-path-core unchanged. Lockfile and installed tree read back; the site's linked graph holds one copy of `@vf/brand`.
