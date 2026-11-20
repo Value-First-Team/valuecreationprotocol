@@ -364,3 +364,17 @@ Motif's consumer action (0207348b0, log fc9f00289) and `home-build9.patch`. Pin,
 **Owner:** showcase (Motif's release, build 9 part two)
 
 **On the Language of Value page, twelve swap cards wear their old word's own painting on the front, where they wore the trap sigil** (Chris, 2026-11-14: "Approve all 12 (Recommended)", card use only). They are problem, pain point, go-to-market, ROI as a target, a single summed value total, dashboard, price as value, Gantt chart, tribal knowledge, central gatekeeper, sparring and efficiency value. Each turns to the back it had. The other thirteen fronts are unchanged, and on a phone nothing changes, because the column cards wear the back's picture. The receipts file carries 133 lines: the 121 it carried and the twelve paintings. Pins, both together, in dependencies and overrides: `@vf/brand` 0.183.0 to 0.197.0 (`be805bb`), `@vf/recipes` 0.202.1 to 0.207.0 (`16617c6`). The releases in between ask nothing of this site; since recipes 0.203.0 a card picture cross-fades in once it has loaded. Engine and site-kit unchanged. Lockfile, installed tree and file bytes read back; the site's linked graph holds one copy of each package.
+
+## 2026-11-20 — deploy 13a8da1: the fifth Core Belief as Chris ruled it (@vf/brand 0.217.1, @vf/value-path-core 0.33.4)
+**Breaking:** No for a reader. /beliefs and /glossary change their belief-5 words as described; no URL is removed.
+**Consumer action:** None. Revert target: `dpl_4LZUD9xaNmYhXYbVjuG8pGHUybD5` (`407b995`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `13a8da1`
+**Owner:** showcase (V's dispatch, session mainbrain-67)
+
+**Emergence over Predictability reads canon v2.0** (Chris, 2026-11-19; brain `57e2a3fa2`).
+- **/beliefs** prints the belief's line as "Reality reveals itself through engagement. It does not announce itself in advance.", with canon's new What This Means, Shift, default and approach. The pattern line's Y half is "a direction we move away from", and the compass footnote is "The default it moves away from:".
+- **/glossary's Five Core Beliefs** read `@vf/site-kit`'s `frameworkDefinedTerms`, the shared reader of `@vf/brand`'s canon. Each appears by its full "X over Y" name with canon's statement, linked to its own anchor on /beliefs. They read Sanity `coreBelief` records before: four of the five appeared by their short name, and every definition read "See Core Beliefs canon page." `getCoreBeliefs`, whose only caller that was, is removed.
+- **The canon snapshot** this site reads canon from (`@vf/value-path-core/canon-data`) carries `five-core-beliefs-canonical-reference.md` v2.0.
+- **Chris's May 2026 draft**, `src/content/canon/emergence-over-predictability-canonical-reference.md`, is deleted. No route rendered it, so no URL served it. Its `STAGED_FILES` key and its canon-drift-gate exemption go with it. The canon-drift gate reads 0 paired files and 7 exempt, PASS.
+
+Pins, in dependencies and overrides: `@vf/brand` 0.197.0 (`be805bb`) to 0.217.1 (`de56316`); `@vf/value-path-core` 0.21.3 (`280b75a`) to 0.33.4 (`ad82877`). The brand releases between are additive or words-only for this site. Engine, recipes, ui and site-kit unchanged. Lockfile and installed tree read back.
