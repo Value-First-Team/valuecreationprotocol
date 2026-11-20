@@ -456,3 +456,13 @@ Pins, in dependencies and overrides: `@vf/brand` 0.219.0 (`d5399de`) to 0.220.0 
 **Owner:** showcase (live gate, session d9b9bebf)
 
 On /care and /value-accounting, the card that steps across to the other framework (in the page's close) is drawn at the size of the cards above it, 326 pixels wide, where it had stretched to the full reading column: about 740 by 1,090 pixels on a desktop, taller than the screen. Phones are unchanged. No words change.
+
+## 2026-11-20 — deploy d0d0b8e: two figures (@vf/brand 0.221.0)
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_BmHZpNwyHBU8aY1R1SjcBFcAmn3D` (`5081024`), the production deployment serving before this push.
+**Commit:** `d0d0b8e`
+**Owner:** showcase (V's addendum, session d9b9bebf; Motif's 0.221.0, Blueprint's figures)
+
+/care draws a figure at the foot of "What you hoped for, and what came back": two equal cards, "CARE record" over "Intention" and "Value Entry" over "Value", joined by a line, with one arc in CARE's magenta back to the CARE record named "Return on Intention". /value-accounting draws one at the foot of "Whose word counts, and where money sits", headed "Two lanes, never added": Outside and Inside either side of one wall, and Money apart. Each is at most 480 pixels wide, follows the site's own light and dark switch, and carries a text alternative. Pin: `@vf/brand` 0.220.0 (`32cbac1`) to 0.221.0 (`e06ba9a`), in dependencies and overrides; nothing else moves.
+
+Correction to the `0c6760f` entry above: phones did change slightly. On a 390-pixel screen the sibling card is now 326 pixels wide, where it had filled the 342-pixel column.
