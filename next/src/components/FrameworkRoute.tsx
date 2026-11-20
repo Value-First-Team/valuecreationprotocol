@@ -94,9 +94,28 @@
  * 9b041c096): "Side by side (Recommended)". The three orgs are peers, so on a computer their game
  * cards stand in one row at equal size, each turning in place; below the set's width, the column
  * cards. That is the module's `"across"` layout, and what valuefirstteam.com/three-orgs draws.
+ *
+ * ==========================================================================
+ * THE FRAMEWORK PAGE GROWS (2026-11-20) — CARE AND VALUE ACCOUNTING'S FIRST PASS
+ * ==========================================================================
+ *
+ * Chris's first pass of 2026-11-20 (MainBrain L4-orchestration/output/2026-11-20-care-and-value-accounting/
+ * FIRST-PASS.md), built in @vf/brand 0.220.0 and @vf/site-kit 0.256.0 (Motif's handoff, page-design/
+ * handoff-to-showcase.md). A family with a page record (`hasFrameworkPage`: CARE and Value Accounting today)
+ * draws its sections around its cards; this route hands the module what only a host can: the Friends the page
+ * draws (read through the Friend reader at build), the sibling family's canon page card, and where this property
+ * serves the family's printable sheet and blank first-entry file. Still not one framework word is written here.
+ *
+ *   - The opening follows the film: `frameworkOpensOnStage` and `FrameworkStageFor` take the media, so a family
+ *     whose clip join carries a whole first-screen film opens on it with no change here. None does yet.
+ *   - No duplicated lede: a page-record family's first section prints its opening sentences, so the hero gets none.
+ *   - The spec strip is for a family with no close to carry its reference door: "Source" is off every page
+ *     (V's call 4, under Chris's ruling of 2026-11-16 that public pages do not describe how things are built),
+ *     "Status" and "Cite" are off the framework pages, and "Reference" stays only on TEACH and the Value Loop.
  */
 import type { Metadata } from 'next';
-import { FrameworkModule, frameworkClaim, type FrameworkKey } from '@vf/brand';
+import { FrameworkModule, frameworkClaim, hasFrameworkPage, frameworkPageFriendSlugs, type FrameworkKey } from '@vf/brand';
+import { friends as readFriends } from '@vf/site-kit/friend';
 import { CardArtTableProvider } from '@vf/recipes/game-cards';
 import {
   FRAMEWORK_PATHS,
@@ -110,6 +129,7 @@ import {
   frameworkClaimScale,
   frameworkPageMetadata,
   frameworkJsonLd,
+  frameworkSiblingCard,
 } from '@vf/site-kit/framework';
 import { SITE } from '@/lib/site';
 import { CanonArchetype } from '@/components/CanonArchetype';
@@ -256,7 +276,24 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
   // when it has a liftable overview visual or an opening of its own (TEACH's Quick
   // Reference Card, drawn in the same slot). The rest render exactly what they rendered
   // before this branch existed.
-  const staged = frameworkOpensOnStage(framework);
+  const staged = frameworkOpensOnStage(framework, media);
+  // A family with a page record (CARE, Value Accounting) draws its sections around its cards, and the host hands
+  // over what only a host has. The Friends come through the ruled Friend reader (@vf/site-kit/friend, Studios'
+  // endpoint) at build; if the read fails nothing is passed, and the module draws the receiver by name, never blank.
+  const paged = hasFrameworkPage(framework);
+  const friendSlugs = paged ? frameworkPageFriendSlugs(framework) : [];
+  const friendsRead = friendSlugs.length ? await readFriends(friendSlugs).catch(() => []) : [];
+  const friendsBySlug = Object.fromEntries(
+    friendSlugs.flatMap((slug, i) => (friendsRead[i] ? [[slug, friendsRead[i]] as const] : [])),
+  );
+  const pageProps = paged
+    ? {
+        ...(Object.keys(friendsBySlug).length ? { friends: friendsBySlug } : {}),
+        siblingCard: frameworkSiblingCard(framework),
+        sheetHref: `${path}/sheet`,
+        ...(framework === 'value-accounting' ? { sheetFileHref: '/value-accounting/first-entry.csv' } : {}),
+      }
+    : {};
   const reference = REFERENCE[framework];
   // A framework this property places in the row (ROW_PLACED) or across (ACROSS_PLACED) asks for
   // that layout by the module's layout field and is handed its game cards; any other keeps its
@@ -292,6 +329,7 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
          the column card below it, or, for peers, the cards side by side across. */
       {...(placement ? { itemLayout: placement } : {})}
       {...(itemCards ? { itemCards } : {})}
+      {...pageProps}
       /* Each framework's Compass tool, in either layout. TEACH has none, and its module
          reads none of these. */
       decideEndpoint={COMPASS_SERVICES.decide}
@@ -318,7 +356,7 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
               // on this page's own tokens, above the spec strip.
               opening: (
                 <>
-                  <FrameworkStageFor framework={framework} />
+                  <FrameworkStageFor framework={framework} media={media} />
                   <FrameworkLede framework={framework} className="mt-8 md:mt-10" />
                 </>
               ),
@@ -328,15 +366,13 @@ export async function FrameworkRoute({ framework }: { framework: FrameworkKey })
               title: claim.headline,
               // A claim over the kit's FRAMEWORK_CLAIM_DISPLAY_MAX sets at heading size (@vf/site-kit 0.239.0).
               titleScale: frameworkClaimScale(framework),
-              lead: claim.lines[0] ?? '',
+              // A page-record family's first section prints these sentences; the hero carries none (no duplicated lede).
+              lead: paged ? '' : (claim.lines[0] ?? ''),
             })}
         path={path}
-        specMeta={[
-          { label: 'Status', value: 'canonical' },
-          { label: 'Cite', value: `valuecreationprotocol.com${path}` },
-          { label: 'Source', value: 'Generated from the canonical reference and checked against it on every build' },
-          ...(reference ? [{ label: 'Reference', value: reference.title(), href: reference.href }] : []),
-        ]}
+        // Only a family with no close to carry its reference door keeps the strip, and only that row: TEACH and
+        // the Value Loop. CARE and Value Accounting carry the door in their close; the other eight draw no strip.
+        specMeta={reference && !paged ? [{ label: 'Reference', value: reference.title(), href: reference.href }] : []}
       >
         {/* The hover/focus preview on every "what exists" row. It is a CLIENT wrapper
             over a server-rendered module — it attaches by delegation over the row
