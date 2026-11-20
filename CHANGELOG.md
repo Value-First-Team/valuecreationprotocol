@@ -398,3 +398,15 @@ The canon snapshot moved with `@vf/value-path-core` 0.33.4, and `vcp-canonical-r
 0.218.0 also gives each Core Belief a one-line gloss (`CoreBeliefAtom.gloss`, `beliefGlossText()`, canon v2.0). Nothing this site draws reads it, so no other page's words change: no file in `src` reads it, and no installed `@vf` package at this site's pins does.
 
 Pin, in dependencies and overrides: `@vf/brand` 0.217.1 (`de56316`) to 0.218.0 (`7dfeca1`). Engine, recipes, ui, site-kit and value-path-core unchanged. Lockfile and installed tree read back; the site's linked graph holds one copy of `@vf/brand`.
+
+## 2026-11-20 — deploy 13a3c5a: Expected has run (@vf/brand 0.218.1, @vf/value-path-core 0.33.5)
+**Breaking:** No for a reader. One answer on /value-accounting changes; no URL is removed.
+**Consumer action:** None. Revert target: `dpl_8jnHV7ZqT5iSfzKyEHwKMMb4hbXb` (`19c4c08`), the production deployment serving before this push; its entry above names the one before it.
+**Commit:** `13a3c5a`
+**Owner:** showcase (the coordinator's dispatch, session 4ac21cd1; Motif's 0.218.1 and Lathe's 0.33.5)
+
+**Expected has run.** On /value-accounting, Expected's "Has it run?" reads "Yes." where it read "No." (canon's Value Accounting reference 1.5, from Oracle's live read of 2026-11-20, brain `fd4b11e32`). The page answers it in three places: the card's back, its front, and the stage's row in the list. Expected's line, "Someone wrote down what one person or one team is expected to receive, before it happens.", is unchanged.
+
+**The stored canon copy moves, and no page's words do.** `@vf/value-path-core` 0.33.5 carries Expected's new line and the Emergence over Predictability v2.0 pass. Read record by record against 0.33.4, seven records move: four in `canon-data` (`architecture-walkthrough-guide.md`, `golden-path-qa-five-core-beliefs.md`, `golden-path-qa-value-first-framework-overview.md`, `value-accounting-canonical-reference.md`) and three in `vocab-data` (`expected-value.md`, `propose-vs-settle.md`, `value-doctrine.md`). This site prints 14 records from `canon-data` (`src/lib/markdown.ts`, `STAGED_MASTERS` and `WIKI_CANONICAL`), none of them moved; it does not read `vocab-data`; and no `canonLine`/`canonPhrase` citation names a moved record.
+
+Pins: `@vf/brand` 0.218.0 (`7dfeca1`) to 0.218.1 (`1d3aeee`), in dependencies and overrides; `@vf/value-path-core` 0.33.4 (`ad82877`) to 0.33.5 (`3a662d4`), in dependencies. Engine, recipes, ui and site-kit unchanged. Lockfile read back with one entry each; the linked tree resolves `@vf/brand` 0.218.1 for the site, site-kit and recipes.
