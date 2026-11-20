@@ -6,7 +6,11 @@
    via <link> tag in BaseLayout <head> (preconnect-optimized).
    ============================================================ */
 
-:root {
+/* The light pole is declared on every selector the design engine treats as light (THEME_LIGHT_SELECTORS), not only
+   :root. A subtree that asserts the light pole inside a dark page (a printable sheet while it prints, through
+   @vf/site-kit's PrintableSheet) then carries this site's own light ink too: its headings, which take --vcp-ink,
+   would otherwise keep the dark page's near-white on white paper (live gate, 2026-11-20). */
+:root, .light, [data-theme="light"], .theme-light {
   /* ============= Surface (warm paper, not cool grey) ============= */
   --vcp-paper:          #ffffff;
   --vcp-surface:        #fbfaf7;   /* warm off-white, editorial paper */
