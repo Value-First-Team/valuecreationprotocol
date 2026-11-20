@@ -448,3 +448,11 @@ Pins, in dependencies and overrides: `@vf/brand` 0.218.2 (`26e5a0c`) to 0.219.0 
 **On every other framework page.** The strip under the heading loses "Source", "Status" and "Cite". /teach and /value-loop keep their "Reference" link there; the other eight framework pages draw no strip. On /value-accounting, Expected's card back no longer carries the heading "What canon still holds on Expected"; its rule stays.
 
 Pins, in dependencies and overrides: `@vf/brand` 0.219.0 (`d5399de`) to 0.220.0 (`32cbac1`); `@vf/recipes` 0.213.0 (`c873093`) to 0.214.0 (`08e5a4f`); `@vf/site-kit` 0.243.0 (`12a5860`) to 0.256.0 (`7c1d412`), which carries 0.244.0 to 0.255.0, parts this site does not draw. The engine stays at 0.183.0 under the override; ui unchanged at 0.56.0. Lockfile and installed tree read back, one entry each.
+
+## 2026-11-20 — deploy 0c6760f: the sibling door is card-sized
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_C46nC9Fdzo9zWeiTXEWfaAUj1JyV` (`efecb4a`), the production deployment serving before this push.
+**Commit:** `0c6760f`
+**Owner:** showcase (live gate, session d9b9bebf)
+
+On /care and /value-accounting, the card that steps across to the other framework (in the page's close) is drawn at the size of the cards above it, 326 pixels wide, where it had stretched to the full reading column: about 740 by 1,090 pixels on a desktop, taller than the screen. Phones are unchanged. No words change.
