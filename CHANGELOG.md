@@ -500,3 +500,11 @@ Printed from a dark page, the two sheets' titles ("Start your own CARE record", 
 **Every page:** the "Protocol home" band at the foot of each page is easier to read in the dark theme, and its "Value-First Team" link is underlined.
 
 Pins, in dependencies and overrides: `@vf/brand` 0.222.0 (`4bcae34`) to 0.223.0 (`a79d4cf`); `@vf/site-kit` 0.257.0 (`df06f5d`) to 0.258.0 (`eb52f7f`); `@vf/ui` 0.56.0 (`8306694`) to 0.60.0 (`39fb815`). Recipes stays at 0.215.0 and the engine at 0.183.0 under the override. Lockfile and installed tree read back, one entry each.
+
+## 2026-11-21 — deploy 2b22e30: the films play with real captions (@vf/brand 0.224.0)
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_6vTyGRJCRrMkWJq5dC2r5VPtpQFZ` (`c5cf1df`), the production deployment serving before this push.
+**Commit:** `2b22e30`
+**Owner:** showcase (V's dispatch, session d9b9bebf; Motif's 0.224.0, Marquee's clean cuts)
+
+Every film on /care and /value-accounting now plays without words printed in the picture, with captions the page sets at a readable size: 16 pixels on a phone, growing to 20 on a wide screen, sitting above the player's controls. The film that opens /care is a new, shorter cut of Chris (27 seconds). The films' covers are the same cards as before. Pin, in dependencies and overrides: `@vf/brand` 0.223.0 (`a79d4cf`) to 0.224.0 (`6e53db4`); nothing else moves.
