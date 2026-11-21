@@ -109,7 +109,9 @@
     font-size: 0.6875rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-ink-4);
+    /* --vcp-ink-3, not -4: the labels are read, not decoration (Mirror, 2026-11-20: 2.85:1 light, 3.29:1 dark).
+       5.39:1 on the light hero, 5.14:1 on the dark. */
+    color: var(--vcp-ink-3);
     margin: 0;
   }
   .canon-spec-value {
@@ -657,7 +659,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-teal);
+    color: var(--vcp-impl-link);
     margin: 0 0 1rem;
   }
   .canon-impl-body {
@@ -670,13 +672,15 @@
     font-variation-settings: "opsz" 20;
   }
   .canon-impl-link {
-    color: var(--vcp-teal);
-    text-decoration: none;
-    border-bottom: 1px solid var(--vcp-teal);
+    /* The band inverts with the theme (its ground is --vcp-ink), so the link takes the band's own teal and a real
+       underline at rest (Mirror, 2026-11-20: 1.68:1 and no underline on the dark theme). */
+    color: var(--vcp-impl-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .canon-impl-link:hover {
-    color: var(--vcp-d-teal);
-    border-bottom-color: var(--vcp-d-teal);
+    text-decoration-thickness: 2px;
   }
 
 /* ===== HubArchetype ===== */
@@ -1300,7 +1304,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-teal);
+    color: var(--vcp-impl-link);
     margin: 0 0 1rem;
   }
   .hub-impl-body {
@@ -1313,13 +1317,15 @@
     font-variation-settings: "opsz" 20;
   }
   .hub-impl-link {
-    color: var(--vcp-teal);
-    text-decoration: none;
-    border-bottom: 1px solid var(--vcp-teal);
+    /* The band inverts with the theme (its ground is --vcp-ink), so the link takes the band's own teal and a real
+       underline at rest (Mirror, 2026-11-20: 1.68:1 and no underline on the dark theme). */
+    color: var(--vcp-impl-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .hub-impl-link:hover {
-    color: var(--vcp-d-teal);
-    border-bottom-color: var(--vcp-d-teal);
+    text-decoration-thickness: 2px;
   }
 
 /* ===== SpecArchetype ===== */
@@ -1746,7 +1752,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-teal);
+    color: var(--vcp-impl-link);
     margin: 0 0 1rem;
   }
   .spec-impl-body {
@@ -1759,13 +1765,15 @@
     font-variation-settings: "opsz" 20;
   }
   .spec-impl-link {
-    color: var(--vcp-teal);
-    text-decoration: none;
-    border-bottom: 1px solid var(--vcp-teal);
+    /* The band inverts with the theme (its ground is --vcp-ink), so the link takes the band's own teal and a real
+       underline at rest (Mirror, 2026-11-20: 1.68:1 and no underline on the dark theme). */
+    color: var(--vcp-impl-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .spec-impl-link:hover {
-    color: var(--vcp-d-teal);
-    border-bottom-color: var(--vcp-d-teal);
+    text-decoration-thickness: 2px;
   }
 
 /* ===== ManifestoArchetype ===== */
@@ -2193,7 +2201,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-teal);
+    color: var(--vcp-impl-link);
     margin: 0 0 1rem;
   }
   .manifesto-impl-body {
@@ -2206,13 +2214,15 @@
     font-variation-settings: "opsz" 20;
   }
   .manifesto-impl-link {
-    color: var(--vcp-teal);
-    text-decoration: none;
-    border-bottom: 1px solid var(--vcp-teal);
+    /* The band inverts with the theme (its ground is --vcp-ink), so the link takes the band's own teal and a real
+       underline at rest (Mirror, 2026-11-20: 1.68:1 and no underline on the dark theme). */
+    color: var(--vcp-impl-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .manifesto-impl-link:hover {
-    color: var(--vcp-d-teal);
-    border-bottom-color: var(--vcp-d-teal);
+    text-decoration-thickness: 2px;
   }
 
 /* ===== Homepage (index) ===== */
@@ -2611,7 +2621,7 @@
     font-weight: 500;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--vcp-teal);
+    color: var(--vcp-impl-link);
     margin: 0 0 1rem;
   }
   .vcp-implementer-body {
@@ -2624,13 +2634,15 @@
     font-variation-settings: "opsz" 22;
   }
   .vcp-implementer-link {
-    color: var(--vcp-teal);
-    text-decoration: none;
-    border-bottom: 1px solid var(--vcp-teal);
+    /* The band inverts with the theme (its ground is --vcp-ink), so the link takes the band's own teal and a real
+       underline at rest (Mirror, 2026-11-20: 1.68:1 and no underline on the dark theme). */
+    color: var(--vcp-impl-link);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .vcp-implementer-link:hover {
-    color: var(--vcp-d-teal);
-    border-bottom-color: var(--vcp-d-teal);
+    text-decoration-thickness: 2px;
   }
 
 /* ===== encoding-stack page-local ===== */

@@ -21,11 +21,11 @@
     "assert:changelog": "node ../repo-changelog-lint-run.mjs --repo .. --since 72ead37f9a80f9d5838590d0d220783020f2949c --behavior-paths next/src,next/public,next/next.config.ts,next/vercel.json,next/tailwind.config.ts,next/postcss.config.cjs,next/package-lock.json"
   },
   "dependencies": {
-    "@vf/brand": "github:Value-First-Team/vf-brand#4bcae342bdc8f491c42f8aaf5ea65d3bccdea21c",
+    "@vf/brand": "github:Value-First-Team/vf-brand#a79d4cffca724c1b559a0d3bb098f7d8c715560b",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#5e9ac9ad3f57f4b1741d9ebd22a622212cb370c8",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#df06f5da8f908e267f546d63e9ab7a0b9dcb962f",
-    "@vf/ui": "github:Value-First-Team/vf-ui#8306694ead819a374a21226eb5f851736e91539f",
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#eb52f7f96d5334be526579295553bfb57a2cd8f2",
+    "@vf/ui": "github:Value-First-Team/vf-ui#39fb8154f96fa864040f9ed3e64f3c3f481c5a06",
     "@vf/value-path-core": "github:Value-First-Team/vf-value-path-core#d63cfcd4b54805909493be8b9551fe252453d543",
     "marked": "^14.1.3",
     "next": "^15.3.3",
@@ -43,9 +43,9 @@
   },
   "overrides": {
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
-    "@vf/ui": "github:Value-First-Team/vf-ui#8306694ead819a374a21226eb5f851736e91539f",
-    "@vf/brand": "github:Value-First-Team/vf-brand#4bcae342bdc8f491c42f8aaf5ea65d3bccdea21c",
+    "@vf/ui": "github:Value-First-Team/vf-ui#39fb8154f96fa864040f9ed3e64f3c3f481c5a06",
+    "@vf/brand": "github:Value-First-Team/vf-brand#a79d4cffca724c1b559a0d3bb098f7d8c715560b",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#5e9ac9ad3f57f4b1741d9ebd22a622212cb370c8",
-    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#df06f5da8f908e267f546d63e9ab7a0b9dcb962f"
+    "@vf/site-kit": "github:Value-First-Team/vf-site-kit#eb52f7f96d5334be526579295553bfb57a2cd8f2"
   }
 }

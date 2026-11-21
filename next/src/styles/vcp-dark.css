@@ -37,6 +37,9 @@
   --vcp-teal-deep: var(--vcp-d-teal-deep);
   --vcp-teal-soft: var(--vcp-d-teal-soft);
   --vcp-teal-ink: #7defdf;
+  /* The implementer band is cream in this theme (its ground is --vcp-ink): the light theme's deep teal ink reads on
+     it, 8.66:1 on #f6f3ec, where the lifted teal read 1.68:1 (Mirror, 2026-11-20). */
+  --vcp-impl-link: #064e47;
 
   --mcp-orange: var(--vcp-d-mcp);
   --mcp-orange-deep: #fb923c;

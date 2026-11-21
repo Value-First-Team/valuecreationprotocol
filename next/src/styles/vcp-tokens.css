@@ -47,6 +47,10 @@
 
   /* ============= Semantic ============= */
   --vcp-link:           var(--vcp-teal-deep);
+  /* The implementer band ("Protocol home") is painted with --vcp-ink, so it is dark in this theme and cream in the
+     dark one. Its eyebrow and link take a teal that reads on the band, not on the page: the bright teal here
+     (9.52:1 on #1a1815); vcp-dark.css gives the deep teal ink for the cream band (8.66:1 on #f6f3ec). */
+  --vcp-impl-link:      var(--vcp-d-teal);
   --vcp-link-hover:     #074842;
   --vcp-visited:        #6b4ba6;
   --vcp-success:        #15803d;
