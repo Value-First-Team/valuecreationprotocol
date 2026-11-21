@@ -486,3 +486,17 @@ On every other page, each card's "Turn over" control is now announced with the c
 **Owner:** showcase (live gate, session d9b9bebf)
 
 Printed from a dark page, the two sheets' titles ("Start your own CARE record", "Start your own book of value") came out near-white on white paper while the rest of the sheet printed dark. They now print dark like the rest. Nothing changes on screen and no words change.
+
+## 2026-11-20 — deploy c1b7fbd: the second fix pass (@vf/brand 0.223.0, @vf/site-kit 0.258.0, @vf/ui 0.60.0)
+**Breaking:** No for a reader. No URL is removed.
+**Consumer action:** None. Revert target: `dpl_EBcVAcuXU9wDFTvZpREHX6C23gzK` (`e848487`), the production deployment serving before this push.
+**Commit:** `c1b7fbd`
+**Owner:** showcase (V's dispatch, session d9b9bebf; Motif's phase 5 releases; Mirror's second reading)
+
+**/value-accounting opens on a film of Chris explaining the name,** and "What the book is made of" plays its clip. Both openings keep the picture clear and put Play, Pause and Unmute together under the frame, with a line saying who is speaking and where. The pages read canon CARE 1.6 and Value Accounting 2.5: Shown's line is now "What was written has been put in front of the person it's about.", Confirmed's tile explains whose word counts inside the team, Value Wake is explained where it first appears, and /care links the post Chris introduced CARE in. On both reference pages the Quick Reference Card is wider on a desktop and scrolls in its own box on a phone, and the "Version" and "Cite" labels are easier to read. Both sheets print on one page.
+
+**Keyboard.** Pressing a clip's cover now moves focus to the player it opens, so the keyboard keeps its place.
+
+**Every page:** the "Protocol home" band at the foot of each page is easier to read in the dark theme, and its "Value-First Team" link is underlined.
+
+Pins, in dependencies and overrides: `@vf/brand` 0.222.0 (`4bcae34`) to 0.223.0 (`a79d4cf`); `@vf/site-kit` 0.257.0 (`df06f5d`) to 0.258.0 (`eb52f7f`); `@vf/ui` 0.56.0 (`8306694`) to 0.60.0 (`39fb815`). Recipes stays at 0.215.0 and the engine at 0.183.0 under the override. Lockfile and installed tree read back, one entry each.
