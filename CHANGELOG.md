@@ -542,3 +542,13 @@ On `/twelve-traps`, and on the trap cards `/language-of-value` draws, the Leads 
 Nothing a visitor reads changes. `@vf/value-path-core` 0.34.1 (`62b3501`) to 0.34.2 (`d095745`), in dependencies (no override exists for it), so this site stays on the same canon snapshot as the other two sites. 0.34.2 differs from 0.34.1 by one vocabulary record, `twelve-complexity-traps.md` (the SaaS Trap phrase in canon's wording); no card line moves. This site reads the snapshot's canon files, never its vocabulary records; the eight canonLine and canonPhrase citations replay clean on 0.34.2. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
 
 Revert target: `dpl_134XWGsYQLzoVvk5Lvd1452kesTs` (`f60fa5d`), the production deploy serving this site before this push.
+
+## 2026-11-22 — deploy f453bf5
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `f453bf5`
+**Owner:** showcase (V's dispatch, session b5870018; canon's Value Realities 1.5, Motif's and Lathe's releases, Oracle's glossary)
+
+**The Value Realities as Chris walked them on 2026-11-22.** `@vf/brand` 0.225.0 to 0.227.0 (`4536d76`), in dependencies and overrides, and `@vf/value-path-core` 0.34.2 to 0.34.4 (`970b139`), in dependencies; one lockfile entry each, no nested copy. Where this site prints Value-First Partner's Key Practices, the first now reads "Recognize that the people you meet evaluate you while you evaluate them". The site rebuilds from the website's records, so the Value-First Partner and Value-First Context records as Canon set them today reach its pages, and the deleted Value-First Scoring record no longer can. Site-kit, recipes, ui and engine unchanged.
+
+Revert target: `dpl_EuZS5VgwxVJzq9FphMs2rcdi7XBg` (`b0efed9`), the production deploy serving this site before this push.
