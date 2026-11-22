@@ -21,12 +21,12 @@
     "assert:changelog": "node ../repo-changelog-lint-run.mjs --repo .. --since 72ead37f9a80f9d5838590d0d220783020f2949c --behavior-paths next/src,next/public,next/next.config.ts,next/vercel.json,next/tailwind.config.ts,next/postcss.config.cjs,next/package-lock.json"
   },
   "dependencies": {
-    "@vf/brand": "github:Value-First-Team/vf-brand#c4b0520fab06328cb05ad831a8e938e90bdfc554",
+    "@vf/brand": "github:Value-First-Team/vf-brand#4536d7647f79c12643347f8765ef678f0cce28a6",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#5e9ac9ad3f57f4b1741d9ebd22a622212cb370c8",
     "@vf/site-kit": "github:Value-First-Team/vf-site-kit#eb52f7f96d5334be526579295553bfb57a2cd8f2",
     "@vf/ui": "github:Value-First-Team/vf-ui#39fb8154f96fa864040f9ed3e64f3c3f481c5a06",
-    "@vf/value-path-core": "github:Value-First-Team/vf-value-path-core#d09574546f8447ee6381b3181e7075a9688ab288",
+    "@vf/value-path-core": "github:Value-First-Team/vf-value-path-core#970b139e3cfb13f5397c0096dbf29be8aa1e3ca6",
     "marked": "^14.1.3",
     "next": "^15.3.3",
     "react": "^18.3.1",
@@ -44,7 +44,7 @@
   "overrides": {
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
     "@vf/ui": "github:Value-First-Team/vf-ui#39fb8154f96fa864040f9ed3e64f3c3f481c5a06",
-    "@vf/brand": "github:Value-First-Team/vf-brand#c4b0520fab06328cb05ad831a8e938e90bdfc554",
+    "@vf/brand": "github:Value-First-Team/vf-brand#4536d7647f79c12643347f8765ef678f0cce28a6",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#5e9ac9ad3f57f4b1741d9ebd22a622212cb370c8",
     "@vf/site-kit": "github:Value-First-Team/vf-site-kit#eb52f7f96d5334be526579295553bfb57a2cd8f2"
   }
