@@ -532,3 +532,13 @@ Nothing a visitor reads changes. `@vf/value-path-core` 0.33.9 (`68f4a8e`) to 0.3
 **Owner:** showcase (V's dispatch, session b5870018; canon's Traps landing, brain `6687750ae7`; Motif's and Lathe's releases)
 
 On `/twelve-traps`, and on the trap cards `/language-of-value` draws, the Leads Trap's and the Qualification Trap's way out now carries "A score living inside the Unified View of that relationship is different; scoring in place of understanding is the trap." Chris approved the sentence on 2026-10-16 and canon has carried it since 1.8. `/beliefs` draws what it drew: the "A trap this belief refuses" room that `@vf/brand` 0.225.0 removes drew on no page. The pins: `@vf/brand` 0.224.0 (`6e53db4`) to 0.225.0 (`c4b0520`), in dependencies and overrides, and `@vf/value-path-core` 0.34.0 (`08dacf8`) to 0.34.1 (`62b3501`), in dependencies (no override exists for it), so this site reads the same canon snapshot as valuefirstteam.com and valuefirststudios.com; the eight canonLine and canonPhrase citations replay clean against it. Site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
+
+## 2026-11-22 — deploy 5ac1547
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `5ac1547`
+**Owner:** showcase (V's dispatch, session b5870018; Lathe's release)
+
+Nothing a visitor reads changes. `@vf/value-path-core` 0.34.1 (`62b3501`) to 0.34.2 (`d095745`), in dependencies (no override exists for it), so this site stays on the same canon snapshot as the other two sites. 0.34.2 differs from 0.34.1 by one vocabulary record, `twelve-complexity-traps.md` (the SaaS Trap phrase in canon's wording); no card line moves. This site reads the snapshot's canon files, never its vocabulary records; the eight canonLine and canonPhrase citations replay clean on 0.34.2. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
+
+Revert target: `dpl_134XWGsYQLzoVvk5Lvd1452kesTs` (`f60fa5d`), the production deploy serving this site before this push.
