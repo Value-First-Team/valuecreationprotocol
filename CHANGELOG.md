@@ -508,3 +508,11 @@ Pins, in dependencies and overrides: `@vf/brand` 0.222.0 (`4bcae34`) to 0.223.0 
 **Owner:** showcase (V's dispatch, session d9b9bebf; Motif's 0.224.0, Marquee's clean cuts)
 
 Every film on /care and /value-accounting now plays without words printed in the picture, with captions the page sets at a readable size: 16 pixels on a phone, growing to 20 on a wide screen, sitting above the player's controls. The film that opens /care is a new, shorter cut of Chris (27 seconds). The films' covers are the same cards as before. Pin, in dependencies and overrides: `@vf/brand` 0.223.0 (`a79d4cf`) to 0.224.0 (`6e53db4`); nothing else moves.
+
+## 2026-11-22 — deploy ab59508: a note written for the brain never reaches a page's source; one canon snapshot with the other two sites (@vf/value-path-core 0.33.9)
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_HCgmKgoetdd8PvxdfwmE7qzTigPi` (`357a37f`), the production deployment serving before this push.
+**Commit:** `ab59508` (with `08255c5`)
+**Owner:** showcase (V's dispatch, session b5870018; Chris's walk of the Four Unified Views, canon `9c209b0cde`; Lathe's release and finding)
+
+Nothing a visitor reads changes. **The comment rule** (`ab59508`): the pages this site renders through its own markdown path (/teach/reference, /value-loop/reference, the VCP reference, the positioning paper, the manifestos, the lexicon and the other staged documents) now leave every HTML comment out of the page, as the shared reader on /care/reference and /value-accounting/reference already does. Since 2026-11-22 a framework's canon file can be a copy of its HubSpot record and carries that record's HubSpot address in a comment; without this rule a page rendering such a file would have carried the address in its source. No page here renders one today. **The pin** (`08255c5`): `@vf/value-path-core` 0.33.6 (`d63cfcd`) to 0.33.9 (`68f4a8e`), in dependencies (no override exists for it); the eight canon lines this site quotes hold at 0.33.9, and the four snapshot files it renders carry no comment. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
