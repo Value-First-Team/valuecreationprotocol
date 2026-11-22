@@ -552,3 +552,13 @@ Revert target: `dpl_134XWGsYQLzoVvk5Lvd1452kesTs` (`f60fa5d`), the production de
 **The Value Realities as Chris walked them on 2026-11-22.** `@vf/brand` 0.225.0 to 0.227.0 (`4536d76`), in dependencies and overrides, and `@vf/value-path-core` 0.34.2 to 0.34.4 (`970b139`), in dependencies; one lockfile entry each, no nested copy. Where this site prints Value-First Partner's Key Practices, the first now reads "Recognize that the people you meet evaluate you while you evaluate them". The site rebuilds from the website's records, so the Value-First Partner and Value-First Context records as Canon set them today reach its pages, and the deleted Value-First Scoring record no longer can. Site-kit, recipes, ui and engine unchanged.
 
 Revert target: `dpl_EuZS5VgwxVJzq9FphMs2rcdi7XBg` (`b0efed9`), the production deploy serving this site before this push.
+
+## 2026-11-22 — deploy 79f4b28
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `79f4b28`
+**Owner:** showcase (V's dispatch, session b5870018; Chris's ruling of 2026-11-22 that a Value Reality's number comes off every public page; Motif's @vf/recipes 0.216.0 and Showcase's 0.217.0)
+
+`@vf/recipes` 0.215.0 (5e9ac9a) to 0.217.0 (dc24ce1), in dependencies and overrides; one lockfile entry, no nested copy. On /realities the Value Reality game cards carry no number (the 01 to 15 that showed at desktop width). This site serves no term pages, so 0.217.0's step rule changes nothing else here.
+
+Revert target: `dpl_9RHyXKnEnWdhVoAbsWZy3qi82HH8` (`774b627`), the production deploy serving this site before this push.
