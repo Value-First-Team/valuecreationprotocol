@@ -524,3 +524,11 @@ Nothing a visitor reads changes. **The comment rule** (`ab59508`): the pages thi
 **Owner:** showcase (V's dispatch, session b5870018; Lathe's release)
 
 Nothing a visitor reads changes. `@vf/value-path-core` 0.33.9 (`68f4a8e`) to 0.34.0 (`08dacf8`), in dependencies (no override exists for it), so this site reads the same canon snapshot as valuefirstteam.com and valuefirststudios.com, which take three new Language of Value cards in the same release. This site reads only the snapshot's canon files; 0.34.0 removes four retired Q&A files from it and changes the Three-Org Model and Four Unified Views records, none of which this site names or renders. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
+
+## 2026-11-22 — deploy 6537697: the Leads Trap's and the Qualification Trap's way out carry canon's sentence
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_FE9dpek4iEbEQQLWi92UfkzvCWZd` (`0bbb0c1`), the production deployment serving before this push.
+**Commit:** `6537697`
+**Owner:** showcase (V's dispatch, session b5870018; canon's Traps landing, brain `6687750ae7`; Motif's and Lathe's releases)
+
+On `/twelve-traps`, and on the trap cards `/language-of-value` draws, the Leads Trap's and the Qualification Trap's way out now carries "A score living inside the Unified View of that relationship is different; scoring in place of understanding is the trap." Chris approved the sentence on 2026-10-16 and canon has carried it since 1.8. `/beliefs` draws what it drew: the "A trap this belief refuses" room that `@vf/brand` 0.225.0 removes drew on no page. The pins: `@vf/brand` 0.224.0 (`6e53db4`) to 0.225.0 (`c4b0520`), in dependencies and overrides, and `@vf/value-path-core` 0.34.0 (`08dacf8`) to 0.34.1 (`62b3501`), in dependencies (no override exists for it), so this site reads the same canon snapshot as valuefirstteam.com and valuefirststudios.com; the eight canonLine and canonPhrase citations replay clean against it. Site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
