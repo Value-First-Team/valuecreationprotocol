@@ -30,6 +30,20 @@ function readContent(filename: string): string | undefined {
   }
 }
 
+/**
+ * Every HTML comment out of rendered canon. `marked` passes a comment through as raw HTML, so a note written
+ * for the brain would ship in the page source: a TODO, and since 2026-11-22 the HubSpot address that a
+ * framework's file carries once it is a copy of its HubSpot record (`<!-- generated-copy`, the Five Core
+ * Beliefs first; @vf/value-path-core 0.33.9 keeps it in the snapshot whole, by design). Applied to the
+ * rendered HTML, never the markdown: a comment shown inside a code span or block is escaped by `marked`
+ * (`&lt;!--`) and stays as written. The shared reader (@vf/site-kit FrameworkReferenceBody, which /care and
+ * /value-accounting use) already leaves every comment out; this is the same rule for the pages still on this
+ * site's own path. `raw` is returned unchanged: it is read for fields, never rendered.
+ */
+function withoutComments(html: string): string {
+  return html.replace(/<!--[\s\S]*?-->/g, '');
+}
+
 /** The pinned snapshot's copy of a canon master, by its name under canon/canonical/. */
 function readSnapshot(filename: string): string | undefined {
   return CANONICAL_FILES.find((f) => f.name === filename)?.text;
@@ -53,7 +67,7 @@ export function renderStagedMarkdown(filename: string): { html: string; raw: str
     console.error('[markdown] staged canon file not bundled:', filename);
     return { html: '<p><em>Source document unavailable.</em></p>', raw: '' };
   }
-  const html = marked.parse(raw, { async: false }) as string;
+  const html = withoutComments(marked.parse(raw, { async: false }) as string);
   return { html, raw };
 }
 
@@ -66,7 +80,7 @@ export function renderWikiCanonical(filename: string): { html: string; raw: stri
     console.error('[markdown] canonical reference not in the pinned snapshot:', filename);
     return { html: '<p><em>Canonical reference unavailable.</em></p>', raw: '' };
   }
-  const html = marked.parse(raw, { async: false }) as string;
+  const html = withoutComments(marked.parse(raw, { async: false }) as string);
   return { html, raw };
 }
 
