@@ -516,3 +516,11 @@ Every film on /care and /value-accounting now plays without words printed in the
 **Owner:** showcase (V's dispatch, session b5870018; Chris's walk of the Four Unified Views, canon `9c209b0cde`; Lathe's release and finding)
 
 Nothing a visitor reads changes. **The comment rule** (`ab59508`): the pages this site renders through its own markdown path (/teach/reference, /value-loop/reference, the VCP reference, the positioning paper, the manifestos, the lexicon and the other staged documents) now leave every HTML comment out of the page, as the shared reader on /care/reference and /value-accounting/reference already does. Since 2026-11-22 a framework's canon file can be a copy of its HubSpot record and carries that record's HubSpot address in a comment; without this rule a page rendering such a file would have carried the address in its source. No page here renders one today. **The pin** (`08255c5`): `@vf/value-path-core` 0.33.6 (`d63cfcd`) to 0.33.9 (`68f4a8e`), in dependencies (no override exists for it); the eight canon lines this site quotes hold at 0.33.9, and the four snapshot files it renders carry no comment. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
+
+## 2026-11-22 — deploy be035a3: one canon snapshot with the other two sites (@vf/value-path-core 0.34.0); nothing a visitor reads changes
+**Breaking:** No
+**Consumer action:** None. Revert target: `dpl_Arg6EX3b8HuhcPKpAkzgL4WhuFRt` (`1a07412`), the production deployment serving before this push.
+**Commit:** `be035a3`
+**Owner:** showcase (V's dispatch, session b5870018; Lathe's release)
+
+Nothing a visitor reads changes. `@vf/value-path-core` 0.33.9 (`68f4a8e`) to 0.34.0 (`08dacf8`), in dependencies (no override exists for it), so this site reads the same canon snapshot as valuefirstteam.com and valuefirststudios.com, which take three new Language of Value cards in the same release. This site reads only the snapshot's canon files; 0.34.0 removes four retired Q&A files from it and changes the Three-Org Model and Four Unified Views records, none of which this site names or renders. Brand, site-kit, recipes, ui and engine unchanged. Lockfile and installed tree read back.
