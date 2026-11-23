@@ -562,3 +562,13 @@ Revert target: `dpl_EuZS5VgwxVJzq9FphMs2rcdi7XBg` (`b0efed9`), the production de
 `@vf/recipes` 0.215.0 (5e9ac9a) to 0.217.0 (dc24ce1), in dependencies and overrides; one lockfile entry, no nested copy. On /realities the Value Reality game cards carry no number (the 01 to 15 that showed at desktop width). This site serves no term pages, so 0.217.0's step rule changes nothing else here.
 
 Revert target: `dpl_9RHyXKnEnWdhVoAbsWZy3qi82HH8` (`774b627`), the production deploy serving this site before this push.
+
+## 2026-11-23 — deploy 2c7ebda
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `2c7ebda`
+**Owner:** showcase (V's dispatch, session f0e6ca65; Chris's picks of 2026-11-23, "Clock, AI Replacement is step 1", "Yes, one order everywhere" and, for /twelve-traps, "Keep the two groups"; Motif's @vf/brand 0.228.0 and @vf/recipes 0.219.0)
+
+**A trap card prints the trap's step on the clock.** `@vf/brand` 0.227.0 (4536d76) to 0.228.0 (4801f7d) and `@vf/recipes` 0.217.0 (dc24ce1) to 0.219.0 (faf23b6), together, in dependencies and overrides; one lockfile entry each, no nested copy. Every trap card prints its step in its three places (the front's top line, the front's foot, the back's foot): AI Replacement 01 through B2B 12. On /twelve-traps the cards keep the reference's two groups, so at desktop width they read 12 (B2B) and 11 (SaaS), then 01 to 10. On /language-of-value the trap cards stand in the order of the numbers printed on them. At phone width both pages draw each trap as a column card with no number, as before; on /language-of-value those column cards now run AI Replacement first and B2B last, and /twelve-traps keeps B2B and SaaS at the top. The range also carries @vf/recipes 0.218.0 (86580a5), whose step rule is for term pages; this site serves none, so nothing else changes here.
+
+Revert target: `dpl_E4mgJnvqNxEsAuVyRfRpYRpDLTFo` (`bb57e25`), the production deploy serving this site before this push.
