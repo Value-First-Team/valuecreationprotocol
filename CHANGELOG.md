@@ -592,3 +592,13 @@ Revert target: `dpl_Eivg7e9udBXwFUV9izUd1iQReS5U` (`09fd311`), the production de
 **/teach plays the same six films, now from HubSpot.** Each TEACH film's HubSpot record links to the value pair it is about (the family film to the TEACH framework record), and the page reads those links at build through the ecosystem search's `?about=` door (`@vf/site-kit` 0.260.0's `aboutWork()`, drawn by `@vf/brand` 0.230.0's `resolveFrameworkMediaFromLinks`). The hand-kept film map (`next/src/data/teach-film-map.json`) is deleted. What a visitor sees: the same six films under the same pairs, with the same titles and the same links to each clip's page; each plays its HubSpot file instead of the map's stream copy; the five pair films now carry their caption tracks; Transparent ↔ Trust shows its record's cover. A failed or blind read fails this site's build, so production keeps the last good deploy rather than a /teach with its films silently gone. Every other framework page draws from Sanity exactly as before. `@vf/brand` 0.229.0 (4c6ead5) to 0.230.0 (178cb56) and `@vf/site-kit` 0.258.0 (eb52f7f) to 0.260.0 (6f64887), in dependencies and overrides; one lockfile entry each, no nested copy.
 
 Revert target: `dpl_3r1uzuXbHza19CwCSf2PDPzNs6vE` (`7cb7f99`), the production deploy serving this site before this push.
+
+## 2026-11-24 — deploy 62718d2
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `62718d2`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-24, session ef7d4ea6; Motif's `@vf/brand` 0.231.0; Ledger's cover writes, CRM-ADMIN-LOG E-095)
+
+**/teach: the family film's captions, and the covers before play.** `@vf/brand` 0.230.0 (178cb56) to 0.231.0 (531f436), in dependencies and overrides, one lockfile entry. 0.231.0 draws the TEACH family film's caption track (`FrameworkMedia.filmCaptions`), which 0.230.0 read from its Listing and dropped, so all six films now play under their tracks. The rebuild re-reads HubSpot through the `?about=` door, where four clip Listings now carry a cover (the family film, Empathetic ↔ Empowered, Confidence ↔ Conviction, Humble ↔ Hungry): with Transparent ↔ Trust's, five of the six films show their cover before play. Agile ↔ Adaptable (Listing 605704161872) has no cover yet and still shows a flat panel; it picks its cover up on the next build after its record carries one, with no code change.
+
+Revert target: `dpl_7MvekhPGR1gfY6ZqjzdtRPi7xHdh` (`6d3199f`), the production deploy serving this site before this push.
