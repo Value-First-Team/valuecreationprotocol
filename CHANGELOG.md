@@ -572,3 +572,13 @@ Revert target: `dpl_9RHyXKnEnWdhVoAbsWZy3qi82HH8` (`774b627`), the production de
 **A trap card prints the trap's step on the clock.** `@vf/brand` 0.227.0 (4536d76) to 0.228.0 (4801f7d) and `@vf/recipes` 0.217.0 (dc24ce1) to 0.219.0 (faf23b6), together, in dependencies and overrides; one lockfile entry each, no nested copy. Every trap card prints its step in its three places (the front's top line, the front's foot, the back's foot): AI Replacement 01 through B2B 12. On /twelve-traps the cards keep the reference's two groups, so at desktop width they read 12 (B2B) and 11 (SaaS), then 01 to 10. On /language-of-value the trap cards stand in the order of the numbers printed on them. At phone width both pages draw each trap as a column card with no number, as before; on /language-of-value those column cards now run AI Replacement first and B2B last, and /twelve-traps keeps B2B and SaaS at the top. The range also carries @vf/recipes 0.218.0 (86580a5), whose step rule is for term pages; this site serves none, so nothing else changes here.
 
 Revert target: `dpl_E4mgJnvqNxEsAuVyRfRpYRpDLTFo` (`bb57e25`), the production deploy serving this site before this push.
+
+## 2026-11-24 — deploy 2ff028c
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `2ff028c`
+**Owner:** showcase (V's dispatch, session d1c67bef; Chris's rulings of 2026-11-24 that the Value Loop lands as 1.2 with its three additions, and "Off the page, kept for team"; canon `1bf6c176f2` and `aff07342e5`; Motif's @vf/brand 0.229.0 and Lathe's @vf/value-path-core 0.34.6)
+
+**The Value Loop reference reads 1.2, through the shared reference reader.** `@vf/brand` 0.228.0 (4801f7d) to 0.229.0 (4c6ead5), in dependencies and overrides, and `@vf/value-path-core` 0.34.4 (970b139) to 0.34.6 (06a1bce); one lockfile entry each, no nested copy. /value-loop/reference now renders the way /care/reference and /value-accounting/reference do: version 1.2, effective November 24, 2026, with "Where the Value Loop comes from", "The one question" and "The Five Lanes". The team's closing section ("Keeping this document true") and every file name stay off the page. The page's frame changes with the move: the eyebrow reads "The Value Loop" instead of the four stages, the hero has no lead sentence (the reference opens with its own "What to know first"), the rows under the title are Version and Cite, and the "Where this fits" box at the foot is gone. /value-loop itself does not change. /llms.txt now names each framework reference by its own title (CARE, The TEACH Values, Value Accounting, The Value Loop) instead of "Reference".
+
+Revert target: `dpl_Eivg7e9udBXwFUV9izUd1iQReS5U` (`09fd311`), the production deploy serving this site before this push.
