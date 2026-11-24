@@ -602,3 +602,13 @@ Revert target: `dpl_3r1uzuXbHza19CwCSf2PDPzNs6vE` (`7cb7f99`), the production de
 **/teach: the family film's captions, and the covers before play.** `@vf/brand` 0.230.0 (178cb56) to 0.231.0 (531f436), in dependencies and overrides, one lockfile entry. 0.231.0 draws the TEACH family film's caption track (`FrameworkMedia.filmCaptions`), which 0.230.0 read from its Listing and dropped, so all six films now play under their tracks. The rebuild re-reads HubSpot through the `?about=` door, where four clip Listings now carry a cover (the family film, Empathetic ↔ Empowered, Confidence ↔ Conviction, Humble ↔ Hungry): with Transparent ↔ Trust's, five of the six films show their cover before play. Agile ↔ Adaptable (Listing 605704161872) has no cover yet and still shows a flat panel; it picks its cover up on the next build after its record carries one, with no code change.
 
 Revert target: `dpl_7MvekhPGR1gfY6ZqjzdtRPi7xHdh` (`6d3199f`), the production deploy serving this site before this push.
+
+## 2026-11-24 — deploy d10dba8
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `d10dba8`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-24, session ef7d4ea6; Ledger's cover write, CRM-ADMIN-LOG E-097)
+
+**/teach: the sixth cover.** A rebuild with no code change. Agile ↔ Adaptable's clip Listing (605704161872) now carries a cover, so all six TEACH films show their cover before play; none shows a flat panel. Read just before the commit: the reader and the live `?about=` door return six covers, control found.
+
+Revert target: `dpl_4xmebiFH4T1jQvMwFMkuvHcoYqnp` (`5fd0d30`), the production deploy serving this site before this push.
