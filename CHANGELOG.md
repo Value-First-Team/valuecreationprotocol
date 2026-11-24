@@ -612,3 +612,13 @@ Revert target: `dpl_7MvekhPGR1gfY6ZqjzdtRPi7xHdh` (`6d3199f`), the production de
 **/teach: the sixth cover.** A rebuild with no code change. Agile ↔ Adaptable's clip Listing (605704161872) now carries a cover, so all six TEACH films show their cover before play; none shows a flat panel. Read just before the commit: the reader and the live `?about=` door return six covers, control found.
 
 Revert target: `dpl_4xmebiFH4T1jQvMwFMkuvHcoYqnp` (`5fd0d30`), the production deploy serving this site before this push.
+
+## 2026-11-24 — deploy ef091d3
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `ef091d3`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-24, session ef7d4ea6; Motif's `@vf/brand` 0.232.0; Showcase's `@vf/ui` 0.61.0)
+
+**/teach: a film with no cover of its own falls back to its show's cover, and the covers are fetched at the size they are drawn.** `@vf/brand` 0.231.0 (531f436) to 0.232.0 (2e2fd2c), and `@vf/ui` 0.60.0 (39fb815) to 0.61.0 (6360c10), in dependencies and overrides, one lockfile entry each. A framework film's frame now draws the picture the `?about=` door's reader chose (the film's own crafted cover, else its show's cover) and, where there is neither, a lettered tile with the film's name, never a flat panel. All six TEACH films carry their own cover, so every frame draws the same picture as before. After a press, the player's own poster is now the resized copy of the cover rather than the stored file, and the tile asks for a copy the size of the tile where the browser can tell (`sizes="auto, 100vw"`). `@vf/site-kit` stays at 0.260.0.
+
+Revert target: `dpl_4WDZC8fJhe7kKnnoxQ561p6QwChK` (`4c89e85`), the production deploy serving this site before this push.
