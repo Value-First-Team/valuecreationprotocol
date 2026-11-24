@@ -36,9 +36,9 @@ function readContent(filename: string): string | undefined {
  * framework's file carries once it is a copy of its HubSpot record (`<!-- generated-copy`, the Five Core
  * Beliefs first; @vf/value-path-core 0.33.9 keeps it in the snapshot whole, by design). Applied to the
  * rendered HTML, never the markdown: a comment shown inside a code span or block is escaped by `marked`
- * (`&lt;!--`) and stays as written. The shared reader (@vf/site-kit FrameworkReferenceBody, which /care and
- * /value-accounting use) already leaves every comment out; this is the same rule for the pages still on this
- * site's own path. `raw` is returned unchanged: it is read for fields, never rendered.
+ * (`&lt;!--`) and stays as written. The shared reader (@vf/site-kit FrameworkReferenceBody, which /care,
+ * /value-accounting and /value-loop use) already leaves every comment out; this is the same rule for the pages still
+ * on this site's own path. `raw` is returned unchanged: it is read for fields, never rendered.
  */
 function withoutComments(html: string): string {
   return html.replace(/<!--[\s\S]*?-->/g, '');
@@ -72,19 +72,6 @@ export function renderStagedMarkdown(filename: string): { html: string; raw: str
 }
 
 /**
- * Read a canonical reference from the pinned snapshot and return rendered HTML.
- */
-export function renderWikiCanonical(filename: string): { html: string; raw: string } {
-  const raw = readSnapshot(filename);
-  if (!raw) {
-    console.error('[markdown] canonical reference not in the pinned snapshot:', filename);
-    return { html: '<p><em>Canonical reference unavailable.</em></p>', raw: '' };
-  }
-  const html = withoutComments(marked.parse(raw, { async: false }) as string);
-  return { html, raw };
-}
-
-/**
  * Strip the first H1 from rendered HTML — many canon docs start with their own
  * H1, but the page layout already renders the title.
  */
@@ -103,18 +90,4 @@ export const STAGED_FILES = {
   beyondLeads: 'beyond_leads_manifesto_v2.md',
   valueLedGrowth: 'value-led-growth-manifesto.md',
   positioning: 'Value-Creation-Protocol-Positioning-Paper.md',
-} as const;
-
-export const WIKI_CANONICAL = {
-  beliefs: 'five-core-beliefs-canonical-reference.md',
-  traps: '12-complexity-traps-canonical-reference.md',
-  valuePath: 'value-path-canonical-reference-v1.1.md',
-  threeOrg: 'three-org-model-canonical-reference.md',
-  unifiedViews: 'four-unified-views-canonical-reference.md',
-  valueLoop: 'value-loop-canonical-reference-v1.md',
-  valueLedGrowth: 'value-led-growth-canonical-reference.md',
-  hubspotCvp: 'hubspot-cvp-canonical-reference.md',
-  valueRealities: 'value-realities-canonical-reference.md',
-  fourPillars: 'four-pillars-canonical-reference.md',
-  languageGuide: 'value-first-language-translation-guide.md',
 } as const;

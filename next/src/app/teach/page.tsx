@@ -5,7 +5,8 @@
  * derived copy of canon in @vf/brand (gated against canon by main-brain-lint
  * CN1), the opening is the TEACH arches in @vf/site-kit, and the media join is
  * read once at build by FrameworkRoute. The full canonical reference is at
- * /teach/reference. Edit the framework in .products/vf-brand/src/ and re-pin.
+ * /teach/reference. The TEACH Values' original is their HubSpot Documentation record (67216520275): the canon
+ * file is a copy made from it, and @vf/brand is generated from that copy. Change the record, then re-pin.
  */
 import type { Metadata } from 'next';
 import { FrameworkRoute, frameworkMetadata } from '@/components/FrameworkRoute';

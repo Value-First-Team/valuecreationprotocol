@@ -7,6 +7,7 @@
 import path from 'node:path';
 import { llmsTxt } from '@vf/recipes/sitemap';
 import { CANON_PAGE_FAMILIES } from '@vf/brand';
+import { frameworkReferenceRecords } from '@vf/site-kit/framework';
 import { METHODOLOGY_PAGES } from '@/lib/site';
 
 export const dynamic = 'force-static';
@@ -18,7 +19,15 @@ export const dynamic = 'force-static';
  * every other page's metadata is static and the walk reads its own title.
  */
 const FAMILIES: readonly string[] = CANON_PAGE_FAMILIES;
-const TITLES: Record<string, string> = Object.fromEntries(METHODOLOGY_PAGES.filter((p) => FAMILIES.includes(p.key)).map((p) => [p.href, p.name]));
+/**
+ * A framework's reference page takes the reference's own title for the same reason: its metadata is a call too
+ * (`frameworkReferenceMetadata`), so the walk would print "Reference" (2026-11-24, when /value-loop/reference moved
+ * onto the shared reader and would otherwise have lost its title here).
+ */
+const TITLES: Record<string, string> = Object.fromEntries([
+  ...METHODOLOGY_PAGES.filter((p) => FAMILIES.includes(p.key)).map((p) => [p.href, p.name]),
+  ...frameworkReferenceRecords().map((r) => [r.path, r.title]),
+]);
 
 export function GET() {
   const body = llmsTxt({

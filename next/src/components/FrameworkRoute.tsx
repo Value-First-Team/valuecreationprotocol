@@ -136,7 +136,7 @@ import { CanonArchetype } from '@/components/CanonArchetype';
 import { JsonLd } from '@/components/JsonLd';
 import { frameworkMedia } from '@/lib/framework-media';
 import { teachReferenceTitle } from '@/lib/teach-reference';
-import { valueLoopReferenceTitle } from '@/lib/value-loop-reference';
+import { frameworkReferenceTitle } from '@/components/FrameworkReferenceRoute';
 import { cardArtTable } from '@/lib/card-art-table';
 
 // The AI-Native Shift plates this property serves. Static imports straight out of
@@ -200,8 +200,9 @@ const OG: Record<FrameworkKey, string> = {
  */
 const REFERENCE: Partial<Record<FrameworkKey, { href: string; title: () => string }>> = {
   'teach-values': { href: '/teach/reference', title: () => teachReferenceTitle() },
-  // The Value Loop's reference moved the same way when /value-loop became a thin route (builds 5 and 6).
-  'value-loop': { href: '/value-loop/reference', title: () => valueLoopReferenceTitle() },
+  // The Value Loop's reference moved the same way when /value-loop became a thin route (builds 5 and 6). Since
+  // @vf/brand 0.229.0 that page is on the shared reader, so its title is the record's.
+  'value-loop': { href: '/value-loop/reference', title: () => frameworkReferenceTitle('value-loop') },
 };
 
 /**
