@@ -21,6 +21,12 @@
  *   film map this file used to pass was deleted in the same change. The Five
  *   Core Beliefs followed (2026-11-25): each belief's episode, its articles and
  *   the overview film with its caption track, all from their HubSpot records.
+ *   Then the Value Loop, the Interest Pipeline and the Five-Layer Model
+ *   (2026-11-25, @vf/brand 0.237.0): the Value Loop's deck from its Listing,
+ *   the Interest Pipeline with nothing linked yet, and the Five-Layer Model with
+ *   no film and no deck (Chris, 2026-11-25: "Take both off the page"). The
+ *   Three-Org Model stays on Sanity until its film's Listing is linked; brand
+ *   refuses it from HubSpot (`film_not_linked`) until then.
  *
  *   FROM SANITY (every other framework, until its own pass). The shared
  *   dataset, through the same `sanityQuery` every other canon page uses, with
@@ -48,9 +54,19 @@ import { sanityQuery } from './sanity/client';
  * The frameworks this site draws from HubSpot. Each joins in its own pass: the TEACH Values
  * (2026-11-24), then the Five Core Beliefs (2026-11-25, @vf/brand 0.234.0), which moves
  * /beliefs, the Natural Value Flow card on /language-of-value and the beliefs film tile on
- * / and /methodology in one build. A framework listed here never asks Sanity.
+ * / and /methodology in one build; then the Value Loop, the Interest Pipeline and the
+ * Five-Layer Model (2026-11-25, @vf/brand 0.237.0), which move /value-loop,
+ * /interest-pipeline and /five-layers with their rows on /methodology and their cards on /.
+ * 'three-org-model' joins when its film's Listing is linked. A framework listed here never
+ * asks Sanity.
  */
-const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>(['teach-values', 'core-beliefs']);
+const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>([
+  'teach-values',
+  'core-beliefs',
+  'value-loop',
+  'interest-pipeline',
+  'five-layer-model',
+]);
 
 let rowsPromise: Promise<FrameworkMediaRows | null> | null = null;
 
