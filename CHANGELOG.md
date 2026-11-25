@@ -632,3 +632,13 @@ Revert target: `dpl_4WDZC8fJhe7kKnnoxQ561p6QwChK` (`4c89e85`), the production de
 **The Five Core Beliefs are drawn from HubSpot.** `core-beliefs` joins `READ_FROM_HUBSPOT`, so the beliefs are read at build through the ecosystem search's `?about=` door and drawn by `resolveFrameworkMediaFromLinks`, as `/teach` is. One switch moves four pages: `/beliefs`, the Natural Value Flow card on `/language-of-value`, and the beliefs film tile on `/` and `/methodology`. A refused read fails the build. `@vf/brand` 0.232.0 (2e2fd2c) to 0.234.0 (4b75313) in dependencies and overrides, one lockfile entry; `@vf/site-kit` stays at 0.260.0. What changes for a visitor: all five belief films play, each from its HubSpot recording with its crafted cover (three played before); the overview film plays from its HubSpot file with its caption track and its title-card cover; the data summit article row leaves Empowerment (Lattice A2), and the three article rows that remain each show their date; and four episode titles (Parts 1 to 4) print their Listing's title, which begins with the show's name, until Media's records are corrected and the site is rebuilt.
 
 Revert target: `dpl_Dug59FvTrmXKFk9SUmoNiCG969Kd` (`2a3c9da`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy eeb70eb
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `eeb70eb`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6; Ledger's corrections, CRM-ADMIN-LOG E-118 and E-122)
+
+**The Five Core Beliefs, re-read from HubSpot.** A rebuild with no code change. Since the previous build read the `?about=` door, four belief episode titles were corrected on their records to the title each episode's own page prints (no show name in front), and the recordings of Parts 1, 4 and 5 moved from `conveyingyourmessage.com` to `value.valuefirstteam.com` (same path). This build reads the door after both, so /beliefs, /language-of-value, / and /methodology print the titles visitors saw before the move and play those three films from the new host.
+
+Revert target: `dpl_DQDxe9y9hcFBmq9XWWiu4nAxMEwE` (`df0b4ff`), the production deploy serving this site before this push.
