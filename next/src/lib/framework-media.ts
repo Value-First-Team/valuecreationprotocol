@@ -47,7 +47,7 @@ import {
   type FrameworkMedia,
   type FrameworkMediaRows,
 } from '@vf/brand';
-import { aboutWork, type AboutRead } from '@vf/site-kit/search/about-work';
+import { aboutWork, AboutWorkError, type AboutRead } from '@vf/site-kit/search/about-work';
 import { sanityQuery } from './sanity/client';
 
 /**
@@ -86,13 +86,43 @@ function rows(): Promise<FrameworkMediaRows | null> {
 const BUILD_READ = process.env.VERCEL_DEPLOYMENT_ID ?? process.env.VERCEL_GIT_COMMIT_SHA ?? `local-${Date.now()}`;
 const linksPromises = new Map<FrameworkKey, Promise<AboutRead>>();
 
+/**
+ * ONE READ AT A TIME, AND A RATE LIMIT WAITED OUT. The home page and /methodology ask for
+ * every framework at once, so five frameworks on HubSpot meant five door reads in flight
+ * together, about thirty addresses, and HubSpot's search answered "too many requests":
+ * the door passed that on (502, `rate_limited`) and the build stopped (2026-11-25,
+ * dpl_Fn1mr2zwebSeSHKFHjSYpVE2vyhz). So this build's reads queue behind each other, and a
+ * read the door answers `rate_limited` is asked again after a pause, three more times at
+ * most. Nothing else is retried: a refused, blind or partial read still fails the build at
+ * once, and a rate limit that outlasts the retries fails it too. The door never stores a
+ * 502 (`no-store`) and Next keeps only a 200, so each retry is a fresh read.
+ */
+const RATE_LIMIT_WAITS_MS = [2000, 5000, 10000] as const;
+let readQueue: Promise<unknown> = Promise.resolve();
+
+async function readAbout(framework: FrameworkKey): Promise<AboutRead> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const work = await aboutWork(frameworkLinkAddresses(framework), {
+        init: { cache: 'force-cache', headers: { 'x-vf-build-read': BUILD_READ } },
+      });
+      return work.read;
+    } catch (e) {
+      const wait = RATE_LIMIT_WAITS_MS[attempt];
+      if (!(e instanceof AboutWorkError) || e.code !== 'rate_limited' || wait === undefined) throw e;
+      console.warn(`framework-media: the door answered rate_limited for ${framework}; asking again in ${wait} ms`);
+      await new Promise((r) => setTimeout(r, wait));
+    }
+  }
+}
+
 /** What HubSpot says is published about `framework` and its parts; throws (failing the build) on anything short of a whole read. */
 function links(framework: FrameworkKey): Promise<AboutRead> {
   let p = linksPromises.get(framework);
   if (!p) {
-    p = aboutWork(frameworkLinkAddresses(framework), {
-      init: { cache: 'force-cache', headers: { 'x-vf-build-read': BUILD_READ } },
-    }).then((work) => work.read);
+    const read = () => readAbout(framework);
+    p = readQueue.then(read, read);
+    readQueue = p.catch(() => undefined);
     linksPromises.set(framework, p);
   }
   return p;
