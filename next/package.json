@@ -21,7 +21,7 @@
     "assert:changelog": "node ../repo-changelog-lint-run.mjs --repo .. --since 72ead37f9a80f9d5838590d0d220783020f2949c --behavior-paths next/src,next/public,next/next.config.ts,next/vercel.json,next/tailwind.config.ts,next/postcss.config.cjs,next/package-lock.json"
   },
   "dependencies": {
-    "@vf/brand": "github:Value-First-Team/vf-brand#f2abb34ad8046543b6b647f1d178f44e7e62cb2f",
+    "@vf/brand": "github:Value-First-Team/vf-brand#03021ed555a63be4407013ad6ffbaa7b0029b79b",
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#faf23b695f1bdbbe50549d20459ea46c481d6de8",
     "@vf/site-kit": "github:Value-First-Team/vf-site-kit#bb9d74264794469dc32c929fcf24b7a3d9d2e76f",
@@ -44,7 +44,7 @@
   "overrides": {
     "@vf/design-engine": "github:Value-First-Team/vf-design-engine#5d76302eebbd9a216d4fd846c4575c3ec485a4cc",
     "@vf/ui": "github:Value-First-Team/vf-ui#239e9684e19909e6343b58058f4583397c7dae45",
-    "@vf/brand": "github:Value-First-Team/vf-brand#f2abb34ad8046543b6b647f1d178f44e7e62cb2f",
+    "@vf/brand": "github:Value-First-Team/vf-brand#03021ed555a63be4407013ad6ffbaa7b0029b79b",
     "@vf/recipes": "github:Value-First-Team/vf-recipes#faf23b695f1bdbbe50549d20459ea46c481d6de8",
     "@vf/site-kit": "github:Value-First-Team/vf-site-kit#bb9d74264794469dc32c929fcf24b7a3d9d2e76f"
   }

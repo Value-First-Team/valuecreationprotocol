@@ -24,9 +24,10 @@
  *   Then the Value Loop, the Interest Pipeline and the Five-Layer Model
  *   (2026-11-25, @vf/brand 0.237.0): the Value Loop's deck from its Listing,
  *   the Interest Pipeline with nothing linked yet, and the Five-Layer Model with
- *   no film and no deck (Chris, 2026-11-25: "Take both off the page"). The
- *   Three-Org Model stays on Sanity until its film's Listing is linked; brand
- *   refuses it from HubSpot (`film_not_linked`) until then.
+ *   no film and no deck (Chris, 2026-11-25: "Take both off the page"). Then the
+ *   Three-Org Model (2026-11-25, @vf/brand 0.238.0), once its film's Listing was
+ *   linked: the film plays from its filed file with its caption track, and the
+ *   deck from its Listing.
  *
  *   FROM SANITY (every other framework, until its own pass). The shared
  *   dataset, through the same `sanityQuery` every other canon page uses, with
@@ -56,9 +57,9 @@ import { sanityQuery } from './sanity/client';
  * /beliefs, the Natural Value Flow card on /language-of-value and the beliefs film tile on
  * / and /methodology in one build; then the Value Loop, the Interest Pipeline and the
  * Five-Layer Model (2026-11-25, @vf/brand 0.237.0), which move /value-loop,
- * /interest-pipeline and /five-layers with their rows on /methodology and their cards on /.
- * 'three-org-model' joins when its film's Listing is linked. A framework listed here never
- * asks Sanity.
+ * /interest-pipeline and /five-layers with their rows on /methodology and their cards on /;
+ * then the Three-Org Model (2026-11-25, @vf/brand 0.238.0), which moves /three-orgs with its
+ * row on /methodology and its card on /. A framework listed here never asks Sanity.
  */
 const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>([
   'teach-values',
@@ -66,6 +67,7 @@ const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>([
   'value-loop',
   'interest-pipeline',
   'five-layer-model',
+  'three-org-model',
 ]);
 
 let rowsPromise: Promise<FrameworkMediaRows | null> | null = null;
