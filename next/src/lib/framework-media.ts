@@ -27,7 +27,9 @@
  *   no film and no deck (Chris, 2026-11-25: "Take both off the page"). Then the
  *   Three-Org Model (2026-11-25, @vf/brand 0.238.0), once its film's Listing was
  *   linked: the film plays from its filed file with its caption track, and the
- *   deck from its Listing.
+ *   deck from its Listing. Then the Four Unified Views (2026-11-25, @vf/brand
+ *   0.239.0): the five films from their filed files with their caption tracks,
+ *   the concepts decks, the playbooks from their Listings and the stated articles.
  *
  *   FROM SANITY (every other framework, until its own pass). The shared
  *   dataset, through the same `sanityQuery` every other canon page uses, with
@@ -59,7 +61,11 @@ import { sanityQuery } from './sanity/client';
  * Five-Layer Model (2026-11-25, @vf/brand 0.237.0), which move /value-loop,
  * /interest-pipeline and /five-layers with their rows on /methodology and their cards on /;
  * then the Three-Org Model (2026-11-25, @vf/brand 0.238.0), which moves /three-orgs with its
- * row on /methodology and its card on /. A framework listed here never asks Sanity.
+ * row on /methodology and its card on /; then the Four Unified Views (2026-11-25, @vf/brand
+ * 0.239.0), which moves /unified-views with its row on /methodology and its card on /: the
+ * five films from their filed files with their caption tracks, the concepts decks, each
+ * view's playbook from its Listing, and the five stated articles under the Customer View.
+ * A framework listed here never asks Sanity.
  */
 const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>([
   'teach-values',
@@ -68,6 +74,7 @@ const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>([
   'interest-pipeline',
   'five-layer-model',
   'three-org-model',
+  'unified-views',
 ]);
 
 let rowsPromise: Promise<FrameworkMediaRows | null> | null = null;
