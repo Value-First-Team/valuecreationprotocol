@@ -119,7 +119,7 @@ export const METHODOLOGY_PAGES: readonly MethodologyPage[] = [
     term: 'value-led-growth',
     line: canonLine(
       'value-led-growth-canonical-reference.md',
-      21,
+      29,
       'Value-Led Growth is an organizational philosophy that answers a fundamentally different question than traditional growth models.',
     ),
   },
