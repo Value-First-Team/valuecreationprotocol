@@ -712,3 +712,13 @@ Revert target: `dpl_FuinQvZAbeYeVqag5pBBsYymf6NP` (`59973aa`), the production de
 **The Value Loop, the Interest Pipeline and the Five-Layer Model draw from HubSpot.** `@vf/brand` 0.235.0 (`eb2046f`) to 0.237.0 (`f2abb34`, the `v0.237.0` tag's commit), in dependencies and overrides; one lockfile entry, and site-kit and recipes resolve the same copy. `READ_FROM_HUBSPOT` in `next/src/lib/framework-media.ts` gains `value-loop`, `interest-pipeline` and `five-layer-model`, so `/value-loop`, `/interest-pipeline` and `/five-layers`, with their rows on `/methodology` and their cards on `/`, read the search door's `?about=` answer at build; a refused read fails the build. The Three-Org Model stays on Sanity until its film's Listing is linked (brand refuses it from HubSpot, `film_not_linked`). **What a visitor sees change:** the Five-Layer page's film and deck, both "What AI-Native Actually Means", leave `/five-layers`, which opens on Layer 1; the Five-Layer row on `/methodology` shows the open side; its card on `/` has no film on a phone. The Value Loop keeps its deck row, identical; the Interest Pipeline shows nothing, as before. 0.236.0, crossed, changes nothing a page draws.
 
 Revert target: `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK` (`82e082d`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy c70bd07
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `c70bd07`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6)
+
+**The build's HubSpot reads queue one at a time, and a rate limit is waited out.** The first build of `2c1f79b` (`dpl_Fn1mr2zwebSeSHKFHjSYpVE2vyhz`) stopped prerendering `/`: the home page asks for every framework at once, so five frameworks on HubSpot meant five search-door reads in flight together, about thirty addresses, and HubSpot answered "too many requests", which the door passed on (502, `rate_limited`). Production kept serving `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK`. In `next/src/lib/framework-media.ts` the reads now queue behind each other within a build, and a read answered `rate_limited` is asked again after 2, 5 and 10 seconds, three more times at most. Nothing else is retried: a refused, blind or partial read still fails the build at once. This deploy also carries `2c1f79b` (the entry above), which never went live on its own. Nothing a visitor sees comes from this commit.
+
+Revert target: `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK` (`82e082d`), the production deploy serving this site before `2c1f79b`.
