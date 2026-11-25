@@ -18,7 +18,9 @@
  *   part the read did not answer, or a pick its record does not link FAILS THE
  *   BUILD: production keeps serving the last good deploy, rather than a page
  *   whose films are silently gone. TEACH moved first, and the hand-kept TEACH
- *   film map this file used to pass was deleted in the same change.
+ *   film map this file used to pass was deleted in the same change. The Five
+ *   Core Beliefs followed (2026-11-25): each belief's episode, its articles and
+ *   the overview film with its caption track, all from their HubSpot records.
  *
  *   FROM SANITY (every other framework, until its own pass). The shared
  *   dataset, through the same `sanityQuery` every other canon page uses, with
@@ -26,8 +28,9 @@
  *   exactly as before. A failed read still resolves to an honest empty join.
  *
  * A framework joins READ_FROM_HUBSPOT in the pass that puts its links in
- * HubSpot (the Five Core Beliefs next); the Sanity half leaves when the last one
- * has moved.
+ * HubSpot; the Sanity half leaves when the last one has moved. Until then the
+ * one Sanity query (FRAMEWORK_MEDIA_GROQ) is still made once per build for the
+ * frameworks still on it, and its answer is never used for one listed here.
  */
 import {
   FRAMEWORK_MEDIA_GROQ,
@@ -41,8 +44,13 @@ import {
 import { aboutWork, type AboutRead } from '@vf/site-kit/search/about-work';
 import { sanityQuery } from './sanity/client';
 
-/** The frameworks this site draws from HubSpot. Each joins in its own pass. */
-const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>(['teach-values']);
+/**
+ * The frameworks this site draws from HubSpot. Each joins in its own pass: the TEACH Values
+ * (2026-11-24), then the Five Core Beliefs (2026-11-25, @vf/brand 0.234.0), which moves
+ * /beliefs, the Natural Value Flow card on /language-of-value and the beliefs film tile on
+ * / and /methodology in one build. A framework listed here never asks Sanity.
+ */
+const READ_FROM_HUBSPOT: ReadonlySet<FrameworkKey> = new Set<FrameworkKey>(['teach-values', 'core-beliefs']);
 
 let rowsPromise: Promise<FrameworkMediaRows | null> | null = null;
 
