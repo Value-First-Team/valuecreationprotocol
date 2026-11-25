@@ -254,13 +254,14 @@ export default async function ValueLedGrowthPage() {
       {/* WHAT WE BELIEVE */}
       {vlg?.beliefStatements && vlg.beliefStatements.length > 0 && (
         <>
-          <p className="canon-section-label">What we believe</p>
+          {/* Canon's heading, and no number on a statement (Chris, 2026-11-25, "All three as proposed
+              (Recommended)"): canon does not number them, and the Five Core Beliefs are a different five. */}
+          <p className="canon-section-label">What We Believe</p>
           <h2 className="canon-section-sub">The convictions Value-Led Growth carries.</h2>
 
           <ol className="canon-records">
             {vlg.beliefStatements.map((b, i) => (
               <li className="canon-record" key={b._key ?? i}>
-                <p className="canon-record-eyebrow">Belief {String(i + 1).padStart(2, '0')}</p>
                 <h3 className="canon-record-title">{b.headline}</h3>
                 {b.elaboration && <p className="canon-record-body">{b.elaboration}</p>}
               </li>
@@ -288,7 +289,8 @@ export default async function ValueLedGrowthPage() {
             <ol className="canon-records">
               {vlg.transformationStages.map((s, i) => (
                 <li className="canon-record" key={s._key ?? i}>
-                  <p className="canon-record-eyebrow">Stage {String(i + 1).padStart(2, '0')}</p>
+                  {/* "Step", not "Stage": the Value Path's eight are the stages (Chris, 2026-11-25). */}
+                  <p className="canon-record-eyebrow">Step {i + 1}</p>
                   <h3 className="canon-record-title">{s.name}</h3>
                   {s.description && <p className="canon-record-body">{s.description}</p>}
                 </li>
@@ -321,8 +323,8 @@ export default async function ValueLedGrowthPage() {
         <p className="canon-callout-body">
           Read alongside the <a href="/value-path">Value Path</a>: the Path is the relational map;
           Value-Led Growth is what compounds across it. The <a href="/three-orgs">Three-Org Model</a>{' '}
-          is the structure the philosophy produces. The <a href="/value-loop">Value Loop</a> is the
-          cadence.
+          is the structure the philosophy produces. The <a href="/value-loop">Value Loop</a> is how
+          value actually emerges, running continuously and all at once.
         </p>
       </div>
     </CanonArchetype>
