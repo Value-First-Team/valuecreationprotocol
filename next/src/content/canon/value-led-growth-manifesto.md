@@ -106,46 +106,23 @@ You don't need a framework to recognize value creation.
 
 ---
 
-### The Three Levels of AI-Era Value
+### How Value Grows
 
-**Level 1: Value Creation**
+Foundation, then Capability, then Multiplication. It is one progression.
 
-The foundation. Recognizing when work generates genuine value versus when it merely maintains complexity.
+- **Foundation:** Built, and not yet reaching anyone.
+- **Capability:** Reaching real people, repeatably.
+- **Multiplication:** Compounding through the relationships it creates.
 
-Most organizational activity falls into the second category — meetings about meetings, reports about reports, coordination of coordination. This isn't work. It's organizational metabolism — energy consumed to keep the structure alive.
+A milestone says where a piece of value is. It is never a score, and never a stage someone is placed at.
 
-Value creation happens when:
-- Customer understanding deepens
-- Relationship trust strengthens  
-- Capability genuinely develops
-- Problems actually get solved
-- Outcomes materially improve
+The idea began in *Value as THE first principle*, published September 1, 2025, which set out three under the heading "From Value Creation to Value Multiplication to Value Expansion":
 
-AI partnership at this level means identifying which activities create value and which merely consume resources.
-
-**Level 2: Value Multiplication**
-
-What happens when AI enables you to create more value across more relationships with greater depth.
-
-This isn't doing existing work faster. It's expanding what's possible:
-- Your insights reach more people who need them
-- Your relationships become more informed and responsive
-- Your pattern recognition spans portfolios, not just individual accounts
-- Your strategic thinking benefits from broader context
-
-AI partnership at this level means your human capabilities multiply through machine augmentation.
-
-**Level 3: Value Expansion**
-
-The breakthrough. When AI partnership enables entirely new forms of contribution that didn't exist before.
-
-Not just doing existing work better — creating new categories of value:
-- Collaborative intelligence that emerges from human-AI partnership
-- Insights that surface from patterns no human could track alone
-- Responsiveness that meets customers when questions emerge, not after they've found answers elsewhere
-- Relationship depth that comes from freed capacity, not additional headcount
-
-AI partnership at this level means the fundamental economics of value creation have changed.
+> "**Value Creation**: The foundation. Recognizing when work generates genuine value versus when it feels mechanical or extractive."
+>
+> "**Value Multiplication**: What happens when AI enables you to create more value through enhanced coordination, pattern recognition, and collaboration."
+>
+> "**Value Expansion**: The breakthrough. When AI partnership enables entirely new forms of contribution that didn't exist before."
 
 ---
 
@@ -208,35 +185,35 @@ Value-Led Growth requires understanding how humans actually progress through rel
 
 We call this the Value Path — eight stages that humans recognize immediately because they reflect authentic experience:
 
-**1. AUDIENCE** — "I'm learning about this space."
+**1. Audience** — "I am learning"
 Anonymous discovery. Signal recognition, not surveillance. Creating value through education, not extraction through tracking.
 
-**2. RESEARCHER** — "I'm actively investigating."
+**2. Researcher** — "I am researching"
 Genuine exploration. Supporting evaluation, not pressuring decisions. Being genuinely helpful when questions emerge.
 
-**3. HAND RAISER** — "I'm ready for conversation."
+**3. Hand Raiser** — "I need help"
 Authentic readiness signal. Timing respect, not manufactured urgency. Responding to genuine interest, not forcing premature engagement.
 
-**4. BUYER** — "I'm navigating my organization."
+**4. Buyer** — "I am buying"
 Internal championship. Supporting advocacy, not gatekeeping access. Helping them succeed internally, not just win your deal.
 
-**5. VALUE CREATOR** — "I'm building value with you."
+**5. Value Creator** — "I must create value"
 Active implementation. Momentum preservation, not handoff friction. Ensuring the promise becomes reality.
 
-**6. ADOPTER** — "I realize the value you provide."
+**6. Adopter** — "I realize your value"
 Genuine validation. Real outcome signals, not vanity metrics. Measuring what actually matters to them.
 
-**7. ADVOCATE** — "I tell others about you."
+**7. Advocate** — "I tell others about you"
 Natural amplification. Trust multiplication, not incentive programs. Earning referrals through genuine satisfaction.
 
-**8. CHAMPION** — "I advance this alongside you."
+**8. Champion** — "I am a raving fan"
 Industry leadership. Co-creation, not transactional relationship. Building together toward outcomes neither could achieve alone.
 
 **The Value Path isn't a funnel to push people through. It's a recognition framework for where humans actually are — and what value they need at each stage.**
 
 ---
 
-### The Value Operating System: Three Orgs, One Mission
+### Three Orgs, One Mission
 
 Industrial-age organizational structure fragments value across departments that optimize locally while destroying value globally.
 
@@ -389,12 +366,17 @@ Once proof exists, restructure.
 
 ### The Evolution: Value Accounting
 
-**Finance expands its scope** beyond revenue capture to include value delivery measurement.
+**Finance expands its scope** beyond revenue capture to include value accounting, read beside the money and never divided by it.
 
-**New questions enter resource allocation**:
-- What's the value delivered per dollar invested?
+**New questions enter resource allocation**, asked through Return on Intention for each piece of work:
+- What was it meant to make possible, and for whom?
+- What did it take, in dollars, time, effort or AI tokens?
+- What do the people it served say they experienced?
+- Did the value that emerged serve the care behind the work?
 - Where does value compound versus dissipate?
 - Which relationships create multiplying returns?
+
+Where the return is in dollars, financial ratios still answer the money question, and what people experienced stays in its own terms.
 
 **Pricing evolves** from what-the-market-will-bear to value-delivered-and-shared.
 

@@ -43,8 +43,8 @@ export default async function ValueLedGrowthPage() {
       }
       path="/value-led-growth"
       specMeta={[
-        { label: 'Status', value: 'v1.0 · canonical' },
-        { label: 'Verified', value: '14 May 2026' },
+        { label: 'Status', value: 'v1.3 · canonical' },
+        { label: 'Verified', value: '25 November 2026' },
         { label: 'Cite', value: 'valuecreationprotocol.com/value-led-growth' },
         { label: 'See also', value: '/manifestos/value-led-growth' },
       ]}
@@ -101,10 +101,10 @@ export default async function ValueLedGrowthPage() {
         </>
       )}
 
-      {/* 4-COMPONENT OPERATING SYSTEM */}
+      {/* THE FOUR COMPONENTS (Chris, 2026-11-25, "Components (Recommended)") */}
       {(vlg?.componentWhere || vlg?.componentWho || vlg?.componentWhat || vlg?.componentHow) && (
         <>
-          <p className="canon-section-label">The operating system</p>
+          <p className="canon-section-label">The components</p>
           <h2 className="canon-section-sub">Where · Who · What · How.</h2>
           {vlg.componentsIntro && <p className="canon-section-note">{vlg.componentsIntro}</p>}
 
