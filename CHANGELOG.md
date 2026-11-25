@@ -692,3 +692,13 @@ Revert target: `dpl_B25t6NBhhWf7fAdNf3dqVeTvzYA4` (`dc5dc31`), the production de
 **The canon snapshot moves to 0.34.10, and the Value-Led Growth line on /methodology follows its sentence to line 29.** `@vf/value-path-core` 0.34.6 (`06a1bce`) to 0.34.10 (`e07d47d`, the `v0.34.10` tag's commit), in dependencies; one lockfile entry, no nested copy. Every entry from 0.34.7 to 0.34.10 read. `next/src/lib/site.ts` quotes "Value-Led Growth is an organizational philosophy that answers a fundamentally different question than traditional growth models." through `canonLine`; on this snapshot the sentence is unchanged word for word and sits at line 29 (it was 21), its only occurrence, so the citation reads 29. Every `canonLine` citation on the site was evaluated against both snapshots with `canonLine`'s own normalisation (four calls, all parsed): the positioning paper at 115, HubSpot as CVP at 27 and the VCP reference at 137 hold on both; Value-Led Growth holds at 29 on 0.34.10 and only there. Of the files the site reads whole by name, the two the snapshot carries (`vcp-canonical-reference.md`, `teach-values-canonical-reference.md`) are byte-identical between the two snapshots; the other seven are the site's own files. No page's words are meant to move.
 
 Revert target: `dpl_GGGYpVTNyqh35b73zzrtpHvQcVZR` (`9710376`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy 3876a99
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `3876a99`
+**Owner:** showcase (V's dispatch, session ef7d4ea6; Motif's gate on the shared player's end state, MainBrain `4d0d18ccb8`)
+
+**A finished film's last frame rests clean.** `@vf/ui` 0.61.0 (`6360c10`) to 0.62.0 (`239e968`, the `v0.62.0` tag's commit); one lockfile entry, every `@vf` package resolves it. When a film on this site ends, the browser's control row steps aside and the whole frame becomes one Replay button, named "Replay: {the film's title}", with the house disc in the frame's bottom strip; replay starts the film from the beginning with captions as the viewer left them. A film that ends in fullscreen keeps the browser's controls until the viewer leaves fullscreen. During play nothing changes. The one entry crossed (0.62.0) changes nothing else a visitor sees. Made for the remade Five Core Beliefs film on `/beliefs`, whose close line the browser's control row crossed on a phone.
+
+Revert target: `dpl_FuinQvZAbeYeVqag5pBBsYymf6NP` (`59973aa`), the production deploy serving this site before this push.
