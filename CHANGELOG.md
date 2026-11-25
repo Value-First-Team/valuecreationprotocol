@@ -722,3 +722,13 @@ Revert target: `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK` (`82e082d`), the production de
 **The build's HubSpot reads queue one at a time, and a rate limit is waited out.** The first build of `2c1f79b` (`dpl_Fn1mr2zwebSeSHKFHjSYpVE2vyhz`) stopped prerendering `/`: the home page asks for every framework at once, so five frameworks on HubSpot meant five search-door reads in flight together, about thirty addresses, and HubSpot answered "too many requests", which the door passed on (502, `rate_limited`). Production kept serving `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK`. In `next/src/lib/framework-media.ts` the reads now queue behind each other within a build, and a read answered `rate_limited` is asked again after 2, 5 and 10 seconds, three more times at most. Nothing else is retried: a refused, blind or partial read still fails the build at once. This deploy also carries `2c1f79b` (the entry above), which never went live on its own. Nothing a visitor sees comes from this commit.
 
 Revert target: `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK` (`82e082d`), the production deploy serving this site before `2c1f79b`.
+
+## 2026-11-25 — deploy a486325
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `a486325`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6; Motif's parity check on `@vf/brand` 0.237.0 and 0.238.0; Ledger's film Listing 609864411239, E-181; Chris's ruling on the film, 2026-11-25: "Move it as it is (Recommended)")
+
+**The Three-Org Model draws from HubSpot.** `@vf/brand` 0.237.0 (`f2abb34`) to 0.238.0 (`03021ed`, the `v0.238.0` tag's commit), in dependencies and overrides; one lockfile entry, and site-kit and recipes resolve the same copy. `READ_FROM_HUBSPOT` in `next/src/lib/framework-media.ts` gains `three-org-model`, so `/three-orgs`, with its row on `/methodology` and its card on `/`, reads the search door's `?about=` answer at build; a refused read fails the build. **What a visitor sees change:** before play, nothing (the cover is the same frame as Mux's poster). Pressed, the film plays from its filed file in the browser's own player, as the Five Core Beliefs and TEACH films already do; its menu lists Captions (English) and Download. Its 127-cue caption track is new and on by default (Mux's copy carried none). At the end, the film's last frame rests with one Replay button. The text, the three orgs and their order, the deck row and the line "The Three-Org Model, in a few minutes." are unchanged, and the film itself is unchanged. 0.238.0 is the canon lane's release (the Value Cornerstones); by Motif's reading of the code, nothing on this site draws what it changes.
+
+Revert target: `dpl_DUZwygxuRTKz2M6h3jkw8Uw1G6JN` (`6802524`), the production deploy serving this site before this push.
