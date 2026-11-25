@@ -622,3 +622,13 @@ Revert target: `dpl_4xmebiFH4T1jQvMwFMkuvHcoYqnp` (`5fd0d30`), the production de
 **/teach: a film with no cover of its own falls back to its show's cover, and the covers are fetched at the size they are drawn.** `@vf/brand` 0.231.0 (531f436) to 0.232.0 (2e2fd2c), and `@vf/ui` 0.60.0 (39fb815) to 0.61.0 (6360c10), in dependencies and overrides, one lockfile entry each. A framework film's frame now draws the picture the `?about=` door's reader chose (the film's own crafted cover, else its show's cover) and, where there is neither, a lettered tile with the film's name, never a flat panel. All six TEACH films carry their own cover, so every frame draws the same picture as before. After a press, the player's own poster is now the resized copy of the cover rather than the stored file, and the tile asks for a copy the size of the tile where the browser can tell (`sizes="auto, 100vw"`). `@vf/site-kit` stays at 0.260.0.
 
 Revert target: `dpl_4WDZC8fJhe7kKnnoxQ561p6QwChK` (`4c89e85`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy c75df5a
+**Breaking:** No for any reader of this site's code. What a visitor sees changes on four pages, each by a HubSpot record or a ruling (below).
+**Consumer action:** None.
+**Commit:** `c75df5a`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6; Motif's `@vf/brand` 0.234.0; Ledger's beliefs pass, CRM-ADMIN-LOG E-104 to E-109; Lattice's contract rulings A2 and A3)
+
+**The Five Core Beliefs are drawn from HubSpot.** `core-beliefs` joins `READ_FROM_HUBSPOT`, so the beliefs are read at build through the ecosystem search's `?about=` door and drawn by `resolveFrameworkMediaFromLinks`, as `/teach` is. One switch moves four pages: `/beliefs`, the Natural Value Flow card on `/language-of-value`, and the beliefs film tile on `/` and `/methodology`. A refused read fails the build. `@vf/brand` 0.232.0 (2e2fd2c) to 0.234.0 (4b75313) in dependencies and overrides, one lockfile entry; `@vf/site-kit` stays at 0.260.0. What changes for a visitor: all five belief films play, each from its HubSpot recording with its crafted cover (three played before); the overview film plays from its HubSpot file with its caption track and its title-card cover; the data summit article row leaves Empowerment (Lattice A2), and the three article rows that remain each show their date; and four episode titles (Parts 1 to 4) print their Listing's title, which begins with the show's name, until Media's records are corrected and the site is rebuilt.
+
+Revert target: `dpl_Dug59FvTrmXKFk9SUmoNiCG969Kd` (`2a3c9da`), the production deploy serving this site before this push.
