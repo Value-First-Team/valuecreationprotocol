@@ -652,3 +652,13 @@ Revert target: `dpl_DQDxe9y9hcFBmq9XWWiu4nAxMEwE` (`df0b4ff`), the production de
 **/five-layers follows canon 1.10 to 1.12.** `@vf/brand` 0.234.0 (4b75313) to 0.234.2 (323510c, the `v0.234.2` tag's commit), in dependencies and overrides; one lockfile entry, no nested copy. Read live as text before and after the deploy on 12 pages (the home page, the framework pages, /language-of-value and /value-loop/reference): one changed. On /five-layers, Layer 2's Transformed box reads "The model of each view" beside Value Path, in the row and in the column card (it read Unified Customer View and Unified Revenue View); at 390 it sets as "The model of / each view". /value-loop/reference serves, unchanged. Each layer's Trapped-side name (0.234.2) prints only in `FiveLayerModel` and `FiveLayerRow`, which /five-layers does not draw (the frozen hero opens it, its cards draw the flow), so the five names do not show yet. The hero is unchanged. This site serves no Trust term page. Rendered at 390 and 1440, light and dark: no overflow, no page error. Live as `dpl_46Aq9uXafkTLc1ZJ2mFDi77dLEUE`.
 
 Revert target: `dpl_BSPqaA4H6P9eD3K16EBko6rNz6rK` (`9accd32`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy 0e0cb16
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `0e0cb16`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6; Motif's `@vf/brand` 0.235.0)
+
+**Each TEACH film's credit line, and the desktop rows' show and date.** `@vf/brand` 0.234.2 (323510c) to 0.235.0 (eb2046f, the merge with 0.234.4), in dependencies and overrides, one lockfile entry. Under each TEACH film a credit line now names who speaks, checked against the clip's own caption track (for example "Ryan Ginsberg on Another Orange Morning, 10 November 2026"), on `/teach` and on the family film on `/` and `/methodology`. At desktop, every framework page's row layout prints each "What exists" row's show and date under its title. `/care` and `/value-accounting` keep the same credit text, now from a checked speaker rather than the Sanity clip's kit host. The Five-Layer figure changes in 0.234.3 and 0.234.4 do not reach this site, which does not draw it.
+
+Revert target: `dpl_AfwRJ6kmUdnNKpWEcPHLckLk7rdQ` (`9b07267`), the production deploy serving this site before this push.
