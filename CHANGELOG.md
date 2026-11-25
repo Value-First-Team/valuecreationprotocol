@@ -702,3 +702,13 @@ Revert target: `dpl_GGGYpVTNyqh35b73zzrtpHvQcVZR` (`9710376`), the production de
 **A finished film's last frame rests clean.** `@vf/ui` 0.61.0 (`6360c10`) to 0.62.0 (`239e968`, the `v0.62.0` tag's commit); one lockfile entry, every `@vf` package resolves it. When a film on this site ends, the browser's control row steps aside and the whole frame becomes one Replay button, named "Replay: {the film's title}", with the house disc in the frame's bottom strip; replay starts the film from the beginning with captions as the viewer left them. A film that ends in fullscreen keeps the browser's controls until the viewer leaves fullscreen. During play nothing changes. The one entry crossed (0.62.0) changes nothing else a visitor sees. Made for the remade Five Core Beliefs film on `/beliefs`, whose close line the browser's control row crossed on a phone.
 
 Revert target: `dpl_FuinQvZAbeYeVqag5pBBsYymf6NP` (`59973aa`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy 2c1f79b
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `2c1f79b`
+**Owner:** showcase (the content architecture lane, V's order of 2026-11-25, session ef7d4ea6; Motif's `@vf/brand` 0.237.0; Chris's ruling on the Five-Layer film and deck, 2026-11-25: "Take both off the page (Recommended)")
+
+**The Value Loop, the Interest Pipeline and the Five-Layer Model draw from HubSpot.** `@vf/brand` 0.235.0 (`eb2046f`) to 0.237.0 (`f2abb34`, the `v0.237.0` tag's commit), in dependencies and overrides; one lockfile entry, and site-kit and recipes resolve the same copy. `READ_FROM_HUBSPOT` in `next/src/lib/framework-media.ts` gains `value-loop`, `interest-pipeline` and `five-layer-model`, so `/value-loop`, `/interest-pipeline` and `/five-layers`, with their rows on `/methodology` and their cards on `/`, read the search door's `?about=` answer at build; a refused read fails the build. The Three-Org Model stays on Sanity until its film's Listing is linked (brand refuses it from HubSpot, `film_not_linked`). **What a visitor sees change:** the Five-Layer page's film and deck, both "What AI-Native Actually Means", leave `/five-layers`, which opens on Layer 1; the Five-Layer row on `/methodology` shows the open side; its card on `/` has no film on a phone. The Value Loop keeps its deck row, identical; the Interest Pipeline shows nothing, as before. 0.236.0, crossed, changes nothing a page draws.
+
+Revert target: `dpl_BLcrTjqFVv3CTpNBpqPLRaopPwhK` (`82e082d`), the production deploy serving this site before this push.
