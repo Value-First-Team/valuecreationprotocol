@@ -642,3 +642,13 @@ Revert target: `dpl_Dug59FvTrmXKFk9SUmoNiCG969Kd` (`2a3c9da`), the production de
 **The Five Core Beliefs, re-read from HubSpot.** A rebuild with no code change. Since the previous build read the `?about=` door, four belief episode titles were corrected on their records to the title each episode's own page prints (no show name in front), and the recordings of Parts 1, 4 and 5 moved from `conveyingyourmessage.com` to `value.valuefirstteam.com` (same path). This build reads the door after both, so /beliefs, /language-of-value, / and /methodology print the titles visitors saw before the move and play those three films from the new host.
 
 Revert target: `dpl_DQDxe9y9hcFBmq9XWWiu4nAxMEwE` (`df0b4ff`), the production deploy serving this site before this push.
+
+## 2026-11-25 — deploy 2e65c5f
+**Breaking:** No
+**Consumer action:** None.
+**Commit:** `2e65c5f`
+**Owner:** showcase (V's dispatch, session d1c67bef; Chris's walk of the Five-Layer Model, canon 1.11 then 1.12; Motif's @vf/brand 0.234.1 and 0.234.2)
+
+**/five-layers follows canon 1.10 to 1.12.** `@vf/brand` 0.234.0 (4b75313) to 0.234.2 (323510c, the `v0.234.2` tag's commit), in dependencies and overrides; one lockfile entry, no nested copy. Read live as text before and after the deploy on 12 pages (the home page, the framework pages, /language-of-value and /value-loop/reference): one changed. On /five-layers, Layer 2's Transformed box reads "The model of each view" beside Value Path, in the row and in the column card (it read Unified Customer View and Unified Revenue View); at 390 it sets as "The model of / each view". /value-loop/reference serves, unchanged. Each layer's Trapped-side name (0.234.2) prints only in `FiveLayerModel` and `FiveLayerRow`, which /five-layers does not draw (the frozen hero opens it, its cards draw the flow), so the five names do not show yet. The hero is unchanged. This site serves no Trust term page. Rendered at 390 and 1440, light and dark: no overflow, no page error. Live as `dpl_46Aq9uXafkTLc1ZJ2mFDi77dLEUE`.
+
+Revert target: `dpl_BSPqaA4H6P9eD3K16EBko6rNz6rK` (`9accd32`), the production deploy serving this site before this push.
